@@ -4,6 +4,7 @@ Mechanical, electrical, CAD, BOM, chassis, and mechatronics repository for the O
 
 ## Repository Status
 
+> The latest HW and FW information is currently available in the [openAMR](https://github.com/openAMRobot/openamr) repository. The OpenAMR HW content will be migrated to this repository shortly.
 Current maturity level: Experimental
 
 ## Purpose
