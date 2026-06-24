@@ -1,0 +1,86 @@
+# Motors & drivers (BLDC + ZBLD)
+
+*Last updated: 2026-06-17.*
+
+## Overview
+Two **BLDC** (brushless) motors, one per wheel, each driven by its own **ZBLD** driver. The Teensy
+sends low-current logic signals to the drivers; the drivers deliver the 24 V power to the motor phases.
+
+- **Motors**: **ZD Z4BLD60-24GN-30S** ×2 — 3-phase BLDC, 24 V, **60 W**, **P=5 (5 pole pairs, on the
+  nameplate)**, **3000 rpm** motor + **~30:1 spur gearbox** → ~100 rpm wheel, rated **3.8 A**. U/V/W +
+  Hall. (LEFT=M1, RIGHT=M2)
+- **Drivers**: **ZBLD.C20-120L2R** ×2 (24 V, 7.5 A, 120 W). Full specs + datasheets:
+  [components-bom.md](../../manufacturing/bom/components-bom.md).
+- ⚠️ **Pole pairs = 5** → verify the driver **DIP SW4/SW5** are set to 5 pole pairs (read the silkscreen
+  table on the driver). A wrong pole-pair setting throws off the driver's closed-loop speed scaling.
+
+## Communication (Teensy → driver)
+Per motor, 3 logic lines from the Teensy:
+
+| Teensy signal | Driver input | Meaning | Left pin | Right pin |
+|---|---|---|---|---|
+| PWM | `VAR / AI2` | speed setpoint (PWM 3–10 kHz or 0–5 V) | **1** | **5** |
+| IN_A | `FWD / DI1` | forward direction | **20** | **6** |
+| IN_B | `REV / DI2` | reverse direction | **21** | **8** |
+| GND | `COM` | **common ground (mandatory)** | GND | GND |
+
+- Power side: `DC+ / DC− = 24 V` (with a fuse). Motor side: phases U/V/W + Hall.
+- ⚠️ The driver `COM` **must** be tied to the Teensy GND, otherwise signals/encoders are noisy.
+
+## Driver configuration — DIP switches (SW1–SW6)
+Both drivers must be set **identically**. Functions read from the driver silkscreen (2026-06-19):
+
+| Switch | Function | What it does | Current | **Target** |
+|---|---|---|---|---|
+| **SW1** | open / closed loop (`开环/闭环`) | ON = driver regulates speed itself from the Halls; OFF = driver is just a power stage (Teensy regulates) | ON | **OFF** |
+| **SW2** | speed source (`AI1/AI2`) | OFF = internal VAR knob; ON = external 0–5 V on `VAR/AI2` (our Teensy PWM) | ON | ON |
+| **SW3** | secondary (direction/internal) | no effect here (direction is driven by FWD/REV pins) | OFF | OFF |
+| **SW4 / SW5** | **motor pole pairs** (`极对数`) | tells the driver the pole-pair count (2/3/4/5) to convert Hall freq → RPM. **Only used in closed loop** | OFF/OFF (= 2 pp ⚠️) | **ON/ON (= 5 pp)** |
+| **SW6** | RS485 termination (`485 终端电阻`) | bus end resistor; not used (no RS485) | OFF | OFF |
+
+> 🔶 **Pole-pair mismatch found & corrected (2026-06-19):** the motor is **P=5** (5 pole pairs, on the
+> nameplate) but SW4/SW5 were OFF/OFF (= 2 pole pairs). Now set to **ON/ON (= 5 pp)**. (Only matters in
+> closed loop; harmless but correct in the current open-loop config.)
+
+### Which controller is best — driver vs Teensy PID?
+The **Teensy PID is the better controller for this robot** and should be the authoritative one:
+- it reads the **AS5040 encoder (1024 cnt/rev)** → fine resolution, and measures the **wheel** speed
+  (post-gearbox) — the variable we actually care about (motion + odometry);
+- it is **fully tunable** (K_P/K_I/K_D, already tuned to ±2 %), and feeds ROS `/odom`.
+- the driver's loop measures the **motor shaft** (pre-gearbox) with **coarse Hall** sensors, is **opaque**
+  (only VAR/ACC pots), and needs correct pole pairs.
+
+→ **Run the driver open-loop (SW1=OFF)** so the Teensy is the sole regulator (removes the double-loop that
+worsens snaking; makes pole pairs irrelevant). **Plan B** if low-speed cogging appears: go back to closed
+loop (SW1=ON) **with SW4/SW5=ON/ON (5 pp)** for a proper cascade (fast driver inner loop + Teensy outer).
+The only edge the driver loop has: at low *wheel* speed the motor shaft still spins ~30× faster → richer
+Hall signal → potentially smoother very-low-speed than the 50 Hz Teensy loop.
+
+**Config applied 2026-06-19 (both drivers):** `SW1 OFF · SW2 ON · SW3 OFF · SW4 ON · SW5 ON · SW6 OFF`.
+(Was SW1 ON, SW2 ON, rest OFF.) **Validated** over 3 motor runs — see
+../history/diagnostics.md (see `openamr-platform-sw`: docs/troubleshooting/diagnostics.md).
+
+> ⚠️ **VAR pot is inert in this config**: with SW2=ON the speed comes from AI2 (the PWM), not the VAR/AI1
+> pot, so turning VAR does **not** balance the wheels (confirmed: no change across runs). The residual
+> ~9 % open-loop L/R asymmetry (right faster) is corrected by the **Teensy PID** (→ ~0.2 % in closed loop).
+
+## Driver configuration — TWO trim pots (CRITICAL)
+Each driver has **two** potentiometers. **They must match between LEFT and RIGHT** (calibrate the right
+to the left, the known-good reference). These were the root cause of the right-wheel problem:
+
+| Pot | Location | Function | Correct setting | Symptom if wrong |
+|---|---|---|---|---|
+| **VAR** | top | speed / gain (PWM → speed) | ~3.5/10, **same** both sides | too high → wheel runs ~8× too fast → **runaway** |
+| **ACC/DEC** | near the DIP switches | acceleration/deceleration ramp | **4/10**, same both sides | =0 → no smoothing → **jerks/oscillation** in closed loop |
+
+See the full story in history/diagnostics.md (see `openamr-platform-sw`: docs/troubleshooting/diagnostics.md).
+
+## Good to know / gotchas
+- The original fault ("right wheel runs away, robot doesn't go straight") was **100 % driver tuning**:
+  the right VAR pot was at max (10) and its ACC/DEC pot at 0. After matching both pots to the left, the
+  right wheel tracks correctly.
+- A small residual: the right channel needs slightly more PWM for the same speed (minor); the PID
+  compensates. Fine-tune the right VAR pot if you want perfectly equal PWM.
+- Test the motors safely with the **open-loop mode** (`/debug/openloop`) which bypasses the PID — useful
+  to compare the two channels at identical PWM. See firmware/debug-telemetry.md (see `openamr-platform-fw`: Teensy 4.0 overlay README).
+- **Always**: wheels off the ground, 24 V on, a hand on the 24 V cut-off for the first tests.
