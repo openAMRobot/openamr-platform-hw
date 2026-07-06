@@ -88,6 +88,28 @@ In the firmware:
 So the encoders are **healthy** when properly aligned. Tools to check counts live (Ubuntu, Cyclone domain 0):
 `scripts/encread.py` (angle by hand), `scripts/encpid.py` (per-wheel target/measured/error).
 
+## Velocity-error profile — residual eccentricity (measured 2026-07-06)
+Even with the magnets re-centred, a small **speed-independent** velocity ripple remains, characterised by
+binning the corrected debug rpm (`/debug/left|right.y`) against encoder position at three speeds (120 / 180
+/ 250) — the three curves **overlap**, i.e. it is a **geometric error (magnet eccentricity)**, not a
+speed/PID effect:
+
+| Wheel | Measured velocity error (per revolution) |
+|---|---|
+| **LEFT** (M1) | **±~11 %** (0.91–1.13) — the known off-centre encoder |
+| **RIGHT** (M2) | **±~6 %** (0.94–1.06) |
+
+> ✅ **No odometry drift.** The profile is normalized to **mean = 1.000 over a full revolution** → the
+> error **averages out per revolution**, so position/odometry does **not** drift; it only produces
+> **intra-revolution velocity ripple** (the low-speed left "oscillation"/judder feel). It does not block
+> navigation.
+>
+> **Accepted long-term fix = a velocity filter in firmware, NOT a runtime correction table.** An
+> *incremental* encoder loses its absolute phase at every Teensy power-cycle, so a per-position ripple
+> table cannot stay aligned across reboots — a table was tried and does not hold. (Note: the firmware's
+> `calib_rpm(…)` table *is* applied before the debug rpm is published, so the numbers above are the
+> **residual** with any loaded table = passthrough 1.0 until one is loaded.)
+
 ## Good to know / gotchas
 - ⚠️ **CPR vs wheel + gearbox (confirmed 30:1)**: the motors are **geared 30:1** (Z4BLD60-24GN-30S, see
   [components-bom.md](../../manufacturing/bom/components-bom.md)). `COUNTS_PER_REV = 1024` must be **per wheel revolution**. The

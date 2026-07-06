@@ -74,6 +74,11 @@ pot + **ACC/DEC** ramp pot (see [motors-drivers.md](../motor_control/motors-driv
 
 ## Motor wiring (per motor) — VERIFIED 2026-06-19
 Driver **power**: `V+ / V− = 24 V DC` (大 screw terminals, bottom-right, `电源DC24V`), fused.
+
+> ⚠️ **DC power wire colours on THIS robot** (confirmed 2026-06-18, counter-intuitive — AC-style colours on
+> a DC bus): **brown = + (V+, i.e. the DC "red")**, **blue = − (V−, i.e. the DC "black")**. Colour is only a
+> presumption — **verify with a multimeter** before connecting a 24 V lead. See [power.md](../power_distribution/power.md).
+
 Driver **motor connector** (white Molex, 8 pins):
 
 | `U` | `V` | `W` | `Hu` | `Hv` | `Hw` | `Vcc` | `0V` |
