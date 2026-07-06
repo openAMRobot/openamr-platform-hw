@@ -2,25 +2,25 @@
 
 *Last updated: 2026-06-20.*
 
-## 🔋 État de charge batterie — SEUILS (24 V plomb) — LIRE AVANT TOUT TEST NAV
-Système 24 V = 2× plomb 12 V en série. Tension **au repos** (sans charge) :
+## 🔋 Battery state of charge — THRESHOLDS (24 V lead-acid) — READ BEFORE ANY NAV TEST
+24 V system = 2× 12 V lead-acid in series. **At-rest** voltage (no load):
 
-| Tension repos | État | Pour la navigation |
+| At-rest voltage | State | For navigation |
 |---|---|---|
-| **~25,5–26 V** | pleine charge | ✅ OK pour tester |
-| **~24,5 V** | ~70 % | ✅ acceptable |
-| **~24 V** | ~50 % | ⚠️ limite |
-| **≤ 23,5 V** | déchargé (~30 %) | ❌ **NE PAS tester la nav** |
+| **~25.5–26 V** | full charge | ✅ OK to test |
+| **~24.5 V** | ~70 % | ✅ acceptable |
+| **~24 V** | ~50 % | ⚠️ marginal |
+| **≤ 23.5 V** | discharged (~30 %) | ❌ **DO NOT test nav** |
 
-⚠️ C'est la tension **au repos** : **sous charge (moteurs), elle chute encore** (souvent −1 à −2 V en pointe,
-cf le pack qui sague). En dessous de ~22 V sous charge → drivers en sous-tension → **couple mou + roue
-gauche (faux-contact) décroche → le robot ne suit pas le plan → percute des obstacles pourtant évités par
-la nav.** **RÈGLE : viser ≥ 25 V au repos avant tout test de navigation/évitement.** Sinon on debugge Nav2
-pour rien (déjà arrivé : le vrai problème était le 24 V, pas la nav).
+⚠️ This is the **at-rest** voltage: **under load (motors) it drops further** (often −1 to −2 V at peaks,
+since the pack sags). Below ~22 V under load → drivers undervoltage (ZBLD **fault code 10**, see
+[motor-driver-fault-codes.md](../motor_control/motor-driver-fault-codes.md)) → **weak torque + left wheel
+(loose contact) drops out → the robot does not follow the plan → it hits obstacles that nav was actually
+avoiding.** **RULE: aim for ≥ 25 V at rest before any navigation/avoidance test.** Otherwise we debug Nav2
+for nothing (already happened: the real problem was the 24 V, not nav).
 
-**Relevé 2026-06-20 (fin de session)** : batterie à **23,4 V au repos → trop bas**. Tout test d'évitement
-de cette session est non concluant tant que la batterie n'est pas rechargée (~25,5 V). À reprendre après
-charge.
+**Reading 2026-06-20 (end of session)**: battery at **23.4 V at rest → too low**. Every avoidance test
+from this session is inconclusive until the battery is recharged (~25.5 V). To be resumed after charging.
 
 ## Power architecture — VERIFIED 2026-06-19
 ```
@@ -92,6 +92,26 @@ of the 1023 max), but at higher speeds it will **plateau**, and a sagging 24 V r
 **Practical rule:** keep the pack **charged**; if motors feel weak / one wheel drops, **check battery
 voltage under load** (multimeter on the terminals while commanding) and the 24 V connectors before
 suspecting the firmware/PID. Bench-test on mains for repeatable results.
+
+## ⚠️ Pi 5 brown-out at bring-up — the 5 V rail must hold ≥ 5 A (2026-06-25)
+The Raspberry Pi 5 needs **5 V / 5 A**. At bring-up, motors + LiDAR + camera start **at the same time** →
+a **current spike on the 5 V rail** → if the DC-DC (or a sagging 24 V pack) can't hold it, the rail
+collapses and the **Pi freezes (Ctrl-C dead) then loses the network** (no ping). At boot the Pi warns:
+*"This power supply is not capable of supplying 5A; power to peripherals will be restricted."*
+
+- **Symptoms** (a whole session, 2026-06-25): frozen terminal during a launch, SSH drops, `No route to
+  host`, LiDAR stops, involuntary reboots. **Before blaming the software, check the Pi is still alive
+  (`ping`).** This is a *power* failure, **not** the thermal throttling (that one keeps the Pi online — see
+  [raspberry-pi.md "Thermal"](../computing/raspberry-pi.md)).
+- **Cause = insufficient 5 V supply** (worse when the 24 V pack is low → the buck can't source the peak).
+  No ROS/software setting fixes it.
+- **Fixes:** battery **≥ 25 V** (thresholds above); a **5 V buck rated ≥ 5 A peak** with a short/thick
+  cable; or the official 5 V/5 A supply for bench tests. **Confirmation test:** launch the bring-up
+  **without the camera** (lighter load) — if it holds, it's the supply (the camera adds the fatal peak).
+- Same root cause hits the **motor drivers**: a 24 V bus too low trips **fault code 10 (busbar
+  under-voltage)** on both ZBLD drivers at once — see
+  [motor-driver-fault-codes.md](../motor_control/motor-driver-fault-codes.md). Low battery is the common
+  thread (Pi brown-out + drivers code 10 + soft torque).
 
 ## Stopping the robot quickly (test safety)
 - Software: stop publishing `/cmd_vel` → firmware zeroes motors after 200 ms (watchdog). `Ctrl-C` on the
