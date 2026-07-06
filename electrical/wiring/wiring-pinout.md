@@ -9,7 +9,8 @@ Convention: **MOTOR1 = LEFT wheel, MOTOR2 = RIGHT wheel.** Logic level **3.3 V**
 > (AS5040; the 5 V→~4 V overvoltage was **fixed → now 3.3 V**, see [encoders.md](../sensors/encoders.md)), **IMU**
 > (MPU-6500, SDA18/SCL19, 3.3 V, 0x68), **Teensy = 4.0** (i.MX RT1062), **power/24 V** (no fuse / no
 > battery cut-off — see [power.md](../power_distribution/power.md)). Component list + datasheets: [components-bom.md](../../manufacturing/bom/components-bom.md).
-> Still to read (completeness): LiDAR model, DC-DC model, AC/DC, Pi RAM, gearbox ratio.
+> Still to read (completeness): LiDAR model sticker, DC-DC model, AC/DC converter, gearbox suffix.
+> (Pi RAM confirmed **8 GB**, 2026-07-06 — see [raspberry-pi.md](../computing/raspberry-pi.md).)
 
 ## Teensy 4.0 pin assignment
 
@@ -88,11 +89,11 @@ Driver **motor connector** (white Molex, 8 pins):
 > 🔧 **Left-wheel blocker:** the left signal wiring (4 terminals above) is **proven healthy**, so the
 > intermittent left wheel is NOT here — it's on the **24 V power (V+/V−)** or the **motor connector**
 > (a phase or the Molex). That's where to chase the faux-contact (continuity test while flexing). See
-> ../history/diagnostics.md (see `openamr-platform-sw`: docs/troubleshooting/diagnostics.md) and the `amr-left-wheel-faux-contact` memo.
+> the `openamr-platform-sw` troubleshooting doc (`docs/troubleshooting/diagnostics.md` in that repo) and the `amr-left-wheel-faux-contact` memo.
 
 ## Grounding
 All grounds must be common: **Teensy GND ↔ driver COM**. A floating COM was a real source of noise
-concern (see history/diagnostics.md (see `openamr-platform-sw`: docs/troubleshooting/diagnostics.md)).
+concern (see the `openamr-platform-sw` troubleshooting doc (`docs/troubleshooting/diagnostics.md` in that repo)).
 
 ## ASCII map
 ```

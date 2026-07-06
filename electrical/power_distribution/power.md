@@ -25,23 +25,26 @@ from this session is inconclusive until the battery is recharged (~25.5 V). To b
 ## Power architecture — VERIFIED 2026-06-19
 ```
 Battery 24V ──┐
-              ├──(parallel)──► V+ / V−  of BOTH drivers   (marron = V+, bleu = V−)
+              ├──(parallel)──► V+ / V−  of BOTH drivers   (brown = V+, blue = V−)
 Mains 24V  ───┘
-              └──(parallel)──► DC-DC 24V→5V ──► Raspberry Pi ──USB──► Teensy ──► IMU + encoders (5V)
+              └──(parallel)──► DC-DC 24V→5V ──► Raspberry Pi ──USB──► Teensy ──► IMU + encoders (3.3V)
 ```
 | Element | Supply |
 |---|---|
-| Motors / drivers | **24 V DC** on `V+ / V−` of each driver. Wire colors: **marron = V+, bleu = V−** (confirmed) |
+| Motors / drivers | **24 V DC** on `V+ / V−` of each driver. Wire colors: **brown = V+, blue = V−** (confirmed) |
 | 24 V source | **battery pack** (lead-acid) **or** an **AC/DC converter** (230 V mains) — wired **in parallel** to the same 24 V bus |
 | Raspberry Pi | **DC-DC 24 V→5 V** buck from the 24 V bus |
 | Teensy | powered over **USB** from the Pi (5 V) |
-| **IMU + encoders** | **5 V from the Teensy** (VUSB pin) → see ⚠️ encoder overvoltage in [encoders.md](../sensors/encoders.md) |
+| **IMU + encoders** | **3.3 V from the Teensy** (3.3 V rail). The encoders were originally on the 5 V (VUSB) pin → ~4 V on the Teensy inputs → moved to 3.3 V on 2026-06-19; see ⚠️ encoder overvoltage in [encoders.md](../sensors/encoders.md). The IMU has always been on 3.3 V. |
 | LiDAR | powered over its USB (CP2102 adapter) from the Pi |
 
 ## 🔴 Safety gaps found (2026-06-19) — to fix
 1. **No fuse on the battery.** A lead-acid pack can deliver **hundreds of amps** into a short → fire /
    burns / melted wires if a 24 V conductor touches ground. **Add a fuse (or breaker) on the battery `+`**,
-   as close to the terminal as possible. Size it to the motor stall current (TBD — note the value once chosen).
+   as close to the terminal as possible. Sizing: 2 motors × **3.8 A** nominal ≈ 7.6 A + the DC-DC → a
+   **~15–20 A** fuse (above nominal, below the wire/battery limit). ⚠️ This is above *nominal*, not the
+   *stall* current — a jammed motor draws well above 3.8 A, so a fast-blow at 15–20 A may nuisance-trip or a
+   short one may not clear a stall instantly; confirm the motor stall current before finalising.
 2. **No battery-side disconnect** (only the mains has a switch). No fast hardware cut-off for the 24 V
    battery. **Add a switch/disconnect — ideally an E-stop mushroom** — on the battery `+`.
 3. **Battery AND mains in parallel** on the same bus: if both are ever connected **at once**, the stiffer
@@ -87,7 +90,7 @@ Same motor step (0.25 m/s ≈ 24 rpm), comparing the PWM the PID needs to reach 
 The battery read **24.4 V at rest** but needs **~60 % more PWM** under load → it **sags under load**
 (weak/discharged pack or high internal/contact resistance). Not blocking now (PID compensates, PWM ≈ 34 %
 of the 1023 max), but at higher speeds it will **plateau**, and a sagging 24 V rail is what made the
-**left wheel drop out** when its cable also had a loose contact (see history/diagnostics.md (see `openamr-platform-sw`: docs/troubleshooting/diagnostics.md)).
+**left wheel drop out** when its cable also had a loose contact (see the `openamr-platform-sw` troubleshooting doc (`docs/troubleshooting/diagnostics.md` in that repo)).
 
 **Practical rule:** keep the pack **charged**; if motors feel weak / one wheel drops, **check battery
 voltage under load** (multimeter on the terminals while commanding) and the 24 V connectors before
@@ -119,6 +122,8 @@ collapses and the **Pi freezes (Ctrl-C dead) then loses the network** (no ping).
 - Hardware backstop: keep a hand on the **24 V cut-off** during powered tests. Wheels off the ground.
 
 ## TODO / to document
-- Exact battery capacity (Ah) & charger, AC/DC converter model, fuse rating, and whether a physical
-  **E-stop** exists (a ROS-independent emergency stop is recommended).
+- Charger model, AC/DC converter model, and whether a physical **E-stop** exists (a ROS-independent
+  emergency stop is recommended). *(Battery capacity is known: DM12-7S = 12 V 7 Ah, a pair in series =
+  24 V 7 Ah — see [components-bom.md](../../manufacturing/bom/components-bom.md). Fuse: ~15–20 A, see the
+  safety gaps above.)*
 - A **battery voltage monitor** would be useful (lead-acid sags under load; low voltage → erratic motors).

@@ -20,7 +20,7 @@ Per motor, 3 logic lines from the Teensy:
 
 | Teensy signal | Driver input | Meaning | Left pin | Right pin |
 |---|---|---|---|---|
-| PWM | `VAR / AI2` | speed setpoint (PWM 3–10 kHz or 0–5 V) | **1** | **5** |
+| PWM | `VAR / AI2` | speed setpoint — Teensy PWM @ **3 kHz** on this robot (driver capability: PWM 0–20 kHz, or analog 0–5 V) | **1** | **5** |
 | IN_A | `FWD / DI1` | forward direction | **20** | **6** |
 | IN_B | `REV / DI2` | reverse direction | **21** | **8** |
 | GND | `COM` | **common ground (mandatory)** | GND | GND |
@@ -59,7 +59,7 @@ Hall signal → potentially smoother very-low-speed than the 50 Hz Teensy loop.
 
 **Config applied 2026-06-19 (both drivers):** `SW1 OFF · SW2 ON · SW3 OFF · SW4 ON · SW5 ON · SW6 OFF`.
 (Was SW1 ON, SW2 ON, rest OFF.) **Validated** over 3 motor runs — see
-../history/diagnostics.md (see `openamr-platform-sw`: docs/troubleshooting/diagnostics.md).
+the `openamr-platform-sw` troubleshooting doc (`docs/troubleshooting/diagnostics.md` in that repo).
 
 > ⚠️ **VAR pot is inert in this config**: with SW2=ON the speed comes from AI2 (the PWM), not the VAR/AI1
 > pot, so turning VAR does **not** balance the wheels (confirmed: no change across runs). The residual
@@ -67,14 +67,20 @@ Hall signal → potentially smoother very-low-speed than the 50 Hz Teensy loop.
 
 ## Driver configuration — TWO trim pots (CRITICAL)
 Each driver has **two** potentiometers. **They must match between LEFT and RIGHT** (calibrate the right
-to the left, the known-good reference). These were the root cause of the right-wheel problem:
+to the left, the known-good reference).
 
-| Pot | Location | Function | Correct setting | Symptom if wrong |
+> ⚠️ **Read this alongside the config state.** The VAR **gain** effect below (and the "runaway" root cause)
+> applies when **VAR is in the speed path** — i.e. the *original* config (VAR/AI1 selected, or an AI2 gain
+> that scales the PWM). In the **current config (SW1=OFF open loop, SW2=ON → AI2)** the **speed comes from
+> the PWM on AI2, so the VAR pot is inert for balancing** (see the note above) — the values below are the
+> setting to leave it at, not a live balancing knob. ACC/DEC still ramps in either config.
+
+| Pot | Location | Function | Correct setting | Symptom if wrong (when VAR is in the speed path) |
 |---|---|---|---|---|
 | **VAR** | top | speed / gain (PWM → speed) | ~3.5/10, **same** both sides | too high → wheel runs ~8× too fast → **runaway** |
 | **ACC/DEC** | near the DIP switches | acceleration/deceleration ramp | **4/10**, same both sides | =0 → no smoothing → **jerks/oscillation** in closed loop |
 
-See the full story in history/diagnostics.md (see `openamr-platform-sw`: docs/troubleshooting/diagnostics.md).
+See the full story in the `openamr-platform-sw` troubleshooting doc (`docs/troubleshooting/diagnostics.md` in that repo).
 
 ## Low-speed behaviour — measured velocity floors (2026-07-02)
 Closed-loop sweep **on the ground / under load** (`/cmd_vel` with the PID + dither, as in docking),
@@ -96,11 +102,14 @@ sub-floor yaw corrections are snapped up or zeroed rather than stalling). Judder
 is the static-friction breakaway; a taper (or the driver ACC/DEC ramp) mitigates it.
 
 ## Good to know / gotchas
-- The original fault ("right wheel runs away, robot doesn't go straight") was **100 % driver tuning**:
-  the right VAR pot was at max (10) and its ACC/DEC pot at 0. After matching both pots to the left, the
-  right wheel tracks correctly.
-- A small residual: the right channel needs slightly more PWM for the same speed (minor); the PID
-  compensates. Fine-tune the right VAR pot if you want perfectly equal PWM.
+- The original fault ("right wheel runs away, robot doesn't go straight") was **100 % driver tuning**, in
+  the **original config where VAR was in the speed path**: the right VAR pot was at max (10) and its
+  ACC/DEC pot at 0. After matching both pots to the left, the right wheel tracked correctly. *(Separately,
+  during open-loop balancing on 2026-06-19, raising the right VAR made the right wheel speed up to match a
+  faster left — same knob, opposite direction, because it was a different starting point.)*
+- ⚠️ In the **current config (SW2=ON, AI2 source)** VAR no longer balances the wheels — the residual L/R
+  asymmetry is handled entirely by the **Teensy PID** (the right channel needs slightly more PWM for the
+  same speed; the PID compensates → ~0.2 % in closed loop). Do not chase balance with the VAR pot here.
 - Test the motors safely with the **open-loop mode** (`/debug/openloop`) which bypasses the PID — useful
   to compare the two channels at identical PWM. See firmware/debug-telemetry.md (see `openamr-platform-fw`: Teensy 4.0 overlay README).
 - **Always**: wheels off the ground, 24 V on, a hand on the 24 V cut-off for the first tests.

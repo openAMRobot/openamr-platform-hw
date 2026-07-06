@@ -4,7 +4,11 @@ Mechanical, electrical, CAD, BOM, chassis, and mechatronics repository for the O
 
 ## Repository Status
 
-> The latest HW and FW information is currently available in the [openAMR](https://github.com/openAMRobot/openamr) repository. The OpenAMR HW content will be migrated to this repository shortly.
+> Migration in progress. The **electrical** subsystem docs (computing, motor control, power distribution,
+> sensors, wiring), the **BOM**, and **safety** notes now live here under `electrical/`, `manufacturing/`,
+> and `docs/`. Some historical HW/FW notes still reference the [openAMR](https://github.com/openAMRobot/openamr)
+> working repo (firmware itself belongs in `openamr-platform-fw`). Directories shown in the structure below
+> that are not yet populated are placeholders.
 
 Current maturity level: Experimental
 

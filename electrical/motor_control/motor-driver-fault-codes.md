@@ -18,20 +18,21 @@ ERROR CODE = (number of GREEN flashes × 5) + (number of RED flashes)
 ```
 
 Count one full cycle: the **green** flashes first (each green = 5), then the **red** flashes (each red = 1),
-then it repeats.
+then it repeats. **Count green and red separately** — do NOT add them into one running count.
 
-| You see | Calculation | Code |
-|---|---|---|
-| 0 green, 1 red | 0×5 + 1 | **1** |
-| 0 green, 2 red | 0×5 + 2 | **2** |
-| 1 green, 0 red | 1×5 + 0 | **5** |
-| 1 green, 3 red | 1×5 + 3 | **8** |
-| **1 green, 5 red** | 1×5 + 5 | **10** |
-| 2 green, 0 red | 2×5 + 0 | **10**¹ |
-| 2 green, 4 red | 2×5 + 4 | **14** |
+> ⚠️ **The encoding is NOT a clean base-5 code, so `green×5 + red` can alias** (e.g. 1 green + 5 red and
+> 2 green + 0 red both arithmetic to 10). Do not "carry" a 5th red into an extra green — read the *actual
+> emitted pattern* the driver blinks. Below are the patterns **observed on this robot** (field-confirmed);
+> for any code not seen here, read the pattern off the driver and cross-check the fault-code table.
 
-> ¹ The pattern is "green count, then red count" — count them separately. 1 green + 5 red = code 10
-> (the one seen on this robot, = busbar undervoltage).
+| You see (emitted pattern) | Code | Meaning | Confirmed |
+|---|---|---|---|
+| **1 green, 5 red** | **10** | busbar under-voltage | ✅ seen on this robot (2026-06-26) |
+| **2 green, 4 red** | **14** | locked rotor | ✅ seen on this robot (2026-07-01, wheel jammed on wall) |
+
+*(Other codes in the fault-code table below are from the manufacturer manual and have not been observed
+here — read the blink pattern off the driver, then look up the code. Green contributes 5 each, red 1 each,
+but trust the pattern the driver actually shows, not a computed sum.)*
 
 ## Fault-code table
 
@@ -77,5 +78,5 @@ battery). The ZBLD.C20 needs **24 V ±20 % (≈ 19.2–28.8 V)**; below that →
 - **Code 16 (over-temp)** → let it cool; reduce sustained load.
 
 See also: [motors-drivers.md](motors-drivers.md) (driver model, DIP switches, pots),
-[power.md](../power_distribution/power.md) (battery / 24 V), history/diagnostics.md
-(see `openamr-platform-sw`: docs/troubleshooting/diagnostics.md).
+[power.md](../power_distribution/power.md) (battery / 24 V), and the `openamr-platform-sw`
+troubleshooting doc (`docs/troubleshooting/diagnostics.md` in that repo).

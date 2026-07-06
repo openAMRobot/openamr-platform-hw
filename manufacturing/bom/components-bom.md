@@ -12,7 +12,7 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
 | 5 | IMU | **TDK InvenSense MPU-6500** (board silk says "MPU-6050"/GY-521, but the chip is a 6500) | ✅ | MPU-6500 datasheet (TDK/InvenSense) |
 | 6 | LiDAR | **Slamtec RPLIDAR A1** (A1M8, by shape) | ⏳ confirm sticker | [slamtec.com RPLIDAR A1](https://www.slamtec.com/en/Lidar/A1) |
 | 7 | Camera | **Sony IMX708** = Raspberry Pi **Camera Module 3 NoIR** | ✅ | [raspberrypi.com camera-3](https://www.raspberrypi.com/products/camera-module-3/) |
-| 8 | SBC | **Raspberry Pi 5** | ✅ | confirm RAM (4/8/16 GB) |
+| 8 | SBC | **Raspberry Pi 5** (Model B Rev 1.1, **8 GB** RAM — confirmed 2026-07-06 on the current board) | ✅ | [raspberrypi.com Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) |
 | 9 | DC-DC 24 V→5 V | generic **~300 W 20 A CC/CV buck** (toroid + 2 trimpots) | ⏳ no clear model | (generic) |
 | 10 | Battery ×4 | **DM12-7S** — 12 V **7 Ah**/20HR lead-acid (AGM) | ✅ | DM12-7S SLA datasheet (generic 12 V 7 Ah) |
 | 11 | AC/DC 230→24 V | unknown | ⏳ read label | — |
@@ -25,13 +25,22 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
 - Motor **3000 rpm**, **spur gearbox ~30:1** (read the gearbox `4GN__K` label to confirm) → **~100 rpm
   at the wheel** (rated torque ~4.18 N·m at 30:1).
 - **Hall sensors** for the driver's commutation (separate from the AS5040 encoder).
-- ⚠️ **Pole pairs = 5** → check the driver **DIP SW4/SW5** are set for 5 pole pairs (read the table on
-  the driver silkscreen / the manual). Currently SW4 OFF / SW5 OFF — **verify this = 5 pole pairs**.
-  A wrong pole-pair setting throws off the driver's closed-loop speed scaling.
+- ⚠️ **Pole pairs = 5** → the driver **DIP SW4/SW5** must be set for 5 pole pairs. **Set to ON/ON (= 5 pp)
+  on 2026-06-19** (were OFF/OFF = 2 pp, wrong). A wrong pole-pair setting throws off the driver's
+  closed-loop speed scaling (irrelevant in the current open-loop config, but set correctly). See
+  [motors-drivers.md](../../electrical/motor_control/motors-drivers.md).
 - ⚠️ **Gearbox 30:1 exists** → odometry: `COUNTS_PER_REV = 1024` must be **per wheel revolution**.
   The firmware works at wheel scale (`MOTOR_MAX_RPM 80` ≈ the ~100 rpm output; open-loop ~14 rpm at 20 %
   PWM), so the **AS5040 reads at wheel scale** (mounted on the output side / 1024 cnt = 1 wheel rev).
   **Still verify physically**: drive exactly 1 m, compare `/odom`.
+
+### Drivetrain dimensions (for kinematics / odometry)
+Measured on the real robot (used in the firmware/URDF and the velocity-floor analysis):
+- **Wheel radius = 0.046533 m** (⌀ ≈ 0.0931 m).
+- **Track (wheel separation) = 0.4075 m.**
+- With ~100 rpm at the wheel → **max linear ≈ 0.49 m/s**; rated torque **~4.18 N·m/wheel** (30:1).
+  Reliable low-speed floors (measured on the ground): **linear 0.04–0.05 m/s, angular 0.15 rad/s** — see
+  [motors-drivers.md](../../electrical/motor_control/motors-drivers.md) "measured velocity floors".
 
 ### Drivers — ZBLD.C20-120L2R
 - **24 V ±20 %**, output **7.5 A**, **120 W**, open/closed loop (±0.5 %), ACC/DEC 0.3–10 s, 5 DI (NPN) / 2 DO.
@@ -41,19 +50,20 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
 ### Encoders — AMS AS5040
 - 10-bit magnetic; **default incremental = 256 PPR → 1024 counts/rev** in quadrature = `COUNTS_PER_REV`. ✅
 - Supply **4.5–5.5 V**, but an **internal regulator allows 3.3 V operation**. **Output high level = supply
-  voltage** → powered at 5 V it drives **5 V** on A/B (the measured ~4 V overvoltage into the Teensy 4.0).
-  **Fix option:** power it at **3.3 V** → 3.3 V outputs → safe (or add series R / divider). See
+  voltage** → powered at 5 V it drove **5 V** on A/B (measured ~4 V overvoltage into the non-5 V-tolerant
+  Teensy 4.0). **Fix APPLIED 2026-06-19:** supply moved to the **3.3 V** rail → 3.3 V outputs → safe.
+  (Alternatives had it browned out: series R / divider / level-shifter.) See
   [encoders.md](../../electrical/sensors/encoders.md).
 
 ### Battery — DM12-7S
 - **12 V, 7 Ah** sealed lead-acid (AGM). A pair in series = **24 V 7 Ah**. Sags under load (see
   [power.md](../../electrical/power_distribution/power.md)). ⚠️ No fuse / no disconnect currently — see the safety gaps in [power.md](../../electrical/power_distribution/power.md).
-  Fuse sizing: 2 motors × 3.5 A ≈ 7 A nominal + DC-DC; size a fuse around ~15–20 A (above nominal, below
-  the wire/battery limit).
+  Fuse sizing: 2 motors × **3.8 A** (nameplate) ≈ 7.6 A nominal + DC-DC → a **~15–20 A** fuse (above
+  nominal, below the wire/battery limit). ⚠️ This is above *nominal*, not the *stall* current (a jammed
+  motor draws well above 3.8 A) — confirm the stall current before finalising.
 
 ## Still to read off the robot
 - **LiDAR**: confirm the model sticker (A1M8 vs other).
 - **DC-DC buck**: any printed model / the regulator IC.
 - **AC/DC 230→24 V converter**: brand + model + rating.
-- **Raspberry Pi 5**: RAM variant.
 - **Gearbox**: the reduction suffix on the gearbox label (`4GN__K`) to confirm 30:1.

@@ -10,7 +10,7 @@ Magnetic incremental encoders, one per wheel, that let the Teensy measure each w
 |---|---|
 | Type | AS5040 magnetic, quadrature A/B |
 | Resolution | **1024 counts/rev** (`COUNTS_PER_REV` in firmware) |
-| **Supply voltage** | **5 V** (measured 2026-06-19) ⚠️ see hazard below |
+| **Supply voltage** | **3.3 V** (from the Teensy 3.3 V rail; was 5 V until the 2026-06-19 fix) ⚠️ see hazard below |
 
 > ✅ **RESOLVED 2026-06-19 — encoders moved to 3.3 V supply.** *History:* the encoders were powered at
 > **5 V**, and the AS5040 A/B outputs (output level = supply) read **~4 V** at the Teensy pins. The Teensy
@@ -19,7 +19,7 @@ Magnetic incremental encoders, one per wheel, that let the Teensy measure each w
 > **Fix applied:** the AS5040 is rated 3.3–5 V (internal regulator), so its **supply was moved from the
 > Teensy 5 V (VUSB) pin to the 3.3 V rail**. Verified: supply = 3.3 V, A/B lines now top out at **~3.3 V**
 > (no more 4 V), and the encoders **count cleanly** (validated over 3 sustained motor runs — see
-> ../history/diagnostics.md (see `openamr-platform-sw`: docs/troubleshooting/diagnostics.md)). The 5 V (VUSB) pin now feeds nothing (normal).
+> the `openamr-platform-sw` troubleshooting doc (`docs/troubleshooting/diagnostics.md` in that repo)). The 5 V (VUSB) pin now feeds nothing (normal).
 > *Alternative fixes if 3.3 V had browned out:* series R ~1–2.2 kΩ or a divider per A/B line, or a
 > level-shifter. (The IMU is correctly on **3.3 V** — see [imu.md](imu.md).)
 
@@ -83,7 +83,7 @@ In the firmware:
 > (6–62 rpm) while the left was smooth — but it was smooth **in the air** → a load/vibration-dependent
 > fault. Cause: the right **AS5040 magnet was off-center** → erratic counts under load → the PID reacted →
 > snaking. **Re-centering the magnet fixed it.** (The AS5040 needs the diametric magnet well-centered over
-> the chip; check the field-strength indicator if available.) See history/diagnostics.md (see `openamr-platform-sw`: docs/troubleshooting/diagnostics.md) §8.
+> the chip; check the field-strength indicator if available.) See the `openamr-platform-sw` troubleshooting doc (`docs/troubleshooting/diagnostics.md` in that repo) §8.
 
 So the encoders are **healthy** when properly aligned. Tools to check counts live (Ubuntu, Cyclone domain 0):
 `scripts/encread.py` (angle by hand), `scripts/encpid.py` (per-wheel target/measured/error).
@@ -94,21 +94,36 @@ binning the corrected debug rpm (`/debug/left|right.y`) against encoder position
 / 250) — the three curves **overlap**, i.e. it is a **geometric error (magnet eccentricity)**, not a
 speed/PID effect:
 
-| Wheel | Measured velocity error (per revolution) |
-|---|---|
-| **LEFT** (M1) | **±~11 %** (0.91–1.13) — the known off-centre encoder |
-| **RIGHT** (M2) | **±~6 %** (0.94–1.06) |
+These numbers are the **un-calibrated** ripple — measured with the firmware ripple table **not loaded**
+(passthrough = 1.0). The `calib_rpm(…)` table is applied *before* the debug rpm is published, so with no
+table loaded `/debug/left|right.y` is the raw residual:
 
-> ✅ **No odometry drift.** The profile is normalized to **mean = 1.000 over a full revolution** → the
-> error **averages out per revolution**, so position/odometry does **not** drift; it only produces
-> **intra-revolution velocity ripple** (the low-speed left "oscillation"/judder feel). It does not block
-> navigation.
+| Wheel | Velocity error, table NOT loaded (per revolution) | After `align_enc_cal` (table loaded) |
+|---|---|---|
+| **LEFT** (M1) | **±~11 %** (0.91–1.13) — the known off-centre encoder (raw, pre-centering, was ±~40 %) | **±~4 %** |
+| **RIGHT** (M2) | **±~6 %** (0.94–1.06) | **±~3.5 %** |
+
+> ✅ **No odometry drift, either way.** The profile is normalized to **mean = 1.000 over a full
+> revolution** → the error **averages out per revolution**, so position/odometry does **not** drift; it
+> only produces **intra-revolution velocity ripple** (the low-speed left "oscillation"/judder feel). It
+> does not block navigation.
 >
-> **Accepted long-term fix = a velocity filter in firmware, NOT a runtime correction table.** An
-> *incremental* encoder loses its absolute phase at every Teensy power-cycle, so a per-position ripple
-> table cannot stay aligned across reboots — a table was tried and does not hold. (Note: the firmware's
-> `calib_rpm(…)` table *is* applied before the debug rpm is published, so the numbers above are the
-> **residual** with any loaded table = passthrough 1.0 until one is loaded.)
+> **Deployed fix = a hot-loaded correction table + a per-boot phase re-align.** The ripple *shape* is fixed
+> (it's the magnet geometry), so it is captured once (`scripts/encoder_ref_table.json`) and pushed into the
+> firmware at runtime via `/debug/enc_cal` (`Float32MultiArray`), where `calib_rpm(…)` applies it
+> instantly. This brings **LEFT ±~40 %/±11 % → ±~4 %** and RIGHT to **±~3.5 %**, and it **survives
+> reboot** because the table is re-aligned each boot.
+>
+> ⚠️ **Why the re-align is mandatory (the incremental-phase caveat):** the AS5040 is read *incrementally*,
+> so its count zero lands at a random wheel angle at every Teensy power-cycle. A **static/compiled** table
+> is therefore applied at the wrong angle and does not hold — that failure is real. The per-boot
+> `scripts/align_enc_cal.py` (~8 s: short spin → correlate the live ripple against the reference → publish
+> the table at the correct phase) **solves** it. **Run `align_enc_cal.py` after every Teensy power-cycle**
+> (the table lives in Teensy RAM; a ROS relaunch does not reload it).
+>
+> A 512-count (half-revolution) angular velocity *filter* was **considered but rejected** — it cancels the
+> ripple but adds ~0.6 s of lag to the PID feedback. (Firmware details:
+> `openamr-platform-fw` Teensy 4.0 overlay — `firmware.ino` `calib_rpm`, `/debug/enc_cal`.)
 
 ## Good to know / gotchas
 - ⚠️ **CPR vs wheel + gearbox (confirmed 30:1)**: the motors are **geared 30:1** (Z4BLD60-24GN-30S, see

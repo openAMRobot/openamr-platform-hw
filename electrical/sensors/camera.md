@@ -52,15 +52,22 @@ This overlay **shadows** the apt libcamera without removing it (reversible: just
 Reference guide: <https://github.com/erykpawelek/libcamera_ros2_setup>.
 
 ## Run it
+⚠️ **Use 1280×720 `bgr8`** — the intrinsic calibration was done at 1280×720, so `camera_info` is only
+valid at that resolution (the bring-up runs 1280×720 for this reason; see "Intrinsic calibration"). Run a
+lower resolution **only for an uncalibrated preview**.
 ```bash
 source /opt/ros/jazzy/setup.bash
 source ~/camera_ws/install/setup.bash          # MUST source the overlay (RPi libcamera + camera_ros)
+# Calibrated capture (matches camera_info):
 ros2 run camera_ros camera_node --ros-args \
-  -p width:=640 -p height:=480 -p format:=RGB888 -p frame_id:=camera_optical_frame \
+  -p width:=1280 -p height:=720 -p format:=bgr8 -p frame_id:=camera_optical_frame \
+  -p camera_info_url:=file:///home/botshare/camera_info.yaml \
   -p FrameDurationLimits:="[100000,100000]"     # ~10 fps (see Performance below)
+# Uncalibrated preview only (lighter; camera_info will NOT match): -p width:=640 -p height:=480 -p format:=RGB888
 ```
 It is also wired into the main bring-up (`openamr_real_bringup.launch.py`) — just source `~/camera_ws`
-before launching. Verified working at both 1280×720 and 640×480 `bgr8` on `/camera/image_raw`.
+before launching. Verified working at both 1280×720 and 640×480 `bgr8` on `/camera/image_raw`
+(1280×720 is the calibrated default).
 
 ## ROS interface (provided)
 | Topic | Type | Frame |
