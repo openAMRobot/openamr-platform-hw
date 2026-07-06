@@ -10,7 +10,8 @@ sends low-current logic signals to the drivers; the drivers deliver the 24 V pow
   nameplate)**, **3000 rpm** motor + **~30:1 spur gearbox** → ~100 rpm wheel, rated **3.8 A**. U/V/W +
   Hall. (LEFT=M1, RIGHT=M2)
 - **Drivers**: **ZBLD.C20-120L2R** ×2 (24 V, 7.5 A, 120 W). Full specs + datasheets:
-  [components-bom.md](../../manufacturing/bom/components-bom.md).
+  [components-bom.md](../../manufacturing/bom/components-bom.md). **Red LED / fault blink codes:**
+  [motor-driver-fault-codes.md](motor-driver-fault-codes.md).
 - ⚠️ **Pole pairs = 5** → verify the driver **DIP SW4/SW5** are set to 5 pole pairs (read the silkscreen
   table on the driver). A wrong pole-pair setting throws off the driver's closed-loop speed scaling.
 
@@ -74,6 +75,25 @@ to the left, the known-good reference). These were the root cause of the right-w
 | **ACC/DEC** | near the DIP switches | acceleration/deceleration ramp | **4/10**, same both sides | =0 → no smoothing → **jerks/oscillation** in closed loop |
 
 See the full story in history/diagnostics.md (see `openamr-platform-sw`: docs/troubleshooting/diagnostics.md).
+
+## Low-speed behaviour — measured velocity floors (2026-07-02)
+Closed-loop sweep **on the ground / under load** (`/cmd_vel` with the PID + dither, as in docking),
+real velocity read on `/odom/unfiltered`:
+
+| Axis | Stall | Judder | **Reliable floor** | Clean |
+|---|---|---|---|---|
+| **Linear** | ≤ 0.02 m/s | 0.03 (min 0, std 0.018) | **0.04 m/s** (min 0.020) | **0.05 m/s** (std 0.004); 0.06–0.10 perfect |
+| **Angular** | ≤ 0.08 rad/s | 0.10–0.12 (min 0, high std) | **0.15 rad/s** (min 0.093) | 0.20–0.30 perfect |
+
+> ✅ **The motor is WELL-SIZED (over-sized on torque).** Above the floors the real/commanded ratio is
+> **~1.0** → no torque shortfall. The floors are **stick-slip (static friction) + coarse Hall commutation
+> at low RPM** (an *operating-point* limit, not a sizing one). Reference: the Z4BLD60-24GN-30S + 30:1 gives
+> ~0.49 m/s max and ~4.18 N·m/wheel (specs in [components-bom.md](../../manufacturing/bom/components-bom.md)).
+
+**Consequence:** keep commanded velocities **above the floors**. Docking applies this (drive taper floored
+at 0.05 m/s, scan rotation 0.17 rad/s, a `min_turn_omega` of 0.15 rad/s with a small deadband so
+sub-floor yaw corrections are snapped up or zeroed rather than stalling). Judder on each start-from-standstill
+is the static-friction breakaway; a taper (or the driver ACC/DEC ramp) mitigates it.
 
 ## Good to know / gotchas
 - The original fault ("right wheel runs away, robot doesn't go straight") was **100 % driver tuning**:
