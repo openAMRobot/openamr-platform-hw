@@ -15,11 +15,11 @@ Convention: **MOTOR1 = LEFT wheel, MOTOR2 = RIGHT wheel.** Logic level **3.3 V**
 The complete power-and-signal wiring is shown in the harness diagram below; the sections that
 follow give the exact pin/terminal tables behind it.
 
-> ### 📐 Diagram: Wiring harness (system overview)
-> *Figure 1 — the full OpenAMRobot wiring harness: power (24 V) and logic (3.3 V) domains, and every signal link.*
->
-> **Prompt to generate this diagram (paste to Claude):**
-> ```
+![Figure 1 — OpenAMRobot wiring harness: 24 V power and 3.3 V logic domains, every signal link](diagrams/wiring-harness.svg)
+
+<!-- To regenerate this diagram, prompt Claude with:
+
+-->
 > Create a clean labeled wiring/harness block diagram for a differential-drive robot. Show these blocks and every connection between them, keeping the 24 V POWER domain visually separate (e.g. red/thick) from the 3.3 V LOGIC domain (e.g. blue/thin):
 > - 24 V lead-acid battery (2x 12 V in series) -> [MISSING: fuse] -> 24 V bus.
 > - 24 V bus -> two ZBLD.C20-120L2R motor drivers (V+/V-).
@@ -56,11 +56,11 @@ follow give the exact pin/terminal tables behind it.
 
 The same assignment is shown as a physical pin map below.
 
-> ### 📐 Diagram: Teensy 4.0 pin map
-> *Figure 2 — the Teensy 4.0 board with each used pin labeled by function.*
->
-> **Prompt to generate this diagram (paste to Claude):**
-> ```
+![Figure 2 — Teensy 4.0 pin map: every used pin labeled by function](diagrams/teensy-pinout.svg)
+
+<!-- To regenerate this diagram, prompt Claude with:
+
+-->
 > Draw a top-view pinout diagram of a PJRC Teensy 4.0 board (two rows of pins). Label ONLY the pins used by this robot, colour-grouped by function:
 > - I2C (IMU): pin 18 = SDA, pin 19 = SCL.
 > - Encoders (quadrature): pin 14 = LEFT A, 15 = LEFT B, 11 = RIGHT A, 12 = RIGHT B.
