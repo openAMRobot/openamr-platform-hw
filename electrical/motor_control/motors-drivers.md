@@ -19,11 +19,7 @@ sends low-current logic signals to the drivers; the drivers deliver the 24 V pow
 
 The motor-control signal chain is shown below.
 
-> ### 📐 Diagram: Motor control signal chain (per wheel)
-> *Figure - from a ROS /cmd_vel command down to a turning wheel, for one side.*
->
-> **Prompt to generate this diagram (paste to Claude):**
-> ```
+![Figure — per-wheel signal chain: /cmd_vel → Teensy PID (closed loop) → ZBLD driver (open loop) → BLDC → 30:1 gearbox → wheel → AS5040 encoder back to the PID](diagrams/signal-chain.svg)
 > Draw a left-to-right signal-chain block diagram for ONE wheel:
 > - ROS 2 /cmd_vel -> micro-ROS -> Teensy 4.0.
 > - Teensy: PID (closed-loop on encoder) -> outputs PWM (speed, 0-5 V after filtering) + FWD/REV direction lines.
