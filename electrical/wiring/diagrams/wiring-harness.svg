@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1440" height="990" viewBox="0 0 1440 990" font-family="'Segoe UI',Arial,sans-serif">
+<rect x="0" y="0" width="1440" height="990" fill="#ffffff"/>
   <defs>
     <style>
       .blk{stroke-width:1.5;}

@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1340" height="950" viewBox="0 0 1340 950" font-family="'Segoe UI',Arial,sans-serif">
+<rect x="0" y="0" width="1340" height="950" fill="#ffffff"/>
   <defs>
     <style>
       .title{font-weight:600;font-size:14px;fill:#1a1a1a;}
