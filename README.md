@@ -20,13 +20,6 @@ placeholders** (see [Release scope](#release-scope)).
 ---
 
 ![System block diagram — OpenAMRobot mobile base: sensing, compute, actuation, and power subsystems and how they connect](diagrams/system-block.svg)
-> Draw a high-level system block diagram of the OpenAMRobot mobile base with four grouped areas:
-> - COMPUTE: Raspberry Pi 5 (Ubuntu 24.04, ROS 2 Jazzy, Nav2, docking) <-> Teensy 4.0 (micro-ROS motor control) over USB.
-> - ACTUATION: Teensy -> 2x ZBLD drivers -> 2x BLDC motors -> wheels.
-> - SENSING: AS5040 wheel encoders + MPU6500 IMU -> Teensy; RPLIDAR A1 (USB) + Camera Module 3 (CSI) -> Pi.
-> - POWER: 24 V lead-acid -> drivers, and -> 5 V buck -> Pi; 3.3 V logic -> encoders/IMU.
-> Keep it clean and readable; show the data direction with arrows and label the bus types (USB, CSI, I2C, quadrature, 24 V).
-> ```
 
 The overall system is shown in the block diagram above.
 

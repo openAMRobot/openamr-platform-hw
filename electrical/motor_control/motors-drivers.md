@@ -20,14 +20,6 @@ sends low-current logic signals to the drivers; the drivers deliver the 24 V pow
 The motor-control signal chain is shown below.
 
 ![Figure — per-wheel signal chain: /cmd_vel → Teensy PID (closed loop) → ZBLD driver (open loop) → BLDC → 30:1 gearbox → wheel → AS5040 encoder back to the PID](diagrams/signal-chain.svg)
-> Draw a left-to-right signal-chain block diagram for ONE wheel:
-> - ROS 2 /cmd_vel -> micro-ROS -> Teensy 4.0.
-> - Teensy: PID (closed-loop on encoder) -> outputs PWM (speed, 0-5 V after filtering) + FWD/REV direction lines.
-> - -> ZBLD driver (open loop, SW1=OFF: it is just a power stage) -> commutates using the motor Hall sensors.
-> - -> BLDC motor (U/V/W phases) -> ~30:1 gearbox -> wheel.
-> - Feedback loop: AS5040 encoder on the wheel output -> quadrature A/B -> back to the Teensy PID.
-> Emphasise that the regulation loop is closed by the Teensy PID (the driver does NOT regulate speed in open loop).
-> ```
 
 Per motor, 3 logic lines from the Teensy:
 
