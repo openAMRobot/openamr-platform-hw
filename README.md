@@ -62,7 +62,7 @@ quantities, measured drivetrain constants, driver settings.
 
 ### Manufacturing & safety
 - [Bill of materials](manufacturing/bom/components-bom.md)
-- [Hardware safety notes](docs/safety/safety.md)
+- [Hardware safety notes](safety/safety.md)
 
 ---
 
@@ -71,13 +71,14 @@ quantities, measured drivetrain constants, driver settings.
 What is **included and maintained**:
 - `electrical/` — computing, motor control, power, sensors, wiring (all populated).
 - `manufacturing/bom/` — the bill of materials.
-- `docs/safety/` — safety documentation.
+- `safety/` — hardware safety documentation.
+- `diagrams/` — repository-level diagrams (per-subsystem diagrams live in each subsystem's `diagrams/`).
 
 What is **placeholder / not yet populated** (empty directories, planned):
 - `mechanical/` (CAD, chassis, drawings, renderings)
 - `electrical/pcb/`
 - `manufacturing/assembly/`, `manufacturing/vendors/`
-- `docs/architecture/`, `docs/assembly/`, `docs/troubleshooting/`, `interfaces/`, `assets/`
+- `interfaces/`, `assets/`
 
 ---
 
