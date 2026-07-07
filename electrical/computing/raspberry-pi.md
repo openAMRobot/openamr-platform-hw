@@ -16,8 +16,8 @@ sensor drivers (LiDAR, camera), odometry, and later the navigation (Nav2/SLAM).
 | OS | Ubuntu Server **24.04 LTS** (Noble) |
 | Kernel | 6.8.x-raspi |
 | ROS | **ROS 2 Jazzy** (`/opt/ros/jazzy`) |
-| Hostname | `BOTSHARE` |
-| User | `botshare` (groups: `dialout`, `video`, `sudo`, …) |
+| Hostname | `BOTSHARE` *(reference installation — substitute your own)* |
+| User | `botshare` *(reference installation)* (groups: `dialout`, `video`, `sudo`, …) |
 
 > **Note (2026-07-06):** the current board is an **8 GB** Pi 5, fitted during a hardware swap on
 > 2026-07-06 (the DHCP address moved to `172.17.17.64`; reach it by mDNS `botshare.local`, not a hard-coded
@@ -25,12 +25,13 @@ sensor drivers (LiDAR, camera), odometry, and later the navigation (Nav2/SLAM).
 
 ## Communication
 - **To the Teensy**: USB → `/dev/ttyACM0` (stable: `/dev/serial/by-id/usb-Teensyduino_USB_Serial_16778200-if00`).
-  The Pi hosts the **micro-ROS agent** that exposes the Teensy's topics. See 01-communication.md (see `openamr-platform-sw`: communication doc).
+  The Pi hosts the **micro-ROS agent** that exposes the Teensy's topics. See the micro-ROS / networking
+docs in [`openamr-platform-sw`](https://github.com/openAMRobot/openamr-platform-sw) (`docs/real_robot/`).
 - **To the LiDAR**: USB → `/dev/ttyUSB0` (CP2102 UART bridge).
 - **To the camera**: **CSI** (ribbon cable), not USB.
 - **ROS internal**: DDS = **CycloneDDS** (rmw_cyclonedds_cpp, adopted 2026-06-18 for Nav2/docking).
 
-## Important directories (`/home/botshare`)
+## Important directories (reference installation — `/home/<user>`, here `/home/botshare`)
 | Directory | Contents |
 |---|---|
 | `~/linorobot2_ws` | the **micro-ROS agent** workspace (do NOT delete; it is the Teensy↔ROS bridge) |

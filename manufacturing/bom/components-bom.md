@@ -30,17 +30,30 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
   closed-loop speed scaling (irrelevant in the current open-loop config, but set correctly). See
   [motors-drivers.md](../../electrical/motor_control/motors-drivers.md).
 - ⚠️ **Gearbox 30:1 exists** → odometry: `COUNTS_PER_REV = 1024` must be **per wheel revolution**.
-  The firmware works at wheel scale (`MOTOR_MAX_RPM 80` ≈ the ~100 rpm output; open-loop ~14 rpm at 20 %
-  PWM), so the **AS5040 reads at wheel scale** (mounted on the output side / 1024 cnt = 1 wheel rev).
-  **Still verify physically**: drive exactly 1 m, compare `/odom`.
+  The firmware works at wheel scale (`MOTOR_MAX_RPM 80` = the configured cap, a modest headroom below
+  the ~100 rpm mechanical output; open-loop ~14 rpm at 20 % PWM), so the **AS5040 reads at wheel scale**
+  (mounted on the output side / 1024 cnt = 1 wheel rev). **Still verify physically**: drive exactly 1 m,
+  compare `/odom`.
 
 ### Drivetrain dimensions (for kinematics / odometry)
-Measured on the real robot (used in the firmware/URDF and the velocity-floor analysis):
-- **Wheel radius = 0.046533 m** (⌀ ≈ 0.0931 m).
-- **Track (wheel separation) = 0.4075 m.**
-- With ~100 rpm at the wheel → **max linear ≈ 0.49 m/s**; rated torque **~4.18 N·m/wheel** (30:1).
+**Ground truth = the firmware config** (`lino_base_config.h`), physically measured:
+- **Wheel diameter = 0.2 m** (radius 0.10 m).
+- **Track (wheel separation) = 0.46 m** (`LR_WHEELS_DISTANCE`). The CAD/URDF gives 0.4075 m — a 5 cm
+  discrepancy; **verify with a tape measure** (centre-to-centre of the two wheels) and reconcile.
+- With the firmware cap (`MOTOR_MAX_RPM 80` × `MAX_RPM_RATIO 0.85` = 68 rpm) → **max linear ≈ 0.71 m/s**
+  (~1.0 m/s at the full ~100 rpm mechanical output); rated torque **~4.18 N·m/wheel** (30:1).
   Reliable low-speed floors (measured on the ground): **linear 0.04–0.05 m/s, angular 0.15 rad/s** — see
   [motors-drivers.md](../../electrical/motor_control/motors-drivers.md) "measured velocity floors".
+
+> ⚠️ **Do NOT use 0.046533 m as the wheel radius.** Earlier revisions of this BOM listed a wheel radius
+> of 0.046533 m (⌀ 0.093 m) "measured on the real robot" — that was **wrong**. `0.046533` is the wheel
+> **axle height (Z)** in the CAD-exported URDF, mis-propagated into the Gazebo `robot.sdf` diff-drive
+> `wheel_radius` and copied here by mistake. The physical wheel is ⌀ 0.2 m (firmware, measured).
+>
+> **Latent simulation bug (openamr-platform-sw):** `robot.sdf` uses `wheel_radius 0.046533` /
+> `wheel_separation 0.4075` while the wheel's own visual/collision cylinder is `radius 0.11` — so sim
+> odometry/kinematics are scaled ~2× vs the visible model. Fix in `openamrobot_description`:
+> set the diff-drive `wheel_radius` to 0.10 and `wheel_separation` to 0.46.
 
 ### Drivers — ZBLD.C20-120L2R
 - **24 V ±20 %**, output **7.5 A**, **120 W**, open/closed loop (±0.5 %), ACC/DEC 0.3–10 s, 5 DI (NPN) / 2 DO.

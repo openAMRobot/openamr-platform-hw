@@ -61,7 +61,7 @@ source ~/camera_ws/install/setup.bash          # MUST source the overlay (RPi li
 # Calibrated capture (matches camera_info):
 ros2 run camera_ros camera_node --ros-args \
   -p width:=1280 -p height:=720 -p format:=bgr8 -p frame_id:=camera_optical_frame \
-  -p camera_info_url:=file:///home/botshare/camera_info.yaml \
+  -p camera_info_url:=file:///home/<user>/camera_info.yaml \   # reference install: /home/botshare/...
   -p FrameDurationLimits:="[100000,100000]"     # ~10 fps (see Performance below)
 # Uncalibrated preview only (lighter; camera_info will NOT match): -p width:=640 -p height:=480 -p format:=RGB888
 ```
@@ -83,7 +83,7 @@ Calibrated with a **9×12-square (8×11 inner corners) checkerboard, 30 mm squar
 `camera_calibration cameracalibrator` on the Ubuntu PC (87 views). Result (1280×720):
 `fx≈1415.7, fy≈1415.1, cx≈629.3, cy≈366.4`; distortion (plumb_bob) `[0.0038, 0.217, ~0, ~0, 0]`.
 Saved to **`scripts/camera_info.yaml`** (repo) and **`~/camera_info.yaml`** (Pi); the bring-up loads it via
-`camera_info_url:=file:///home/botshare/camera_info.yaml`.
+`camera_info_url:=file:///home/<user>/camera_info.yaml` (reference install: `/home/botshare/...`).
 
 > ⚠️ **Resolution must match the calibration**: it was done at **1280×720**, so the camera now runs at
 > **1280×720** in the bring-up (intrinsics are resolution-dependent, and the 16:9 mode crops the 4:3 sensor

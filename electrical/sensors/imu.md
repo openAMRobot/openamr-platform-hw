@@ -20,7 +20,11 @@ heading (yaw) estimation for navigation.
 - `SDA = pin 18`, `SCL = pin 19` (Teensy 4.0 default `Wire`) — confirmed on the board.
 - **Supply = 3.3 V** (measured), `AD0 = GND` → address **0x68**, `GND` common with the Teensy.
 - The Teensy is the I²C master; the IMU answers at 0x68.
-- The firmware reads acceleration and rotation rate; it publishes `sensor_msgs/Imu` on **`/imu/data`**.
+- The firmware reads acceleration and rotation rate; it publishes raw IMU on **`/imu/data_raw`**
+  (`sensor_msgs/Imu`) plus **`/imu/mag`** (`sensor_msgs/MagneticField`, see the no-magnetometer note
+  below). The **filtered `/imu/data`** is produced host-side (Madgwick/EKF), not by the firmware.
+  *(Older revisions of this doc said the firmware publishes `/imu/data` directly — that is outdated;
+  the deployed 2026-06-29 firmware publishes `/imu/data_raw` + `/imu/mag`.)*
 
 > ✅ **No level-shift issue here** (unlike the encoders): the GY-521 board runs on **3.3 V**, so its
 > on-board I²C pull-ups pull to 3.3 V → SDA/SCL never exceed 3.3 V → safe for the Teensy 4.0.
@@ -36,7 +40,9 @@ The linorobot2 **MPU6050** driver checks `WHO_AM_I == 0x68` and **rejects** our 
   (accel+gyro), so it works.
 
 ## Status (verified)
-- ✅ `/imu/data` publishes **real data**: at rest, `linear_acceleration.z ≈ 9.74 m/s²` (gravity).
+- ✅ `/imu/data_raw` publishes **real data**: at rest, `linear_acceleration.z ≈ 9.74 m/s²` (gravity).
+- ⚠️ `/imu/mag` is published for message-shape compatibility only — the MPU6500 has **no magnetometer**,
+  so it carries no real magnetic field; do not fuse it as a heading source.
 - The `linear_acceleration.x ≈ -2` at rest means the IMU is **mounted at a slight tilt** (to account for
   in the URDF later).
 
@@ -54,8 +60,8 @@ slip). The accelerometer is **not** used (tilted mount + only yaw matters in 2D)
 
 ## Good to know / gotchas
 - **No orientation**: the driver provides raw accel + gyro only; the orientation quaternion in
-  `/imu/data` is all zeros (invalid). For sensor fusion (EKF / `robot_localization`), use the
+  `/imu/data_raw` is all zeros (invalid). For sensor fusion (EKF / `robot_localization`), use the
   **angular velocity** (`angular_velocity.z`, yaw rate), not the orientation.
-- There is a tiny standalone I²C scanner project on the Pi (`~/i2cscan`) to re-check the bus / address
-  (`WHO_AM_I`) if needed.
+- A tiny standalone I²C scanner project on the reference Pi (`~/i2cscan`) can re-check the bus /
+  address (`WHO_AM_I`) if needed.
 - The firmware default scales: accel ±2 g (`1/16384`), gyro ±250 °/s (`1/131`).

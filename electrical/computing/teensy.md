@@ -19,7 +19,8 @@ wheel's target speed (differential kinematics), reads the **encoders**, runs a p
 
 ## Communication
 - **To the Pi**: USB serial, **micro-ROS (XRCE-DDS)** protocol, **115200 baud**. The Teensy is the
-  *client*; the *agent* runs on the Pi. (details: 01-communication.md (see `openamr-platform-sw`: communication doc))
+  *client*; the *agent* runs on the Pi. (details: see the micro-ROS / networking docs in
+  [`openamr-platform-sw`](https://github.com/openAMRobot/openamr-platform-sw), `docs/real_robot/`)
 - **To the IMU**: I²C (SDA pin 18, SCL pin 19), address 0x68. ([imu.md](../sensors/imu.md))
 - **To the encoders**: A/B quadrature on interrupts. ([encoders.md](../sensors/encoders.md))
 - **To the drivers**: PWM + 2 direction lines per motor. ([motors-drivers.md](../motor_control/motors-drivers.md))
