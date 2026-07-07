@@ -95,7 +95,30 @@ The driver's connected terminals and their Teensy links are shown below.
 >
 > **Prompt to generate this diagram (paste to Claude):**
 > ```
-> Draw a connection diagram for one ZBLD.C20-120L2R BLDC driver. Show its 12-position signal terminal block with ONLY these 4 wired (others greyed 'not connected'): VAR/AI2 (speed, analog 0-5 V from a filtered Teensy PWM), FWD/DI1 (forward, digital), REV/DI2 (reverse, digital), COM (common ground). Show the incoming Teensy links (PWM, FWD, REV, GND). Separately show the 24 V DC power screw terminals (V+/V-, brown=+, blue=-) and the 8-pin Molex motor connector (U, V, W phases + Hu, Hv, Hw Halls + Vcc 5 V + 0V). Note: the driver does its own commutation from the Halls; the Teensy never sees U/V/W.
+> Draw a connection diagram for one ZBLD.C20-120L2R BLDC driver. English labels only.
+> Draw its 12-position signal terminal block VERTICALLY, and you MUST keep this EXACT
+> terminal order from BOTTOM to TOP, labeling every position with its real name (do not
+> reorder, do not group the wired ones together):
+>   pos 1 (bottom) FWD/DI1  <-- WIRED
+>   pos 2          REV/DI2  <-- WIRED
+>   pos 3          JOG/DI3  (not connected)
+>   pos 4          CLR/DI4  (not connected)
+>   pos 5          BRK/DI5  (not connected)
+>   pos 6          COM      <-- WIRED
+>   pos 7          VAR/AI2  <-- WIRED
+>   pos 8          +5V      (not connected)
+>   pos 9          ERR/DO1  (not connected)
+>   pos 10         SPD/DO2  (not connected)
+>   pos 11         A+       (not connected, RS485)
+>   pos 12 (top)   B-       (not connected, RS485)
+> Highlight ONLY the 4 wired terminals at their real positions (1, 2, 6, 7); grey out the
+> other 8 but STILL show their real names. Show the incoming Teensy links to the wired ones:
+> VAR/AI2 <- Teensy PWM (LEFT pin 1 / RIGHT pin 5, through an RC filter -> 0-5 V);
+> FWD/DI1 <- Teensy FWD (LEFT pin 20 / RIGHT pin 6); REV/DI2 <- Teensy REV (LEFT pin 21 /
+> RIGHT pin 8); COM <- Teensy GND (common ground, mandatory). Separately show the 24 V DC
+> power screw terminals V+/V- (brown = +24 V, blue = 0 V) and the 8-pin Molex motor connector
+> (U, V, W phases + Hu, Hv, Hw Halls + Vcc 5 V Hall supply + 0V Hall return). Note: the driver
+> commutates internally from the Halls; the Teensy never sees U/V/W.
 > ```
 
 
