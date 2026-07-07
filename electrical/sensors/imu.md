@@ -53,7 +53,7 @@ reads ~0 with a firmware deadband** → no heading drift on straight lines. Duri
 **tracks the real rotation** closely (verified against wheel odometry, e.g. both ≈ −25 °/s while turning).
 Conclusion: the gyro Z is healthy and the fusion mainly **reduces heading drift in turns** (where wheels
 slip). The accelerometer is **not** used (tilted mount + only yaw matters in 2D). See
-../software/ros-architecture.md (see `openamr-platform-sw`: ROS architecture).
+the `openamr-platform-sw` navigation/architecture docs.
 
 > ⚠️ Measure the bias only when the robot is **strictly immobile** — moving it during the capture gives a
 > bogus (even sign-flipping) bias reading.

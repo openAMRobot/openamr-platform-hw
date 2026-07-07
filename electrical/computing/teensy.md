@@ -14,7 +14,7 @@ wheel's target speed (differential kinematics), reads the **encoders**, runs a p
 | MCU | NXP **IMXRT1062**, Cortex-M7 @ 600 MHz |
 | Logic | **3.3 V** (⚠️ not all pins are 5 V tolerant) |
 | USB | native serial (shows up as `/dev/ttyACM0`) |
-| USB serial number | `16778200` |
+| USB serial number | `16778200` *(reference unit — yours differs)* |
 | Firmware | `linorobot2_hardware` (PlatformIO, env `teensy40`) |
 
 ## Communication
@@ -29,8 +29,8 @@ wheel's target speed (differential kinematics), reads the **encoders**, runs a p
 See the dedicated sheet **[wiring-pinout.md](../wiring/wiring-pinout.md)** (all pins in one place).
 
 ## Firmware & flashing
-- Source and structure: **firmware/firmware.md (see `openamr-platform-fw`: Teensy 4.0 overlay README)**.
-- Build/flash on the Pi: **procedures/running-the-robot.md (see `openamr-platform-sw` run-book)**.
+- Source and structure: **the `openamr-platform-fw` overlay README (`boards/teensy_4_0/linorobot2_overlay/README.md`)**.
+- Build/flash on the Pi: **the `openamr-platform-sw` real-robot run-book (`docs/real_robot/`)**.
 - ⚠️ The firmware **starts on its own** at power-up (USB). There is nothing to "launch" on the Teensy;
   what you launch is the **agent** on the Pi.
 
@@ -38,6 +38,6 @@ See the dedicated sheet **[wiring-pinout.md](../wiring/wiring-pinout.md)** (all 
 - The **LED (pin 13)** is a diagnostic: 3 repeated blinks = init failure (IMU not recognized, or ROS
   entity creation failed). Solid LED = connected to the agent.
 - The current firmware includes **debug** additions (`/debug/*` topics) and an **open-loop mode**
-  (`/debug/openloop`) to test the motors without the PID. See firmware/debug-telemetry.md (see `openamr-platform-fw`: Teensy 4.0 overlay README).
+  (`/debug/openloop`) to test the motors without the PID. See the `openamr-platform-fw` debug-telemetry doc (`docs/architecture/debug-telemetry.md`).
 - You **cannot read back** the flashed firmware (the Teensy can't be dumped): the only "backup" is the
   source code in `~/linorobot2_hardware`.

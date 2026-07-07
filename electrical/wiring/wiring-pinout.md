@@ -51,7 +51,7 @@ follow give the exact pin/terminal tables behind it.
 | Debug LED | 13 | init/status (3 blinks = init failure) |
 | micro-ROS | USB | native serial, 115200 baud |
 
-> These values are also the `#define`s in `lino_base_config.h` (see firmware/firmware.md (see `openamr-platform-fw`: Teensy 4.0 overlay README)).
+> These values are also the `#define`s in `lino_base_config.h` (see the `openamr-platform-fw` overlay README (`boards/teensy_4_0/linorobot2_overlay/README.md`)).
 > Note: `MOTOR1_PWM` is pin **1** (pin 21 is **not** a PWM pin on the Teensy 4.x — a common upstream pitfall).
 
 The same assignment is shown as a physical pin map below.

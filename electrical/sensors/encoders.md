@@ -149,4 +149,4 @@ table loaded `/debug/left|right.y` is the raw residual:
   the output side / not multiplied by 30). Odometry is therefore *consistent*, but **verify physically**:
   drive exactly 1 m and compare `/odom`.
 - Raw counts are visible live on `/debug/left` and `/debug/right` (field `z`). See
-  firmware/debug-telemetry.md (see `openamr-platform-fw`: Teensy 4.0 overlay README).
+  the `openamr-platform-fw` debug-telemetry doc (`docs/architecture/debug-telemetry.md`).

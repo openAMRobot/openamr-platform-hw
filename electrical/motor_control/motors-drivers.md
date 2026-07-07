@@ -128,5 +128,5 @@ is the static-friction breakaway; a taper (or the driver ACC/DEC ramp) mitigates
   asymmetry is handled entirely by the **Teensy PID** (the right channel needs slightly more PWM for the
   same speed; the PID compensates → ~0.2 % in closed loop). Do not chase balance with the VAR pot here.
 - Test the motors safely with the **open-loop mode** (`/debug/openloop`) which bypasses the PID — useful
-  to compare the two channels at identical PWM. See firmware/debug-telemetry.md (see `openamr-platform-fw`: Teensy 4.0 overlay README).
+  to compare the two channels at identical PWM. See the `openamr-platform-fw` debug-telemetry doc (`docs/architecture/debug-telemetry.md`).
 - **Always**: wheels off the ground, 24 V on, a hand on the 24 V cut-off for the first tests.

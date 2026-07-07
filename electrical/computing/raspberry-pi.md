@@ -24,7 +24,7 @@ sensor drivers (LiDAR, camera), odometry, and later the navigation (Nav2/SLAM).
 > IP). Earlier notes in this repo referenced a **4 GB** unit — that was the previous board.
 
 ## Communication
-- **To the Teensy**: USB → `/dev/ttyACM0` (stable: `/dev/serial/by-id/usb-Teensyduino_USB_Serial_16778200-if00`).
+- **To the Teensy**: USB → `/dev/ttyACM0` (stable: `/dev/serial/by-id/usb-Teensyduino_USB_Serial_<serial>-if00` (reference unit: `...16778200-if00`)).
   The Pi hosts the **micro-ROS agent** that exposes the Teensy's topics. See the micro-ROS / networking
 docs in [`openamr-platform-sw`](https://github.com/openAMRobot/openamr-platform-sw) (`docs/real_robot/`).
 - **To the LiDAR**: USB → `/dev/ttyUSB0` (CP2102 UART bridge).
@@ -42,7 +42,7 @@ docs in [`openamr-platform-sw`](https://github.com/openAMRobot/openamr-platform-
 | `~/*.py` (encoder_*, powered_*, openloop_*, …) | diagnostic scripts |
 
 ## Access
-SSH from the dev PC. See procedures/running-the-robot.md (see `openamr-platform-sw` run-book).
+SSH from the dev PC. See the `openamr-platform-sw` real-robot run-book (`docs/real_robot/`).
 ROS 2 is sourced automatically in an interactive shell (`~/.bashrc`).
 Over a **non-interactive** SSH command you must source it manually:
 ```bash
