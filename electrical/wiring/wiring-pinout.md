@@ -114,13 +114,11 @@ pot + **ACC/DEC** ramp pot (see [motors-drivers.md](../motor_control/motors-driv
 
 The switch positions are shown below.
 
-> ### 📐 Diagram: Driver DIP switch settings
-> *Figure 4 — the 6-position DIP block on each driver, drawn in the applied configuration.*
->
-> **Prompt to generate this diagram (paste to Claude):**
-> ```
-> Draw a 6-position DIP switch block (SW1..SW6) in this exact state: SW1=OFF, SW2=ON, SW3=OFF, SW4=ON, SW5=ON, SW6=OFF. Annotate each: SW1=OFF -> open loop (Teensy PID is the sole regulator); SW2=ON -> speed source = AI2 (external 0-5 V PWM input); SW3=OFF; SW4=ON & SW5=ON -> 5 pole pairs (motor P=5); SW6=OFF -> no RS485. Both drivers are set identically.
-> ```
+![Figure 4 — driver DIP switches SW1..SW6 in the applied configuration (OFF·ON·OFF·ON·ON·OFF)](diagrams/driver-dip-switches.svg)
+
+<!-- To regenerate this diagram, prompt Claude with:
+Draw a 6-position DIP switch block (SW1..SW6) in this exact state: SW1=OFF, SW2=ON, SW3=OFF, SW4=ON, SW5=ON, SW6=OFF. Annotate each: SW1=OFF -> open loop (Teensy PID is the sole regulator); SW2=ON -> speed source = AI2 (external 0-5 V PWM input); SW3=OFF; SW4=ON & SW5=ON -> 5 pole pairs (motor P=5); SW6=OFF -> no RS485. Both drivers are set identically.
+-->
 
 
 - **SW1 = OFF → open loop** (driver is a power stage; the **Teensy PID** is the sole regulator — best
