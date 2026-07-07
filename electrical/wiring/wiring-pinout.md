@@ -62,11 +62,7 @@ FWD/DI1  REV/DI2  JOG/DI3  CLR/DI4  BRK/DI5  COM  VAR/AI2  +5V  ERR/DO1  SPD/DO2
 
 The driver's connected terminals and their Teensy links are shown below.
 
-> ### 📐 Diagram: Driver signal + power connections (ZBLD C20-120L2R)
-> *Figure 3 — one ZBLD driver: which of its 12 signal terminals are wired, plus the 24 V power and motor connector.*
->
-> **Prompt to generate this diagram (paste to Claude):**
-> ```
+![Figure 3 — ZBLD.C20-120L2R driver connections: the 12-position signal block (only terminals 1/2/6/7 wired), 24 V power, and the 8-pin motor Molex](diagrams/driver-connections.svg)
 > Draw a connection diagram for one ZBLD.C20-120L2R BLDC driver. English labels only.
 > Draw its 12-position signal terminal block VERTICALLY, and you MUST keep this EXACT
 > terminal order from BOTTOM to TOP, labeling every position with its real name (do not
