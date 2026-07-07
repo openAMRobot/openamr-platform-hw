@@ -26,17 +26,6 @@ The power distribution is shown in the diagram below.
 
 ![Figure — power distribution: 230 V charger, 24 V battery (with the missing fuse and disconnect), 24 V drivers, and the buck-derived 5 V/3.3 V logic](diagrams/power-distribution.svg)
 
-<!-- To regenerate this diagram, prompt Claude with:
-Draw a power distribution diagram for the robot. Left to right:
-- 230 V AC mains -> AC/DC converter/charger (enclosed) -> charges the battery.
-- Battery: 2x 12 V lead-acid in series = 24 V. Mark at-rest thresholds (full ~25.5-26 V, ~50% ~24 V, dead <=23.5 V).
-- Battery + -> [RED: NO FUSE FITTED - add 15-20 A] -> [RED: NO BATTERY DISCONNECT/E-STOP FITTED] -> 24 V bus.
-- 24 V bus -> 2x ZBLD motor drivers (V+/V-).
-- 24 V bus -> DC-DC buck converter -> 5 V (must hold >=5 A or the Pi 5 browns out at bring-up) -> Raspberry Pi 5.
-- From the Pi/Teensy: 3.3 V logic rail -> AS5040 encoders and MPU6500 IMU.
-Colour the 24 V path red/thick, the 5 V path orange, the 3.3 V path blue. Show the two red 'NOT FITTED' safety gaps prominently.
--->
-
 ## Power architecture — VERIFIED 2026-06-19
 ```
 Battery 24V ──┐

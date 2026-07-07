@@ -17,21 +17,6 @@ follow give the exact pin/terminal tables behind it.
 
 ![Figure 1 — OpenAMRobot wiring harness: 24 V power and 3.3 V logic domains, every signal link](diagrams/wiring-harness.svg)
 
-<!-- To regenerate this diagram, prompt Claude with:
-
--->
-> Create a clean labeled wiring/harness block diagram for a differential-drive robot. Show these blocks and every connection between them, keeping the 24 V POWER domain visually separate (e.g. red/thick) from the 3.3 V LOGIC domain (e.g. blue/thin):
-> - 24 V lead-acid battery (2x 12 V in series) -> [MISSING: fuse] -> 24 V bus.
-> - 24 V bus -> two ZBLD.C20-120L2R motor drivers (V+/V-).
-> - 24 V bus -> DC-DC buck -> 5 V -> Raspberry Pi 5.
-> - Each driver -> its ZD Z4BLD60 BLDC motor: 3 phases U/V/W + 3 Hall sensors Hu/Hv/Hw + Hall Vcc(5V)/0V.
-> - Teensy 4.0 (3.3 V logic) signal links: to LEFT driver PWM=pin1, FWD=pin20, REV=pin21; to RIGHT driver PWM=pin5, FWD=pin6, REV=pin8; each driver COM tied to Teensy GND (common ground, mandatory).
-> - AS5040 encoders (3.3 V): LEFT A/B -> Teensy pins 14/15; RIGHT A/B -> pins 11/12.
-> - MPU6500 IMU (3.3 V, I2C 0x68): SDA->pin18, SCL->pin19.
-> - Raspberry Pi 5 <-> Teensy over USB (micro-ROS, 115200); Pi <-> RPLIDAR A1 over USB; Pi <-> Camera Module 3 over CSI.
-> Label voltages on every rail. Mark the missing fuse and missing battery disconnect as red 'NOT FITTED' notes.
-> ```
-
 ## Teensy 4.0 pin assignment
 
 | Function | Pin | Notes |
@@ -57,19 +42,6 @@ follow give the exact pin/terminal tables behind it.
 The same assignment is shown as a physical pin map below.
 
 ![Figure 2 — Teensy 4.0 pin map: every used pin labeled by function](diagrams/teensy-pinout.svg)
-
-<!-- To regenerate this diagram, prompt Claude with:
-
--->
-> Draw a top-view pinout diagram of a PJRC Teensy 4.0 board (two rows of pins). Label ONLY the pins used by this robot, colour-grouped by function:
-> - I2C (IMU): pin 18 = SDA, pin 19 = SCL.
-> - Encoders (quadrature): pin 14 = LEFT A, 15 = LEFT B, 11 = RIGHT A, 12 = RIGHT B.
-> - Motor LEFT: pin 1 = PWM (only PWM-capable pin used), 20 = FWD, 21 = REV.
-> - Motor RIGHT: pin 5 = PWM, 6 = FWD, 8 = REV.
-> - Pin 13 = debug LED. USB = micro-ROS serial (115200).
-> Add a callout: 'pin 21 is NOT PWM-capable on Teensy 4.x — that is why MOTOR1 PWM is pin 1'. All I/O is 3.3 V, NOT 5 V tolerant — add that as a warning banner.
-> ```
-
 
 ## Driver wiring — ZBLD C20-120L2R (VERIFIED 2026-06-19)
 
@@ -121,7 +93,6 @@ The driver's connected terminals and their Teensy links are shown below.
 > commutates internally from the Halls; the Teensy never sees U/V/W.
 > ```
 
-
 Unused: `JOG/DI3`, `CLR/DI4`, `BRK/DI5` (brake), `+5V`, `ERR/DO1` (no fault read-back), `SPD/DO2`
 (no speed feedback to the Teensy), `A+/B−` (RS485 not used). Speed/gain is set by the on-board **VAR/AI1**
 pot + **ACC/DEC** ramp pot (see [motors-drivers.md](../motor_control/motors-drivers.md)).
@@ -138,11 +109,6 @@ pot + **ACC/DEC** ramp pot (see [motors-drivers.md](../motor_control/motors-driv
 The switch positions are shown below.
 
 ![Figure 4 — driver DIP switches SW1..SW6 in the applied configuration (OFF·ON·OFF·ON·ON·OFF)](diagrams/driver-dip-switches.svg)
-
-<!-- To regenerate this diagram, prompt Claude with:
-Draw a 6-position DIP switch block (SW1..SW6) in this exact state: SW1=OFF, SW2=ON, SW3=OFF, SW4=ON, SW5=ON, SW6=OFF. Annotate each: SW1=OFF -> open loop (Teensy PID is the sole regulator); SW2=ON -> speed source = AI2 (external 0-5 V PWM input); SW3=OFF; SW4=ON & SW5=ON -> 5 pole pairs (motor P=5); SW6=OFF -> no RS485. Both drivers are set identically.
--->
-
 
 - **SW1 = OFF → open loop** (driver is a power stage; the **Teensy PID** is the sole regulator — best
   for this robot, removes the double loop). *Was ON (closed loop); changed 2026-06-19.* Validated: smooth.
