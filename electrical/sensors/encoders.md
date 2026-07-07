@@ -60,6 +60,22 @@ is functionally confirmed: the firmware decodes clean A/B quadrature and the cou
 > `COUNTS_PER_REV = 1024` exactly. Datasheet + part list in [components-bom.md](../../manufacturing/bom/components-bom.md).
 
 ## Communication (quadrature → Teensy)
+
+The encoder-to-Teensy wiring is shown below.
+
+> ### 📐 Diagram: AS5040 encoder wiring (both wheels)
+> *Figure - the two AS5040 quadrature encoders wired to the Teensy on the 3.3 V rail.*
+>
+> **Prompt to generate this diagram (paste to Claude):**
+> ```
+> Draw a wiring diagram for two AS5040 magnetic quadrature encoders (one per wheel):
+> - Supply: 3.3 V rail (NOT 5 V - add a red note: at 5 V the A/B outputs reach ~4 V and over-drive the Teensy 3.3 V inputs, which are NOT 5 V tolerant; fixed 2026-06-19).
+> - LEFT encoder: A -> Teensy pin 14, B -> Teensy pin 15.
+> - RIGHT encoder: A -> Teensy pin 11, B -> Teensy pin 12.
+> - Common GND.
+> Also include a small inset showing the two quadrature waveforms A and B 90 degrees out of phase, with an arrow indicating that the A-before-B vs B-before-A order gives the direction of rotation. Note 1024 counts per wheel revolution.
+> ```
+
 Two digital signals **A** and **B** in quadrature, read by the Teensy on **interrupt** pins. The phase
 relationship between A and B gives direction; counting edges gives position.
 

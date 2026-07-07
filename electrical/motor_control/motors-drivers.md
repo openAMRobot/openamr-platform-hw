@@ -16,6 +16,23 @@ sends low-current logic signals to the drivers; the drivers deliver the 24 V pow
   table on the driver). A wrong pole-pair setting throws off the driver's closed-loop speed scaling.
 
 ## Communication (Teensy → driver)
+
+The motor-control signal chain is shown below.
+
+> ### 📐 Diagram: Motor control signal chain (per wheel)
+> *Figure - from a ROS /cmd_vel command down to a turning wheel, for one side.*
+>
+> **Prompt to generate this diagram (paste to Claude):**
+> ```
+> Draw a left-to-right signal-chain block diagram for ONE wheel:
+> - ROS 2 /cmd_vel -> micro-ROS -> Teensy 4.0.
+> - Teensy: PID (closed-loop on encoder) -> outputs PWM (speed, 0-5 V after filtering) + FWD/REV direction lines.
+> - -> ZBLD driver (open loop, SW1=OFF: it is just a power stage) -> commutates using the motor Hall sensors.
+> - -> BLDC motor (U/V/W phases) -> ~30:1 gearbox -> wheel.
+> - Feedback loop: AS5040 encoder on the wheel output -> quadrature A/B -> back to the Teensy PID.
+> Emphasise that the regulation loop is closed by the Teensy PID (the driver does NOT regulate speed in open loop).
+> ```
+
 Per motor, 3 logic lines from the Teensy:
 
 | Teensy signal | Driver input | Meaning | Left pin | Right pin |
