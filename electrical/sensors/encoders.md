@@ -63,11 +63,7 @@ is functionally confirmed: the firmware decodes clean A/B quadrature and the cou
 
 The encoder-to-Teensy wiring is shown below.
 
-> ### 📐 Diagram: AS5040 encoder wiring (both wheels)
-> *Figure - the two AS5040 quadrature encoders wired to the Teensy on the 3.3 V rail.*
->
-> **Prompt to generate this diagram (paste to Claude):**
-> ```
+![Figure — two AS5040 quadrature encoders on the 3.3 V rail: LEFT A/B to Teensy 14/15, RIGHT A/B to 11/12, common GND, with the quadrature-waveform inset (1024 counts/rev)](diagrams/encoder-wiring.svg)
 > Draw a wiring diagram for two AS5040 magnetic quadrature encoders (one per wheel):
 > - Supply: 3.3 V rail (NOT 5 V - add a red note: at 5 V the A/B outputs reach ~4 V and over-drive the Teensy 3.3 V inputs, which are NOT 5 V tolerant; fixed 2026-06-19).
 > - LEFT encoder: A -> Teensy pin 14, B -> Teensy pin 15.
