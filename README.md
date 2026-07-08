@@ -102,7 +102,7 @@ Honest disclosure — these are **not yet fixed** and are safety-relevant:
 
 Hardware and mechatronics documentation belongs here. Related repositories:
 
-- **`openamr-platform-fw`** — Teensy firmware (overlay on linorobot2).
+- **`openamr-platform-fw`** — Teensy motor-control firmware.
 - **`openamr-platform-sw`** — ROS 2 software (description, Gazebo, Nav2, docking).
 
 ## Safety notice

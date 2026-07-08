@@ -34,8 +34,8 @@ docs in [`openamr-platform-sw`](https://github.com/openAMRobot/openamr-platform-
 ## Important directories (reference installation — `/home/<user>`, here `/home/botshare`)
 | Directory | Contents |
 |---|---|
-| `~/linorobot2_ws` | the **micro-ROS agent** workspace (do NOT delete; it is the Teensy↔ROS bridge) |
-| `~/linorobot2_hardware` | the Teensy **firmware source** (upstream clone + our config + debug) |
+| `~/microros_ws` *(reference install)* | the **micro-ROS agent** workspace (do NOT delete; it is the Teensy↔ROS bridge) |
+| `~/teensy_firmware` *(reference install)* | the Teensy **firmware source** (see `openamr-platform-fw`) |
 | `~/openamr-platform-sw` | OpenAMR **navigation** stack (cloned, not built yet) |
 | `~/openamr_hardware_bringup_guide` | provided bring-up guide (reference) |
 | `~/openamr_real_bringup.launch.py` | the **real bring-up launch** (agent+lidar+odom+TF) |
@@ -46,7 +46,7 @@ SSH from the dev PC. See the `openamr-platform-sw` real-robot run-book (`docs/re
 ROS 2 is sourced automatically in an interactive shell (`~/.bashrc`).
 Over a **non-interactive** SSH command you must source it manually:
 ```bash
-source /opt/ros/jazzy/setup.bash && source ~/linorobot2_ws/install/setup.bash
+source /opt/ros/jazzy/setup.bash && source ~/microros_ws/install/setup.bash   # reference install path
 ```
 
 ## ⚠️ Thermal — no active cooler → the Pi throttles navigation (2026-07-06)

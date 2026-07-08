@@ -20,7 +20,7 @@ Full details: [power distribution & safety](../electrical/power_distribution/pow
 
 ## Software / firmware changes
 - Don't flash a new firmware without knowing you can re-flash a working one (the Teensy can't be dumped;
-  source is in `~/linorobot2_hardware`).
+  firmware source: see `openamr-platform-fw`).
 - After any firmware/config change, **re-verify** encoder directions and a low-speed `/cmd_vel` before
   driving normally.
 

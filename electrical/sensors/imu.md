@@ -31,7 +31,7 @@ heading (yaw) estimation for navigation.
 > Unused pins: `XCL`, `XDA` (auxiliary I²C), `INT` (data-ready interrupt).
 
 ## Firmware driver — the fix
-The linorobot2 **MPU6050** driver checks `WHO_AM_I == 0x68` and **rejects** our chip (which returns 0x70)
+The **MPU6050** driver checks `WHO_AM_I == 0x68` and **rejects** our chip (which returns 0x70)
 → `setup()` used to hang (LED 3 blinks, no topics). The fix:
 
 - Use **`USE_MPU9250_IMU`** in `lino_base_config.h` (instead of `USE_MPU6050_IMU`).

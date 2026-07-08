@@ -28,5 +28,5 @@ license permits redistribution and it is clearly documented here.
 
 ## Related repositories
 
-- `openamr-platform-fw` — Teensy firmware (overlay on linorobot2).
+- `openamr-platform-fw` — Teensy motor-control firmware.
 - `openamr-platform-sw` — ROS 2 software (description, Gazebo, Nav2, docking).

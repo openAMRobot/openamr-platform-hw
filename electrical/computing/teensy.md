@@ -15,7 +15,7 @@ wheel's target speed (differential kinematics), reads the **encoders**, runs a p
 | Logic | **3.3 V** (⚠️ not all pins are 5 V tolerant) |
 | USB | native serial (shows up as `/dev/ttyACM0`) |
 | USB serial number | `16778200` *(reference unit — yours differs)* |
-| Firmware | `linorobot2_hardware` (PlatformIO, env `teensy40`) |
+| Firmware | OpenAMRobot Teensy firmware — see `openamr-platform-fw` (PlatformIO, env `teensy40`) |
 
 ## Communication
 - **To the Pi**: USB serial, **micro-ROS (XRCE-DDS)** protocol, **115200 baud**. The Teensy is the
@@ -29,7 +29,7 @@ wheel's target speed (differential kinematics), reads the **encoders**, runs a p
 See the dedicated sheet **[wiring-pinout.md](../wiring/wiring-pinout.md)** (all pins in one place).
 
 ## Firmware & flashing
-- Source and structure: **the `openamr-platform-fw` overlay README (`boards/teensy_4_0/linorobot2_overlay/README.md`)**.
+- Source and structure: **the `openamr-platform-fw` firmware documentation**.
 - Build/flash on the Pi: **the `openamr-platform-sw` real-robot run-book (`docs/real_robot/`)**.
 - ⚠️ The firmware **starts on its own** at power-up (USB). There is nothing to "launch" on the Teensy;
   what you launch is the **agent** on the Pi.
@@ -40,4 +40,4 @@ See the dedicated sheet **[wiring-pinout.md](../wiring/wiring-pinout.md)** (all 
 - The current firmware includes **debug** additions (`/debug/*` topics) and an **open-loop mode**
   (`/debug/openloop`) to test the motors without the PID. See the `openamr-platform-fw` debug-telemetry doc (`docs/architecture/debug-telemetry.md`).
 - You **cannot read back** the flashed firmware (the Teensy can't be dumped): the only "backup" is the
-  source code in `~/linorobot2_hardware`.
+  firmware source: see `openamr-platform-fw`.
