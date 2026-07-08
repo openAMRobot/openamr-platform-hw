@@ -34,11 +34,11 @@
   <circle cx="620" cy="214" r="3.5" fill="#2c6fbb"/>
 
   <!-- ===== GREEN "3.3 V, safe" NOTE ===== -->
-  <rect x="700" y="234" width="392" height="92" rx="8" fill="#e9f7ef" stroke="#2e8b57" stroke-width="1.8"/>
-  <text x="716" y="256" font-weight="700" font-size="13px" fill="#2e8b57">3.3 V, safe</text>
-  <text x="716" y="276" font-size="11.5px" fill="#1a1a1a">On-board pull-ups tie SDA/SCL to 3.3 V, so the I&#178;C lines</text>
-  <text x="716" y="293" font-size="11.5px" fill="#1a1a1a">never exceed 3.3 V — safe for the Teensy inputs,</text>
-  <text x="716" y="310" font-size="11.5px" fill="#1a1a1a">which are NOT 5 V tolerant.</text>
+  <rect x="700" y="90" width="392" height="92" rx="8" fill="#e9f7ef" stroke="#2e8b57" stroke-width="1.8"/>
+  <text x="716" y="112" font-weight="700" font-size="13px" fill="#2e8b57">3.3 V, safe</text>
+  <text x="716" y="132" font-size="11.5px" fill="#1a1a1a">On-board pull-ups tie SDA/SCL to 3.3 V, so the I&#178;C lines</text>
+  <text x="716" y="149" font-size="11.5px" fill="#1a1a1a">never exceed 3.3 V — safe for the Teensy inputs,</text>
+  <text x="716" y="166" font-size="11.5px" fill="#1a1a1a">which are NOT 5 V tolerant.</text>
 
   <!-- ===== IMU BREAKOUT ===== -->
   <rect x="90" y="300" width="270" height="290" rx="10" fill="#f5f8fc" stroke="#2c6fbb" stroke-width="1.6"/>
