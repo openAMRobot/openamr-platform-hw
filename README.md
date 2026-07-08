@@ -1,6 +1,6 @@
 # OpenAMR Platform Hardware
 
-![The OpenAMRobot differential-drive base — front panel with the E-stop, status buttons, and the camera module, on its drive wheels and casters](assets/images/AMR_front_view.jpg)
+![The OpenAMRobot differential-drive base — 3D view with the cover shown transparent, revealing the drive wheels, central electronics bracket, sensors, and the front panel (E-stop, buttons, camera)](mechanical/renderings/AMR_transparent.jpg)
 
 Hardware documentation for the **OpenAMRobot** differential-drive mobile base: electrical
 wiring and pinouts, power distribution, computing, sensors, motor control, the bill of
@@ -36,7 +36,7 @@ The configuration the docs describe and that has run the real robot:
 | Motors | **ZD Z4BLD60-24GN-30S ×2** | 3-phase BLDC, 24 V, 60 W, 5 pole pairs, 3000 rpm + **1:25** gearbox (4GN 25K) → **120 rpm** wheel. [motors-drivers.md](electrical/motor_control/motors-drivers.md) |
 | Motor drivers | **ZBLD.C20-120L2R ×2** | 24 V, 7.5 A, 120 W. Set **DIP SW4/SW5 = 5 pole pairs**. LED [fault codes](electrical/motor_control/motor-driver-fault-codes.md) |
 | Wheel encoders | **AS5040 ×2** | magnetic quadrature, 1024 cnt/rev at wheel scale. **3.3 V supply.** [encoders.md](electrical/sensors/encoders.md) |
-| IMU | **MPU6500** | 3-axis accel + gyro. **No magnetometer** (`/imu/mag` carries no real field). 3.3 V. [imu.md](electrical/sensors/imu.md) |
+| IMU | **MPU6500** *(board silkscreen says MPU-6050; actual silicon is a 6500 — `WHO_AM_I` 0x70)* | 3-axis accel + gyro. **No magnetometer** (`/imu/mag` carries no real field). 3.3 V. [imu.md](electrical/sensors/imu.md) |
 | LiDAR | **RPLIDAR A1** | 2D scan, USB (CP2102). [lidar.md](electrical/sensors/lidar.md) |
 | Camera | **Raspberry Pi Camera Module 3 NoIR (IMX708)** | CSI ribbon, not USB. [camera.md](electrical/sensors/camera.md) |
 | Power | **24 V battery** (any chemistry; reference build = 2× 12 V in series) | ≥25 V at rest before tests (reference lead-acid threshold). [power.md](electrical/power_distribution/power.md) |
@@ -48,6 +48,10 @@ note there about a stale 0.046533 m value that was a CAD artifact).
 **Internal layout (cover removed):**
 
 ![Top view of the base with the cover removed — the two drive wheels (top and bottom), the central electronics bracket, the RPLIDAR on the right, the E-stop, and the reserved zones for the electronics modules and the optional wireless charger](assets/images/AMR_open_top_view.jpg)
+
+![3D cut-away of the base — the two BLDC drive wheels with their brackets, the red central control bracket, the driver/electronics boxes, and cable routing](mechanical/renderings/AMR_uncovered.png)
+
+More views, renders and the full CAD are in [`mechanical/`](mechanical/).
 
 ---
 

@@ -42,6 +42,19 @@ Files follow `MMP.<assembly>.<sub>.<sub>.<part>` (and `PT1.*` for shared parts):
   the platform with **optional attachments** (e.g. the dual-arm manipulator). These illustrate where
   the platform is heading — see [../product-architecture.md](../product-architecture.md).
 
+### Base platform — key views
+
+| Transparent (cover shown) | Cut-away (internals) |
+|---|---|
+| ![Base, transparent cover](renderings/AMR_transparent.jpg) | ![Base, cover removed](renderings/AMR_uncovered.png) |
+
+| Orthographic views (front / left / top / trimetric) | Front panel |
+|---|---|
+| ![Four orthographic views](renderings/AMR_views.jpg) | ![Front panel](renderings/Front_view_semitrasparent.jpg) |
+
+Side / bottom and the SolidWorks assembly renders `MMP_01`–`MMP_05` are also in
+[`renderings/`](renderings/).
+
 ## Drivetrain (as-built)
 
 Wheel **⌀ 0.2 m**, track **0.46 m** (firmware-measured — see

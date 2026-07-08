@@ -25,6 +25,11 @@ The **✅ base** (this repo's electrical / firmware / software) is the core of t
 
 ## What is optional / roadmap (⚙️ NOT on the base build)
 
+The same base platform, extended toward the full product vision (here with the dual-arm manipulator
+attachment — **illustrative, not the base build**):
+
+![Product-vision render — the base platform carrying a vertical column with a depth camera and two robot arms; the base still shows the same front panel (E-stop, buttons, camera) and casters](mechanical/renderings/Open_AMR_.png)
+
 Shown in the architecture diagram but **not part of the base**:
 
 - **Extra safety pack** — ultrasonic (JSN-SR04) + IR (E18-D80NK) proximity rings.
