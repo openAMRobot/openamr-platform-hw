@@ -131,9 +131,9 @@ table loaded `/debug/left|right.y` is the raw residual:
 > `openamr-platform-fw` Teensy 4.0 overlay — `firmware.ino` `calib_rpm`, `/debug/enc_cal`.)
 
 ## Good to know / gotchas
-- ⚠️ **CPR vs wheel + gearbox (confirmed 30:1)**: the motors are **geared 30:1** (Z4BLD60-24GN-30S, see
+- ⚠️ **CPR vs wheel + gearbox (1:25)**: the motors are **geared 1:25** (Z4BLD60-24GN-30S + 4GN 25K, see
   [components-bom.md](../../manufacturing/bom/components-bom.md)). `COUNTS_PER_REV = 1024` must be **per wheel revolution**. The
-  firmware runs at **wheel scale** (`MOTOR_MAX_RPM 80` ≈ the ~100 rpm geared output; open-loop ~14 rpm at
+  firmware runs at **wheel scale** (`MOTOR_MAX_RPM 80` ≈ the 120 rpm geared output; open-loop ~14 rpm at
   20 % PWM), which means the AS5040 effectively reads **wheel-scale** (1024 cnt = 1 wheel rev — mounted on
   the output side / not multiplied by 30). Odometry is therefore *consistent*, but **verify physically**:
   drive exactly 1 m and compare `/odom`.

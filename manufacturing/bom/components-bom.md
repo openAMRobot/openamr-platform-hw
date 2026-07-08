@@ -27,16 +27,19 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
 ### Motors — Z4BLD60-24GN-30S (ZD geared BLDC)
 *Nameplate read 2026-06-19: 60 W, 24 VDC, 3000 RPM, 3.8 A, Class B Cont, IP20, **P=5**, dated 2021/07/11.*
 - **3-phase, P=5 → 5 pole pairs** (confirmed on the nameplate), 24 V, **60 W**, rated current **3.8 A**.
-- Motor **3000 rpm**, **spur gearbox ~30:1** (read the gearbox `4GN__K` label to confirm) → **~100 rpm
-  at the wheel** (rated torque ~4.18 N·m at 30:1).
+- Motor **3000 rpm**, **spur gearbox 1:25** (gearbox **`4GN 25K`**, confirmed by the OpenAMRobot
+  [sizing calculations](../../datasheets/motor-sizing-calculations.md) and the mechanical BOM) → **120 rpm
+  at the wheel** (rated torque ~3.48 N·m at 25:1). ⚠️ The motor suffix **`-30S`** is a ZD series code,
+  **not** the ratio — the gearbox is 4GN 25K = **25:1** (an earlier "~30:1" here was inferred from an
+  analog part number and is superseded).
 - **Hall sensors** for the driver's commutation (separate from the AS5040 encoder).
 - ⚠️ **Pole pairs = 5** → the driver **DIP SW4/SW5** must be set for 5 pole pairs. **Set to ON/ON (= 5 pp)
   on 2026-06-19** (were OFF/OFF = 2 pp, wrong). A wrong pole-pair setting throws off the driver's
   closed-loop speed scaling (irrelevant in the current open-loop config, but set correctly). See
   [motors-drivers.md](../../electrical/motor_control/motors-drivers.md).
-- ⚠️ **Gearbox 30:1 exists** → odometry: `COUNTS_PER_REV = 1024` must be **per wheel revolution**.
+- ⚠️ **Gearbox 1:25** → odometry: `COUNTS_PER_REV = 1024` must be **per wheel revolution**.
   The firmware works at wheel scale (`MOTOR_MAX_RPM 80` = the configured cap, a modest headroom below
-  the ~100 rpm mechanical output; open-loop ~14 rpm at 20 % PWM), so the **AS5040 reads at wheel scale**
+  the 120 rpm mechanical output; open-loop ~14 rpm at 20 % PWM), so the **AS5040 reads at wheel scale**
   (mounted on the output side / 1024 cnt = 1 wheel rev). **Still verify physically**: drive exactly 1 m,
   compare `/odom`.
 
@@ -47,7 +50,8 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
   (centre-to-centre of the two wheels). The CAD/URDF value of 0.4075 m is **wrong** (CAD artifact) —
   use 0.46 m; the sim `robot.sdf` still needs correcting (see the sim note below).
 - With the firmware cap (`MOTOR_MAX_RPM 80` × `MAX_RPM_RATIO 0.85` = 68 rpm) → **max linear ≈ 0.71 m/s**
-  (~1.0 m/s at the full ~100 rpm mechanical output); rated torque **~4.18 N·m/wheel** (30:1).
+  (mechanical no-load ≈ **1.26 m/s** at the full **120 rpm** output — see the
+  [sizing calculations](../../datasheets/motor-sizing-calculations.md)); rated torque **~3.48 N·m/wheel** (25:1).
   Reliable low-speed floors (measured on the ground): **linear 0.04–0.05 m/s, angular 0.15 rad/s** — see
   [motors-drivers.md](../../electrical/motor_control/motors-drivers.md) "measured velocity floors".
 
@@ -87,4 +91,4 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
 - **LiDAR**: confirm the model sticker (A1M8 vs other).
 - **DC-DC buck**: any printed model / the regulator IC.
 - **AC/DC 230→24 V converter**: brand + model + rating.
-- **Gearbox**: the reduction suffix on the gearbox label (`4GN__K`) to confirm 30:1.
+- **Gearbox**: ~~confirm the ratio~~ — **done: `4GN 25K` = 1:25** (matches the OpenAMRobot sizing calcs).

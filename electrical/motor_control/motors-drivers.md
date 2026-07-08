@@ -7,8 +7,8 @@ Two **BLDC** (brushless) motors, one per wheel, each driven by its own **ZBLD** 
 sends low-current logic signals to the drivers; the drivers deliver the 24 V power to the motor phases.
 
 - **Motors**: **ZD Z4BLD60-24GN-30S** ×2 — 3-phase BLDC, 24 V, **60 W**, **P=5 (5 pole pairs, on the
-  nameplate)**, **3000 rpm** motor + **~30:1 spur gearbox** → ~100 rpm wheel, rated **3.8 A**. U/V/W +
-  Hall. (LEFT=M1, RIGHT=M2)
+  nameplate)**, **3000 rpm** motor + **1:25 spur gearbox** (4GN 25K) → **120 rpm** wheel, rated **3.8 A**.
+  U/V/W + Hall. (LEFT=M1, RIGHT=M2) See the [sizing calculations](../../datasheets/motor-sizing-calculations.md).
 - **Drivers**: **ZBLD.C20-120L2R** ×2 (24 V, 7.5 A, 120 W). Full specs + datasheets:
   [components-bom.md](../../manufacturing/bom/components-bom.md). **Red LED / fault blink codes:**
   [motor-driver-fault-codes.md](motor-driver-fault-codes.md).
@@ -28,7 +28,7 @@ subset of these terminals and uses a specific DIP configuration — both are det
 
 The motor-control signal chain is shown below.
 
-![Figure — per-wheel signal chain: /cmd_vel → Teensy PID (closed loop) → ZBLD driver (open loop) → BLDC → 30:1 gearbox → wheel → AS5040 encoder back to the PID](diagrams/signal-chain.svg)
+![Figure — per-wheel signal chain: /cmd_vel → Teensy PID (closed loop) → ZBLD driver (open loop) → BLDC → 25:1 gearbox → wheel → AS5040 encoder back to the PID](diagrams/signal-chain.svg)
 
 Per motor, 3 logic lines from the Teensy:
 
@@ -111,8 +111,10 @@ real velocity read on `/odom/unfiltered`:
 
 > ✅ **The motor is WELL-SIZED (over-sized on torque).** Above the floors the real/commanded ratio is
 > **~1.0** → no torque shortfall. The floors are **stick-slip (static friction) + coarse Hall commutation
-> at low RPM** (an *operating-point* limit, not a sizing one). Reference: the Z4BLD60-24GN-30S + 30:1 gives
-> ~0.49 m/s max and ~4.18 N·m/wheel (specs in [components-bom.md](../../manufacturing/bom/components-bom.md)).
+> at low RPM** (an *operating-point* limit, not a sizing one). Reference: the Z4BLD60-24GN-30S + **1:25**
+> gearbox gives a mechanical no-load max of ~**1.26 m/s** (software-capped to ~0.71 m/s) and ~**3.48 N·m/wheel**
+> (specs in [components-bom.md](../../manufacturing/bom/components-bom.md), derivation in the
+> [sizing calculations](../../datasheets/motor-sizing-calculations.md)).
 
 **Consequence:** keep commanded velocities **above the floors**. Docking applies this (drive taper floored
 at 0.05 m/s, scan rotation 0.17 rad/s, a `min_turn_omega` of 0.15 rad/s with a small deadband so

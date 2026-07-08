@@ -33,7 +33,7 @@ The configuration the docs describe and that has run the real robot:
 |---|---|---|
 | Compute | **Raspberry Pi 5, 8 GB** | Ubuntu Server 24.04 + ROS 2 Jazzy. **No active cooler fitted** → thermal throttling under the stack. [raspberry-pi.md](electrical/computing/raspberry-pi.md) |
 | Microcontroller | **Teensy 4.0** | micro-ROS motor control. 3.3 V I/O, **not 5 V tolerant**. [teensy.md](electrical/computing/teensy.md) |
-| Motors | **ZD Z4BLD60-24GN-30S ×2** | 3-phase BLDC, 24 V, 60 W, 5 pole pairs, 3000 rpm + ~30:1 gearbox → ~100 rpm wheel. [motors-drivers.md](electrical/motor_control/motors-drivers.md) |
+| Motors | **ZD Z4BLD60-24GN-30S ×2** | 3-phase BLDC, 24 V, 60 W, 5 pole pairs, 3000 rpm + **1:25** gearbox (4GN 25K) → **120 rpm** wheel. [motors-drivers.md](electrical/motor_control/motors-drivers.md) |
 | Motor drivers | **ZBLD.C20-120L2R ×2** | 24 V, 7.5 A, 120 W. Set **DIP SW4/SW5 = 5 pole pairs**. LED [fault codes](electrical/motor_control/motor-driver-fault-codes.md) |
 | Wheel encoders | **AS5040 ×2** | magnetic quadrature, 1024 cnt/rev at wheel scale. **3.3 V supply.** [encoders.md](electrical/sensors/encoders.md) |
 | IMU | **MPU6500** | 3-axis accel + gyro. **No magnetometer** (`/imu/mag` carries no real field). 3.3 V. [imu.md](electrical/sensors/imu.md) |
