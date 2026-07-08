@@ -6,6 +6,10 @@ Hardware documentation for the **OpenAMRobot** differential-drive mobile base: e
 wiring and pinouts, power distribution, computing, sensors, motor control, the bill of
 materials, and safety notes.
 
+**The physical robot** — the base shown above, built and running (here in an SME / logistics setting):
+
+![The physical OpenAMRobot base in a workshop — white chassis, orange top mounting plate, front E-stop, on the floor beside stacked pallets](mechanical/renderings/AMR_SME_logistics.jpg)
+
 **Status: experimental / documentation-first.** The electrical, BOM, safety, and now the
 **mechanical CAD** (chassis, production files, renders) and **datasheets** are real and maintained.
 The PCB directory is still an **empty placeholder** (see [Release scope](#release-scope)).
