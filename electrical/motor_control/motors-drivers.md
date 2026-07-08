@@ -15,6 +15,15 @@ sends low-current logic signals to the drivers; the drivers deliver the 24 V pow
 - ⚠️ **Pole pairs = 5** → verify the driver **DIP SW4/SW5** are set to 5 pole pairs (read the silkscreen
   table on the driver). A wrong pole-pair setting throws off the driver's closed-loop speed scaling.
 
+## Manufacturer reference diagram
+
+The driver's full terminal layout, DIP-switch table, and LED status codes, from the manufacturer:
+
+![ZBLD.C20-120L2R driver setup: 24 V DC+/DC- (fused), motor phases U/V/W + Hall sensors, control inputs FWD/DI1, REV/DI2, JOG/DI3, CLR/DI4, BRK/DI5, COM, VAR/AI2, +5V, ERR/DO1, SPD/DO2, RS485 A/B, the SW1-SW6 DIP-switch configuration table, and the LED status/fault codes](diagrams/zbld-driver-setup-reference.jpg)
+
+*Source: ZD **ZBLD.C20-120L2R** product manual (manufacturer reference figure). This robot wires only a
+subset of these terminals and uses a specific DIP configuration — both are detailed below.*
+
 ## Communication (Teensy → driver)
 
 The motor-control signal chain is shown below.
@@ -32,6 +41,10 @@ Per motor, 3 logic lines from the Teensy:
 
 - Power side: `DC+ / DC− = 24 V` (with a fuse). Motor side: phases U/V/W + Hall.
 - ⚠️ The driver `COM` **must** be tied to the Teensy GND, otherwise signals/encoders are noisy.
+
+Of the driver's twelve control terminals, this robot wires only **four** — the connections are shown below:
+
+![Driver terminal wiring: only DI1 (FWD), DI2 (REV), COM (GND), and AI2 (VAR/PWM speed setpoint) go to the Teensy; DC+/DC- take the fused 24 V and U/V/W + Hall go to the motor](../wiring/diagrams/driver-connections.svg)
 
 ## Driver configuration — DIP switches (SW1–SW6)
 Both drivers must be set **identically**. Functions read from the driver silkscreen (2026-06-19):
