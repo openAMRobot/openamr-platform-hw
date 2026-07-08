@@ -53,8 +53,6 @@ note there about a stale 0.046533 m value that was a CAD artifact).
 
 ![Top view of the base with the cover removed — the two drive wheels (top and bottom), the central electronics bracket, the RPLIDAR on the right, the E-stop, and the reserved zones for the electronics modules and the optional wireless charger](assets/images/AMR_open_top_view.jpg)
 
-![3D cut-away of the base — the two BLDC drive wheels with their brackets, the red central control bracket, the driver/electronics boxes, and cable routing](mechanical/renderings/AMR_uncovered.png)
-
 More views, renders and the full CAD are in [`mechanical/`](mechanical/).
 
 ---

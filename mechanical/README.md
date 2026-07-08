@@ -44,16 +44,12 @@ Files follow `MMP.<assembly>.<sub>.<sub>.<part>` (and `PT1.*` for shared parts):
 
 ### Base platform — key views
 
-| Transparent (cover shown) | Cut-away (internals) |
+| Transparent (cover shown) | Front panel |
 |---|---|
-| ![Base, transparent cover](renderings/AMR_transparent.jpg) | ![Base, cover removed](renderings/AMR_uncovered.png) |
+| ![Base, transparent cover](renderings/AMR_transparent.jpg) | ![Front panel](renderings/Front_view_semitrasparent.jpg) |
 
-| Orthographic views (front / left / top / trimetric) | Front panel |
-|---|---|
-| ![Four orthographic views](renderings/AMR_views.jpg) | ![Front panel](renderings/Front_view_semitrasparent.jpg) |
-
-Side / bottom and the SolidWorks assembly renders `MMP_01`–`MMP_05` are also in
-[`renderings/`](renderings/).
+Orthographic views ([`AMR_views.jpg`](renderings/AMR_views.jpg)), side / bottom, and the SolidWorks
+assembly renders `MMP_01`–`MMP_05` are also in [`renderings/`](renderings/).
 
 ## Drivetrain (as-built)
 
