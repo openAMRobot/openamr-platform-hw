@@ -14,17 +14,20 @@ This folder includes STEP file MMP.00.00.00.000_full_assembly.STEP that represen
 
 - **Usage:** use these files to restore and view full designs or construction assemblies in your preferred CAD software.
 
-### `SW17_full_project`
+### Full SolidWorks 2017 project (Release asset)
 
-This folder contains a complete project package, including all components, fasteners, printed circuit boards, and other parts, exemplified through a disinfection robot project.
+The complete native project package (`MMP.00.00.00.000_Multipurpose_mobile_platform.zip`, ~50 MB —
+all components, fasteners, and models for SolidWorks 2017+) is **not stored in the repo** (it is over
+GitHub's 50 MB file threshold and bloats every clone). It is distributed as a **GitHub Release asset**:
 
-**💡MMP - stands for Multipurpose Mobile Platform**
+➡️ **[Releases](https://github.com/openAMRobot/openamr-platform-hw/releases)** → download
+`MMP.00.00.00.000_Multipurpose_mobile_platform.zip`.
 
-- **File compatibility:** these files are designed for SolidWorks version 2017 or newer.
-
-- **Contents:** this comprehensive package includes all necessary components and models, providing a full representation of the project.
-
-- **Folder Naming:** the main file is named `MMP.00.00.00.000_Multipurpose_mobile_platform`. After extracting all the files from MMP.00.00.00.000_Multipurpose_mobile_platform.zip into a single folder named `MMP.00.00.00.000_Multipurpose_mobile_platform`, locate the file with all zeros in the name, `MMP.00.00.00.000`, to open the full project.
+**💡MMP — Multipurpose Mobile Platform.** After downloading, extract the zip into a folder named
+`MMP.00.00.00.000_Multipurpose_mobile_platform` and open the file with all zeros in the name,
+`MMP.00.00.00.000`, to load the full project. The neutral **STEP full assembly** (in
+`Full_assembly_STEP/`) is committed in the repo and opens in any CAD tool if you don't need the
+native SolidWorks source.
 
 ### `production_files`
 
@@ -38,7 +41,9 @@ This folder provides production-ready files in various formats that can be used 
 
 ## Accessing and using projects
 
-- **Full projects:** for example, in the `SW17_full_project` folder, use the file named `MMP.00.00.00.000` to open the full project in SolidWorks. 
+- **Full project:** download the SolidWorks 2017 project from the
+  [Releases](https://github.com/openAMRobot/openamr-platform-hw/releases) (see above), then open the
+  file named `MMP.00.00.00.000` in SolidWorks.
 
 - **Editing and improvements:** after opening the project, you can rename assemblies, edit, or improve the models. We encourage you to suggest improvements or report issues to the project.
 
