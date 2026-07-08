@@ -29,10 +29,32 @@ Listing here does not replace GitHub history — it complements it.
       24 V battery voltage thresholds.
     - Corrected drivetrain dimensions (wheel ⌀ 0.2 m / track 0.46 m, firmware-measured).
   - **Wiring & schematic diagrams**: the system harness, Teensy pin map, ZBLD driver
-    connections, DIP switches, power distribution, motor signal chain, and encoder wiring.
-  - **Licensing** and repository meta (`LICENSE`, `NOTICE`, `SECURITY`, `CONTRIBUTING`).
+    connections, DIP switches, power distribution, motor signal chain, and sensor wiring
+    (encoders, IMU, LiDAR, camera).
+  - **Mechanical / product merge**: integrated the mechanical CAD, mechanical BOM, datasheets,
+    and renders from the OpenAMRobot design repository (see *Upstream content* below); wrote the
+    `product-architecture.md` (tested base vs. optional/roadmap parts) and the mechanical index.
+  - **Cross-source reconciliation**: gearbox **1:25** (4GN 25K) vs. the mis-inferred ~30:1,
+    the MPU-6050 silkscreen / MPU6500 silicon clarification, generic-battery wording, and the
+    wheel-geometry correction.
+  - **Licensing** and repository meta (`LICENSE`, `NOTICE`, `SECURITY`, `CONTRIBUTING`,
+    `CODE_OF_CONDUCT`).
 
-### Repository scaffolding
+### Mechanical platform & product design
 
-- **Alex** ([OpenAMRobot maintainer](mailto:botshare.ai@gmail.com))
+- **Alex Reznichenko** and the **OpenAMRobot design team** — <info@botshare.ai>
+  - The **MMP (Multipurpose Mobile Platform)** mechanical design: chassis, panels, cover, base,
+    **wheel assembly** (brackets, motor bracket, drive shaft), centre/support/LiDAR brackets, and
+    the camera / magnetic-encoder mounts (the CAD, production drawings, and SolidWorks project).
+  - The **mechanical BOM** (sheet-metal specs, fasteners, Blickle wheel/castor) and the
+    component selection / motor-gearbox-driver sizing.
+  - The overall **product architecture** and the robot renders/photos.
   - Initial `openamr-platform-hw` repository structure and governance scaffolding.
+
+## Upstream content
+
+The mechanical CAD, mechanical BOM, datasheets, renders, and product architecture in this
+repository were **merged from the OpenAMRobot design repository**
+([`openAMRobot/openamr`](https://github.com/openAMRobot/openamr), MIT), authored by the OpenAMRobot
+design team. The manufacturer datasheets under `datasheets/` remain the copyright of their
+respective manufacturers (re-hosted with attribution).
