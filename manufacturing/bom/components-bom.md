@@ -38,8 +38,9 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
 ### Drivetrain dimensions (for kinematics / odometry)
 **Ground truth = the firmware config** (`lino_base_config.h`), physically measured:
 - **Wheel diameter = 0.2 m** (radius 0.10 m).
-- **Track (wheel separation) = 0.46 m** (`LR_WHEELS_DISTANCE`). The CAD/URDF gives 0.4075 m — a 5 cm
-  discrepancy; **verify with a tape measure** (centre-to-centre of the two wheels) and reconcile.
+- **Track (wheel separation) = 0.46 m** (`LR_WHEELS_DISTANCE`), **confirmed by tape-measure**
+  (centre-to-centre of the two wheels). The CAD/URDF value of 0.4075 m is **wrong** (CAD artifact) —
+  use 0.46 m; the sim `robot.sdf` still needs correcting (see the sim note below).
 - With the firmware cap (`MOTOR_MAX_RPM 80` × `MAX_RPM_RATIO 0.85` = 68 rpm) → **max linear ≈ 0.71 m/s**
   (~1.0 m/s at the full ~100 rpm mechanical output); rated torque **~4.18 N·m/wheel** (30:1).
   Reliable low-speed floors (measured on the ground): **linear 0.04–0.05 m/s, angular 0.15 rad/s** — see
