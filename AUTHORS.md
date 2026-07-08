@@ -26,7 +26,7 @@ Listing here does not replace GitHub history — it complements it.
     - The **AS5040 5 V → 3.3 V overvoltage fix** (A/B outputs over-driving the non-5 V-tolerant
       Teensy inputs).
     - Encoder velocity-error profile, measured velocity floors, DC wire colours, and the
-      24 V lead-acid battery voltage thresholds.
+      24 V battery voltage thresholds.
     - Corrected drivetrain dimensions (wheel ⌀ 0.2 m / track 0.46 m, firmware-measured).
   - **Wiring & schematic diagrams**: the system harness, Teensy pin map, ZBLD driver
     connections, DIP switches, power distribution, motor signal chain, and encoder wiring.

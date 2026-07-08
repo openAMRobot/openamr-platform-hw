@@ -14,7 +14,7 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
 | 7 | Camera | **Sony IMX708** = Raspberry Pi **Camera Module 3 NoIR** | ✅ | [raspberrypi.com camera-3](https://www.raspberrypi.com/products/camera-module-3/) |
 | 8 | SBC | **Raspberry Pi 5** (Model B Rev 1.1, **8 GB** RAM — confirmed 2026-07-06 on the current board) | ✅ | [raspberrypi.com Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) |
 | 9 | DC-DC 24 V→5 V | generic **~300 W 20 A CC/CV buck** (toroid + 2 trimpots) | ⏳ no clear model | (generic) |
-| 10 | Battery ×4 | **DM12-7S** — 12 V **7 Ah**/20HR lead-acid (AGM) | ✅ | DM12-7S SLA datasheet (generic 12 V 7 Ah) |
+| 10 | Battery | **any 24 V pack** (chemistry up to you). Reference build: 4× **DM12-7S** 12 V **7 Ah** lead-acid (AGM), 2 in series → 24 V | ✅ | DM12-7S SLA datasheet (reference; any 24 V source works) |
 | 11 | AC/DC 230→24 V | unknown | ⏳ read label | — |
 
 ## Key specs that affect configuration
@@ -69,9 +69,11 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
   (Alternatives had it browned out: series R / divider / level-shifter.) See
   [encoders.md](../../electrical/sensors/encoders.md).
 
-### Battery — DM12-7S
-- **12 V, 7 Ah** sealed lead-acid (AGM). A pair in series = **24 V 7 Ah**. Sags under load (see
-  [power.md](../../electrical/power_distribution/power.md)). ⚠️ No fuse / no disconnect currently — see the safety gaps in [power.md](../../electrical/power_distribution/power.md).
+### Battery — 24 V (reference: DM12-7S)
+- The design takes **any 24 V battery**. Reference build: **12 V, 7 Ah** sealed lead-acid (AGM), a pair
+  in series = **24 V 7 Ah**. Any 24 V chemistry (LiFePO4 / Li-ion) works too — mind its own BMS/charger
+  and adjust the voltage thresholds in [power.md](../../electrical/power_distribution/power.md). Batteries
+  sag under load. ⚠️ No fuse / no disconnect currently — see the safety gaps in [power.md](../../electrical/power_distribution/power.md).
   Fuse sizing: 2 motors × **3.8 A** (nameplate) ≈ 7.6 A nominal + DC-DC → a **~15–20 A** fuse (above
   nominal, below the wire/battery limit). ⚠️ This is above *nominal*, not the *stall* current (a jammed
   motor draws well above 3.8 A) — confirm the stall current before finalising.

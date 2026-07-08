@@ -2,8 +2,11 @@
 
 *Last updated: 2026-06-20.*
 
-## 🔋 Battery state of charge — THRESHOLDS (24 V lead-acid) — READ BEFORE ANY NAV TEST
-24 V system = 2× 12 V lead-acid in series. **At-rest** voltage (no load):
+## 🔋 Battery state of charge — THRESHOLDS — READ BEFORE ANY NAV TEST
+The design takes **any 24 V battery** (chemistry is up to you). The at-rest thresholds below are for the
+**reference build's pack** (2× 12 V lead-acid in series) — **adjust the numbers for your chemistry**
+(LiFePO4 / Li-ion rest at different voltages and have flatter discharge curves). **At-rest** voltage
+(no load):
 
 | At-rest voltage | State | For navigation |
 |---|---|---|
@@ -36,14 +39,14 @@ Mains 24V  ───┘
 | Element | Supply |
 |---|---|
 | Motors / drivers | **24 V DC** on `V+ / V−` of each driver. Wire colors: **brown = V+, blue = V−** (confirmed) |
-| 24 V source | **battery pack** (lead-acid) **or** an **AC/DC converter** (230 V mains) — wired **in parallel** to the same 24 V bus |
+| 24 V source | a **24 V battery pack** (any chemistry) **or** an **AC/DC converter** (230 V mains) — wired **in parallel** to the same 24 V bus |
 | Raspberry Pi | **DC-DC 24 V→5 V** buck from the 24 V bus |
 | Teensy | powered over **USB** from the Pi (5 V) |
 | **IMU + encoders** | **3.3 V from the Teensy** (3.3 V rail). The encoders were originally on the 5 V (VUSB) pin → ~4 V on the Teensy inputs → moved to 3.3 V on 2026-06-19; see ⚠️ encoder overvoltage in [encoders.md](../sensors/encoders.md). The IMU has always been on 3.3 V. |
 | LiDAR | powered over its USB (CP2102 adapter) from the Pi |
 
 ## 🔴 Safety gaps found (2026-06-19) — to fix
-1. **No fuse on the battery.** A lead-acid pack can deliver **hundreds of amps** into a short → fire /
+1. **No fuse on the battery.** A 24 V battery can deliver **hundreds of amps** into a short → fire /
    burns / melted wires if a 24 V conductor touches ground. **Add a fuse (or breaker) on the battery `+`**,
    as close to the terminal as possible. Sizing: 2 motors × **3.8 A** nominal ≈ 7.6 A + the DC-DC → a
    **~15–20 A** fuse (above nominal, below the wire/battery limit). ⚠️ This is above *nominal*, not the
@@ -56,12 +59,18 @@ Mains 24V  ───┘
    time** — a source selector switch would make this safe.
 
 ## Battery pack
-- **4 × 12 V lead-acid** batteries (the big black ones).
+
+Any **24 V** battery works — the drivers and the buck only see the 24 V bus, not a chemistry. The
+**reference build** uses:
+
+- **4 × 12 V** batteries (lead-acid, the big black ones).
 - Wired **2 in series → 24 V** (one "pair"). With 2 pairs you can make **24 V** (pairs in parallel, more
   capacity) **or 48 V** (pairs in series) — this matches the OpenAMR platform's "24/48 V" spec.
 - **In practice we usually run a single pair = 24 V.**
-- ⚠️ Lead-acid basics: respect polarity, don't short the terminals (very high current), charge with a
-  suitable lead-acid charger, and don't fully deep-discharge them (shortens life).
+- ⚠️ Battery care depends on the chemistry you choose. For the reference **lead-acid** pack: respect
+  polarity, don't short the terminals (very high current), charge with a suitable lead-acid charger, and
+  don't fully deep-discharge (shortens life). Other chemistries (LiFePO4/Li-ion) need their own BMS /
+  charger and voltage limits.
 
 The Teensy sends only **low-current logic signals** to the drivers; the **24 V power** goes through the
 drivers to the motor phases. Logic ground (Teensy GND) and driver `COM` must be **common**.
@@ -130,4 +139,4 @@ collapses and the **Pi freezes (Ctrl-C dead) then loses the network** (no ping).
   emergency stop is recommended). *(Battery capacity is known: DM12-7S = 12 V 7 Ah, a pair in series =
   24 V 7 Ah — see [components-bom.md](../../manufacturing/bom/components-bom.md). Fuse: ~15–20 A, see the
   safety gaps above.)*
-- A **battery voltage monitor** would be useful (lead-acid sags under load; low voltage → erratic motors).
+- A **battery voltage monitor** would be useful (batteries sag under load; low voltage → erratic motors).

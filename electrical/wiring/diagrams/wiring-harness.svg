@@ -47,8 +47,8 @@
   <!-- Battery -->
   <rect x="40" y="80" width="195" height="96" rx="6" class="blk" fill="#fdecea" stroke="#d32f2f"/>
   <text class="title" x="137" y="118" text-anchor="middle">24 V battery</text>
-  <text class="sub" x="137" y="137" text-anchor="middle">2× 12 V lead-acid</text>
-  <text class="sub" x="137" y="153" text-anchor="middle">in series</text>
+  <text class="sub" x="137" y="137" text-anchor="middle">24 V battery</text>
+  <text class="sub" x="137" y="153" text-anchor="middle">any chemistry</text>
   <text class="vtag" x="137" y="98" text-anchor="middle" fill="#b71c1c">+24 V</text>
 
   <!-- Battery disconnect NOT FITTED -->

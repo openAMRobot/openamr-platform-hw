@@ -37,7 +37,7 @@ The configuration the docs describe and that has run the real robot:
 | IMU | **MPU6500** | 3-axis accel + gyro. **No magnetometer** (`/imu/mag` carries no real field). 3.3 V. [imu.md](electrical/sensors/imu.md) |
 | LiDAR | **RPLIDAR A1** | 2D scan, USB (CP2102). [lidar.md](electrical/sensors/lidar.md) |
 | Camera | **Raspberry Pi Camera Module 3 NoIR (IMX708)** | CSI ribbon, not USB. [camera.md](electrical/sensors/camera.md) |
-| Power | **2× 12 V lead-acid in series (24 V)** | ≥25 V at rest before tests. [power.md](electrical/power_distribution/power.md) |
+| Power | **24 V battery** (any chemistry; reference build = 2× 12 V in series) | ≥25 V at rest before tests (reference lead-acid threshold). [power.md](electrical/power_distribution/power.md) |
 
 **Drivetrain (odometry):** wheel **⌀ 0.2 m** (radius 0.10 m), track **0.46 m** — firmware values,
 physically measured. See the [BOM drivetrain section](manufacturing/bom/components-bom.md) (and the
@@ -86,7 +86,7 @@ What is **placeholder / not yet populated** (empty directories, planned):
 
 Honest disclosure — these are **not yet fixed** and are safety-relevant:
 
-1. **No fuse on the 24 V battery.** A lead-acid pack can deliver hundreds of amps into a short.
+1. **No fuse on the 24 V battery.** A 24 V battery can deliver hundreds of amps into a short.
    Add a **15–20 A fuse/breaker** on the battery `+`. See [power.md](electrical/power_distribution/power.md).
 2. **No battery-side disconnect / hardware E-stop.** Only the mains has a switch; there is no fast
    cut-off for the 24 V battery. Add a switch/disconnect — ideally an **E-stop mushroom** — on `+`.
