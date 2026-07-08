@@ -16,24 +16,7 @@ A 360° 2D laser scanner used for mapping, localization and obstacle avoidance. 
 ## Communication (Pi ↔ LiDAR)
 The connection is shown in the diagram below.
 
-> 📐 **[Diagram: RPLIDAR A1 connection]** — *placeholder; not generated yet (prompt in the page source).*
-
-<!-- DIAGRAM PLACEHOLDER (lidar-connection) — TO PLACE THE DIAGRAM, replace the blockquote line
-above AND this whole comment with a single image line:
-    ![RPLIDAR A1 -> USB (CP2102 UART bridge) -> Raspberry Pi 5 (/dev/ttyUSB0)](diagrams/lidar-connection.svg)
-
-Generation prompt (paste to Claude):
-Draw a simple connection diagram for the 2D LiDAR:
-- RPLIDAR A1 (360 degree 2D laser scanner) -> USB cable -> Silicon Labs CP2102 USB-to-UART bridge
-  (VID:PID 10c4:ea60) -> a USB port on the Raspberry Pi 5.
-- Appears as /dev/ttyUSB0 (use the stable /dev/serial/by-id/... path).
-- Powered over the same USB (5 V). Note: the LiDAR is on the Pi, NOT the Teensy.
-STYLE (keep ALL diagrams uniform): solid WHITE background - add a full-canvas white rectangle as the
-first element. Flat, clean, technical look; dark text (#1a1a1a), sans-serif. Use explicit hex colours
-ONLY - no CSS variables. Shared palette: 24 V/power = red #c0392b; 5 V = orange #e67e22; 3.3 V logic =
-blue #2c6fbb; data buses = grey #888888; warning/danger = red #c0392b; OK = green #2e8b57.
-Rounded-rectangle blocks, labelled arrows, English labels only, landscape orientation, no text overflow.
--->
+![RPLIDAR A1 -> USB cable -> Slamtec adapter STC-A0317-R03 (CP2102 bridge, 10c4:ea60) -> Raspberry Pi 5 USB (/dev/ttyUSB0)](diagrams/lidar-connection.svg)
 
 - **Physical**: USB → `/dev/ttyUSB0`
   (stable: `/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0`).

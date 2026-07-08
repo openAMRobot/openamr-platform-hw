@@ -12,29 +12,13 @@
 | Module | Raspberry Pi Camera Module 3 **NoIR** (Sony **IMX708** sensor, no IR-cut filter) |
 | Autofocus | `dw9807` VCM (lens motor) on the module |
 | Interface | **CSI** (MIPI ribbon to the Pi), **not USB** → handled by **libcamera** |
-| Device | "cam0" on the Pi 5 CSI connector |
+| Cabling | 15-pin FPC ribbon (Pi-4 style) → **CSI adapter (15→22-pin)** required for the Pi 5's narrower connector |
+| Device | **"cam1"** on the Pi 5 CSI connector |
 
 ## Communication (Pi ↔ camera)
 The connection is shown in the diagram below.
 
-> 📐 **[Diagram: Camera Module 3 (IMX708) CSI connection]** — *placeholder; not generated yet (prompt in the page source).*
-
-<!-- DIAGRAM PLACEHOLDER (camera-connection) — TO PLACE THE DIAGRAM, replace the blockquote line
-above AND this whole comment with a single image line:
-    ![Pi Camera Module 3 NoIR (IMX708) -> CSI/MIPI ribbon -> Raspberry Pi 5 (cam0, libcamera)](diagrams/camera-connection.svg)
-
-Generation prompt (paste to Claude):
-Draw a simple connection diagram for the camera:
-- Raspberry Pi Camera Module 3 NoIR (Sony IMX708 sensor, no IR-cut filter) -> CSI / MIPI ribbon
-  cable -> the Raspberry Pi 5 camera connector (cam0). This is CSI, NOT USB.
-- Handled by libcamera on the Pi (note: needs the Raspberry Pi libcamera fork for IMX708 on Pi 5).
-- 3.3 V logic on the CSI side. Keep it simple: sensor -> ribbon -> Pi.
-STYLE (keep ALL diagrams uniform): solid WHITE background - add a full-canvas white rectangle as the
-first element. Flat, clean, technical look; dark text (#1a1a1a), sans-serif. Use explicit hex colours
-ONLY - no CSS variables. Shared palette: 24 V/power = red #c0392b; 5 V = orange #e67e22; 3.3 V logic =
-blue #2c6fbb; data buses = grey #888888; warning/danger = red #c0392b; OK = green #2e8b57.
-Rounded-rectangle blocks, labelled arrows, English labels only, landscape orientation, no text overflow.
--->
+![Pi Camera Module 3 NoIR (IMX708) -> 15-pin FPC ribbon -> CSI adapter (15->22-pin) -> Raspberry Pi 5 cam1 connector (CSI/MIPI, not USB; libcamera RPi fork)](diagrams/camera-connection.svg)
 
 - **CSI / MIPI** ribbon into the Pi's camera connector. Kernel side is fully OK:
   `camera_auto_detect=1` (in `/boot/firmware/config.txt`) loads the overlay; the media graph is

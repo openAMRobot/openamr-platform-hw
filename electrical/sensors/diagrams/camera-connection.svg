@@ -1,0 +1,70 @@
+<svg width="1080" height="460" viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+
+  <!-- Full-canvas white background (first element) -->
+  <rect x="0" y="0" width="1080" height="460" fill="#ffffff"/>
+
+  <!-- Title -->
+  <text x="540" y="40" text-anchor="middle" font-size="19" font-weight="700" fill="#1a1a1a">Camera Connection &#8212; Pi Camera Module 3 NoIR &#8594; Adapter &#8594; Raspberry Pi 5 (cam1, CSI)</text>
+  <text x="540" y="63" text-anchor="middle" font-size="13" fill="#666666">Chain: sensor &#8594; 15-pin ribbon &#8594; adapter (15&#8594;22-pin) &#8594; Pi 5 cam1 &#8212; MIPI CSI-2, not USB</text>
+
+  <!-- ===================== CAMERA BLOCK ===================== -->
+  <rect x="40" y="150" width="215" height="150" rx="14" ry="14" fill="#eaf2fb" stroke="#2c6fbb" stroke-width="2"/>
+  <text x="147" y="196" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1a1a">Camera Module 3 NoIR</text>
+  <text x="147" y="220" text-anchor="middle" font-size="13" fill="#333333">Sony IMX708 sensor</text>
+  <text x="147" y="240" text-anchor="middle" font-size="13" fill="#333333">No IR-cut filter</text>
+  <rect x="72" y="258" width="150" height="24" rx="12" ry="12" fill="#2c6fbb"/>
+  <text x="147" y="274" text-anchor="middle" font-size="12" font-weight="600" fill="#ffffff">3.3 V CSI logic</text>
+  <!-- Camera FPC connector tab -->
+  <rect x="255" y="205" width="15" height="40" rx="3" ry="3" fill="#555555"/>
+
+  <!-- ===================== RIBBON 1 : 15-pin ===================== -->
+  <text x="344" y="194" text-anchor="middle" font-size="12.5" font-weight="600" fill="#444444">15-pin FPC ribbon</text>
+  <rect x="275" y="207" width="138" height="36" rx="8" ry="8" fill="#ececec" stroke="#888888" stroke-width="1.5"/>
+  <line x1="285" y1="216" x2="405" y2="216" stroke="#bcbcbc" stroke-width="1.5"/>
+  <line x1="285" y1="225" x2="405" y2="225" stroke="#bcbcbc" stroke-width="1.5"/>
+  <line x1="285" y1="234" x2="405" y2="234" stroke="#bcbcbc" stroke-width="1.5"/>
+  <polygon points="413,209 432,225 413,241" fill="#888888"/>
+  <text x="344" y="262" text-anchor="middle" font-size="12" fill="#666666">Pi-4 style</text>
+
+  <!-- ===================== ADAPTER BLOCK ===================== -->
+  <rect x="420" y="205" width="15" height="40" rx="3" ry="3" fill="#555555"/>
+  <rect x="435" y="150" width="210" height="150" rx="14" ry="14" fill="#f2f2f2" stroke="#888888" stroke-width="2"/>
+  <text x="540" y="194" text-anchor="middle" font-size="15" font-weight="700" fill="#1a1a1a">CSI ribbon adapter</text>
+  <text x="540" y="220" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a1a">15-pin &#8594; 22-pin</text>
+  <text x="540" y="240" text-anchor="middle" font-size="12" fill="#555555">Connectors differ</text>
+  <rect x="478" y="256" width="124" height="24" rx="12" ry="12" fill="#c0392b"/>
+  <text x="540" y="272" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">ADAPTER REQUIRED</text>
+  <rect x="645" y="205" width="15" height="40" rx="3" ry="3" fill="#555555"/>
+
+  <!-- ===================== RIBBON 2 : 22-pin ===================== -->
+  <text x="737" y="194" text-anchor="middle" font-size="12.5" font-weight="600" fill="#444444">22-pin FPC ribbon</text>
+  <rect x="668" y="207" width="138" height="36" rx="8" ry="8" fill="#ececec" stroke="#888888" stroke-width="1.5"/>
+  <line x1="678" y1="216" x2="798" y2="216" stroke="#bcbcbc" stroke-width="1.5"/>
+  <line x1="678" y1="225" x2="798" y2="225" stroke="#bcbcbc" stroke-width="1.5"/>
+  <line x1="678" y1="234" x2="798" y2="234" stroke="#bcbcbc" stroke-width="1.5"/>
+  <polygon points="806,209 825,225 806,241" fill="#888888"/>
+  <text x="737" y="262" text-anchor="middle" font-size="12" fill="#666666">Pi 5 narrow</text>
+
+  <!-- ===================== RASPBERRY PI BLOCK ===================== -->
+  <rect x="810" y="205" width="15" height="40" rx="3" ry="3" fill="#555555"/>
+  <rect x="825" y="150" width="215" height="150" rx="14" ry="14" fill="#f6f6f6" stroke="#555555" stroke-width="2"/>
+  <text x="932" y="196" text-anchor="middle" font-size="16" font-weight="700" fill="#1a1a1a">Raspberry Pi 5</text>
+  <text x="932" y="220" text-anchor="middle" font-size="13" fill="#333333">cam1 CSI connector</text>
+  <text x="932" y="240" text-anchor="middle" font-size="13" fill="#333333">MIPI CSI-2</text>
+  <rect x="850" y="258" width="165" height="24" rx="12" ry="12" fill="#2e8b57"/>
+  <text x="932" y="274" text-anchor="middle" font-size="11.5" font-weight="600" fill="#ffffff">Handled by libcamera</text>
+
+  <!-- ===================== SOFTWARE NOTE ===================== -->
+  <rect x="40" y="322" width="1000" height="64" rx="12" ry="12" fill="#f4f4f4" stroke="#cccccc" stroke-width="1.5"/>
+  <text x="66" y="350" font-size="13" fill="#1a1a1a"><tspan font-weight="700">Note:&#160;</tspan>libcamera handles the IMX708 on the Raspberry Pi 5. Use the Raspberry Pi libcamera fork for IMX708 support &#8212;</text>
+  <text x="66" y="370" font-size="13" fill="#1a1a1a">the mainline/distro libcamera may lack the Pi 5 IMX708 tuning. The whole chain is CSI / MIPI &#8212; <tspan font-weight="700" fill="#c0392b">NOT USB</tspan>.</text>
+
+  <!-- ===================== LEGEND ===================== -->
+  <rect x="40" y="408" width="15" height="15" rx="3" ry="3" fill="#2c6fbb"/>
+  <text x="62" y="420" font-size="12" fill="#333333">3.3 V logic</text>
+  <rect x="180" y="408" width="15" height="15" rx="3" ry="3" fill="#888888"/>
+  <text x="202" y="420" font-size="12" fill="#333333">Data bus (MIPI CSI-2)</text>
+  <rect x="390" y="408" width="15" height="15" rx="3" ry="3" fill="#c0392b"/>
+  <text x="412" y="420" font-size="12" fill="#333333">Required adapter / caution</text>
+
+</svg>

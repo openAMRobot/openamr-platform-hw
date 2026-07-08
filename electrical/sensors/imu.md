@@ -20,28 +20,7 @@ heading (yaw) estimation for navigation.
 
 The I²C wiring is shown in the diagram below.
 
-> 📐 **[Diagram: MPU6500 IMU I²C wiring]** — *placeholder; not generated yet (prompt in the page source).*
-
-<!-- DIAGRAM PLACEHOLDER (mpu6500-imu-i2c-wiring) — TO PLACE THE DIAGRAM, replace the blockquote line
-above AND this whole comment with a single image line:
-    ![MPU6500 IMU on the Teensy I2C bus: SDA->18, SCL->19, 3.3 V, AD0->GND (addr 0x68)](diagrams/imu-wiring.svg)
-
-Generation prompt (paste to Claude):
-Draw a wiring diagram for an MPU6500 IMU breakout (GY-521-style board) connected to a Teensy 4.0 over I2C.
-- Supply: 3.3 V rail (NOT 5 V), GND common with the Teensy.
-- SDA -> Teensy pin 18, SCL -> Teensy pin 19 (Teensy 4.0 default Wire bus).
-- AD0 -> GND, which sets the I2C address to 0x68.
-- Show the on-board I2C pull-up resistors pulling SDA/SCL up to 3.3 V (so the lines never exceed 3.3 V -
-  safe for the non-5V-tolerant Teensy inputs); add a small green "3.3 V, safe" note.
-- Label the chip: MPU6500 (3-axis accel + gyro, NO magnetometer). Note WHO_AM_I reads 0x70 and is driven
-  through the MPU9250 driver.
-- Grey out the unused pins: XCL, XDA (auxiliary I2C), INT (data-ready).
-STYLE (keep ALL diagrams uniform): solid WHITE background - add a full-canvas white rectangle as the
-first element. Flat, clean, technical look; dark text (#1a1a1a), sans-serif. Use explicit hex colours
-ONLY - no CSS variables. Shared palette: 3.3 V logic = blue #2c6fbb; data buses = grey #888888;
-warning/danger = red #c0392b; OK/safe = green #2e8b57. Rounded-rectangle blocks, labelled arrows,
-English labels only, landscape orientation, no text overflow.
--->
+![IMU breakout (board marked MPU-6050, actual silicon MPU6500, WHO_AM_I 0x70) on the Teensy I2C bus: SDA->18, SCL->19, 3.3 V from the Teensy 3V3 pin, AD0 left floating (addr 0x68 = board default), on-board pull-ups](diagrams/imu-wiring.svg)
 
 - `SDA = pin 18`, `SCL = pin 19` (Teensy 4.0 default `Wire`) — confirmed on the board.
 - **Supply = 3.3 V** (measured), `AD0 = GND` → address **0x68**, `GND` common with the Teensy.
