@@ -3,6 +3,11 @@
 *Last updated: 2026-06-19.* Identification done by reading the real labels on the robot + manufacturer
 datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact label/marking.
 
+> **Two BOMs, by scope.** This file is the **electrical / electronic** BOM (compute, drivers, motors,
+> sensors, power). The **mechanical** BOM — sheet-metal parts, fasteners, technological operations, and
+> the Blickle wheel/castor — is [`mechanical-bom.md`](mechanical-bom.md) + the source workbook
+> [`BOM_specs_MMP.xlsx`](BOM_specs_MMP.xlsx). Component datasheets are under [`../../datasheets/`](../../datasheets/).
+
 | # | Component | Exact name / part number | Status | Datasheet / source |
 |---|---|---|---|---|
 | 1 | Microcontroller | **Teensy 4.0** (MCU NXP **i.MX RT1062**, Cortex-M7 600 MHz) | ✅ | [pjrc.com/store/teensy40](https://www.pjrc.com/store/teensy40.html) |

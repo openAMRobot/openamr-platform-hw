@@ -6,9 +6,9 @@ Hardware documentation for the **OpenAMRobot** differential-drive mobile base: e
 wiring and pinouts, power distribution, computing, sensors, motor control, the bill of
 materials, and safety notes.
 
-**Status: experimental / documentation-first.** The electrical, BOM, and safety documentation
-is real and maintained. The mechanical CAD, PCB, and rendering directories are **empty
-placeholders** (see [Release scope](#release-scope)).
+**Status: experimental / documentation-first.** The electrical, BOM, safety, and now the
+**mechanical CAD** (chassis, production files, renders) and **datasheets** are real and maintained.
+The PCB directory is still an **empty placeholder** (see [Release scope](#release-scope)).
 
 > ## ⚠️ Read this before wiring anything (can physically damage hardware)
 > - **Teensy 4.0 GPIO is 3.3 V and NOT 5 V tolerant** (abs. max ~3.6 V). Feeding a 5 V signal
@@ -56,8 +56,14 @@ note there about a stale 0.046533 m value that was a CAD artifact).
 **Wiring & pinout (start here for a build):** **[wiring-pinout.md](electrical/wiring/wiring-pinout.md)**
 — full Teensy pinout, driver wiring, DIP switches, motor wiring, grounding, ASCII map.
 
-**Bill of materials:** **[components-bom.md](manufacturing/bom/components-bom.md)** — parts,
-quantities, measured drivetrain constants, driver settings.
+**Bill of materials:** **[components-bom.md](manufacturing/bom/components-bom.md)** (electrical) +
+**[mechanical-bom.md](manufacturing/bom/mechanical-bom.md)** (sheet metal, fasteners, wheels).
+
+**Mechanical CAD:** **[mechanical/](mechanical/)** — full STEP assembly, per-part production files
+(PDF/DXF/SLDPRT/STEP), the SolidWorks project, and renders.
+
+**Product architecture:** **[product-architecture.md](product-architecture.md)** — the base build
+vs. the optional/roadmap parts.
 
 ### Electrical
 - Computing — [Raspberry Pi 5](electrical/computing/raspberry-pi.md) · [Teensy 4.0](electrical/computing/teensy.md)
@@ -76,15 +82,17 @@ quantities, measured drivetrain constants, driver settings.
 
 What is **included and maintained**:
 - `electrical/` — computing, motor control, power, sensors, wiring (all populated).
-- `manufacturing/bom/` — the bill of materials.
+- `mechanical/` — **CAD** (full STEP assembly, per-part production files, SolidWorks project) + renders.
+- `manufacturing/bom/` — electrical **and** mechanical bills of materials.
+- `manufacturing/assembly/` — wheel-assembly guide.
+- `datasheets/` — component datasheets (re-hosted, manufacturer copyright) + motor sizing calculations.
 - `safety/` — hardware safety documentation.
 - `diagrams/` — repository-level diagrams (per-subsystem diagrams live in each subsystem's `diagrams/`).
 
 What is **placeholder / not yet populated** (empty directories, planned):
-- `mechanical/` (CAD, chassis, drawings, renderings)
 - `electrical/pcb/`
-- `manufacturing/assembly/`, `manufacturing/vendors/`
-- `interfaces/`, `assets/`
+- `manufacturing/vendors/`
+- `interfaces/`
 
 ---
 

@@ -49,7 +49,7 @@ Of the driver's twelve control terminals, this robot wires only **four** — the
 ## Driver configuration — DIP switches (SW1–SW6)
 Both drivers must be set **identically**. Functions read from the driver silkscreen (2026-06-19):
 
-| Switch | Function | What it does | Current | **Target** |
+| Switch | Function | What it does | Was (pre 06-19) | **Now (applied 06-19)** |
 |---|---|---|---|---|
 | **SW1** | open / closed loop (`开环/闭环`) | ON = driver regulates speed itself from the Halls; OFF = driver is just a power stage (Teensy regulates) | ON | **OFF** |
 | **SW2** | speed source (`AI1/AI2`) | OFF = internal VAR knob; ON = external 0–5 V on `VAR/AI2` (our Teensy PWM) | ON | ON |
