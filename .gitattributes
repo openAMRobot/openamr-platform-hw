@@ -1,0 +1,14 @@
+*.STEP !text !filter !merge !diff
+*.step !text !filter !merge !diff
+*.SLDPRT !text !filter !merge !diff
+*.sldprt !text !filter !merge !diff
+*.SLDASM !text !filter !merge !diff
+*.sldasm !text !filter !merge !diff
+*.SLDDRW !text !filter !merge !diff
+*.slddrw !text !filter !merge !diff
+*.DXF !text !filter !merge !diff
+*.dxf !text !filter !merge !diff
+*.PDF !text !filter !merge !diff
+*.pdf !text !filter !merge !diff
+*.zip !text !filter !merge !diff
+*.dwg !text !filter !merge !diff

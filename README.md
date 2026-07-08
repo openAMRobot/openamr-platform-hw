@@ -1,5 +1,7 @@
 # OpenAMR Platform Hardware
 
+![The OpenAMRobot differential-drive base — front panel with the E-stop, status buttons, and the camera module, on its drive wheels and casters](assets/images/AMR_front_view.jpg)
+
 Hardware documentation for the **OpenAMRobot** differential-drive mobile base: electrical
 wiring and pinouts, power distribution, computing, sensors, motor control, the bill of
 materials, and safety notes.
@@ -42,6 +44,10 @@ The configuration the docs describe and that has run the real robot:
 **Drivetrain (odometry):** wheel **⌀ 0.2 m** (radius 0.10 m), track **0.46 m** — firmware values,
 physically measured. See the [BOM drivetrain section](manufacturing/bom/components-bom.md) (and the
 note there about a stale 0.046533 m value that was a CAD artifact).
+
+**Internal layout (cover removed):**
+
+![Top view of the base with the cover removed — the two drive wheels (top and bottom), the central electronics bracket, the RPLIDAR on the right, the E-stop, and the reserved zones for the electronics modules and the optional wireless charger](assets/images/AMR_open_top_view.jpg)
 
 ---
 
@@ -100,7 +106,12 @@ Honest disclosure — these are **not yet fixed** and are safety-relevant:
 
 ## Repository boundaries
 
-Hardware and mechatronics documentation belongs here. Related repositories:
+Hardware and mechatronics documentation belongs here — **`openamr-platform-hw` is the CAD, chassis,
+electrical, BOM and manufacturing repo** of the OpenAMRobot ecosystem:
+
+![OpenAMRobot ecosystem — the modular repositories: platform-sw (ROS 2), platform-fw (firmware), platform-hw (CAD/chassis/electrical/BOM/manufacturing), interfaces, comm, ui, and docs](assets/images/OpenAMRobot_ecosystem.png)
+
+Related repositories:
 
 - **`openamr-platform-fw`** — Teensy motor-control firmware.
 - **`openamr-platform-sw`** — ROS 2 software (description, Gazebo, Nav2, docking).

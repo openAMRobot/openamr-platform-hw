@@ -35,6 +35,10 @@ TF `base_link→lidar_link` = **x=0.335 m, y=0, z=0.18 m, yaw=180° (π)**. The 
 the wheel axle, centered, and **mounted rotated 180°**: its 0° points to the **rear**; the robot's front
 is the LiDAR's 180°. (Found empirically — an object placed in front shows up at ±180° in the LiDAR frame.)
 
+The RPLIDAR (on its bracket, right in this top view) sits ahead of the central electronics bracket:
+
+![Top view of the base with the cover removed — the RPLIDAR on its bracket is visible ahead of the drive wheels and the central electronics bracket](../../assets/images/AMR_open_top_view.jpg)
+
 ## Field of view note
 The robot's own frame/structure produces close returns in several directions (≈ ±20–50° and ±80–90° in
 the LiDAR frame), not a clean rear block. → a **`scan_body_filter`** (provided in `openamrobot_nav2`)
