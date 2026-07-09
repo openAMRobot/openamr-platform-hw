@@ -1,0 +1,17 @@
+# CAD / binary engineering files — treat as binary (no text/EOL munging, no diff).
+# Stored in plain git (Git LFS is not usable on public forks of this repo).
+*.STEP   binary
+*.step   binary
+*.SLDPRT binary
+*.sldprt binary
+*.SLDASM binary
+*.sldasm binary
+*.SLDDRW binary
+*.slddrw binary
+*.DXF    binary
+*.dxf    binary
+*.PDF    binary
+*.pdf    binary
+*.zip    binary
+*.dwg    binary
+*.xlsx   binary

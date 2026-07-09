@@ -1,0 +1,252 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1340" height="950" viewBox="0 0 1340 950" font-family="'Segoe UI',Arial,sans-serif">
+<rect x="0" y="0" width="1340" height="950" fill="#ffffff"/>
+  <defs>
+    <style>
+      .title{font-weight:600;font-size:14px;fill:#1a1a1a;}
+      .big{font-weight:700;font-size:15px;fill:#111;}
+      .sub{font-weight:400;font-size:11.5px;fill:#455;}
+      .subm{font-weight:600;font-size:12px;fill:#1a1a1a;}
+      .ncn{font-weight:600;font-size:12px;fill:#78909c;}
+      .nc{font-weight:400;font-size:11px;fill:#90a4ae;font-style:italic;}
+      .wired{font-weight:700;font-size:10px;fill:#2e7d32;}
+      .wl{font-weight:600;font-size:11px;}
+      .h1{font-weight:700;font-size:20px;fill:#111;}
+      .h2{font-weight:400;font-size:12.5px;fill:#555;}
+      .lg{font-weight:400;font-size:11.5px;fill:#333;}
+      .pin{font-weight:600;font-size:11.5px;fill:#222;}
+      .num{font-weight:700;font-size:11px;}
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1340" height="950" fill="#ffffff"/>
+
+  <text class="h1" x="40" y="38">ZBLD.C20-120L2R BLDC driver — connection diagram</text>
+  <text class="h2" x="40" y="58">12-position signal terminal shown vertically, position 1 (bottom) to 12 (top) · only terminals 1, 2, 6, 7 are wired · commutation is internal</text>
+
+  <!-- ===== 24 V SUPPLY ===== -->
+  <rect x="755" y="60" width="210" height="60" rx="6" fill="#fdecea" stroke="#d32f2f" stroke-width="1.5"/>
+  <text class="title" x="860" y="86" text-anchor="middle">24 V DC supply</text>
+  <text class="sub" x="860" y="105" text-anchor="middle">+24 V (brown) · 0 V (blue)</text>
+  <line x1="820" y1="120" x2="820" y2="232" stroke="#6d4c41" stroke-width="4.5"/>
+  <text class="wl" x="828" y="185" fill="#5d4037">brown +24 V</text>
+  <polyline points="905,120 905,150 1000,150 1000,232" fill="none" stroke="#1976d2" stroke-width="4.5"/>
+  <text class="wl" x="912" y="140" fill="#0d47a1">blue 0 V</text>
+
+  <!-- ===== TEENSY ===== -->
+  <rect x="40" y="526" width="165" height="128" rx="8" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+  <text class="title" x="122" y="546" text-anchor="middle">Teensy 4.0 · 3.3 V</text>
+  <text class="pin" x="192" y="564" text-anchor="end">PWM  L1/R5</text>
+  <text class="pin" x="192" y="590" text-anchor="end">GND  common</text>
+  <text class="pin" x="192" y="616" text-anchor="end">REV  L21/R8</text>
+  <text class="pin" x="192" y="642" text-anchor="end">FWD  L20/R6</text>
+  <circle cx="200" cy="560" r="3" fill="#1565c0"/>
+  <circle cx="200" cy="586" r="3" fill="#455a64"/>
+  <circle cx="200" cy="612" r="3" fill="#1565c0"/>
+  <circle cx="200" cy="638" r="3" fill="#1565c0"/>
+
+  <!-- RC filter on PWM -->
+  <rect x="250" y="542" width="110" height="36" rx="6" fill="#fff3e0" stroke="#f57c00" stroke-width="1.5"/>
+  <text class="subm" x="305" y="557" text-anchor="middle" font-size="11.5px">RC low-pass</text>
+  <text class="sub" x="305" y="571" text-anchor="middle">PWM &#8594; 0–5 V</text>
+
+  <!-- ===== DRIVER CONTAINER ===== -->
+  <rect x="405" y="180" width="700" height="650" rx="12" fill="#f7f8f9" stroke="#607d8b" stroke-width="1.5" stroke-dasharray="8 5"/>
+  <text class="big" x="420" y="206">ZBLD.C20-120L2R</text>
+  <text class="sub" x="420" y="223">BLDC driver · internal commutation</text>
+
+  <!-- ===== 24 V POWER SCREW TERMINALS ===== -->
+  <rect x="755" y="215" width="330" height="78" rx="6" fill="#fdecea" stroke="#d32f2f" stroke-width="1.5"/>
+  <circle cx="820" cy="232" r="9" fill="#fff" stroke="#6d4c41" stroke-width="2"/>
+  <line x1="814" y1="232" x2="826" y2="232" stroke="#6d4c41" stroke-width="2"/>
+  <text class="subm" x="838" y="237">V+</text>
+  <circle cx="1000" cy="232" r="9" fill="#fff" stroke="#1976d2" stroke-width="2"/>
+  <line x1="994" y1="232" x2="1006" y2="232" stroke="#1976d2" stroke-width="2"/>
+  <text class="subm" x="982" y="237" text-anchor="end">V-</text>
+  <text class="title" x="920" y="264" text-anchor="middle">24 V DC power · screw terminals</text>
+  <text class="sub" x="920" y="281" text-anchor="middle">brown = V+ (+24 V)  ·  blue = V- (0 V)</text>
+
+  <!-- ===== 12-POSITION SIGNAL TERMINAL BLOCK (vertical) ===== -->
+  <rect x="470" y="305" width="250" height="440" rx="6" fill="#ffffff" stroke="#455a64" stroke-width="1.5"/>
+  <text class="title" x="595" y="327" text-anchor="middle">Signal terminal block · 12-position</text>
+
+  <!-- pos 12 (top) B- -->
+  <rect x="482" y="343" width="26" height="26" rx="3" fill="#eceff1" stroke="#b0bec5"/>
+  <text class="num" x="495" y="360" text-anchor="middle" fill="#90a4ae">12</text>
+  <text class="ncn" x="518" y="353">B-</text>
+  <text class="nc" x="518" y="367">not connected · RS485</text>
+  <!-- pos 11 A+ -->
+  <rect x="482" y="376" width="26" height="26" rx="3" fill="#eceff1" stroke="#b0bec5"/>
+  <text class="num" x="495" y="393" text-anchor="middle" fill="#90a4ae">11</text>
+  <text class="ncn" x="518" y="386">A+</text>
+  <text class="nc" x="518" y="400">not connected · RS485</text>
+  <!-- pos 10 SPD/DO2 -->
+  <rect x="482" y="409" width="26" height="26" rx="3" fill="#eceff1" stroke="#b0bec5"/>
+  <text class="num" x="495" y="426" text-anchor="middle" fill="#90a4ae">10</text>
+  <text class="ncn" x="518" y="419">SPD / DO2</text>
+  <text class="nc" x="518" y="433">not connected</text>
+  <!-- pos 9 ERR/DO1 -->
+  <rect x="482" y="442" width="26" height="26" rx="3" fill="#eceff1" stroke="#b0bec5"/>
+  <text class="num" x="495" y="459" text-anchor="middle" fill="#90a4ae">9</text>
+  <text class="ncn" x="518" y="452">ERR / DO1</text>
+  <text class="nc" x="518" y="466">not connected</text>
+  <!-- pos 8 +5V -->
+  <rect x="482" y="475" width="26" height="26" rx="3" fill="#eceff1" stroke="#b0bec5"/>
+  <text class="num" x="495" y="492" text-anchor="middle" fill="#90a4ae">8</text>
+  <text class="ncn" x="518" y="485">+5V</text>
+  <text class="nc" x="518" y="499">not connected</text>
+  <!-- pos 7 VAR/AI2 WIRED -->
+  <rect x="482" y="508" width="26" height="26" rx="3" fill="#ffe0b2" stroke="#f57c00" stroke-width="1.5"/>
+  <text class="num" x="495" y="525" text-anchor="middle" fill="#e65100">7</text>
+  <text class="subm" x="518" y="518">VAR / AI2</text>
+  <text class="sub" x="518" y="532">speed · analog 0–5 V  <tspan class="wired">WIRED</tspan></text>
+  <!-- pos 6 COM WIRED -->
+  <rect x="482" y="541" width="26" height="26" rx="3" fill="#cfd8dc" stroke="#455a64" stroke-width="1.5"/>
+  <text class="num" x="495" y="558" text-anchor="middle" fill="#37474f">6</text>
+  <text class="subm" x="518" y="551">COM</text>
+  <text class="sub" x="518" y="565">common 0 V ground  <tspan class="wired">WIRED</tspan></text>
+  <!-- pos 5 BRK/DI5 -->
+  <rect x="482" y="574" width="26" height="26" rx="3" fill="#eceff1" stroke="#b0bec5"/>
+  <text class="num" x="495" y="591" text-anchor="middle" fill="#90a4ae">5</text>
+  <text class="ncn" x="518" y="584">BRK / DI5</text>
+  <text class="nc" x="518" y="598">not connected</text>
+  <!-- pos 4 CLR/DI4 -->
+  <rect x="482" y="607" width="26" height="26" rx="3" fill="#eceff1" stroke="#b0bec5"/>
+  <text class="num" x="495" y="624" text-anchor="middle" fill="#90a4ae">4</text>
+  <text class="ncn" x="518" y="617">CLR / DI4</text>
+  <text class="nc" x="518" y="631">not connected</text>
+  <!-- pos 3 JOG/DI3 -->
+  <rect x="482" y="640" width="26" height="26" rx="3" fill="#eceff1" stroke="#b0bec5"/>
+  <text class="num" x="495" y="657" text-anchor="middle" fill="#90a4ae">3</text>
+  <text class="ncn" x="518" y="650">JOG / DI3</text>
+  <text class="nc" x="518" y="664">not connected</text>
+  <!-- pos 2 REV/DI2 WIRED -->
+  <rect x="482" y="673" width="26" height="26" rx="3" fill="#bbdefb" stroke="#1565c0" stroke-width="1.5"/>
+  <text class="num" x="495" y="690" text-anchor="middle" fill="#0d47a1">2</text>
+  <text class="subm" x="518" y="683">REV / DI2</text>
+  <text class="sub" x="518" y="697">reverse · digital  <tspan class="wired">WIRED</tspan></text>
+  <!-- pos 1 FWD/DI1 WIRED (bottom) -->
+  <rect x="482" y="706" width="26" height="26" rx="3" fill="#bbdefb" stroke="#1565c0" stroke-width="1.5"/>
+  <text class="num" x="495" y="723" text-anchor="middle" fill="#0d47a1">1</text>
+  <text class="subm" x="518" y="716">FWD / DI1</text>
+  <text class="sub" x="518" y="730">forward · digital  <tspan class="wired">WIRED</tspan></text>
+
+  <text class="sub" x="595" y="762" text-anchor="middle" fill="#78909c">Terminals numbered 1 (bottom) &#8594; 12 (top) · order unchanged</text>
+
+  <!-- ===== COMMUTATION NOTE ===== -->
+  <rect x="735" y="430" width="170" height="250" rx="6" fill="#ede7f6" stroke="#7b1fa2" stroke-width="1.5"/>
+  <text class="title" x="820" y="454" text-anchor="middle" fill="#4a148c">Internal commutation</text>
+  <text class="sub" x="748" y="478">Driver reads Hall</text>
+  <text class="sub" x="748" y="494">Hu / Hv / Hw and drives</text>
+  <text class="sub" x="748" y="510">phases U / V / W itself</text>
+  <text class="sub" x="748" y="526">(6-step, closed loop).</text>
+  <text class="subm" x="748" y="554" font-size="11.5px">Teensy never sees</text>
+  <text class="subm" x="748" y="570" font-size="11.5px">U / V / W. It only sets:</text>
+  <text class="sub" x="748" y="594">• speed  &#8594; VAR / AI2</text>
+  <text class="sub" x="748" y="610">• dir      &#8594; FWD / REV</text>
+  <text class="sub" x="748" y="626">• ground &#8594; COM</text>
+  <text class="sub" x="748" y="654" fill="#6a1b9a">Halls are read here,</text>
+  <text class="sub" x="748" y="670" fill="#6a1b9a">not by the Teensy.</text>
+
+  <!-- ===== 8-PIN MOLEX MOTOR CONNECTOR ===== -->
+  <rect x="910" y="360" width="175" height="356" rx="6" fill="#ffffff" stroke="#455a64" stroke-width="1.5"/>
+  <text class="title" x="997" y="382" text-anchor="middle">8-pin Molex &#8594; motor</text>
+  <text class="pin" x="925" y="422">U</text>
+  <text class="pin" x="925" y="459">V</text>
+  <text class="pin" x="925" y="496">W</text>
+  <text class="sub" x="948" y="422">phase</text>
+  <text class="sub" x="948" y="459">phase</text>
+  <text class="sub" x="948" y="496">phase</text>
+  <text class="pin" x="925" y="533">Hu</text>
+  <text class="pin" x="925" y="570">Hv</text>
+  <text class="pin" x="925" y="607">Hw</text>
+  <text class="sub" x="955" y="533">Hall</text>
+  <text class="sub" x="955" y="570">Hall</text>
+  <text class="sub" x="955" y="607">Hall</text>
+  <text class="pin" x="925" y="644">Vcc</text>
+  <text class="sub" x="963" y="644">5 V Hall supply</text>
+  <text class="pin" x="925" y="681">0V</text>
+  <text class="sub" x="955" y="681">Hall return</text>
+  <circle cx="1085" cy="418" r="3.5" fill="#7b1fa2"/>
+  <circle cx="1085" cy="455" r="3.5" fill="#7b1fa2"/>
+  <circle cx="1085" cy="492" r="3.5" fill="#7b1fa2"/>
+  <circle cx="1085" cy="529" r="3.5" fill="#00838f"/>
+  <circle cx="1085" cy="566" r="3.5" fill="#00838f"/>
+  <circle cx="1085" cy="603" r="3.5" fill="#00838f"/>
+  <circle cx="1085" cy="640" r="3.5" fill="#f57c00"/>
+  <circle cx="1085" cy="677" r="3.5" fill="#455a64"/>
+  <path d="M905 570 C 897 577, 903 582, 909 582" fill="none" stroke="#7b1fa2" stroke-width="1.3" stroke-dasharray="4 3"/>
+
+  <!-- ===== MOTOR ===== -->
+  <rect x="1140" y="360" width="170" height="356" rx="8" fill="#f3e5f5" stroke="#7b1fa2" stroke-width="1.5"/>
+  <text class="title" x="1225" y="386" text-anchor="middle">ZD Z4BLD60</text>
+  <text class="sub" x="1225" y="404" text-anchor="middle">BLDC motor</text>
+  <text class="pin" x="1152" y="422">U</text>
+  <text class="pin" x="1152" y="459">V</text>
+  <text class="pin" x="1152" y="496">W</text>
+  <text class="pin" x="1152" y="533">Hu</text>
+  <text class="pin" x="1152" y="570">Hv</text>
+  <text class="pin" x="1152" y="607">Hw</text>
+  <text class="pin" x="1152" y="644">+5V</text>
+  <text class="pin" x="1152" y="681">0V</text>
+  <text class="sub" x="1300" y="422" text-anchor="end">winding</text>
+  <text class="sub" x="1300" y="459" text-anchor="end">winding</text>
+  <text class="sub" x="1300" y="496" text-anchor="end">winding</text>
+  <text class="sub" x="1300" y="533" text-anchor="end">sensor</text>
+  <text class="sub" x="1300" y="570" text-anchor="end">sensor</text>
+  <text class="sub" x="1300" y="607" text-anchor="end">sensor</text>
+
+  <!-- ===== WIRES: Molex -> motor ===== -->
+  <line x1="1085" y1="418" x2="1140" y2="418" stroke="#7b1fa2" stroke-width="3.5"/>
+  <line x1="1085" y1="455" x2="1140" y2="455" stroke="#7b1fa2" stroke-width="3.5"/>
+  <line x1="1085" y1="492" x2="1140" y2="492" stroke="#7b1fa2" stroke-width="3.5"/>
+  <line x1="1085" y1="529" x2="1140" y2="529" stroke="#00838f" stroke-width="2"/>
+  <line x1="1085" y1="566" x2="1140" y2="566" stroke="#00838f" stroke-width="2"/>
+  <line x1="1085" y1="603" x2="1140" y2="603" stroke="#00838f" stroke-width="2"/>
+  <line x1="1085" y1="640" x2="1140" y2="640" stroke="#f57c00" stroke-width="2.5"/>
+  <line x1="1085" y1="677" x2="1140" y2="677" stroke="#455a64" stroke-width="2.5"/>
+
+  <!-- ===== WIRES: Teensy -> wired terminals (fan) ===== -->
+  <!-- PWM -> RC -> VAR (pos7, 521) : channel x=420 -->
+  <line x1="200" y1="560" x2="250" y2="560" stroke="#1565c0" stroke-width="2"/>
+  <polyline points="360,560 420,560 420,521 482,521" fill="none" stroke="#f57c00" stroke-width="2.5"/>
+  <text class="wl" x="392" y="553" fill="#e65100">0–5 V</text>
+  <!-- GND -> COM (pos6, 554) : channel x=433 -->
+  <polyline points="200,586 433,586 433,554 482,554" fill="none" stroke="#455a64" stroke-width="2.5"/>
+  <!-- REV -> REV/DI2 (pos2, 686) : channel x=459 -->
+  <polyline points="200,612 459,612 459,686 482,686" fill="none" stroke="#1565c0" stroke-width="2"/>
+  <!-- FWD -> FWD/DI1 (pos1, 719) : channel x=446 -->
+  <polyline points="200,638 446,638 446,719 482,719" fill="none" stroke="#1565c0" stroke-width="2"/>
+  <!-- connection dots -->
+  <circle cx="482" cy="521" r="3" fill="#e65100"/>
+  <circle cx="482" cy="554" r="3" fill="#455a64"/>
+  <circle cx="482" cy="686" r="3" fill="#1565c0"/>
+  <circle cx="482" cy="719" r="3" fill="#1565c0"/>
+
+  <!-- ===== POWER WIRES to screws ===== -->
+  <line x1="820" y1="120" x2="820" y2="232" stroke="#6d4c41" stroke-width="4.5"/>
+
+  <!-- ===== MANDATORY GROUND NOTE ===== -->
+  <rect x="40" y="700" width="345" height="60" rx="8" fill="#fff8e1" stroke="#f9a825" stroke-width="1.5"/>
+  <text class="subm" x="56" y="722" fill="#8d6e00" font-size="12.5px">★ Mandatory common ground</text>
+  <text class="sub" x="56" y="740" fill="#7a5c00">Teensy GND must tie to COM (pos 6). Without it,</text>
+  <text class="sub" x="56" y="755" fill="#7a5c00">FWD / REV / VAR have no return and will not switch.</text>
+
+  <!-- ===== LEGEND ===== -->
+  <rect x="40" y="838" width="1270" height="94" rx="8" fill="#fafafa" stroke="#bbb"/>
+  <text class="title" x="56" y="860">Wire legend</text>
+  <line x1="60" y1="882" x2="90" y2="882" stroke="#f57c00" stroke-width="3"/>
+  <text class="lg" x="98" y="886">5 V analog (VAR) / Hall Vcc</text>
+  <line x1="330" y1="882" x2="360" y2="882" stroke="#1565c0" stroke-width="2"/>
+  <text class="lg" x="368" y="886">3.3 V logic (PWM / FWD / REV)</text>
+  <line x1="650" y1="882" x2="680" y2="882" stroke="#455a64" stroke-width="2.5"/>
+  <text class="lg" x="688" y="886">ground · COM · 0 V</text>
+  <line x1="880" y1="882" x2="910" y2="882" stroke="#7b1fa2" stroke-width="4"/>
+  <text class="lg" x="918" y="886">motor phase U / V / W</text>
+  <line x1="1090" y1="882" x2="1120" y2="882" stroke="#00838f" stroke-width="2"/>
+  <text class="lg" x="1128" y="886">Hall Hu / Hv / Hw</text>
+  <line x1="60" y1="910" x2="90" y2="910" stroke="#6d4c41" stroke-width="4.5"/>
+  <text class="lg" x="98" y="914">24 V + (V+, brown)</text>
+  <line x1="330" y1="910" x2="360" y2="910" stroke="#1976d2" stroke-width="4.5"/>
+  <text class="lg" x="368" y="914">24 V - (V-, blue)</text>
+  <rect x="650" y="904" width="30" height="12" rx="2" fill="#eceff1" stroke="#b0bec5"/>
+  <text class="lg" x="688" y="914">terminal not connected</text>
+</svg>
