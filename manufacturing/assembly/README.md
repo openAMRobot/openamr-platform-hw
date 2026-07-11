@@ -1,12 +1,14 @@
 # Assembly
 
-## Wheel assembly
+## 🔩 Wheel Assembly Tutorial
+
+[![Wheel Assembly](https://img.youtube.com/vi/FlsYwoiEAsk/maxresdefault.jpg)](https://youtu.be/FlsYwoiEAsk?list=PLlQYRQ1Q-yzqA89n-1vjrnNSw8hSucCKi)
+
+▶️ Step-by-step assembly of the OpenAMRobot drive wheel module.
 
 The drive-wheel assembly (motor + gearbox + drive shaft + brackets, `MMP.03.*` in
 [../../mechanical/](../../mechanical/)) is assembled in the sequence shown below. Follow the same
 order left and right.
-
-> 🎬 **Video:** [wheel assembly sequence](https://youtu.be/FlsYwoiEAsk) (correct order, demonstrated).
 
 **Step 1**
 ![Wheel assembly step 1](AMR_wheel_assembly_1.png)
