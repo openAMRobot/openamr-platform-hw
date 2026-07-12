@@ -12,7 +12,13 @@ materials, and safety notes.
 
 **Status: experimental / documentation-first.** The electrical, BOM, safety, and now the
 **mechanical CAD** (chassis, production files, renders) and **datasheets** are real and maintained.
-The PCB directory is still an **empty placeholder** (see [Release scope](#release-scope)).
+
+> [!NOTE]
+> This repository is part of the **OpenAMRobot vX.X.X** release.
+>
+> Download the complete product release (Hardware + Software + Firmware + UI + Documentation) here:
+>
+> **https://github.com/openAMRobot/openamrobot-release/releases/latest**
 
 > ## ⚠️ Read this before wiring anything (can physically damage hardware)
 > - **Teensy 4.0 GPIO is 3.3 V and NOT 5 V tolerant** (abs. max ~3.6 V). Feeding a 5 V signal
