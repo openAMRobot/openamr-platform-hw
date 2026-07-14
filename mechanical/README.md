@@ -12,7 +12,7 @@ The CAD, production drawings, and renders come from the OpenAMRobot design repos
   - `cad/Full_assembly_STEP/` — the complete robot as a single STEP assembly.
   - `cad/production_files/` — per-part production set: **PDF + DXF** (order parts without CAD) plus
     **SLDPRT / SLDDRW / STEP** (native + neutral).
-  - the full **SolidWorks 2017 project** — a **GitHub Release asset** (too large for the repo); see
+  - the full **SolidWorks 2017 project** — a **GitHub Release asset** ([SolidWorks 2017 3D model](https://github.com/openAMRobot/openamr-platform-hw/tree/main/mechanical/cad/SW17_3D_model)); see
     the repo [Releases](https://github.com/openAMRobot/openamr-platform-hw/releases).
 - **[`renderings/`](renderings/)** — CAD renders and robot views (see the note on base vs. product vision below).
 - `chassis/`, `drawings/` — reserved (production drawings currently live alongside the models in
