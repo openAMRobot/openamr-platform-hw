@@ -125,7 +125,7 @@ concern (see the `openamr-platform-sw` troubleshooting doc (`docs/troubleshootin
 
 ```
 
-![Discussion E-Stop button and Power distribution](https://github.com/orgs/openAMRobot/discussions/6)
+# [Discussion E-Stop button and Power distribution](https://github.com/orgs/openAMRobot/discussions/6)
 
 
 ![Power_connection_AMR_1](https://github.com/user-attachments/assets/316422bf-0235-4a99-9767-aef7b1126889)
@@ -142,4 +142,5 @@ XB2-BS542 — same Ø22/Ø40 form factor, 1NC, twist release, 10 A Ith, IP65, IE
 → https://www.amazon.com/XB2-BS542-Emergency-Button-Switch-pushbutton/dp/B07Y7KZDSH
 → direct from manufacturer, ~$1/pc: https://www.finglai.com/products/switches/push-buttons/DIA22-XB2-B/XB2-BS542.html
 LAY37 is the same class, usually sold as NO+NC: https://www.amazon.com/LAY37-Mushroom-Emergency-Button-Switch/dp/B07DL333VL [eBay](https://www.ebay.com/itm/356714450971)[Electric-b2c](https://www.electric-b2c.com/products/button-switch-self-reset-xb2-small-mushroom-head-emergency-stop-22mm-knob-key-start-inching-power-on-xb2-bs542-xb2-ba31-xb2-ba42)
+
 Reminder: contacts are ~3 A DC-13 at 24 V, so for the OpenAMRobot battery bus, break a contactor coil with the NC contacts rather than the full motor current.
