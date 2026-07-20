@@ -125,12 +125,14 @@ concern (see the `openamr-platform-sw` troubleshooting doc (`docs/troubleshootin
 
 ```
 
-# [Discussion E-Stop button and Power distribution](https://github.com/orgs/openAMRobot/discussions/6)
+# Schematic to understand how Emergency switch and reset button works.
+
+### [Discussion E-Stop button and Power distribution](https://github.com/orgs/openAMRobot/discussions/6)
+
 
 
 ![Power_connection_AMR_1](https://github.com/user-attachments/assets/316422bf-0235-4a99-9767-aef7b1126889)
 
-Schematic to understand how Emergency switch and reset button works.
 
 ## Schneider (genuine, ~€20–35):
 Harmony XB4-BS542 — Ø22 mm mount, red Ø40 mm mushroom, twist-to-release, metal bezel, 1NC (add a ZBE-102 block for a second NC channel). Certified positive-opening contacts per IEC 60947-5-5 — the one to use for anything CE-facing.
