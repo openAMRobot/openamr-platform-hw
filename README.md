@@ -144,15 +144,13 @@ regulatory compliance before building or operating hardware based on this docume
 
 ## License
 
-**MIT** (Copyright (c) 2026 OpenAMRobot) for the documentation and BOM currently in this repo —
-see [`LICENSE`](LICENSE). Hardware design files (CAD/schematics/PCB), when added, are planned under
-**CERN-OHL-S-2.0**. See [`NOTICE.md`](NOTICE.md).
+**CERN-OHL-P-2.0** for original CAD, schematics, mechanical/electrical design files, manufacturing source, and products made from that source. Original documentation is CC BY 4.0, and any software or scripts are MIT. See [`LICENSE`](LICENSE), [`LICENSING.md`](LICENSING.md), and [`NOTICE.md`](NOTICE.md).
 
 ## Ownership, licensing, and contributions
 
 OpenAMRobot is a project initiated, operated, and controlled by **Botshare LTD** (Cyprus Company ID HE479056). Botshare LTD owns the transferable economic rights in original OpenAMRobot material created by or validly assigned to it. Third-party material remains subject to its respective ownership, licences, and notices.
 
-Public distribution under this repository's applicable licence grants the permissions stated in that licence; it does not transfer ownership of underlying copyright, trademarks, patents, or other intellectual property.
+Original OpenAMRobot software and firmware are licensed under MIT, documentation under CC BY 4.0, and hardware design source under CERN-OHL-P-2.0, as mapped in [`LICENSING.md`](LICENSING.md). Public distribution grants the permissions stated in the applicable licence; it does not transfer ownership of underlying copyright, trademarks, patents, or other intellectual property.
 
 Accepted external contributions require DCO sign-off and an applicable Individual or Corporate Contributor Agreement governing assignment of transferable economic rights to Botshare LTD. Contributor attribution and legally non-waivable authorship or moral rights remain recognized.
 

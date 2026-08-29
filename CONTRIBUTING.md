@@ -9,7 +9,7 @@ safety documentation. It is documentation-first; CAD/PCB directories are placeho
 ## Licensing of contributions
 
 - Documentation and BOM contributions are accepted under **MIT** (`LICENSE`), (c) OpenAMRobot.
-- Future hardware design files (CAD/schematics/PCB) will be **CERN-OHL-S-2.0**; do not add
+- Future hardware design files (CAD/schematics/PCB) will be **CERN-OHL-P-2.0**; do not add
   design files until that carve-out is in place.
 - Do not add third-party datasheets/design files unless their license permits redistribution.
 
