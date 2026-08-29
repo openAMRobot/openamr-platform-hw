@@ -144,9 +144,7 @@ regulatory compliance before building or operating hardware based on this docume
 
 ## License
 
-**MIT** (Copyright (c) 2026 OpenAMRobot) for the documentation and BOM currently in this repo —
-see [`LICENSE`](LICENSE). Hardware design files (CAD/schematics/PCB), when added, are planned under
-**CERN-OHL-S-2.0**. See [`NOTICE.md`](NOTICE.md).
+**CERN-OHL-P-2.0** for original CAD, schematics, mechanical/electrical design files, manufacturing source, and products made from that source. Original documentation is CC BY 4.0, and any software or scripts are MIT. See [`LICENSE`](LICENSE), [`LICENSING.md`](LICENSING.md), and [`NOTICE.md`](NOTICE.md).
 
 ## Ownership, licensing, and contributions
 
