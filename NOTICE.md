@@ -16,7 +16,7 @@ release notes where applicable. Contributions are accepted under the terms in
 ## Licensing summary
 
 - Documentation, notes, and BOM: **MIT** (Copyright (c) 2026 OpenAMRobot) — see `LICENSE`.
-- Hardware design files (CAD/schematics/PCB): planned **CERN-OHL-S-2.0** when added
+- Hardware design files (CAD/schematics/PCB): planned **CERN-OHL-P-2.0** when added
   (directories are currently empty placeholders).
 
 ## Third-Party Material
