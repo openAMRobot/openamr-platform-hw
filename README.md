@@ -1,4 +1,4 @@
-# OpenAMR Platform Hardware
+# OpenAMRobot Platform Hardware
 
 ![The OpenAMRobot differential-drive base — 3D view with the cover shown transparent, revealing the drive wheels, central electronics bracket, sensors, and the front panel (E-stop, buttons, camera)](mechanical/renderings/AMR_transparent.jpg)
 

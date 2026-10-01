@@ -65,7 +65,7 @@ Any **24 V** battery works — the drivers and the buck only see the 24 V bus, n
 
 - **4 × 12 V** batteries (lead-acid, the big black ones).
 - Wired **2 in series → 24 V** (one "pair"). With 2 pairs you can make **24 V** (pairs in parallel, more
-  capacity) **or 48 V** (pairs in series) — this matches the OpenAMR platform's "24/48 V" spec.
+  capacity) **or 48 V** (pairs in series) — this matches the OpenAMRobot platform's "24/48 V" spec.
 - **In practice we usually run a single pair = 24 V.**
 - ⚠️ Battery care depends on the chemistry you choose. For the reference **lead-acid** pack: respect
   polarity, don't short the terminals (very high current), charge with a suitable lead-acid charger, and

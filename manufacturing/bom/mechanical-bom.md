@@ -59,11 +59,11 @@ The following components are used in the assemblies:
 
 __________________________________________________________
 
-# OpenAMR – Preliminary Electronics Bill of Materials (BOM)
+# OpenAMRobot – Preliminary Electronics Bill of Materials (BOM)
 
 ## Overview
 
-This Bill of Materials preliminary defines the electronics used in the OpenAMR development platform.  
+This Bill of Materials preliminary defines the electronics used in the OpenAMRobot development platform.  
 The system follows a two-layer architecture:
 
 - **High-level control**: Raspberry Pi 5 (ROS2, navigation, perception, UI)  
