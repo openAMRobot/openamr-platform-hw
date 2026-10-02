@@ -7,4 +7,4 @@ The total price: 115USD*2pc+145USD=375USD
 
 Contact:
 Finkle: finkle@zlingkj.com
-Melady: melady@zlingkj.com
+
