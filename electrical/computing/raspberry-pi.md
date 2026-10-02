@@ -36,7 +36,7 @@ docs in [`openamr-platform-sw`](https://github.com/openAMRobot/openamr-platform-
 |---|---|
 | `~/microros_ws` *(reference install)* | the **micro-ROS agent** workspace (do NOT delete; it is the Teensy↔ROS bridge) |
 | `~/teensy_firmware` *(reference install)* | the Teensy **firmware source** (see `openamr-platform-fw`) |
-| `~/openamr-platform-sw` | OpenAMR **navigation** stack (cloned, not built yet) |
+| `~/openamr-platform-sw` | OpenAMRobot **navigation** stack (cloned, not built yet) |
 | `~/openamr_hardware_bringup_guide` | provided bring-up guide (reference) |
 | `~/openamr_real_bringup.launch.py` | the **real bring-up launch** (agent+lidar+odom+TF) |
 | `~/*.py` (encoder_*, powered_*, openloop_*, …) | diagnostic scripts |
