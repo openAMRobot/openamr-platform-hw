@@ -51,7 +51,8 @@ The following components are used in the assemblies:
   - 8x7x28 DIN 6885-UNI 6604 (formerly ISO 773)
 - **Screwed spacer sleeve:** TFF-M3/25 FIX&FASTEN
 - **BLDC Motor:** Z4BLD60-24GN-30S/4GN 25K 
-- **Laser range scanner:** RPLIDAR A1-A1M8
+- **Laser range scanner:** RPLIDAR S3 (S3M1-R2), 2.0 navigation LiDAR, 4 × M2.5 (screw engagement ≤ 4 mm). Legacy (existing robot): RPLIDAR A1-A1M8
+- **LiDAR spacer plate:** fitted under the S3 on the existing A1 bracket so the S3 scan plane sits at the A1 scan-plane height (`lidar_link` unchanged); thickness to be set from the Slamtec drawings
 - **Camera module:** NVision Assem
 - **Proximity sensor:** E18-D80NK
 - **US sensor:** JSN-SR04T
@@ -106,7 +107,7 @@ The setup is designed for differential drive mobile robot development and softwa
 
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
-| LiDAR | RPLIDAR A1 | 1 | 2D laser scanner for SLAM and obstacle detection (USB) |
+| LiDAR | RPLIDAR S3 (S3M1-R2) | 1 | 2.0 navigation 2D laser scanner for SLAM and obstacle detection (USB via USB to UART adapter; regulated 5 V rail). Replaces the RPLIDAR A1 — legacy (existing robot) |
 | Camera | Raspberry Pi Camera Module / Arducam IMX219 | 1 | Vision sensor for docking and computer vision tasks (CSI interface) |
 
 ---
@@ -117,7 +118,7 @@ The setup is designed for differential drive mobile robot development and softwa
 |------|------|-----|------------|
 | Battery | 24V Li-ion / LiFePO4 pack | 1 | Main power source for motors and electronics |
 | DC-DC Converter | LM2596 Buck Converter (24V → 5V, ≥5A) | 1 | Power supply for Raspberry Pi |
-| DC-DC Converter | DROK 24V → 5V/12V Step-Down Module | 1 | Power supply for sensors and auxiliary electronics |
+| DC-DC Converter | DROK 24V → 5V/12V Step-Down Module — legacy (existing robot) | 1 | Power supply for sensors and auxiliary electronics on the existing robot. OpenAMRobot 2.0 has no 12 V rail |
 | Protection | Inline fuse (rated above motor current) | 1 | Overcurrent protection on main power line |
 | Safety | Emergency stop switch | 1 | Manual power cutoff for safety |
 
@@ -148,7 +149,7 @@ The setup is designed for differential drive mobile robot development and softwa
 - Teensy ↔ Motor Drivers: PWM (speed) + Digital IO (direction)  
 - Teensy ↔ Encoders: Quadrature (A/B) or SPI interface  
 - Teensy ↔ IMU: I2C  
-- Raspberry Pi ↔ LiDAR: USB  
+- Raspberry Pi ↔ LiDAR: USB (RPLIDAR A1, legacy (existing robot)); 2.0: Jetson ↔ RPLIDAR S3 via USB to UART adapter  
 - Raspberry Pi ↔ Camera: CSI  
 
 ---
@@ -159,6 +160,5 @@ The setup is designed for differential drive mobile robot development and softwa
 - Breadboard or perfboard is used for initial prototyping before designing a custom carrier PCB.  
 - All components are selected to support ROS2-based mobile robotics development.  
 
-[![Support on Patreon - Supporter Tier – €5/month](https://img.shields.io/badge/Support%20on-Patreon-orange)](https://www.patreon.com/cw/Botshare)
 [![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/paypalme/BotshareAI)
 [![Donate on GitHub](https://img.shields.io/badge/Sponsor%20on-GitHub-pink?logo=github-sponsors)](https://github.com/sponsors/openAMRobot)

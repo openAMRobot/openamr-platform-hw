@@ -195,7 +195,7 @@
   <text class="sub" x="1035" y="500" text-anchor="middle">powered from buck 5 V</text>
   <line x1="930" y1="512" x2="1140" y2="512" stroke="#a5d6a7" stroke-width="1"/>
   <text class="sub" x="1035" y="534" text-anchor="middle">USB → Teensy (micro-ROS)</text>
-  <text class="sub" x="1035" y="558" text-anchor="middle">USB → RPLIDAR A1</text>
+  <text class="sub" x="1035" y="558" text-anchor="middle">USB → RPLIDAR A1 (legacy)</text>
   <text class="sub" x="1035" y="582" text-anchor="middle">CSI → Camera Module 3</text>
   <text class="sub" x="1035" y="606" text-anchor="middle">runs ROS 2 host</text>
 
@@ -207,7 +207,7 @@
   <!-- ============ RPLIDAR ============ -->
   <rect x="910" y="680" width="210" height="86" rx="6" class="blk" fill="#eceff1" stroke="#455a64"/>
   <text class="title" x="1015" y="712" text-anchor="middle">RPLIDAR A1</text>
-  <text class="sub" x="1015" y="732" text-anchor="middle">2D laser scanner</text>
+  <text class="sub" x="1015" y="732" text-anchor="middle">legacy (existing robot)</text>
   <text class="subm" x="1015" y="750" text-anchor="middle">USB → Raspberry Pi 5</text>
 
   <!-- Pi <-> RPLIDAR USB -->

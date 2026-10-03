@@ -20,7 +20,8 @@ The **✅ base** (this repo's electrical / firmware / software) is the core of t
   running micro-ROS motor control (electronics derived from the Linorobot project, motor + controller
   upgraded to the ZD/ZBLD industrial parts).
 - **Compute:** Raspberry Pi 5 + ROS 2 Jazzy + Nav2.
-- **Sensing:** RPLIDAR A1 (2D), Pi Camera Module 3, MPU6500 IMU.
+- **Sensing:** RPLIDAR A1 (2D) — legacy (existing robot), Pi Camera Module 3, MPU6500 IMU. The 2.0
+  navigation LiDAR is the **RPLIDAR S3** (S3M1-R2); see [lidar.md](electrical/sensors/lidar.md).
 - **Power:** 24 V bus (any chemistry; reference build 2× 12 V; the product targets a LiFePO4 + BMS pack).
 
 ## What is optional / roadmap (⚙️ NOT on the base build)
