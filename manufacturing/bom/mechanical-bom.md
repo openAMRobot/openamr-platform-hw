@@ -118,7 +118,7 @@ The setup is designed for differential drive mobile robot development and softwa
 |------|------|-----|------------|
 | Battery | 24V Li-ion / LiFePO4 pack | 1 | Main power source for motors and electronics |
 | DC-DC Converter | LM2596 Buck Converter (24V → 5V, ≥5A) | 1 | Power supply for Raspberry Pi |
-| DC-DC Converter | DROK 24V → 5V/12V Step-Down Module | 1 | Power supply for sensors and auxiliary electronics |
+| DC-DC Converter | DROK 24V → 5V/12V Step-Down Module — legacy (existing robot) | 1 | Power supply for sensors and auxiliary electronics on the existing robot. OpenAMRobot 2.0 has no 12 V rail |
 | Protection | Inline fuse (rated above motor current) | 1 | Overcurrent protection on main power line |
 | Safety | Emergency stop switch | 1 | Manual power cutoff for safety |
 
@@ -160,6 +160,5 @@ The setup is designed for differential drive mobile robot development and softwa
 - Breadboard or perfboard is used for initial prototyping before designing a custom carrier PCB.  
 - All components are selected to support ROS2-based mobile robotics development.  
 
-[![Support on Patreon - Supporter Tier – €5/month](https://img.shields.io/badge/Support%20on-Patreon-orange)](https://www.patreon.com/cw/Botshare)
 [![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/paypalme/BotshareAI)
 [![Donate on GitHub](https://img.shields.io/badge/Sponsor%20on-GitHub-pink?logo=github-sponsors)](https://github.com/sponsors/openAMRobot)

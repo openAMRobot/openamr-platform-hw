@@ -19,6 +19,7 @@ obstacle avoidance; it does not implement or validate any safety function.
 | Mounting | **4 × M2.5**, screw engagement **≤ 4 mm** |
 | Bracket | existing A1 bracket (`MMP.07` LiDAR support) **plus a spacer plate**, so the S3 scan plane sits at the A1 scan-plane height. Spacer thickness: to be set from the Slamtec drawings |
 | TF | **`lidar_link` position unchanged** (same as the A1 values below) |
+| Orientation | mounted in the **same orientation as the A1: rotated 180°**, so the static transform `base_link→lidar_link` stays unchanged: **x 0.335 m, z 0.18 m, yaw 3.14159** |
 | Scan window | **fully open — no translucent cover** in front of the scan window |
 
 - Power comes from the regulated 5 V rail, not over the host's USB port. There is **no 12 V rail** and
