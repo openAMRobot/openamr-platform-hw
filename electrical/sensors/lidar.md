@@ -17,15 +17,22 @@ obstacle avoidance; it does not implement or validate any safety function.
 | Supply | **regulated 5 V rail**: **4.9 – 5.2 V**, ripple **≤ 150 mV** |
 | Current | **1.2 A** at start, **0.45 A** typical running |
 | Mounting | **4 × M2.5**, screw engagement **≤ 4 mm** |
-| Bracket | existing A1 bracket (`MMP.07` LiDAR support) **plus a spacer plate**, so the S3 scan plane sits at the A1 scan-plane height. Spacer thickness: to be set from the Slamtec drawings |
-| TF | **`lidar_link` position unchanged** (same as the A1 values below) |
-| Orientation | mounted in the **same orientation as the A1: rotated 180°**, so the static transform `base_link→lidar_link` stays unchanged: **x 0.335 m, z 0.18 m, yaw 3.14159** |
+| Bracket | existing A1 bracket (`MMP.07` LiDAR support) **plus a spacer plate**, so the S3 scan plane sits at the A1 scan-plane height. **Pending confirmation:** the `MMP.07` bracket identity is inferred, and the spacer plate dimensions (including thickness) are not set; both are to be confirmed from the Slamtec drawings and the physical part |
+| TF | **`lidar_link` position unchanged** (same as the A1 values below); this is the **intended S3 installation target, not a measured S3 result** |
+| Orientation | mounted in the **same orientation as the A1: rotated 180°**, so the static transform `base_link→lidar_link` stays unchanged: **x 0.335 m, z 0.18 m, yaw 3.14159**. This transform and the 180° orientation are the **intended S3 installation target, not a measured S3 result** |
 | Scan window | **fully open — no translucent cover** in front of the scan window |
 
 - Power comes from the regulated 5 V rail, not over the host's USB port. There is **no 12 V rail** and
   **no 24 V LiDAR branch**.
 - Driver parameters (baud rate, scan mode), range and scan rate: to be set from the Slamtec
   datasheet / SDK; the A1 values below do not apply to the S3.
+
+### Commissioning step (S3)
+After mounting the S3, and **before the unchanged `base_link→lidar_link` transform is used for
+navigation**, verify the `sllidar_ros2` scan orientation against the physical mounting: check where
+**angle zero** points and the **direction of rotation** (for example, an object placed in front of the
+robot must appear at the expected angle in the published scan). Record the result as **S3 evidence**;
+until then the transform above remains the intended target only.
 
 ## Legacy (existing robot): RPLIDAR A1
 
@@ -58,6 +65,9 @@ The connection is shown in the diagram below.
 - Published frame: **`lidar_link`** (must match the URDF / static TF `base_link→lidar_link`).
 
 ### Mounting (measured)
+**RPLIDAR A1 evidence only (legacy, existing robot).** These measurements were taken with the A1 and are
+not S3 evidence.
+
 TF `base_link→lidar_link` = **x=0.335 m, y=0, z=0.18 m, yaw=180° (π)**. The LiDAR is 33.5 cm in front of
 the wheel axle, centered, and **mounted rotated 180°**: its 0° points to the **rear**; the robot's front
 is the LiDAR's 180°. (Found empirically — an object placed in front shows up at ±180° in the LiDAR frame.)
