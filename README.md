@@ -83,6 +83,7 @@ vs. the optional/roadmap parts.
 - Power — [power distribution & battery](electrical/power_distribution/power.md)
 - Sensors — [encoders (AS5040)](electrical/sensors/encoders.md) · [IMU (MPU6500)](electrical/sensors/imu.md) · [LiDAR (RPLIDAR A1)](electrical/sensors/lidar.md) · [camera (IMX708)](electrical/sensors/camera.md)
 - Wiring — [wiring & pinout](electrical/wiring/wiring-pinout.md)
+- 2.0 sensors: [sensor index](electrical/sensors/README.md) · [base camera (Gemini 336L)](electrical/sensors/camera.md) · [IMU (ICM-42688-P)](electrical/sensors/imu.md) · [near-field (MB7060, TF-Luna)](electrical/sensors/near-field.md)
 
 ### Manufacturing & safety
 - [Bill of materials](manufacturing/bom/components-bom.md)

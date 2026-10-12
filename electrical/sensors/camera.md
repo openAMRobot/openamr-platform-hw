@@ -1,15 +1,34 @@
-# Camera (Pi Camera Module 3 NoIR / IMX708)
+# Camera: Orbbec Gemini 336L (2.0 base camera) and Pi Camera Module 3 NoIR / IMX708 (Gate A unit)
 
-*Last updated: 2026-06-18.*
+*Last updated: 2026-10-12.*
 
-> **Status: WORKING + CALIBRATED (2026-06-19).** The camera streams to ROS (`/camera/image_raw` +
+## 2.0 base camera: Orbbec Gemini 336L
+The OpenAMRobot 2.0 base camera is the **Orbbec Gemini 336L**. Source: P-03 Decision Addendum rev19.0
+item 19 (12 Oct 2026); geometry from STEP MMP.00.00.00.000.
+
+| | |
+|---|---|
+| Model | **Orbbec Gemini 336L** |
+| Position | housing centre on the old camera centre, **142.5 mm above the floor** |
+| Frame | `base_camera_link` **(0.376, 0, 0.0445)** from `base_link` (drive-axle midpoint, 98.0 mm above the floor) |
+| Front-panel opening | about **126 × 36 mm**, on the housing centre |
+| Up-tilt | **5, 10 or 15 degrees**, baseline **10 degrees** |
+
+Not verified: the opening size and the tilt positions are design values; they are not checked on a
+built 2.0 unit.
+
+The rest of this page documents the **Gate A unit** camera (Raspberry Pi Camera Module 3 NoIR, IMX708).
+
+## Gate A unit: Raspberry Pi Camera Module 3 NoIR (IMX708)
+
+> **Gate A unit. Status: WORKING + CALIBRATED (2026-06-19).** The camera streams to ROS (`/camera/image_raw` +
 > `/camera/camera_info`), and the intrinsics are now calibrated (checkerboard) → `camera_info` publishes
 > real K + distortion. See "Intrinsic calibration" below.
 
 ## Overview
 | | |
 |---|---|
-| Module | Raspberry Pi Camera Module 3 **NoIR** (Sony **IMX708** sensor, no IR-cut filter) |
+| Module | Raspberry Pi Camera Module 3 **NoIR** (Sony **IMX708** sensor, no IR-cut filter), Gate A unit |
 | Autofocus | `dw9807` VCM (lens motor) on the module |
 | Interface | **CSI** (MIPI ribbon to the Pi), **not USB** → handled by **libcamera** |
 | Cabling | 15-pin FPC ribbon (Pi-4 style) → **CSI adapter (15→22-pin)** required for the Pi 5's narrower connector |
@@ -18,23 +37,23 @@
 ## Communication (Pi ↔ camera)
 The connection is shown in the diagram below.
 
-![Pi Camera Module 3 NoIR (IMX708) -> 15-pin FPC ribbon -> CSI adapter (15->22-pin) -> Raspberry Pi 5 cam1 connector (CSI/MIPI, not USB; libcamera RPi fork)](diagrams/camera-connection.svg)
+![Gate A unit: Pi Camera Module 3 NoIR (IMX708) -> 15-pin FPC ribbon -> CSI adapter (15->22-pin) -> Raspberry Pi 5 cam1 connector (CSI/MIPI, not USB; libcamera RPi fork)](diagrams/camera-connection.svg)
 
 - **CSI / MIPI** ribbon into the Pi's camera connector. Kernel side is fully OK:
   `camera_auto_detect=1` (in `/boot/firmware/config.txt`) loads the overlay; the media graph is
-  `imx708_noir → csi2 → pisp-fe → rp1-cfe` (verify with `media-ctl -d /dev/media0 -p`).
+  `imx708_noir → csi2 → pisp-fe → rp1-cfe` (Gate A unit; verify with `media-ctl -d /dev/media0 -p`).
 - The capture is driven by **libcamera**, exposed to ROS by the **`camera_ros`** node.
 
 ## ⚠️ The libcamera gotcha (and the fix) — IMPORTANT
 On **Pi 5 + Ubuntu 24.04 + ROS 2 Jazzy**, the **apt** packages
 (`ros-jazzy-libcamera` / `ros-jazzy-camera-ros`) use **upstream libcamera**, which does **NOT** support
-the Camera Module 3 (IMX708) on Pi 5. Symptom:
+the Camera Module 3 (IMX708, Gate A unit) on Pi 5. Symptom:
 ```
 camera_node → "no cameras available"
 # debug (LIBCAMERA_LOG_LEVELS=*:0): rpi/pisp pipeline → "Unable to acquire a CFE instance"
 ```
 The hardware/kernel are fine — it's purely a libcamera version problem. **Only the Raspberry Pi fork of
-libcamera supports the IMX708.**
+libcamera supports the IMX708 (Gate A unit).**
 
 **Fix (done 2026-06-18): build the RPi fork of libcamera + `camera_ros` from source in a colcon overlay.**
 On the Pi, in `~/camera_ws`:
@@ -107,16 +126,19 @@ ros2 run camera_calibration cameracalibrator --size 8x11 --square 0.030 --ros-ar
 ```
 Move the board to fill X/Y/Size/Skew → CALIBRATE → SAVE (writes `/tmp/calibrationdata.tar.gz`).
 
-## Mounting (measured) & TF
+## Mounting (measured) & TF, Gate A unit
+The values below are the **Gate A unit** camera. The 2.0 base camera frame is `base_camera_link`
+(0.376, 0, 0.0445), see the top of this page.
+
 Physical position relative to `base_link` (center of the wheel axle):
-- **x ≈ 0.415 m** (8 cm in front of the LiDAR, which is at x=0.335)
+- Gate A unit: **x ≈ 0.415 m** (8 cm in front of the LiDAR, which is at x=0.335)
 - **y = 0** (centered)
 - **z ≈ 0.12 m** relative to `base_link` (≈ 0.175 m above the ground)
 - Orientation: facing forward (to refine).
 
 The bring-up publishes two static TFs:
 ```
-base_link → camera_link        (x=0.415, y=0, z=0.12)
+base_link → camera_link        (x=0.415, y=0, z=0.12)   # Gate A unit
 camera_link → camera_optical_frame   (roll=-90°, yaw=-90°  → ROS optical convention: z fwd, x right, y down)
 ```
 Images are published in `camera_optical_frame`.
