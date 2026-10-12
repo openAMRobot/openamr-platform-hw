@@ -1,10 +1,50 @@
-# LiDAR (RPLidar)
+# LiDAR — RPLIDAR S3 (2.0) and RPLIDAR A1 (legacy)
 
-*Last updated: 2026-06-17.*
+*Last updated: 2026-10-12.*
 
-## Overview
-A 360° 2D laser scanner used for mapping, localization and obstacle avoidance. It is connected to the
-**Pi** (USB), **not** the Teensy.
+## 2.0 navigation LiDAR: Slamtec RPLIDAR S3 (S3M1-R2)
+The OpenAMRobot 2.0 navigation LiDAR is the **Slamtec RPLIDAR S3** (model **S3M1-R2**). It replaces the
+RPLIDAR A1 of the existing robot (documented below as legacy) and supersedes the Hokuyo UST-10LX, which
+was dropped. **Backup:** the RPLIDAR S2E, only if the S3 is unavailable.
+
+**Functional sensing only — the LiDAR is not a safety device.** It feeds mapping, localization and
+obstacle avoidance; it does not implement or validate any safety function.
+
+| | |
+|---|---|
+| Model | Slamtec **RPLIDAR S3**, **S3M1-R2** |
+| Interface | **USB to the Jetson** (2.0 reference compute) through a **USB to UART adapter** |
+| Supply | **regulated 5 V rail**: **4.9 – 5.2 V**, ripple **≤ 150 mV** |
+| Current | **1.2 A** at start, **0.45 A** typical running |
+| Mounting | **4 × M2.5**, screw engagement **≤ 4 mm** |
+| Bracket | existing `MMP.07` A1 bracket and its **10 mm standoffs plus a 7.1 mm spacer plate** (A1 hole pattern below, 4 × M2.5 S3 pattern above, screw engagement **≤ 4 mm**). The S3 scan plane is **30.55 mm** above its bottom face (Slamtec S3 drawing), so the S3 beam sits at **222.0 mm above the floor**, the same as the A1 |
+| TF | 2.0 frame `lidar_link` as in the Orientation row (scan plane at 222.0 mm above the floor, as on the A1); this is the **S3 installation value from the 2.0 geometry, not a measured S3 result** |
+| Orientation | mounted in the **same orientation as the A1: rotated 180°**. 2.0 frame `lidar_link` **(0.330, 0, 0.124), yaw π** from `base_link` (drive-axle midpoint, 98.0 mm above the floor), origin at the scan-plane centre. Gate A unit: measured static transform **x 0.335 m, z 0.18 m, yaw π** |
+| Scan window | **fully open — no translucent cover** in front of the scan window |
+
+- Power comes from the regulated 5 V rail, not over the host's USB port. There is **no 12 V rail** and
+  **no 24 V LiDAR branch**.
+- Driver parameters (baud rate, scan mode), range and scan rate: to be set from the Slamtec
+  datasheet / SDK; the A1 values below do not apply to the S3.
+
+### Body filter (S3)
+The body filter is the v0.0.1 real-robot filter (`openamr-platform-sw`
+`openamrobot_perception/config/scan_body_filter_real.yaml`), unchanged for the S3: the side posts
+(20 × 18 mm angle profile) cover **90.5° to 97.1°** from forward on each side at **0.169 to 0.188 m**
+range, inside its close-mask sectors.
+
+### Commissioning step (S3)
+After mounting the S3, and **before the 2.0 `base_link→lidar_link` transform is used for
+navigation**, verify the `sllidar_ros2` scan orientation against the physical mounting: check where
+**angle zero** points and the **direction of rotation** (for example, an object placed in front of the
+robot must appear at the expected angle in the published scan). Record the result as **S3 evidence**;
+until then the transform above is not measured S3 evidence.
+
+## Legacy (existing robot): RPLIDAR A1
+
+### Overview
+**RPLIDAR A1 — legacy (existing robot).** A 360° 2D laser scanner used for mapping, localization and
+obstacle avoidance. It is connected to the **Pi** (USB), **not** the Teensy.
 
 | | |
 |---|---|
@@ -13,7 +53,7 @@ A 360° 2D laser scanner used for mapping, localization and obstacle avoidance. 
 | Output | `/scan` (`sensor_msgs/msg/LaserScan`), ~7 Hz |
 | Range | 0.15 – 12 m, 360° (`angle` ≈ ±3.04 rad), increment ≈ 1.3° |
 
-## Communication (Pi ↔ LiDAR)
+### Communication (Pi ↔ LiDAR)
 The connection is shown in the diagram below.
 
 ![RPLIDAR A1 -> USB cable -> Slamtec adapter STC-A0317-R03 (CP2102 bridge, 10c4:ea60) -> Raspberry Pi 5 USB (/dev/ttyUSB0)](diagrams/lidar-connection.svg)
@@ -30,8 +70,11 @@ The connection is shown in the diagram below.
   ```
 - Published frame: **`lidar_link`** (must match the URDF / static TF `base_link→lidar_link`).
 
-## Mounting (measured)
-TF `base_link→lidar_link` = **x=0.335 m, y=0, z=0.18 m, yaw=180° (π)**. The LiDAR is 33.5 cm in front of
+### Mounting (measured)
+**RPLIDAR A1 evidence only (legacy, existing robot).** These measurements were taken with the A1 and are
+not S3 evidence.
+
+2.0 frame `base_link→lidar_link` = **(0.330, 0, 0.124), yaw π**, from `base_link` at the drive-axle midpoint 98.0 mm above the floor, origin at the scan-plane centre. Gate A unit: measured TF **x=0.335 m, y=0, z=0.18 m, yaw=180° (π)**. The LiDAR is 33.5 cm in front of
 the wheel axle, centered, and **mounted rotated 180°**: its 0° points to the **rear**; the robot's front
 is the LiDAR's 180°. (Found empirically — an object placed in front shows up at ±180° in the LiDAR frame.)
 
@@ -39,12 +82,12 @@ The RPLIDAR (on its bracket, right in this top view) sits ahead of the central e
 
 ![Top view of the base with the cover removed — the RPLIDAR on its bracket is visible ahead of the drive wheels and the central electronics bracket](../../assets/images/AMR_open_top_view.jpg)
 
-## Field of view note
+### Field of view note
 The robot's own frame/structure produces close returns in several directions (≈ ±20–50° and ±80–90° in
 the LiDAR frame), not a clean rear block. → a **`scan_body_filter`** (provided in `openamrobot_nav2`)
 must mask those self-returns to produce `/scan_filtered` for Nav2.
 
-## Good to know / gotchas
+### Good to know / gotchas
 - ⚠️ **Do not kill the driver brutally while it is scanning.** A hard SIGTERM leaves the LiDAR stuck
   (`Cannot start scan: 80008000`, then `operation time out`). To recover: **restart the node once**
   (a clean fresh start usually re-inits it); if that fails, **unplug/replug the USB**. Don't loop-respawn

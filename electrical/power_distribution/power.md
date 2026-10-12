@@ -43,7 +43,8 @@ Mains 24V  ───┘
 | Raspberry Pi | **DC-DC 24 V→5 V** buck from the 24 V bus |
 | Teensy | powered over **USB** from the Pi (5 V) |
 | **IMU + encoders** | **3.3 V from the Teensy** (3.3 V rail). The encoders were originally on the 5 V (VUSB) pin → ~4 V on the Teensy inputs → moved to 3.3 V on 2026-06-19; see ⚠️ encoder overvoltage in [encoders.md](../sensors/encoders.md). The IMU has always been on 3.3 V. |
-| LiDAR | powered over its USB (CP2102 adapter) from the Pi |
+| LiDAR — legacy (existing robot), RPLIDAR A1 | powered over its USB (CP2102 adapter) from the Pi |
+| LiDAR — 2.0, RPLIDAR S3 | **regulated 5 V rail**: 4.9–5.2 V, ripple ≤ 150 mV, **1.2 A at start**, 0.45 A typical running. No 12 V rail and no 24 V LiDAR branch. See [lidar.md](../sensors/lidar.md) |
 
 ## 🔴 Safety gaps found (2026-06-19) — to fix
 1. **No fuse on the battery.** A 24 V battery can deliver **hundreds of amps** into a short → fire /
