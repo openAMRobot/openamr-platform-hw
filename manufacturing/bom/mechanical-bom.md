@@ -52,7 +52,7 @@ The following components are used in the assemblies:
 - **Screwed spacer sleeve:** TFF-M3/25 FIX&FASTEN
 - **BLDC Motor:** Z4BLD60-24GN-30S/4GN 25K 
 - **Laser range scanner:** RPLIDAR S3 (S3M1-R2), 2.0 navigation LiDAR, 4 × M2.5 (screw engagement ≤ 4 mm). Legacy (existing robot): RPLIDAR A1-A1M8
-- **LiDAR spacer plate:** fitted under the S3 on the existing A1 bracket so the S3 scan plane sits at the A1 scan-plane height (`lidar_link` unchanged); thickness to be set from the Slamtec drawings
+- **LiDAR spacer plate:** 7.1 mm, on the existing 10 mm standoffs of the A1 bracket, under the S3, so the S3 scan plane sits at the A1 scan-plane height, 222.0 mm above the floor (BOM Issue 7.7 MEC-008)
 - **Camera module:** NVision Assem
 - **Proximity sensor:** E18-D80NK
 - **US sensor:** JSN-SR04T
