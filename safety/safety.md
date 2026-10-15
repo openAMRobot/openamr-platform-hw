@@ -2,6 +2,12 @@
 
 *Last updated: 2026-06-17.*
 
+> **E-01 baseline (15 October 2026).** The guidance below is for the existing v0.0.1 robot. The
+> defined fused and E-stop-protected layout for builders (two dual-channel E-stops, Pilz PNOZ s3
+> safety relay, two LEV100H contactors with feedback, one RESET button) is in
+> [E-01 safety chain and power distribution](../electrical/power_distribution/e01-safety-and-power.md).
+> It is a design baseline, not yet built or tested.
+
 ## Motor / movement tests
 1. **Wheels off the ground** for all initial motor tests.
 2. **24 V on** only when you need the wheels to turn; keep a **hand on the 24 V cut-off**.
