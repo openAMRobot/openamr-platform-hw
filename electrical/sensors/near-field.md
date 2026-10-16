@@ -1,8 +1,8 @@
 # Near-field sensors: MaxBotix MB7060 ultrasonic and Benewake TF-Luna cliff sensors (2.0)
 
-*Last updated: 2026-10-12.*
+*Last updated: 2026-10-16.*
 
-Source: P-03 Decision Addendum rev19.0 item 19 (12 Oct 2026) and BOM Issue 7.7; geometry from STEP
+Source: P-03 Decision Addendum rev19.4 item 19 D1 and D6 (16 Oct 2026) and BOM Issue 7.8; geometry from CAD Rev B and STEP
 MMP.00.00.00.000.
 
 **Functional sensing only: the near-field sensors are not a safety device.** They feed obstacle and
