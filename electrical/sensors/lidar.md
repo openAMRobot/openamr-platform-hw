@@ -1,6 +1,6 @@
 # LiDAR — RPLIDAR S3 (2.0) and RPLIDAR A1 (legacy)
 
-*Last updated: 2026-10-12.*
+*Last updated: 2026-10-16.*
 
 ## 2.0 navigation LiDAR: Slamtec RPLIDAR S3 (S3M1-R2)
 The OpenAMRobot 2.0 navigation LiDAR is the **Slamtec RPLIDAR S3** (model **S3M1-R2**). It replaces the
@@ -17,8 +17,8 @@ obstacle avoidance; it does not implement or validate any safety function.
 | Supply | **regulated 5 V rail**: **4.9 – 5.2 V**, ripple **≤ 150 mV** |
 | Current | **1.2 A** at start, **0.45 A** typical running |
 | Mounting | **4 × M2.5**, screw engagement **≤ 4 mm** |
-| Bracket | existing `MMP.07` A1 bracket and its **10 mm standoffs plus a 7.1 mm spacer plate** (A1 hole pattern below, 4 × M2.5 S3 pattern above, screw engagement **≤ 4 mm**). The S3 scan plane is **30.55 mm** above its bottom face (Slamtec S3 drawing), so the S3 beam sits at **222.0 mm above the floor**, the same as the A1 |
-| TF | 2.0 frame `lidar_link` as in the Orientation row (scan plane at 222.0 mm above the floor, as on the A1); this is the **S3 installation value from the 2.0 geometry, not a measured S3 result** |
+| Bracket | existing `MMP.07` bracket with a **17.5 mm printed spacer MMP.07.00.00.002 and no standoffs** (4 × M2.5 S3 pattern, screw engagement **≤ 4 mm**). The S3 scan plane is **222.05 mm above the floor** per P-03 rev19.4 item 19 D4 |
+| TF | 2.0 frame `lidar_link` as in the Orientation row; scan plane **222.05 mm above the floor**. The frame remains the approved installation value pending S3 commissioning evidence |
 | Orientation | mounted in the **same orientation as the A1: rotated 180°**. 2.0 frame `lidar_link` **(0.330, 0, 0.124), yaw π** from `base_link` (drive-axle midpoint, 98.0 mm above the floor), origin at the scan-plane centre. Gate A unit: measured static transform **x 0.335 m, z 0.18 m, yaw π** |
 | Scan window | **fully open — no translucent cover** in front of the scan window |
 
