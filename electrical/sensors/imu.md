@@ -1,10 +1,10 @@
 # IMU: ICM-42688-P (2.0) and MPU6500 (Gate A unit)
 
-*Last updated: 2026-10-12.*
+*Last updated: 2026-10-16.*
 
 ## 2.0 IMU: TDK InvenSense ICM-42688-P (MIKROE-4237)
 The OpenAMRobot 2.0 IMU is the **ICM-42688-P** on the **MIKROE-4237 6DOF IMU 14 Click** board. Source:
-P-03 Decision Addendum rev19.0 item 19 (12 Oct 2026); geometry from STEP MMP.00.00.00.000.
+P-03 Decision Addendum rev19.4 item 19 D5 (16 Oct 2026); geometry from CAD Rev B and STEP MMP.00.00.00.000.
 
 | | |
 |---|---|
@@ -12,8 +12,8 @@ P-03 Decision Addendum rev19.0 item 19 (12 Oct 2026); geometry from STEP MMP.00.
 | Bus | **dedicated SPI**, **Mode 0**, clock **at most 8 MHz** |
 | Data path | **data-ready interrupt with DMA** |
 | `WHO_AM_I` | **0x47** (checked at boot) |
-| Frame | `imu_link` on the centreline at **x 0.0544 m**, **z 0.133 m** from `base_link` (54.4 mm in front of the drive axle, 177 mm above the base plate top, 231 mm above the floor); axes aligned with `base_link` |
-| Mount | on the electronics bracket MMP.04.00.00.002, CAD 2026-10-15. Was x 0.195 m on the base plate (Alex decision 2026-10-12) |
+| Frame | `imu_link` at **(0.0544, 0, 0.1210) m** from `base_link`, yaw **-90 deg** (rpy `0, 0, -pi/2`); centreline, 54.4 mm ahead of the drive axle, 219.04 mm above the floor; raw sensor-frame values are published, with axis mapping in the URDF and no firmware remap |
+| Mount | on the electronics bracket MMP.04.00.00.002, CAD Rev B. Supersedes `(0.0544, 0, 0.133)` measured against a displaced base plate and the earlier x 0.195 m base-plate position |
 
 The rest of this page documents the **Gate A unit** IMU (MPU6500).
 
