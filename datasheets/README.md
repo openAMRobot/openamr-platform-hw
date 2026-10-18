@@ -21,8 +21,23 @@ The base OpenAMRobot documented in this repo uses the **ZD** motor + driver. The
 | [`ZLTech/drivers/`](ZLTech/) | ZLAC8015D / ZLAC8030L industrial drivers (CANopen/RS485) | ⚙️ option (higher-power variant) |
 | [`ZLTech/wheel_ZLLG80ASM250/`](ZLTech/wheel_ZLLG80ASM250/) | ZLLG80 hub-motor wheel | ⚙️ option (alternative drivetrain) |
 | [`TZBot/battery_BMS/`](TZBot/battery_BMS/) | 24 V 20 Ah battery + BMS (serial protocol) | ⚙️ option (product battery/BMS) |
-| [`TZBot/charger/`](TZBot/charger/) | WCM-300 wireless charger | ⚙️ option (auto-docking charge) |
-| [`TZBot/lift/`](TZBot/lift/) | Lift reducer (TZDSXZ-48-400) | ⚙️ option (lift attachment) |
+| [`TZBot/charger/`](TZBot/) | WCM-300 wireless charger | ⚙️ option (auto-docking charge) |
+| [`TZBot/lift/`](TZBot/) | Lift reducer (TZDSXZ-48-400) | ⚙️ option (lift attachment) |
 
 See [product-architecture.md](../product-architecture.md) for how the base and the options fit
 together.
+
+## OpenAMRobot 2.0 controller and sensor references
+
+| Folder | References |
+|---|---|
+| [`STMicroelectronics/STM32H723ZG/`](STMicroelectronics/STM32H723ZG/) | STM32H723ZG datasheet DS13313, NUCLEO-H723ZG UM2407 and MB1364 schematic; ES0491 errata. RM0468 metadata and source are recorded in the folder readme. |
+| [`MaxBotix/MB7060/`](MaxBotix/MB7060/) | XL-MaxSonar-WR/WRC datasheet, document code 11838ab. |
+| [`Benewake/TF-Luna/`](Benewake/TF-Luna/) | TF-Luna datasheet and user manual, retained in separate subfolders under their vendor filename en.pdf. |
+| [`TDK/ICM-42688-P/`](TDK/ICM-42688-P/) | ICM-42688-P datasheet DS-000347. |
+| [`MikroE/6DOF_IMU_14_Click/`](MikroE/6DOF_IMU_14_Click/) | 6DOF IMU 14 Click schematic. |
+| [`TI/ISO1212/`](TI/ISO1212/), [`TI/TPL7407L/`](TI/TPL7407L/) | Link-only metadata; TI terms prohibit other reproduction and display of these PDFs. |
+
+The RM0468 reference manual is in the Drive datasheet collection but was not added to this repository
+because the GitHub connector limits a request frame to 64 MiB and the base64 upload payload exceeds
+that limit. See the [Drive datasheet index](https://docs.google.com/document/d/1j_060HCrq38LloNOodoAYJo8fWIgATMPDUFOauSoijg/edit).
