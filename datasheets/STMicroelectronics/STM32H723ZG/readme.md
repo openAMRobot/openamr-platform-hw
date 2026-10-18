@@ -17,7 +17,7 @@ Retrieved 18 October 2026. SHA-256 values are for the retrieved vendor PDFs.
 - Date: December 2021
 - SHA-256: e93804cc95acbe39134b1e7cbca5a663d2d2a9607c62b1d140a922e5d180dcf9
 - OpenAMRobot document: OpenAMRobot_NUCLEO-H723ZG_Pin_Map_Draft.docx, controller reference
-- Repository status: Not added because the GitHub connector rejects request frames above 64 MiB; this PDF's base64 payload is 88,412,612 bytes. The PDF is present in the Google Drive Datasheets folder.
+- Repository status: link only, not stored here because of its size (about 66 MB). Download it from the source link above and check the SHA-256.
 
 ## es0491-stm32h72xx73xx-device-errata-stmicroelectronics.pdf
 - Source: https://www.st.com/resource/en/errata_sheet/es0491-stm32h72xx73xx-device-errata-stmicroelectronics.pdf

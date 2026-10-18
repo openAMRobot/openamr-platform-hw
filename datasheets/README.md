@@ -38,6 +38,6 @@ together.
 | [`MikroE/6DOF_IMU_14_Click/`](MikroE/6DOF_IMU_14_Click/) | 6DOF IMU 14 Click schematic. |
 | [`TI/ISO1212/`](TI/ISO1212/), [`TI/TPL7407L/`](TI/TPL7407L/) | Link-only metadata; TI terms prohibit other reproduction and display of these PDFs. |
 
-The RM0468 reference manual is in the Drive datasheet collection but was not added to this repository
-because the GitHub connector limits a request frame to 64 MiB and the base64 upload payload exceeds
-that limit. See the [Drive datasheet index](https://docs.google.com/document/d/1j_060HCrq38LloNOodoAYJo8fWIgATMPDUFOauSoijg/edit).
+The RM0468 reference manual (about 66 MB) is not stored in this repository because of its size.
+Download it from ST; the source link, revision and SHA-256 are in
+[`STMicroelectronics/STM32H723ZG/readme.md`](STMicroelectronics/STM32H723ZG/readme.md).
