@@ -8,7 +8,7 @@ This repository contains a variety of CAD drawings and 3D models in multiple for
 
 ### `Full_assembly_STEP`
 
-This folder includes STEP file MMP.00.00.00.000_full_assembly.STEP that represent the complete design or construction tree.
+This folder includes the full assembly as a zipped STEP file, `MMP.00.00.00.000_full_assembly.STEP.zip` (the STEP is 139 MB, over GitHub's 100 MB file limit; unzip it before opening). It represents the complete design or construction tree.
 
 - **STEP files:** these files are compatible with various CAD programs, including SolidWorks, Catia, and AutoCAD. They adhere to the STEP (Standard for the Exchange of Product Data) format, which uses ASCII text to describe three-dimensional objects and models according to the ISO 10303 specification.
 

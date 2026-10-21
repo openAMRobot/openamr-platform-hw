@@ -1,19 +1,36 @@
-# IMU (MPU6500)
+# IMU: ICM-42688-P (2.0) and MPU6500 (Gate A unit)
 
-*Last updated: 2026-06-18.*
+*Last updated: 2026-10-12.*
+
+## 2.0 IMU: TDK InvenSense ICM-42688-P (MIKROE-4237)
+The OpenAMRobot 2.0 IMU is the **ICM-42688-P** on the **MIKROE-4237 6DOF IMU 14 Click** board. Source:
+P-03 Decision Addendum rev19.0 item 19 (12 Oct 2026); geometry from STEP MMP.00.00.00.000.
+
+| | |
+|---|---|
+| Chip / board | **ICM-42688-P** (3-axis accel + 3-axis gyro), MikroElektronika **MIKROE-4237** 6DOF IMU 14 Click |
+| Bus | **dedicated SPI**, **Mode 0**, clock **at most 8 MHz** |
+| Data path | **data-ready interrupt with DMA** |
+| `WHO_AM_I` | **0x47** (checked at boot) |
+| Frame | `imu_link` on the centreline at **x 0.0544 m**, **z 0.133 m** from `base_link` (54.4 mm in front of the drive axle, 177 mm above the base plate top, 231 mm above the floor); axes aligned with `base_link` |
+| Mount | on the electronics bracket MMP.04.00.00.002, CAD 2026-10-15. Was x 0.195 m on the base plate (Alex decision 2026-10-12) |
+
+The rest of this page documents the **Gate A unit** IMU (MPU6500).
+
+## Gate A unit: MPU6500
 
 ## Overview
 An inertial measurement unit (accelerometer + gyroscope) on the Teensy's I²C bus. Used to improve
 heading (yaw) estimation for navigation.
 
-> ⚠️ **Important**: the board was labeled / assumed to be an **MPU6050**, but it is actually an
+> ⚠️ **Important (Gate A unit)**: the board was labeled / assumed to be an **MPU6050**, but it is actually an
 > **MPU6500**. This caused a lot of confusion (see below).
 
 | | |
 |---|---|
-| Chip | **MPU6500** (3-axis accel + 3-axis gyro) |
+| Chip | **MPU6500** (3-axis accel + 3-axis gyro), Gate A unit |
 | Bus | I²C, address **0x68** (AD0 = GND) |
-| `WHO_AM_I` (reg 0x75) | **0x70** (an MPU6050 would return 0x68) |
+| `WHO_AM_I` (reg 0x75) | **0x70** (an MPU6050 would return 0x68; Gate A unit) |
 | Magnetometer | none (MPU6500 has no mag; the MPU9250 would) |
 
 ## Communication (I²C → Teensy) — wiring VERIFIED 2026-06-19
@@ -36,7 +53,7 @@ The I²C wiring is shown in the diagram below.
 > Unused pins: `XCL`, `XDA` (auxiliary I²C), `INT` (data-ready interrupt).
 
 ## Firmware driver — the fix
-The **MPU6050** driver checks `WHO_AM_I == 0x68` and **rejects** our chip (which returns 0x70)
+Gate A unit: the **MPU6050** driver checks `WHO_AM_I == 0x68` and **rejects** our chip (which returns 0x70)
 → `setup()` used to hang (LED 3 blinks, no topics). The fix:
 
 - Use **`USE_MPU9250_IMU`** in `lino_base_config.h` (instead of `USE_MPU6050_IMU`).

@@ -51,11 +51,32 @@ The following components are used in the assemblies:
   - 8x7x28 DIN 6885-UNI 6604 (formerly ISO 773)
 - **Screwed spacer sleeve:** TFF-M3/25 FIX&FASTEN
 - **BLDC Motor:** Z4BLD60-24GN-30S/4GN 25K 
-- **Laser range scanner:** RPLIDAR A1-A1M8
+- **Laser range scanner:** RPLIDAR S3 (S3M1-R2), 2.0 navigation LiDAR, 4 × M2.5 (screw engagement ≤ 4 mm). Legacy (existing robot): RPLIDAR A1-A1M8
+- **LiDAR mount spacer:** MMP.07.00.00.002, **17.5 mm** thick, 3D printed (see below), directly on the MMP.07 bracket without standoffs; S3 beam 174.0 + 17.5 + 30.55 = 222.05 mm above the floor. Was a 7.1 mm spacer plate on the 10 mm standoffs of the A1 bracket (BOM Issue 7.7 MEC-008)
 - **Camera module:** NVision Assem
 - **Proximity sensor:** E18-D80NK
 - **US sensor:** JSN-SR04T
 - **LED module:** 3 LED RGB Module 0.72W SWP
+
+## 3D-printed parts
+
+FDM print in PETG, at least 4 perimeters and 40 % infill. STEP and STL are in
+`mechanical/cad/production_files`.
+
+| Part number | Name | Qty | Size (mm) | Notes |
+|---|---|---|---|---|
+| MMP.01.00.00.003 | Camera mount | 1 | 144 x 42 x 32 | Orbbec Gemini 336L, 10° up face |
+| MMP.00.00.00.005 | TF-Luna mount | 2 | 52 x 9 x 23 | Front and back panel centre; 10° sensor face |
+| MMP.00.00.00.006 | Ultrasonic mount | 4 | 55 x 40 x 32 | MB7060, front and back panel edges, y ±130 mm |
+| MMP.07.00.00.002 | LiDAR mount spacer | 1 | 80 x 70 x **17.5** | Under the RPLIDAR S3, no standoffs |
+| MMP.02.00.00.002 | Motor driver mount | 1 | 170 x 30 x 28 | ZLAC8015D to the base plate |
+
+Sheet metal and plate parts for the electronics (STEP only, no DXF yet):
+
+| Part number | Name | Qty | Notes |
+|---|---|---|---|
+| MMP.04.00.00.002 | Electronics bracket | 1 | 2 mm sheet, under and in front of the center bracket; Jetson and IMU |
+| MMP.04.00.00.003 | STM32 Click mount plate | 1 | 6 mm plate, 100 x 90 mm; STM32 and Click boards, on anti-vibration standoffs |
 
 __________________________________________________________
 
@@ -98,7 +119,7 @@ The setup is designed for differential drive mobile robot development and softwa
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
 | Magnetic Encoder | AS5040 | 2 | Wheel position sensing for odometry (Quadrature (A/B) or SPI interface) |
-| IMU | MPU6050 | 1 | 6-axis inertial measurement unit (accelerometer + gyroscope, I2C) |
+| IMU | MPU6500 | 1 | 6-axis inertial measurement unit (accelerometer + gyroscope, I2C). Gate A unit (legacy), superseded by BOM Issue 7.7: 2.0 IMU is the ICM-42688-P |
 
 ---
 
@@ -106,8 +127,8 @@ The setup is designed for differential drive mobile robot development and softwa
 
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
-| LiDAR | RPLIDAR A1 | 1 | 2D laser scanner for SLAM and obstacle detection (USB) |
-| Camera | Raspberry Pi Camera Module / Arducam IMX219 | 1 | Vision sensor for docking and computer vision tasks (CSI interface) |
+| LiDAR | RPLIDAR S3 (S3M1-R2) | 1 | 2.0 navigation 2D laser scanner for SLAM and obstacle detection (USB via USB to UART adapter; regulated 5 V rail). Replaces the RPLIDAR A1 — legacy (existing robot) |
+| Camera | Raspberry Pi Camera Module / Arducam IMX219 | 1 | Vision sensor for docking and computer vision tasks (CSI interface). Gate A unit, superseded by BOM Issue 7.7 |
 
 ---
 
@@ -117,7 +138,7 @@ The setup is designed for differential drive mobile robot development and softwa
 |------|------|-----|------------|
 | Battery | 24V Li-ion / LiFePO4 pack | 1 | Main power source for motors and electronics |
 | DC-DC Converter | LM2596 Buck Converter (24V → 5V, ≥5A) | 1 | Power supply for Raspberry Pi |
-| DC-DC Converter | DROK 24V → 5V/12V Step-Down Module | 1 | Power supply for sensors and auxiliary electronics |
+| DC-DC Converter | DROK 24V → 5V/12V Step-Down Module, legacy (Gate A unit), superseded by BOM Issue 7.7 | 1 | Power supply for sensors and auxiliary electronics on the existing robot. OpenAMRobot 2.0 has no 12 V rail |
 | Protection | Inline fuse (rated above motor current) | 1 | Overcurrent protection on main power line |
 | Safety | Emergency stop switch | 1 | Manual power cutoff for safety |
 
@@ -137,8 +158,8 @@ The setup is designed for differential drive mobile robot development and softwa
 
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
-| Hub Motor | ZLLG80ASM250-L | 2 | Integrated BLDC motor with built-in encoder |
-| Driver | ZLAC8015D | 1–2 | Motor controller with RS485/CAN interface |
+| Hub Motor | ZLLG80ASM250-L-B | 2 | Integrated BLDC motor with built-in encoder (BOM Issue 7.7 selection; exact order code under confirmation in PR #17) |
+| Driver | ZLAC8015D | 1–2 | Motor controller with RS485/CAN interface. Gate A unit, superseded by BOM Issue 7.7 |
 
 ---
 
@@ -148,7 +169,7 @@ The setup is designed for differential drive mobile robot development and softwa
 - Teensy ↔ Motor Drivers: PWM (speed) + Digital IO (direction)  
 - Teensy ↔ Encoders: Quadrature (A/B) or SPI interface  
 - Teensy ↔ IMU: I2C  
-- Raspberry Pi ↔ LiDAR: USB  
+- Raspberry Pi ↔ LiDAR: USB (RPLIDAR A1, legacy (existing robot)); 2.0: Jetson ↔ RPLIDAR S3 via USB to UART adapter  
 - Raspberry Pi ↔ Camera: CSI  
 
 ---
@@ -159,6 +180,5 @@ The setup is designed for differential drive mobile robot development and softwa
 - Breadboard or perfboard is used for initial prototyping before designing a custom carrier PCB.  
 - All components are selected to support ROS2-based mobile robotics development.  
 
-[![Support on Patreon - Supporter Tier – €5/month](https://img.shields.io/badge/Support%20on-Patreon-orange)](https://www.patreon.com/cw/Botshare)
 [![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/paypalme/BotshareAI)
 [![Donate on GitHub](https://img.shields.io/badge/Sponsor%20on-GitHub-pink?logo=github-sponsors)](https://github.com/sponsors/openAMRobot)

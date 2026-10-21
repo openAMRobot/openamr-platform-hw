@@ -10,6 +10,8 @@
 *.slddrw binary
 *.DXF    binary
 *.dxf    binary
+*.STL    binary
+*.stl    binary
 *.PDF    binary
 *.pdf    binary
 *.zip    binary

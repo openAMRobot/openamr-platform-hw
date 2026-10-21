@@ -9,7 +9,7 @@ Convention: **MOTOR1 = LEFT wheel, MOTOR2 = RIGHT wheel.** Logic level **3.3 V**
 > (AS5040; the 5 V→~4 V overvoltage was **fixed → now 3.3 V**, see [encoders.md](../sensors/encoders.md)), **IMU**
 > (MPU-6500, SDA18/SCL19, 3.3 V, 0x68), **Teensy = 4.0** (i.MX RT1062), **power/24 V** (no fuse / no
 > battery cut-off — see [power.md](../power_distribution/power.md)). Component list + datasheets: [components-bom.md](../../manufacturing/bom/components-bom.md).
-> Still to read (completeness): LiDAR model sticker, DC-DC model, AC/DC converter, gearbox suffix.
+> Still to read (completeness): LiDAR model sticker (legacy A1, existing robot; the 2.0 LiDAR is the RPLIDAR S3, see [lidar.md](../sensors/lidar.md)), DC-DC model, AC/DC converter, gearbox suffix.
 > (Pi RAM confirmed **8 GB**, 2026-07-06 — see [raspberry-pi.md](../computing/raspberry-pi.md).)
 
 The complete power-and-signal wiring is shown in the harness diagram below; the sections that
