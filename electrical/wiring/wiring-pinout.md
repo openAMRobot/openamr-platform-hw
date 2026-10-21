@@ -131,15 +131,13 @@ concern (see the `openamr-platform-sw` troubleshooting doc (`docs/troubleshootin
 
 ### [E-Stop button and Power distribution - OpenAMRobot discussions](https://github.com/orgs/openAMRobot/discussions/6)
 
-## Schneider (genuine, ~€20–35):
+> This section describes the v0.0.1 robot. Use only E-stops with certified positive-opening contacts
+> (IEC 60947-5-5); uncertified clones are not recommended for any use. OpenAMRobot 2.0 uses the E-01
+> safety chain: Schneider XB4BS8445 E-stops with a ZBE-102 block, dual channel into a Pilz PNOZ s3.
+
+## Schneider (genuine):
 Harmony XB4-BS542 — Ø22 mm mount, red Ø40 mm mushroom, twist-to-release, metal bezel, 1NC (add a ZBE-102 block for a second NC channel). Certified positive-opening contacts per IEC 60947-5-5 — the one to use for anything CE-facing.
 → https://www.se.com/ww/en/product/XB4BS542/
 Plastic-bezel equivalent: XB5-AS542, same page structure at se.com.
-
-## Chinese clone (~€1–5):
-XB2-BS542 — same Ø22/Ø40 form factor, 1NC, twist release, 10 A Ith, IP65, IEC 60947-5-1, but no e-stop-specific certification. Fine for prototypes and internal testing.
-→ https://www.amazon.com/XB2-BS542-Emergency-Button-Switch-pushbutton/dp/B07Y7KZDSH
-→ direct from manufacturer, ~$1/pc: https://www.finglai.com/products/switches/push-buttons/DIA22-XB2-B/XB2-BS542.html
-LAY37 is the same class, usually sold as NO+NC: https://www.amazon.com/LAY37-Mushroom-Emergency-Button-Switch/dp/B07DL333VL [eBay](https://www.ebay.com/itm/356714450971)[Electric-b2c](https://www.electric-b2c.com/products/button-switch-self-reset-xb2-small-mushroom-head-emergency-stop-22mm-knob-key-start-inching-power-on-xb2-bs542-xb2-ba31-xb2-ba42)
 
 Reminder: contacts are ~3 A DC-13 at 24 V, so for the OpenAMRobot battery bus, break a contactor coil with the NC contacts rather than the full motor current.
