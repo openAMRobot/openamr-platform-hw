@@ -11,9 +11,7 @@ for the wheel–motor–driver mechatronic chain.
 
 ## What applies to the base build vs. what is optional
 
-The base OpenAMRobot documented in this repo uses the **ZD** motor + driver. The **ZLTech** and
-**TZBot** parts are **alternative / optional** components for larger product configurations
-(higher-power drives, wireless charging, lift, larger battery) — they are **not** on the base build.
+The base OpenAMRobot documented in this repo uses the **ZD** motor + driver. The **ZLTech** parts and the TZBOT battery and BMS are **alternative / optional** components for larger product configurations; they are **not** on the base build. The TZBOT WCM-500-24 wireless charger is the 2.0 and release 001 charging path.
 
 | Folder | Component | On the base build? |
 |---|---|---|
@@ -21,8 +19,7 @@ The base OpenAMRobot documented in this repo uses the **ZD** motor + driver. The
 | [`ZLTech/drivers/`](ZLTech/) | ZLAC8015D / ZLAC8030L industrial drivers (CANopen/RS485) | ⚙️ option (higher-power variant) |
 | [`ZLTech/wheel_ZLLG80ASM250/`](ZLTech/wheel_ZLLG80ASM250/) | ZLLG80 hub-motor wheel | ⚙️ option (alternative drivetrain) |
 | [`TZBot/battery_BMS/`](TZBot/battery_BMS/) | 24 V 20 Ah battery + BMS (serial protocol) | ⚙️ option (product battery/BMS) |
-| [`TZBot/charger/`](TZBot/) | WCM-300 wireless charger | ⚙️ option (auto-docking charge) |
-| [`TZBot/lift/`](TZBot/) | Lift reducer (TZDSXZ-48-400) | ⚙️ option (lift attachment) |
+| [`TZBot/charger/`](TZBot/charger/) | TZBOT WCM-500-24 wireless charger (2.0 and release 001 charging path) | Yes, the 2.0 design (register CHARGING) |
 
 See [product-architecture.md](../product-architecture.md) for how the base and the options fit
 together.
