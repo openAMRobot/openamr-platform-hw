@@ -45,8 +45,8 @@ attachment — **illustrative, not the base build**):
 Shown in the architecture diagram but **not part of the base**:
 
 - **Extra safety pack** — ultrasonic (JSN-SR04) + IR (E18-D80NK) proximity rings.
-- **Attachments** — tilt sorting, conveyor, **lift** (BLDC lift/rotate), end-effectors.
-- **Charging**: **wireless charging** (WCM-300) with auto-docking is OpenAMRobot 3.0.
+- **Attachments** — tilt sorting, conveyor, end-effectors.
+- **Charging**: TZBOT WCM-500-24 wireless charging is the 2.0 and release 001 charging path (register CHARGING); the WCM-300 is only the existing unit on the release 001 robot.
 - **Battery/BMS** — 24 V smart battery pack + BMS (serial), vs. the base's plain 24 V pack.
 - **Higher-power drives** — ZLTech ZLAC8015D/8030L drivers, hub-motor wheels.
 - **Tracking / AI** — QR + line tracking, on-board NVIDIA (Jetson) for heavier perception.
