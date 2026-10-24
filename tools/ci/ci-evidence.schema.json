@@ -30,12 +30,13 @@
         "properties": {
           "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
           "status": {"enum": ["PASS", "FAIL", "NOT RUN"]},
-          "detail": {"type": "string"}
+          "detail": {"type": "string"},
+          "experimental": {"description": "true: recorded, but not a gate and not counted in result", "const": true}
         }
       }
     },
     "result": {
-      "description": "FAIL if any check failed; INCOMPLETE if none failed but one did not run; PASS only if every check passed.",
+      "description": "Over the checks not marked experimental: FAIL if any failed; INCOMPLETE if none failed but one did not run; PASS only if every one passed.",
       "enum": ["PASS", "FAIL", "INCOMPLETE"]
     },
     "contract": {

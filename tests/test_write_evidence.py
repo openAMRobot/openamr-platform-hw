@@ -64,6 +64,20 @@ class Record(unittest.TestCase):
         self.assertEqual(len(r["artifacts"]), 1)
         self.assertRegex(r["artifacts"][0]["sha256"], r"^[0-9a-f]{64}$")
 
+    def test_experimental_check_is_recorded_but_not_a_gate(self):
+        r = write("a\tPASS\nrenode\tFAIL\tboot blocked\texperimental\n")
+        jsonschema.validate(r, SCHEMA)
+        self.assertEqual(r["result"], "PASS")
+        self.assertEqual(r["checks"][1], {"name": "renode", "status": "FAIL", "detail": "boot blocked", "experimental": True})
+
+    def test_only_experimental_checks_are_rejected(self):
+        with self.assertRaises(ValueError):
+            write("renode\tPASS\tok\texperimental\n")
+
+    def test_bad_fourth_field_is_rejected(self):
+        with self.assertRaises(ValueError):
+            write("a\tPASS\tok\tmaybe\n")
+
     def test_bad_status_is_rejected(self):
         with self.assertRaises(ValueError):
             write("a\tSKIP\n")

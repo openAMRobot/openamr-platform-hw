@@ -14,7 +14,8 @@ Usage:
     --checks checks.tsv --register-sha <sha> \
     [--contract interfaces/electrical/base-controller-io.yaml --contract-repository R --contract-sha S] \
     [--artifact path ...]
-checks.tsv: one check per line, "<name><TAB><PASS|FAIL|NOT RUN>[<TAB>detail]".
+checks.tsv: one check per line, "<name><TAB><PASS|FAIL|NOT RUN>[<TAB>detail[<TAB>experimental]]".
+A check marked experimental is recorded but is not a gate: it does not count towards result.
 """
 import argparse
 import datetime
@@ -49,6 +50,10 @@ def read_checks(path):
         check = {"name": parts[0], "status": parts[1]}
         if len(parts) > 2 and parts[2]:
             check["detail"] = parts[2]
+        if len(parts) > 3:
+            if parts[3] != "experimental":
+                raise ValueError(f"{path}:{number}: fourth field must be 'experimental', got {parts[3]!r}")
+            check["experimental"] = True
         checks.append(check)
     if not checks:
         raise ValueError(f"{path}: no checks; an evidence record without checks proves nothing")
@@ -59,7 +64,10 @@ def read_checks(path):
 
 
 def overall(checks):
-    statuses = {c["status"] for c in checks}
+    gating = [c for c in checks if not c.get("experimental")]
+    if not gating:
+        raise ValueError("every check is experimental; an evidence record needs at least one gating check")
+    statuses = {c["status"] for c in gating}
     if "FAIL" in statuses:
         return "FAIL"
     return "INCOMPLETE" if "NOT RUN" in statuses else "PASS"

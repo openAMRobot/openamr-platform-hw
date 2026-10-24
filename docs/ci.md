@@ -79,8 +79,8 @@ same format from its nightly.
 | `repository`, `sha`, `ref` | repository and the exact commit checked (`ref` is the branch it was taken from) |
 | `workflow`, `run_url`, `date` | workflow name, URL of the run, UTC time the record was written |
 | `inputs` | the other checked-out repositories, `repository -> commit SHA` (openamr-platform-fw, openAMRobot/.github) |
-| `checks[]` | `name`, `status` (`PASS`, `FAIL` or `NOT RUN`) and `detail` for every check |
-| `result` | `FAIL` if any check failed, `INCOMPLETE` if none failed but one did not run, `PASS` only if all passed |
+| `checks[]` | `name`, `status` (`PASS`, `FAIL` or `NOT RUN`) and `detail` for every check; `experimental: true` marks a check that is recorded but is not a gate (for example the firmware Renode boot) |
+| `result` | over the checks not marked experimental: `FAIL` if any failed, `INCOMPLETE` if none failed but one did not run, `PASS` only if all passed |
 | `contract` | `repository`, `sha`, `path`, `contract_version` and SHA-256 of `interfaces/electrical/base-controller-io.yaml` |
 | `register` | `openAMRobot/.github`, `decisions.yaml` and the register commit SHA |
 | `artifacts[]` | files produced by the run with their SHA-256 (firmware images in openamr-platform-fw) |
