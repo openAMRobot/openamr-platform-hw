@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/openAMRobot/openamr-platform-hw/tools/ci/ci-evidence.schema.json",
+  "title": "OpenAMRobot CI evidence record (ci-evidence.json), schema_version 1",
+  "description": "Written by tools/ci/write_evidence.py in the nightly workflows of openamr-platform-hw and openamr-platform-fw; input for openamrobot-release. See docs/ci.md.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "repository", "sha", "ref", "workflow", "run_url", "date", "inputs",
+               "checks", "result", "contract", "register", "artifacts"],
+  "properties": {
+    "schema_version": {"const": 1},
+    "repository": {"type": "string", "pattern": "^[A-Za-z0-9-]+/[A-Za-z0-9._-]+$"},
+    "sha": {"$ref": "#/$defs/sha"},
+    "ref": {"type": "string", "minLength": 1},
+    "workflow": {"type": "string", "minLength": 1},
+    "run_url": {"type": "string", "pattern": "^https://github\\.com/.+/actions/runs/[0-9]+(/attempts/[0-9]+)?$|^local$"},
+    "date": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"},
+    "inputs": {
+      "description": "Other repositories checked out by the run, repository -> commit SHA.",
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/sha"}
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "status"],
+        "properties": {
+          "name": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "status": {"enum": ["PASS", "FAIL", "NOT RUN"]},
+          "detail": {"type": "string"},
+          "experimental": {"description": "true: recorded, but not a gate and not counted in result", "const": true}
+        }
+      }
+    },
+    "result": {
+      "description": "Over the checks not marked experimental: FAIL if any failed; INCOMPLETE if none failed but one did not run; PASS only if every one passed.",
+      "enum": ["PASS", "FAIL", "INCOMPLETE"]
+    },
+    "contract": {
+      "oneOf": [
+        {"type": "null"},
+        {"type": "object", "additionalProperties": false,
+         "required": ["repository", "sha", "path", "contract_version", "sha256"],
+         "properties": {
+           "repository": {"type": "string"},
+           "sha": {"$ref": "#/$defs/sha"},
+           "path": {"type": "string"},
+           "contract_version": {"type": "string"},
+           "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+         }}
+      ]
+    },
+    "register": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "file", "sha"],
+      "properties": {
+        "repository": {"type": "string"},
+        "file": {"type": "string"},
+        "sha": {"$ref": "#/$defs/sha"}
+      }
+    },
+    "artifacts": {
+      "description": "Files produced by the run (firmware images, reports), with their SHA-256.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256"],
+        "properties": {
+          "path": {"type": "string"},
+          "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"}
+  }
+}
