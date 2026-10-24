@@ -46,8 +46,60 @@ git clone https://github.com/openAMRobot/.github ../.github
 bash tools/ci/kicad_checks.sh
 ```
 
-## Layers 2 to 4
+## Layer 2: nightly integration checks
 
-The nightly integration workflow and the release evidence record are described in the sections
-added with them. Hardware-in-the-loop checks for the controller run from openamr-platform-fw on a
-self-hosted bench runner; no job in this repository reaches hardware.
+Workflow `.github/workflows/hardware-nightly.yml` ("Hardware nightly"), daily at 02:17 UTC and on
+manual dispatch; never on pull requests. GitHub-hosted runners only.
+
+1. Checks out openamr-platform-hw `main`, openamr-platform-fw `main` and openAMRobot/.github
+   `main`, and records the three commit SHAs in the job summary.
+2. `tools/ci/nightly_hw.sh` runs every hardware check of layer 1 (self-tests, repository files,
+   electrical contract, BOM) and continues after a failure. The electrical contract is checked
+   against the register on .github `main` (layer 1 uses the pinned `REGISTER_SHA`), so a register
+   change that breaks the contract shows up the next morning.
+3. When openamr-platform-fw `main` has `boards/stm32/*/*.ioc`, it runs openamr-platform-fw's
+   `tools/ci/check_ioc_contract.py` against this repository's contract; otherwise the check is
+   `NOT RUN: no STM32 project on openamr-platform-fw main`.
+4. A KiCad container job runs ERC, DRC and the BOM export when a project exists; otherwise `pcb`
+   is `NOT RUN: no KiCad projects`.
+5. The `evidence` job writes `ci-evidence.json` and uploads it as the artifact `ci-evidence`
+   (retention 90 days), with the check logs as `nightly-checks`. The job fails after the upload
+   when any check failed.
+
+## Release evidence: ci-evidence.json
+
+`ci-evidence.json` is the input that openamrobot-release reads to prove which exact system was
+tested. It is written by `tools/ci/write_evidence.py` and validated against
+`tools/ci/ci-evidence.schema.json` (schema_version 1) before upload. openamr-platform-fw writes the
+same format from its nightly.
+
+| Field | Meaning |
+|---|---|
+| `schema_version` | `1` |
+| `repository`, `sha`, `ref` | repository and the exact commit checked (`ref` is the branch it was taken from) |
+| `workflow`, `run_url`, `date` | workflow name, URL of the run, UTC time the record was written |
+| `inputs` | the other checked-out repositories, `repository -> commit SHA` (openamr-platform-fw, openAMRobot/.github) |
+| `checks[]` | `name`, `status` (`PASS`, `FAIL` or `NOT RUN`) and `detail` for every check |
+| `result` | `FAIL` if any check failed, `INCOMPLETE` if none failed but one did not run, `PASS` only if all passed |
+| `contract` | `repository`, `sha`, `path`, `contract_version` and SHA-256 of `interfaces/electrical/base-controller-io.yaml` |
+| `register` | `openAMRobot/.github`, `decisions.yaml` and the register commit SHA |
+| `artifacts[]` | files produced by the run with their SHA-256 (firmware images in openamr-platform-fw) |
+
+How openamrobot-release uses it:
+
+- The component SHA in the release manifest must equal `sha`, and the contract SHA and version
+  must be the ones the release names.
+- `result` must be `PASS` for a release claim; `INCOMPLETE` names the checks that did not run,
+  which the release notes list as not verified.
+- The record's own SHA-256 is printed in the job summary, and the artifact ID and digest are
+  printed by the upload step; the release manifest stores both.
+- Records are never edited or regenerated after a release. A later run produces a new record.
+
+The record proves which commits were checked and what the checks reported. It is not hardware,
+simulation or safety evidence; hardware-in-the-loop results are recorded separately (openamr-platform-fw,
+`docs/hil-bench.md`).
+
+## Layer 3
+
+Hardware-in-the-loop checks for the controller run from openamr-platform-fw on a self-hosted bench
+runner; no job in this repository reaches hardware.

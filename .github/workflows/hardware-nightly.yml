@@ -1,0 +1,176 @@
+name: Hardware nightly
+
+# Layer 2: do the repositories still agree? Checks openamr-platform-hw main against
+# openamr-platform-fw main and the decisions register on openAMRobot/.github main, records the
+# three commit SHAs and writes ci-evidence.json (docs/ci.md) for openamrobot-release.
+# GitHub-hosted runners only; no hardware, no secrets, never on pull_request.
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    outputs:
+      hw_sha: ${{ steps.shas.outputs.hw }}
+      fw_sha: ${{ steps.shas.outputs.fw }}
+      gh_sha: ${{ steps.shas.outputs.gh }}
+      pcb_projects: ${{ steps.shas.outputs.pcb_projects }}
+    steps:
+      - name: Check out openamr-platform-hw main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: main
+          path: hw
+          persist-credentials: false
+
+      - name: Check out openamr-platform-fw main
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: openAMRobot/openamr-platform-fw
+          ref: main
+          path: fw
+          persist-credentials: false
+
+      - name: Check out openAMRobot/.github main (decisions register)
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: openAMRobot/.github
+          ref: main
+          path: dotgithub
+          persist-credentials: false
+
+      - name: Record the commits under test
+        id: shas
+        run: |
+          for r in hw fw dotgithub; do echo "$r $(git -C "$r" rev-parse HEAD)"; done | tee "$RUNNER_TEMP/shas.txt"
+          echo "hw=$(git -C hw rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "fw=$(git -C fw rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "gh=$(git -C dotgithub rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "pcb_projects=$(cd hw && bash tools/ci/kicad_checks.sh --list | grep -c . || true)" >> "$GITHUB_OUTPUT"
+          { echo "### Commits under test"; echo '```'; cat "$RUNNER_TEMP/shas.txt"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Install pinned Python packages
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --no-deps -r hw/tools/ci/requirements.txt
+          "$RUNNER_TEMP/venv/bin/pip" check
+          echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"
+
+      - name: Hardware checks across the pinned commits
+        id: run
+        run: |
+          set +e
+          bash hw/tools/ci/nightly_hw.sh hw fw dotgithub nightly
+          echo "exit=$?" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: nightly-checks
+          path: nightly
+          retention-days: 90
+          if-no-files-found: error
+
+  pcb:
+    name: pcb (ERC, DRC, BOM export)
+    needs: checks
+    if: needs.checks.outputs.pcb_projects != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    container:
+      # kicad/kicad 10.0.6, multi-arch index digest (Docker Hub, published 2026-09-22)
+      image: kicad/kicad:10.0.6@sha256:18693567392b80da435f9fa952ce3a3e534c66eb5a6033f5b9c80aa3b19dd3ec
+      options: --user root
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ needs.checks.outputs.hw_sha }}
+          persist-credentials: false
+
+      - name: ERC, DRC and BOM export for every *.kicad_pro
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          bash tools/ci/kicad_checks.sh build/kicad
+
+  evidence:
+    name: evidence (ci-evidence.json)
+    needs: [checks, pcb]
+    if: always() && needs.checks.result == 'success'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out openamr-platform-hw at the commit under test
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ needs.checks.outputs.hw_sha }}
+          persist-credentials: false
+
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: nightly-checks
+          path: nightly
+
+      - name: Install pinned Python packages
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --no-deps -r tools/ci/requirements.txt
+
+      - name: Add the PCB job result
+        if: needs.checks.outputs.pcb_projects != '0'
+        env:
+          PCB: ${{ needs.pcb.result }}
+        run: |
+          case "$PCB" in
+            success) printf 'pcb\tPASS\tERC, DRC and BOM export\n' >> nightly/checks.tsv ;;
+            failure) printf 'pcb\tFAIL\tERC, DRC or BOM export failed (pcb job)\n' >> nightly/checks.tsv ;;
+            *)       printf 'pcb\tNOT RUN\tpcb job %s\n' "$PCB" >> nightly/checks.tsv ;;
+          esac
+
+      - name: Write ci-evidence.json
+        env:
+          HW_SHA: ${{ needs.checks.outputs.hw_sha }}
+          FW_SHA: ${{ needs.checks.outputs.fw_sha }}
+          GH_SHA: ${{ needs.checks.outputs.gh_sha }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          "$RUNNER_TEMP/venv/bin/python" tools/ci/write_evidence.py --out ci-evidence.json \
+            --repository "$GITHUB_REPOSITORY" --sha "$HW_SHA" --ref main --workflow "$GITHUB_WORKFLOW" \
+            --run-url "$RUN_URL" \
+            --input "openAMRobot/openamr-platform-fw=$FW_SHA" --input "openAMRobot/.github=$GH_SHA" \
+            --checks nightly/checks.tsv --register-sha "$GH_SHA" \
+            --contract interfaces/electrical/base-controller-io.yaml \
+            --contract-repository "$GITHUB_REPOSITORY" --contract-sha "$HW_SHA"
+          {
+            echo "### ci-evidence.json ($(python3 -c 'import json;print(json.load(open("ci-evidence.json"))["result"])'))"
+            echo '| Check | Status | Detail |'
+            echo '|---|---|---|'
+            awk -F '\t' '{ printf "| %s | %s | %s |\n", $1, $2, $3 }' nightly/checks.tsv
+            echo
+            echo "SHA-256 of ci-evidence.json: \`$(sha256sum ci-evidence.json | cut -d' ' -f1)\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+          grep -P '\tNOT RUN\t' nightly/checks.tsv | while IFS=$'\t' read -r name _ detail; do
+            echo "::warning title=$name::NOT RUN: $detail"
+          done
+
+      - name: Upload ci-evidence.json
+        id: upload
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: ci-evidence
+          path: ci-evidence.json
+          retention-days: 90
+          if-no-files-found: error
+
+      - name: Fail on a failed check (after the evidence is stored)
+        run: |
+          echo "artifact id ${{ steps.upload.outputs.artifact-id }}, digest ${{ steps.upload.outputs.artifact-digest }}" >> "$GITHUB_STEP_SUMMARY"
+          result=$(python3 -c 'import json;print(json.load(open("ci-evidence.json"))["result"])')
+          echo "result: $result"
+          test "$result" != FAIL
