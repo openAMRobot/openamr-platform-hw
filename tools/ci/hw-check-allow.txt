@@ -1,0 +1,3 @@
+# Known findings of tools/ci/check_hw_repo.py, one per line: <check> <path> <tracking issue URL>
+# Remove a line in the PR that fixes the finding. Every line needs an open issue.
+format mechanical/cad/SW17_3D_model/MMP.00.00.00.000_Multipurpose_mobile_platform.zip https://github.com/openAMRobot/openamr-platform-hw/issues/33
