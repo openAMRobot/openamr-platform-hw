@@ -100,7 +100,7 @@ decision. A text check proves textual consistency, never mechanical, electrical 
 - Binary engineering files are marked binary in `.gitattributes`; Git LFS is not used; no file
   above 95 MiB. Vendor datasheets keep their source and licence; link-only where the vendor's
   terms forbid redistribution.
-- Checks (`tools/ci/`, once PR #34 merges): `python3 -m unittest discover -s tests -v` and
+- Checks (`tools/ci/`, workflow "Hardware checks"): `python3 -m unittest discover -s tests -v` and
   `python3 tools/ci/check_hw_repo.py --root .`; known findings go in `tools/ci/hw-check-allow.txt`
   with an open tracking issue. A check proves file consistency, never mechanical or electrical
   correctness.
