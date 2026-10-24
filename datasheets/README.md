@@ -16,7 +16,7 @@ The base OpenAMRobot documented in this repo uses the **ZD** motor + driver. The
 | Folder | Component | On the base build? |
 |---|---|---|
 | [`ZDmotor/`](ZDmotor/) | ZD BLDC motor (Z4BLD60-24GN-30S) + **ZBLD.C20-120L2R** driver | ✅ **yes — this is the base** |
-| [`ZLTech/drivers/`](ZLTech/) | ZLAC8015D / ZLAC8030L industrial drivers (CANopen/RS485) | ⚙️ option (higher-power variant) |
+| [`ZLTech/drivers/`](ZLTech/drivers/) | ZLAC8015D / ZLAC8030L industrial drivers (CANopen/RS485) | ⚙️ option (higher-power variant) |
 | [`ZLTech/wheel_ZLLG80ASM250/`](ZLTech/wheel_ZLLG80ASM250/) | ZLLG80 hub-motor wheel | ⚙️ option (alternative drivetrain) |
 | [`TZBot/battery_BMS/`](TZBot/battery_BMS/) | 24 V 20 Ah battery + BMS (serial protocol) | ⚙️ option (product battery/BMS) |
 | [`TZBot/charger/`](TZBot/charger/) | TZBOT WCM-500-24 wireless charger (2.0 and release 001 charging path) | Yes, the 2.0 design (register CHARGING) |

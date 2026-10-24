@@ -1,0 +1,23 @@
+name: Hardware checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  hardware-checks:
+    name: hardware-checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Checker self-tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Links, file formats, sizes, attributes, datasheet index
+        run: python3 tools/ci/check_hw_repo.py --root .
