@@ -1,0 +1,837 @@
+# SPDX-License-Identifier: CC-BY-4.0
+# OpenAMRobot 2.0 finish schedule, mobile base. Machine-readable source for the robot model.
+# The companion file openAMRobot/openamr-upperbody-hw docs/finish/finishes.yaml uses the same
+# schema, palette and id rules; entry ids are unique across both files (prefix base. or upper.).
+# finish-schedule.md is generated from this file by tools/finish_tables.py; edit this file first.
+# Cosmetic only: nothing here changes a shape, dimension, position, function or material.
+
+schema: openamrobot-finishes/1
+scope: mobile base
+repository: openAMRobot/openamr-platform-hw
+companion: openAMRobot/openamr-upperbody-hw docs/finish/finishes.yaml
+date: 2026-10-25
+
+model:
+  repository: openAMRobot/openamr-platform-sw
+  commit: 9a58e0bc90ed10940947c700dce0b7bee0244764
+  node_ids_from: ros2/src/openamrobot_description/meshes/PROVENANCE.yaml (glb.nodes, 44 nodes)
+  glb: build/base_visual.glb (not committed; regenerated for the preview renders)
+  glb_sha256: fb41c555b1e429804e2794355a08d61bce8315ed0454b4957e3f435d0796b7b0
+
+# How a reader applies an entry:
+#   node_id         GLB node id (glTF node name and extras.id). null: no node is planned.
+#   node_id_status  existing (in the GLB today; the default when absent) or proposed (reserved id).
+#   model_link(s)   optional URDF link name(s) the entry colours when there is no GLB node.
+#   colour          palette key, or null for as_delivered parts that keep the model's own materials.
+#   srgb_hex        display value for the model; null means keep the node's existing materials.
+#   finish          one of finish_values. as_delivered: purchased part, no finishing operation.
+#   status          decided: material, colour and process are established by the cited sources.
+#                   verify: at least one input is open; the verify field names the check.
+finish_values: [matte, satin, gloss, anodised, printed, as_delivered]
+status_values: [decided, verify]
+
+# sRGB values are screen approximations of the RAL references. A physical RAL sample governs.
+palette:
+  light_grey_7035: {ral: RAL 7035, name: Light grey, srgb_hex: "#CBD0CC"}
+  graphite_7016: {ral: RAL 7016, name: Anthracite grey, srgb_hex: "#383E42"}
+  black_9005: {ral: RAL 9005, name: Jet black, srgb_hex: "#0A0A0A"}
+  orange_2004: {ral: RAL 2004, name: Pure orange, srgb_hex: "#F44611"}
+  cyan_5018: {ral: RAL 5018, name: Turquoise blue (cyan reference; verify against a physical sample), srgb_hex: "#3F888F"}
+  white_9016: {ral: RAL 9016, name: Traffic white (finish on the current MMP drawings), srgb_hex: "#F6F6F6"}
+
+entries:
+  # ---------------------------------------------------------------- body panels (light grey)
+  - id: base.side_panel_left
+    node_id: side_panel_left
+    part: MMP.00.00.00.003 Side panel
+    name: Side panel (left)
+    location: left side of the chassis, full length
+    material: steel sheet EN 1.0114, 0.8 mm (drawing MMP.00.00.00.003)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: light_grey_7035
+    ral: RAL 7035
+    srgb_hex: "#CBD0CC"
+    finish: matte
+    process: polyester powder coat after bending and deburring, fine texture matte
+    masking: rivet nut threads if fitted before coating; bonding point (location per wiring drawing); bolted flange faces to the base plate and supports
+    notes: drawing note 8 is replaced by RAL 7035 only when the drawing owner revises the note; until then this is the proposed finish
+    status: decided
+    verify: null
+  - id: base.side_panel_right
+    node_id: side_panel_right
+    part: MMP.00.00.00.003 Side panel
+    name: Side panel (right)
+    location: right side of the chassis, full length
+    material: steel sheet EN 1.0114, 0.8 mm (drawing MMP.00.00.00.003)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: light_grey_7035
+    ral: RAL 7035
+    srgb_hex: "#CBD0CC"
+    finish: matte
+    process: polyester powder coat after bending and deburring, fine texture matte
+    masking: rivet nut threads if fitted before coating; bonding point; bolted flange faces to the base plate and supports
+    notes: as base.side_panel_left
+    status: decided
+    verify: null
+  - id: base.front_panel
+    node_id: front_panel
+    part: MMP.00.00.00.001 Front panel
+    name: Front panel
+    location: front face, x +0.390 m; carries the base E-stop, base camera opening, TF-Luna centre hole and two MB7060 edge holes
+    material: steel sheet EN 1.0114, 2.0 mm (drawing MMP.00.00.00.001)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: light_grey_7035
+    ral: RAL 7035
+    srgb_hex: "#CBD0CC"
+    finish: matte
+    process: polyester powder coat after bending and deburring, fine texture matte
+    masking: E-stop mounting hole bore and its legend-plate seat; MB7060 edge hole bores (27.5 mm) and the lock-nut clamp ring on both faces; TF-Luna centre hole; camera opening edges (about 126 x 36 mm); rivet nut threads; bonding point
+    notes: no accent colour on this panel; the E-stop stays red on yellow with no orange or cyan within the keep-out (insert-schedule.md, rule K1)
+    status: verify
+    verify: confirm that the committed PDF drawing matches the Rev B front panel in the v0.2 STEP (hole list and E-stop hole size), then fix the mask list from that drawing
+  - id: base.rear_panel
+    node_id: rear_panel
+    part: MMP.00.00.00.002 Back panel
+    name: Rear panel
+    location: rear face, x -0.390 m; two MB7060 edge holes and the 22.0 mm rear centre hole (TF-Luna)
+    material: steel sheet EN 1.0114, 2.0 mm (drawing MMP.00.00.00.002)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: light_grey_7035
+    ral: RAL 7035
+    srgb_hex: "#CBD0CC"
+    finish: matte
+    process: polyester powder coat after bending and deburring, fine texture matte
+    masking: MB7060 edge hole bores and lock-nut clamp ring on both faces; 22.0 mm centre hole; any connector or service cut-out; rivet nut threads; bonding point
+    notes: RESET button location is not shown in the CAD; if it is on this panel the same keep-out rule K1 applies
+    status: verify
+    verify: confirm the committed PDF drawing matches the Rev B back panel in the v0.2 STEP; confirm the RESET button position (CAD or wiring drawing)
+
+  # ---------------------------------------------------------------- upper cover (graphite)
+  - id: base.cover
+    node_id: cover
+    part: MMP.01.00.00.001 Cover
+    name: Upper cover (steel deck, top 294 mm above the floor)
+    location: top of the chassis; carries the lift base plate on four M8 on the 190 x 300 mm pattern
+    material: steel sheet EN 1.0114, 0.8 mm (drawing MMP.01.00.00.001)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: graphite_7016
+    ral: RAL 7016
+    srgb_hex: "#383E42"
+    finish: matte
+    process: polyester powder coat after bending and deburring, fine texture matte
+    masking: the lift base plate footprint (bolted joint, no coating under the clamp); the four M8 holes and their washer faces on both sides; bonding point for the upper body; rivet nut threads; cooling openings stay open
+    notes: no film, strip or insert on the cover; nothing may cross the LiDAR scan band or cooling paths
+    status: verify
+    verify: lift base plate outline and the orientation of the 190 x 300 mm pattern (supplier CAD pending, option B page) to size the footprint mask; bonding point location for the upper body
+  - id: base.cover_flange_front
+    node_id: cover_flange_front
+    part: MMP.01.00.00.002 Cover flange
+    name: Cover flange (front)
+    location: front edge of the upper cover
+    material: steel sheet EN 1.0114, 0.8 mm (drawing MMP.01.00.00.002)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: graphite_7016
+    ral: RAL 7016
+    srgb_hex: "#383E42"
+    finish: matte
+    process: polyester powder coat, same batch as base.cover
+    masking: bolted faces to the cover and supports; rivet nut threads
+    notes: coated in the same batch as the cover so the upper cover reads as one part
+    status: decided
+    verify: null
+  - id: base.cover_flange_rear
+    node_id: cover_flange_rear
+    part: MMP.01.00.00.002 Cover flange
+    name: Cover flange (rear)
+    location: rear edge of the upper cover
+    material: steel sheet EN 1.0114, 0.8 mm (drawing MMP.01.00.00.002)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: graphite_7016
+    ral: RAL 7016
+    srgb_hex: "#383E42"
+    finish: matte
+    process: polyester powder coat, same batch as base.cover
+    masking: bolted faces to the cover and supports; rivet nut threads
+    notes: as base.cover_flange_front
+    status: decided
+    verify: null
+
+  # ---------------------------------------------------------------- internal steel (no change)
+  - id: base.base_plate
+    node_id: base_plate
+    part: MMP.02.00.00.001 Base
+    name: Base plate (lower deck)
+    location: bottom of the chassis, top 54.0 mm above the floor; internal
+    material: steel sheet EN 1.0114, 2.0 mm (drawing MMP.02.00.00.001)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: white_9016
+    ral: RAL 9016
+    srgb_hex: "#F6F6F6"
+    finish: gloss
+    process: no change; powder coat per drawing
+    masking: castor top-plate seats; hub motor bracket faces; battery restraint faces; main grounding point; rivet nut threads
+    notes: internal; kept as drawn so that no internal drawing changes
+    status: decided
+    verify: null
+  - id: base.centre_bracket
+    node_id: centre_bracket
+    part: MMP.04.00.00.001 Center bracket
+    name: Centre bracket
+    location: across the chassis between the drive wheels; internal
+    material: steel sheet EN 1.0114, 2.0 mm (drawing MMP.04.00.00.001)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: white_9016
+    ral: RAL 9016
+    srgb_hex: "#F6F6F6"
+    finish: gloss
+    process: no change; powder coat per drawing
+    masking: bolted faces; rivet nut threads; bonding point if used
+    notes: internal
+    status: decided
+    verify: null
+  - id: base.support_front_left
+    node_id: support_front_left
+    part: MMP.05.00.00.001 Support
+    name: Top-cover support (front left)
+    location: front left corner under the cover; internal
+    material: steel sheet EN 1.0114, 1.2 mm (drawing MMP.05.00.00.001)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: white_9016
+    ral: RAL 9016
+    srgb_hex: "#F6F6F6"
+    finish: gloss
+    process: no change; powder coat per drawing
+    masking: bolted faces to the cover and base plate; rivet nut threads
+    notes: internal
+    status: decided
+    verify: null
+  - id: base.support_front_right
+    node_id: support_front_right
+    part: MMP.05.00.00.001 Support
+    name: Top-cover support (front right)
+    location: front right corner under the cover; internal
+    material: steel sheet EN 1.0114, 1.2 mm (drawing MMP.05.00.00.001)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: white_9016
+    ral: RAL 9016
+    srgb_hex: "#F6F6F6"
+    finish: gloss
+    process: no change; powder coat per drawing
+    masking: bolted faces; rivet nut threads
+    notes: internal
+    status: decided
+    verify: null
+  - id: base.support_rear_left
+    node_id: support_rear_left
+    part: MMP.05.00.00.001 Support
+    name: Top-cover support (rear left)
+    location: rear left corner under the cover; internal
+    material: steel sheet EN 1.0114, 1.2 mm (drawing MMP.05.00.00.001)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: white_9016
+    ral: RAL 9016
+    srgb_hex: "#F6F6F6"
+    finish: gloss
+    process: no change; powder coat per drawing
+    masking: bolted faces; rivet nut threads
+    notes: internal
+    status: decided
+    verify: null
+  - id: base.support_rear_right
+    node_id: support_rear_right
+    part: MMP.05.00.00.001 Support
+    name: Top-cover support (rear right)
+    location: rear right corner under the cover; internal
+    material: steel sheet EN 1.0114, 1.2 mm (drawing MMP.05.00.00.001)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: white_9016
+    ral: RAL 9016
+    srgb_hex: "#F6F6F6"
+    finish: gloss
+    process: no change; powder coat per drawing
+    masking: bolted faces; rivet nut threads
+    notes: internal
+    status: decided
+    verify: null
+  - id: base.lidar_support
+    node_id: lidar_support
+    part: MMP.07.00.00.001 Lidar support
+    name: LiDAR support
+    location: front of the deck under the LiDAR; internal
+    material: steel sheet EN 1.0114, 1.2 mm (drawing MMP.07.00.00.001)
+    current_finish: powder coat, enamel white glossy RAL 9016 (drawing note 8)
+    colour: white_9016
+    ral: RAL 9016
+    srgb_hex: "#F6F6F6"
+    finish: gloss
+    process: no change; powder coat per drawing
+    masking: LiDAR seat face under the spacer; M2.5 and spacer hole threads or rivet nuts
+    notes: the scan window of the RPLIDAR S3 stays fully open; no cover or film near it
+    status: decided
+    verify: null
+  - id: base.electronics_bracket
+    node_id: electronics_bracket
+    part: MMP.04.00.00.002 Electronics bracket
+    name: Electronics bracket
+    location: under and in front of the centre bracket; Jetson and IMU; internal
+    material: sheet 2 mm (mechanical BOM); steel grade not stated (STEP only, no drawing)
+    current_finish: verify (no drawing)
+    colour: white_9016
+    ral: RAL 9016
+    srgb_hex: "#F6F6F6"
+    finish: gloss
+    process: powder coat as the other internal brackets, once a drawing states the material
+    masking: IMU and compute seat faces; standoff and rivet nut threads; bonding point
+    notes: internal
+    status: verify
+    verify: drawing with material and finish note for MMP.04.00.00.002 (STEP only today)
+  - id: base.controller_plate
+    node_id: controller_plate
+    part: MMP.04.00.00.003 STM32 Click mount plate
+    name: Base controller mount plate
+    location: on anti-vibration standoffs; internal
+    material: 6 mm plate, 100 x 90 mm (mechanical BOM); material not stated
+    current_finish: verify (no drawing)
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none until the material is known
+    masking: not applicable
+    notes: internal; no finish proposed
+    status: verify
+    verify: drawing with material for MMP.04.00.00.003
+
+  # ---------------------------------------------------------------- printed parts (black filament)
+  - id: base.camera_mount
+    node_id: camera_mount
+    part: MMP.01.00.00.003 Camera mount
+    name: Base camera mount (Gemini 336L)
+    location: behind the front panel camera opening
+    material: printed PETG (mechanical BOM; BOM row MEC-009), 2 x M4 heat-set inserts
+    current_finish: as printed, colour not specified
+    colour: black_9005
+    ral: RAL 9005
+    srgb_hex: "#0A0A0A"
+    finish: printed
+    process: print in black PETG (filament colour close to RAL 9005); no paint
+    masking: none (coloured in the material); keep the camera face and lens windows clear
+    notes: black keeps stray reflection away from the camera opening
+    status: decided
+    verify: null
+  - id: base.tof_mount_front
+    node_id: tof_mount_front
+    part: MMP.00.00.00.005 TF-Luna mount
+    name: TF-Luna mount (front)
+    location: front panel centre, 10 degree sensor face
+    material: printed PETG (mechanical BOM; BOM row MEC-010)
+    current_finish: as printed, colour not specified
+    colour: black_9005
+    ral: RAL 9005
+    srgb_hex: "#0A0A0A"
+    finish: printed
+    process: print in black PETG
+    masking: none; lens apertures never covered
+    notes: null
+    status: decided
+    verify: null
+  - id: base.tof_mount_rear
+    node_id: tof_mount_rear
+    part: MMP.00.00.00.005 TF-Luna mount
+    name: TF-Luna mount (rear)
+    location: rear panel centre, 10 degree sensor face
+    material: printed PETG (mechanical BOM; BOM row MEC-010)
+    current_finish: as printed, colour not specified
+    colour: black_9005
+    ral: RAL 9005
+    srgb_hex: "#0A0A0A"
+    finish: printed
+    process: print in black PETG
+    masking: none; lens apertures never covered
+    notes: null
+    status: decided
+    verify: null
+  - id: base.ultrasonic_mount_front_left
+    node_id: ultrasonic_mount_front_left
+    part: MMP.00.00.00.006 Ultrasonic mount
+    name: MB7060 mount (front left)
+    location: front panel edge hole, y +0.130 m
+    material: printed PETG or COTS retention set (BOM row MEC-011)
+    current_finish: as printed, colour not specified
+    colour: black_9005
+    ral: RAL 9005
+    srgb_hex: "#0A0A0A"
+    finish: printed
+    process: print in black PETG if the printed option is used; a COTS set stays as delivered
+    masking: none; the transducer face is never covered
+    notes: null
+    status: verify
+    verify: BOM MEC-011 allows printed PETG or COTS; confirm which is built
+  - id: base.ultrasonic_mount_front_right
+    node_id: ultrasonic_mount_front_right
+    part: MMP.00.00.00.006 Ultrasonic mount
+    name: MB7060 mount (front right)
+    location: front panel edge hole, y -0.130 m
+    material: printed PETG or COTS retention set (BOM row MEC-011)
+    current_finish: as printed, colour not specified
+    colour: black_9005
+    ral: RAL 9005
+    srgb_hex: "#0A0A0A"
+    finish: printed
+    process: print in black PETG if the printed option is used; a COTS set stays as delivered
+    masking: none; the transducer face is never covered
+    notes: null
+    status: verify
+    verify: BOM MEC-011 allows printed PETG or COTS; confirm which is built
+  - id: base.ultrasonic_mount_rear_left
+    node_id: ultrasonic_mount_rear_left
+    part: MMP.00.00.00.006 Ultrasonic mount
+    name: MB7060 mount (rear left)
+    location: rear panel edge hole, y +0.130 m
+    material: printed PETG or COTS retention set (BOM row MEC-011)
+    current_finish: as printed, colour not specified
+    colour: black_9005
+    ral: RAL 9005
+    srgb_hex: "#0A0A0A"
+    finish: printed
+    process: print in black PETG if the printed option is used; a COTS set stays as delivered
+    masking: none; the transducer face is never covered
+    notes: null
+    status: verify
+    verify: BOM MEC-011 allows printed PETG or COTS; confirm which is built
+  - id: base.ultrasonic_mount_rear_right
+    node_id: ultrasonic_mount_rear_right
+    part: MMP.00.00.00.006 Ultrasonic mount
+    name: MB7060 mount (rear right)
+    location: rear panel edge hole, y -0.130 m
+    material: printed PETG or COTS retention set (BOM row MEC-011)
+    current_finish: as printed, colour not specified
+    colour: black_9005
+    ral: RAL 9005
+    srgb_hex: "#0A0A0A"
+    finish: printed
+    process: print in black PETG if the printed option is used; a COTS set stays as delivered
+    masking: none; the transducer face is never covered
+    notes: null
+    status: verify
+    verify: BOM MEC-011 allows printed PETG or COTS; confirm which is built
+  - id: base.lidar_spacer
+    node_id: lidar_spacer
+    part: MMP.07.00.00.002 Lidar mount spacer
+    name: LiDAR spacer 17.5 mm
+    location: between the LiDAR support and the RPLIDAR S3
+    material: printed, 17.5 mm (mechanical BOM, 3D-printed parts table); BOM row MEC-008 title says aluminium spacer plate
+    current_finish: verify
+    colour: black_9005
+    ral: RAL 9005
+    srgb_hex: "#0A0A0A"
+    finish: printed
+    process: print in black PETG if printed; as machined if aluminium
+    masking: none; LiDAR seat face stays flat and uncoated
+    notes: the scan plane height (222.05 mm) depends on this part; no change to its thickness
+    status: verify
+    verify: resolve printed versus aluminium between the mechanical BOM and BOM row MEC-008
+  - id: base.driver_mount
+    node_id: driver_mount
+    part: MMP.02.00.00.002 Motor driver mount
+    name: Motor driver mount
+    location: on the base plate under the ZLAC8015D; internal
+    material: printed PETG (mechanical BOM)
+    current_finish: as printed, colour not specified
+    colour: black_9005
+    ral: RAL 9005
+    srgb_hex: "#0A0A0A"
+    finish: printed
+    process: print in black PETG
+    masking: none; keep the driver heatsink airflow path open
+    notes: internal
+    status: decided
+    verify: null
+
+  # ---------------------------------------------------------------- purchased parts (as delivered)
+  - id: base.hub_motor_wheel_left
+    node_id: hub_motor_wheel_left
+    part: ZLTECH ZLLG80ASM250-L-B hub motor wheel (BOM row DRV-001)
+    name: Hub motor wheel (left)
+    location: left drive axle
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: not applicable; protect the tyre, shaft flats and brake housing from overspray during assembly
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.hub_motor_wheel_right
+    node_id: hub_motor_wheel_right
+    part: ZLTECH ZLLG80ASM250-L-B hub motor wheel (BOM row DRV-001)
+    name: Hub motor wheel (right)
+    location: right drive axle
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: not applicable
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.castor_front_left
+    node_id: castor_front_left
+    part: LPA-VSTH 35K swivel castor (BOM row MEC-002)
+    name: Castor (front left)
+    location: front left corner
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: not applicable; shims (MEC-016) stay uncoated
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.castor_front_right
+    node_id: castor_front_right
+    part: LPA-VSTH 35K swivel castor (BOM row MEC-002)
+    name: Castor (front right)
+    location: front right corner
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: not applicable
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.castor_rear_left
+    node_id: castor_rear_left
+    part: LPA-VSTH 35K swivel castor (BOM row MEC-002)
+    name: Castor (rear left)
+    location: rear left corner
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: not applicable
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.castor_rear_right
+    node_id: castor_rear_right
+    part: LPA-VSTH 35K swivel castor (BOM row MEC-002)
+    name: Castor (rear right)
+    location: rear right corner
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: not applicable
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.lidar
+    node_id: lidar
+    part: SLAMTEC RPLIDAR S3 (S3M1-R2) (BOM row NAV-001)
+    name: Navigation LiDAR
+    location: front of the deck, scan plane 222.05 mm above the floor
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: scan window never covered, taped, filmed or painted; cover it only with a removable cap during coating work nearby
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.base_camera
+    node_id: base_camera
+    part: Orbbec Gemini 336L (BOM row CAM-001)
+    name: Base RGB-D camera
+    location: behind the front panel opening, base_camera_link
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: lens and projector windows never covered
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.ultrasonic_front_left
+    node_id: ultrasonic_front_left
+    part: MaxBotix MB7060 (BOM row SNS-002)
+    name: Ultrasonic sensor (front left)
+    location: front panel edge hole, y +0.130 m
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: transducer face never covered or painted; lock nut (MEC-021) as delivered
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.ultrasonic_front_right
+    node_id: ultrasonic_front_right
+    part: MaxBotix MB7060 (BOM row SNS-002)
+    name: Ultrasonic sensor (front right)
+    location: front panel edge hole, y -0.130 m
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: transducer face never covered or painted
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.ultrasonic_rear_left
+    node_id: ultrasonic_rear_left
+    part: MaxBotix MB7060 (BOM row SNS-002)
+    name: Ultrasonic sensor (rear left)
+    location: rear panel edge hole, y +0.130 m
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: transducer face never covered or painted
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.ultrasonic_rear_right
+    node_id: ultrasonic_rear_right
+    part: MaxBotix MB7060 (BOM row SNS-002)
+    name: Ultrasonic sensor (rear right)
+    location: rear panel edge hole, y -0.130 m
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: transducer face never covered or painted
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.tof_front
+    node_id: tof_front
+    part: Benewake TF-Luna (BOM row SNS-001)
+    name: ToF cliff sensor (front)
+    location: front panel centre
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: both lenses never covered
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.tof_rear
+    node_id: tof_rear
+    part: Benewake TF-Luna (BOM row SNS-001)
+    name: ToF cliff sensor (rear)
+    location: rear panel centre
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: both lenses never covered
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.imu
+    node_id: imu
+    part: ICM-42688-P IMU board (BOM row IMU-001)
+    name: IMU
+    location: electronics bracket; internal
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: not applicable
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.compute
+    node_id: compute
+    part: Jetson Orin NX 16 GB on reComputer Robotics J401 (BOM rows CMP-001, CMP-002)
+    name: Compute
+    location: electronics bracket; internal
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: heatsink and fan inlet and outlet stay open (cooling path)
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.base_controller
+    node_id: base_controller
+    part: STM32H723ZG NUCLEO-144 (BOM row CTL-001)
+    name: Base controller
+    location: controller mount plate; internal
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: not applicable
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.motor_driver
+    node_id: motor_driver
+    part: ZLAC8015D V4.2 (BOM row DRV-002)
+    name: Motor driver
+    location: driver mount on the base plate; internal
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: heatsink fins stay open (cooling path); labels stay readable
+    notes: model keeps its existing materials
+    status: decided
+    verify: null
+  - id: base.battery
+    node_id: battery
+    part: 8S1P LF105 pack and enclosure (BOM rows PWR-001, PWR-028)
+    name: Battery cell-group envelope (provisional)
+    location: rear deck between the centre bracket and the rear supports; internal
+    material: purchased pack; enclosure by the pack assembler
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: terminals, labels and vents never covered
+    notes: model keeps its existing envelope materials
+    status: decided
+    verify: null
+
+  # ---------------------------------------------------------------- parts without a GLB node
+  - id: base.estop_front
+    node_id: null
+    part: Schneider XB4BS8445 plus ZBE-102 (BOM row SAF-001)
+    name: Base E-stop (S1, base front)
+    location: front panel
+    material: purchased
+    current_finish: as delivered, red mushroom on a yellow legend
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: never painted, covered or restyled; no orange or cyan accent within the keep-out (rule K1)
+    notes: the yellow background stays; safety markings stay readable
+    status: decided
+    verify: null
+  - id: base.reset_button
+    node_id: null
+    part: Schneider XB4BW36B5 (BOM row SAF-005)
+    name: RESET button (illuminated, blue)
+    location: verify
+    material: purchased
+    current_finish: as delivered, standard blue
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none
+    masking: never painted or covered; no orange or cyan accent within the keep-out (rule K1)
+    notes: the blue lens keeps its meaning
+    status: verify
+    verify: RESET button panel and position (not in the v0.2 CAD); needed to apply the keep-out
+  - id: base.fasteners
+    node_id: null
+    part: fasteners, rivet nuts (stainless), standoffs, dampers (CAD group fastener_small)
+    name: Fasteners and rivet nuts
+    location: whole chassis
+    material: purchased
+    current_finish: as delivered
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none; rivet nuts may be set before coating only with the thread protected (CAD README)
+    masking: threads protected with plugs before coating
+    notes: not modelled (excluded from the GLB)
+    status: decided
+    verify: null
+  - id: base.plastic_cover
+    node_id: null
+    part: MMP.00.00.00.004 Plastic cover
+    name: Plastic cover (production file only)
+    location: not in the v0.2 full assembly
+    material: verify (STEP only, no drawing)
+    current_finish: verify
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none proposed
+    masking: not applicable
+    notes: the STEP envelope is about 605 x 780 x 117 mm; it is not used by the 2.0 model
+    status: verify
+    verify: confirm whether MMP.00.00.00.004 is part of the 2.0 build; if yes, material and a finish (coloured sheet or film, graphite RAL 7016) follow
+  - id: base.branding_parts
+    node_id: null
+    part: OpenAMRobot branding parts for covers (BOM row MEC-017)
+    name: Cover branding parts
+    location: verify
+    material: "verify (BOM: geometry and material to be defined)"
+    current_finish: verify
+    colour: null
+    ral: null
+    srgb_hex: null
+    finish: as_delivered
+    process: none proposed until the cover drawings define them
+    masking: not applicable
+    notes: no accent colour is proposed for branding in this plan
+    status: verify
+    verify: cover drawing with branding geometry and material (BOM row MEC-017)
