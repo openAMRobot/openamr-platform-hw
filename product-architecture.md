@@ -27,7 +27,7 @@ The **✅ base** (this repo's electrical / firmware / software) is the core of t
 The list above is the **Gate A unit**. The **OpenAMRobot 2.0 sensor set** (P-03 Decision Addendum rev19.0
 item 19, BOM Issue 7.14):
 
-- **Base camera:** Orbbec Gemini 336L, housing centre 142.5 mm above the floor, `base_camera_link`
+- **Base camera:** Orbbec Gemini 336L, camera centre 144 mm above the floor, `base_camera_link`
   (0.376, 0, 0.0445), up-tilt 5, 10 or 15 degrees (baseline 10). See [camera.md](electrical/sensors/camera.md).
 - **IMU:** ICM-42688-P (TDK EV_ICM-42688-P board) on a dedicated SPI, on the centreline at
   x 0.195 m from `base_link`. See [imu.md](electrical/sensors/imu.md).

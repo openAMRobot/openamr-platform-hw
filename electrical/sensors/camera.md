@@ -9,10 +9,10 @@ item 19 (12 Oct 2026); geometry from STEP MMP.00.00.00.000.
 | | |
 |---|---|
 | Model | **Orbbec Gemini 336L** |
-| Position | housing centre on the old camera centre, **142.5 mm above the floor** |
-| Frame | `base_camera_link` **(0.376, 0, 0.0445)** from `base_link` (drive-axle midpoint, 98.0 mm above the floor) |
+| Position | camera centre **144 mm above the floor** |
+| Frame | `base_camera_link` **(0.387, 0, 0.046)** from `base_link` (drive-axle midpoint, 98.0 mm above the floor) |
 | Front-panel opening | about **126 × 36 mm**, on the housing centre |
-| Up-tilt | **5, 10 or 15 degrees**, baseline **10 degrees** |
+| Up-tilt | **5, 10 or 15 degrees**, baseline **10 degrees**; configuration ID `base_tilt` **bt05, bt10, bt15** (default **bt10**) |
 
 Not verified: the opening size and the tilt positions are design values; they are not checked on a
 built 2.0 unit.
@@ -128,7 +128,7 @@ Move the board to fill X/Y/Size/Skew → CALIBRATE → SAVE (writes `/tmp/calibr
 
 ## Mounting (measured) & TF, Gate A unit
 The values below are the **Gate A unit** camera. The 2.0 base camera frame is `base_camera_link`
-(0.376, 0, 0.0445), see the top of this page.
+(0.387, 0, 0.046), see the top of this page.
 
 Physical position relative to `base_link` (center of the wheel axle):
 - Gate A unit: **x ≈ 0.415 m** (8 cm in front of the LiDAR, which is at x=0.335)

@@ -51,7 +51,7 @@ EVE LF105 LiFePO4 pack (25.6 V, 105 Ah).
 | Wheel encoders | **AS5040 ×2** | magnetic quadrature, 1024 cnt/rev at wheel scale. **3.3 V supply.** [encoders.md](electrical/sensors/encoders.md) |
 | IMU | **MPU6500** *(board silkscreen says MPU-6050; actual silicon is a 6500 — `WHO_AM_I` 0x70)* | 3-axis accel + gyro. **No magnetometer** (`/imu/mag` carries no real field). 3.3 V. [imu.md](electrical/sensors/imu.md) |
 | LiDAR | **RPLIDAR A1** — legacy (existing robot) | 2D scan, USB (CP2102). The 2.0 navigation LiDAR is the **RPLIDAR S3** (S3M1-R2): USB to the Jetson through a USB to UART adapter, regulated 5 V rail. [lidar.md](electrical/sensors/lidar.md) |
-| Camera | **Raspberry Pi Camera Module 3 NoIR (IMX708)** | CSI ribbon, not USB. [camera.md](electrical/sensors/camera.md) |
+| Camera | **Raspberry Pi Camera Module 3 NoIR (IMX708)**, legacy (existing robot); the 2.0 base camera is the Orbbec Gemini 336L | CSI ribbon, not USB. [camera.md](electrical/sensors/camera.md) |
 | Power | **24 V battery** (any chemistry; reference build = 2× 12 V in series) | ≥25 V at rest before tests (reference lead-acid threshold). [power.md](electrical/power_distribution/power.md) |
 
 **Drivetrain (odometry):** wheel **⌀ 0.2 m** (radius 0.10 m), track **0.46 m** — firmware values,
