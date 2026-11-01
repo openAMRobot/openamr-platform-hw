@@ -158,7 +158,7 @@ The setup is designed for differential drive mobile robot development and softwa
 
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
-| Hub Motor | ZLLG80ASM250-L-B | 2 | Integrated BLDC motor with built-in encoder (BOM Issue 7.7 selection; exact order code under confirmation in PR #17) |
+| Hub Motor | ZLLG80ASM250-L-B | 2 | Integrated BLDC motor with built-in encoder (BOM Issue 7.14 selection; exact order code under confirmation in PR #17) |
 | Driver | ZLAC8015D | 1–2 | Motor controller with RS485/CAN interface. Gate A unit, superseded by BOM Issue 7.7 |
 
 ---
