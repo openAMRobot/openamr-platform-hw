@@ -18,7 +18,7 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
 | 6 | LiDAR (2.0 navigation) | **Slamtec RPLIDAR S3** (S3M1-R2); USB to UART adapter to the Jetson; regulated 5 V rail (4.9–5.2 V, ripple ≤150 mV, 1.2 A start, 0.45 A typical). Backup: RPLIDAR S2E, only if the S3 is unavailable | 2.0 selection | Slamtec S3 datasheet (to be added) · [lidar.md](../../electrical/sensors/lidar.md) |
 | 6a | LiDAR — legacy (existing robot) | **Slamtec RPLIDAR A1** (A1M8, by shape) | ⏳ confirm sticker | [slamtec.com RPLIDAR A1](https://www.slamtec.com/en/Lidar/A1) |
 | 7 | Camera | **Sony IMX708** = Raspberry Pi **Camera Module 3 NoIR**. Gate A unit, superseded by BOM Issue 7.7 | ✅ | [raspberrypi.com camera-3](https://www.raspberrypi.com/products/camera-module-3/) |
-| 8 | SBC | **Raspberry Pi 5** (Model B Rev 1.1, **8 GB** RAM — confirmed 2026-07-06 on the current board) | ✅ | [raspberrypi.com Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) |
+| 8 | SBC | **Raspberry Pi 5** (Model B Rev 1.1, **8 GB** RAM — confirmed 2026-07-06 on the current board), legacy (existing robot); 2.0 compute: Jetson Orin NX 16 GB on reComputer J401 | ✅ | [raspberrypi.com Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) |
 | 9 | DC-DC 24 V→5 V | generic **~300 W 20 A CC/CV buck** (toroid + 2 trimpots) | ⏳ no clear model | (generic) |
 | 10 | Battery | **any 24 V pack** (chemistry up to you). Reference build: 4× **DM12-7S** 12 V **7 Ah** lead-acid (AGM), 2 in series → 24 V | ✅ | DM12-7S SLA datasheet (reference; any 24 V source works) |
 | 11 | AC/DC 230→24 V | unknown | ⏳ read label | — |

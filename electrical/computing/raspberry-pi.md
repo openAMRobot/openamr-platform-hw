@@ -1,4 +1,7 @@
-# Raspberry Pi 5 — main computer
+# Raspberry Pi 5 — main computer of the existing robot (v0.0.1, legacy)
+
+> Legacy: this page describes the existing robot (v0.0.1). The OpenAMRobot 2.0 compute is the NVIDIA
+> Jetson Orin NX 16 GB on a reComputer Robotics J401.
 
 *Last updated: 2026-07-06.*
 
@@ -9,7 +12,7 @@ sensor drivers (LiDAR, camera), odometry, and later the navigation (Nav2/SLAM).
 ## Specifications
 | | |
 |---|---|
-| Model | Raspberry Pi 5 Model B Rev 1.1 |
+| Model | Raspberry Pi 5 Model B Rev 1.1 (legacy, existing robot) |
 | CPU | 4× ARM Cortex-A76 **up to 2.4 GHz**, **aarch64 / ARM64** |
 | RAM | **8 GB** (measured 2026-07-06: 6.4 GB free under the full stack — RAM is *not* a bottleneck) |
 | Active cooler | **NONE fitted** ⚠️ → thermal throttling under the robot stack, see "Thermal" below |
@@ -65,7 +68,7 @@ Contributing load (work navigation does not need): `dock_trigger.py` ~36 % + `ca
 `apriltag_gate.py` ~19 % of a core (~74 % total) → load ~5.2 on 4 cores.
 
 **Mitigations:**
-1. **Fit the official Raspberry Pi 5 Active Cooler** (~€5–10 clip-on heatsink+fan). It keeps the SoC
+1. **Fit the official Raspberry Pi 5 Active Cooler** (legacy robot) (~€5–10 clip-on heatsink+fan). It keeps the SoC
    ~50–60 °C under load and removes the throttling. *This is the real fix (cooler on order 2026-07-06).*
 2. Meanwhile, run the **light bring-up** (`use_camera:=false use_docking:=false`) — kills those three
    processes (~74 % of a core freed), drops load well under 4, and lets the Pi cool. This is the right

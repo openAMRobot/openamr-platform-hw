@@ -35,13 +35,16 @@ materials, and safety notes.
 
 The overall system is shown in the block diagram above.
 
-## Current validated hardware configuration
+## Existing robot (release v0.0.1, Gate A unit) hardware configuration
 
-The configuration the docs describe and that has run the real robot:
+Legacy: the configuration the docs describe and that has run the real robot (v0.0.1). The OpenAMRobot 2.0
+hardware is the Jetson Orin NX 16 GB on a reComputer Robotics J401, the STM32H723ZG (NUCLEO-H723ZG) base
+controller, two ZLTECH ZLLG80ASM250-L-B hub motors with one ZLAC8015D V4.2 driver on CAN1, and one 8S1P
+EVE LF105 LiFePO4 pack (25.6 V, 105 Ah).
 
 | Subsystem | Part | Notes |
 |---|---|---|
-| Compute | **Raspberry Pi 5, 8 GB** | Ubuntu Server 24.04 + ROS 2 Jazzy. **No active cooler fitted** → thermal throttling under the stack. [raspberry-pi.md](electrical/computing/raspberry-pi.md) |
+| Compute | **Raspberry Pi 5, 8 GB**, legacy (existing robot); the 2.0 compute is the Jetson Orin NX 16 GB on reComputer J401 | Ubuntu Server 24.04 + ROS 2 Jazzy. **No active cooler fitted** → thermal throttling under the stack. [raspberry-pi.md](electrical/computing/raspberry-pi.md) |
 | Microcontroller | **Teensy 4.0** | micro-ROS motor control. 3.3 V I/O, **not 5 V tolerant**. [teensy.md](electrical/computing/teensy.md) |
 | Motors | **ZD Z4BLD60-24GN-30S ×2** | 3-phase BLDC, 24 V, 60 W, 5 pole pairs, 3000 rpm + **1:25** gearbox (4GN 25K) → **120 rpm** wheel. [motors-drivers.md](electrical/motor_control/motors-drivers.md) |
 | Motor drivers | **ZBLD.C20-120L2R ×2** | 24 V, 7.5 A, 120 W. Set **DIP SW4/SW5 = 5 pole pairs**. LED [fault codes](electrical/motor_control/motor-driver-fault-codes.md) |
@@ -78,7 +81,7 @@ More views, renders and the full CAD are in [`mechanical/`](mechanical/).
 vs. the optional/roadmap parts.
 
 ### Electrical
-- Computing — [Raspberry Pi 5](electrical/computing/raspberry-pi.md) · [Teensy 4.0](electrical/computing/teensy.md)
+- Computing — [Raspberry Pi 5 (legacy, existing robot)](electrical/computing/raspberry-pi.md) · [Teensy 4.0 (Gate A)](electrical/computing/teensy.md)
 - Motor control — [motors & drivers](electrical/motor_control/motors-drivers.md) · [driver LED fault codes](electrical/motor_control/motor-driver-fault-codes.md)
 - Power — [power distribution & battery](electrical/power_distribution/power.md)
 - Sensors — [encoders (AS5040)](electrical/sensors/encoders.md) · [IMU (MPU6500)](electrical/sensors/imu.md) · [LiDAR (RPLIDAR S3; A1 legacy)](electrical/sensors/lidar.md) · [camera (IMX708)](electrical/sensors/camera.md)
@@ -134,7 +137,7 @@ electrical, BOM and manufacturing repo** of the OpenAMRobot ecosystem:
 
 Related repositories:
 
-- **`openamr-platform-fw`** — Teensy motor-control firmware.
+- **`openamr-platform-fw`** — base-controller firmware: STM32H723ZG (2.0, Gate B); Teensy 4.0 overlay (Gate A, legacy).
 - **`openamr-platform-sw`** — ROS 2 software (description, Gazebo, Nav2, docking).
 
 ## Safety notice

@@ -111,7 +111,7 @@ voltage under load** (multimeter on the terminals while commanding) and the 24 V
 suspecting the firmware/PID. Bench-test on mains for repeatable results.
 
 ## ⚠️ Pi 5 brown-out at bring-up — the 5 V rail must hold ≥ 5 A (2026-06-25)
-The Raspberry Pi 5 needs **5 V / 5 A**. At bring-up, motors + LiDAR + camera start **at the same time** →
+The Raspberry Pi 5 (legacy, existing robot) needs **5 V / 5 A**. At bring-up, motors + LiDAR + camera start **at the same time** →
 a **current spike on the 5 V rail** → if the DC-DC (or a sagging 24 V pack) can't hold it, the rail
 collapses and the **Pi freezes (Ctrl-C dead) then loses the network** (no ping). At boot the Pi warns:
 *"This power supply is not capable of supplying 5A; power to peripherals will be restricted."*

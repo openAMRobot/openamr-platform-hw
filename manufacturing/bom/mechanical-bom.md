@@ -76,18 +76,19 @@ Sheet metal and plate parts for the electronics (STEP only, no DXF yet):
 | Part number | Name | Qty | Notes |
 |---|---|---|---|
 | MMP.04.00.00.002 | Electronics bracket | 1 | 2 mm sheet, under and in front of the center bracket; Jetson and IMU |
-| MMP.04.00.00.003 | STM32 Click mount plate | 1 | 6 mm plate, 100 x 90 mm; STM32 and Click boards, on anti-vibration standoffs |
+| MMP.04.00.00.003 | STM32 Click mount plate | 1 | 6 mm plate, 100 x 90 mm; NUCLEO-H723ZG and the CAN isolator, no click shield, on anti-vibration standoffs |
 
 __________________________________________________________
 
-# OpenAMRobot – Preliminary Electronics Bill of Materials (BOM)
+# OpenAMRobot – Preliminary Electronics Bill of Materials (BOM), existing robot (v0.0.1, legacy)
 
 ## Overview
 
 This Bill of Materials preliminary defines the electronics used in the OpenAMRobot development platform.  
+Legacy: it describes the existing robot (v0.0.1); the OpenAMRobot 2.0 electronics are in BOM Issue 7.14.  
 The system follows a two-layer architecture:
 
-- **High-level control**: Raspberry Pi 5 (ROS2, navigation, perception, UI)  
+- **High-level control**: Raspberry Pi 5 (existing robot, legacy) (ROS2, navigation, perception, UI)  
 - **Real-time control**: Teensy 4.0 (motor control, encoders, IMU)  
 
 The setup is designed for differential drive mobile robot development and software validation.
@@ -98,7 +99,7 @@ The setup is designed for differential drive mobile robot development and softwa
 
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
-| Main Computer | Raspberry Pi 5 (8GB) | 1 | High-level controller running ROS2, SLAM, navigation, and UI |
+| Main Computer | Raspberry Pi 5 (8GB), legacy (existing robot) | 1 | High-level controller running ROS2, SLAM, navigation, and UI |
 | Microcontroller | Teensy 4.0 | 1 | Real-time controller for motors, sensors, and low-level logic |
 | Communication | USB cable (USB-A ↔ Micro USB / USB-C) | 1 | Serial communication between Raspberry Pi and Teensy |
 
@@ -163,8 +164,9 @@ The setup is designed for differential drive mobile robot development and softwa
 
 ---
 
-## System Interfaces Summary
+## System Interfaces Summary (existing robot, legacy)
 
+- 2.0: Jetson ↔ STM32H723ZG over Ethernet, micro-ROS over UDP (USB for the bench only)  
 - Raspberry Pi ↔ Teensy: USB Serial  
 - Teensy ↔ Motor Drivers: PWM (speed) + Digital IO (direction)  
 - Teensy ↔ Encoders: Quadrature (A/B) or SPI interface  

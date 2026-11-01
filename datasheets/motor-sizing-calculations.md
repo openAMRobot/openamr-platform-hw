@@ -130,7 +130,7 @@ Peak_Current ≈ 5 A to 7.5 A
 |------------------------|------------------------------------------------------|
 | Teensy microcontroller | Low-level motor control and sensor feedback          |
 | RS485 bus              | Communication with ESC driver (control + feedback)   |
-| Raspberry Pi 5 (ROS2)  | High-level control (navigation, SLAM, teleoperation) |
+| Raspberry Pi 5 (ROS2), legacy (existing robot) | High-level control (navigation, SLAM, teleoperation) |
 | Motor driver modes     | RS485-based, optional PWM fallback                   |
 
 ## 5. Additional control-related calculations {#additional-control-related-calculations}
