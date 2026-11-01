@@ -56,7 +56,7 @@ obstacle avoidance. It is connected to the **Pi** (USB), **not** the Teensy.
 ### Communication (Pi ↔ LiDAR)
 The connection is shown in the diagram below.
 
-![RPLIDAR A1 -> USB cable -> Slamtec adapter STC-A0317-R03 (CP2102 bridge, 10c4:ea60) -> Raspberry Pi 5 USB (/dev/ttyUSB0)](diagrams/lidar-connection.svg)
+![RPLIDAR A1 (legacy, existing robot) -> USB cable -> Slamtec adapter STC-A0317-R03 (CP2102 bridge, 10c4:ea60) -> Raspberry Pi 5 USB (/dev/ttyUSB0)](diagrams/lidar-connection.svg)
 
 - **Physical**: USB → `/dev/ttyUSB0`
   (stable: `/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0`).
