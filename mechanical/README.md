@@ -3,8 +3,8 @@
 Chassis and mechanical design of the OpenAMRobot base — the **MMP (Multipurpose Mobile Platform)**.
 The CAD, production drawings, and renders come from the OpenAMRobot design repository.
 
-> Binary CAD files (`.STEP .SLDPRT .SLDASM .SLDDRW .DXF .PDF .zip`) are stored with **Git LFS**
-> (see the repo `.gitattributes`). Clone with Git LFS installed to pull the actual files.
+> Binary CAD files (`.STEP .SLDPRT .SLDASM .SLDDRW .DXF .PDF .zip`) are marked **binary** in the repo
+> `.gitattributes`; Git LFS is not used, so a normal clone pulls the actual files.
 
 ## Contents
 
