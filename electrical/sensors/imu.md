@@ -11,7 +11,7 @@ EV_ICM-42688-P board; geometry from STEP MMP.00.00.00.000.
 | | |
 |---|---|
 | Chip / board | **ICM-42688-P** (3-axis accel + 3-axis gyro), TDK **EV_ICM-42688-P** board |
-| Bus | **dedicated SPI**, **Mode 0**, clock **at most 8 MHz** |
+| Bus | **SPI4**, **Mode 0**, clock **at most 8 MHz**; no click shield, wired directly |
 | Data path | **data-ready interrupt with DMA** |
 | `WHO_AM_I` | **0x47** (checked at boot) |
 | Frame | `imu_link` on the centreline at **x 0.0544 m**, **z 0.133 m** from `base_link` (54.4 mm in front of the drive axle, 177 mm above the base plate top, 231 mm above the floor); axes aligned with `base_link` |

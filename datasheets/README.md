@@ -11,13 +11,13 @@ for the wheel–motor–driver mechatronic chain.
 
 ## What applies to the base build vs. what is optional
 
-The base OpenAMRobot documented in this repo uses the **ZD** motor + driver. The **ZLTech** parts and the TZBOT battery and BMS are **alternative / optional** components for larger product configurations; they are **not** on the base build. The TZBOT WCM-500-24 wireless charger is the 2.0 and release 001 charging path.
+The existing robot (v0.0.1) documented in this repo uses the **ZD** motor + driver. The **ZLTECH ZLLG80ASM250-L-B** and **ZLAC8015D V4.2** are the selected 2.0 drivetrain. The TZBOT battery and BMS are **optional**; they are **not** the 2.0 battery. The TZBOT WCM-500-24 wireless charger is the 2.0 and release 001 charging path.
 
 | Folder | Component | On the base build? |
 |---|---|---|
-| [`ZDmotor/`](ZDmotor/) | ZD BLDC motor (Z4BLD60-24GN-30S) + **ZBLD.C20-120L2R** driver | ✅ **yes — this is the base** |
-| [`ZLTech/drivers/`](ZLTech/drivers/) | ZLAC8015D / ZLAC8030L industrial drivers (CANopen/RS485) | ⚙️ option (higher-power variant) |
-| [`ZLTech/wheel_ZLLG80ASM250/`](ZLTech/wheel_ZLLG80ASM250/) | ZLLG80 hub-motor wheel | ⚙️ option (alternative drivetrain) |
+| [`ZDmotor/`](ZDmotor/) | ZD BLDC motor (Z4BLD60-24GN-30S) + **ZBLD.C20-120L2R** driver | existing robot (v0.0.1), legacy |
+| [`ZLTech/drivers/`](ZLTech/drivers/) | ZLAC8015D V4.2 driver (CANopen on CAN1; RS485 not used in 2.0); ZLAC8030L reference only | yes, the 2.0 drivetrain |
+| [`ZLTech/wheel_ZLLG80ASM250/`](ZLTech/wheel_ZLLG80ASM250/) | ZLLG80ASM250-L-B hub motor | yes, the 2.0 drivetrain |
 | [`TZBot/battery_BMS/`](TZBot/battery_BMS/) | 24 V 20 Ah battery + BMS (serial protocol) | ⚙️ option (product battery/BMS) |
 | [`TZBot/charger/`](TZBot/charger/) | TZBOT WCM-500-24 wireless charger (2.0 and release 001 charging path) | Yes, the 2.0 design (register CHARGING) |
 

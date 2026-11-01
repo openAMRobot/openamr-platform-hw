@@ -1,4 +1,8 @@
-# Encoders (AS5040)
+# Encoders (AS5040, existing robot, Gate A unit)
+
+> Legacy: this page describes the existing robot (Gate A unit), where the Teensy reads the AS5040
+> encoders. The OpenAMRobot 2.0 ZLTECH ZLLG80ASM250-L-B hub motors have built-in encoders read by the
+> ZLAC8015D V4.2 driver.
 
 *Last updated: 2026-06-17.*
 

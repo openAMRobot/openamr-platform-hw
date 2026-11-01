@@ -6,6 +6,7 @@
 
 ▶️ Step-by-step assembly of the OpenAMRobot drive wheel module.
 
+This tutorial covers the existing robot (v0.0.1) ZD drivetrain, not the 2.0 ZLTECH hub motors.
 The drive-wheel assembly (motor + gearbox + drive shaft + brackets, `MMP.03.*` in
 [../../mechanical/](../../mechanical/)) is assembled in the sequence shown below. Follow the same
 order left and right.

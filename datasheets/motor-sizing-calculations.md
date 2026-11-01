@@ -1,5 +1,8 @@
 # Mechanical, electrical and control calculations
 
+> Legacy: these calculations cover the existing robot (v0.0.1) ZD drivetrain. The OpenAMRobot 2.0
+> drivetrain is two ZLTECH ZLLG80ASM250-L-B hub motors with one ZLAC8015D V4.2 driver on CAN1.
+
 ## 1. Mechanical, electrical, and control calculations for wheel-motor-driver mechatronic system {#mechanical-electrical-and-control-calculations-for-wheel-motor-driver-mechatronic-system}
 
 ### 1.1 Motor and gearbox overview {#motor-and-gearbox-overview}
@@ -129,9 +132,9 @@ Peak_Current ≈ 5 A to 7.5 A
 | **Component**          | **Function**                                         |
 |------------------------|------------------------------------------------------|
 | Teensy microcontroller | Low-level motor control and sensor feedback          |
-| RS485 bus              | Communication with ESC driver (control + feedback)   |
-| Raspberry Pi 5 (ROS2)  | High-level control (navigation, SLAM, teleoperation) |
-| Motor driver modes     | RS485-based, optional PWM fallback                   |
+| RS485 bus              | not used: the existing robot drives the ZBLD drivers by PWM + FWD/REV; no RS485 in 2.0 |
+| Raspberry Pi 5 (ROS2), legacy (existing robot) | High-level control (navigation, SLAM, teleoperation) |
+| Motor driver modes     | PWM on the existing robot (legacy); no RS485 in 2.0  |
 
 ## 5. Additional control-related calculations {#additional-control-related-calculations}
 
@@ -139,8 +142,8 @@ Peak_Current ≈ 5 A to 7.5 A
 
 - Built-in Hall sensors inside the BLDC motor.
 
-- Motor controller reads the Hall sensors and provides RPM data via
-  > RS485 to Teensy.
+- Motor controller reads the Hall sensors for commutation only (existing robot, legacy); RPM data over
+  > RS485 is not used, and RS485 is not in 2.0 (no RS485).
 
 **Odometry calculation basics:**
 

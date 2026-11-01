@@ -6,11 +6,13 @@ actually been wired, flashed, and driven. The base is one configuration of a lar
 and sensor packs.
 
 This page separates the two so nothing here implies the base build ships with a lift, a conveyor, or
-a wireless charger — it does not.
+a wireless charger — it does not. This applies to the existing robot (v0.0.1). For OpenAMRobot 2.0 the lift
+is approved in principle (DOLD Hexalift V4 350 mm primary) and the TZBOT WCM-500-24 wireless charger is the
+charging path.
 
 ## The full product architecture (superset)
 
-![Full OpenAMRobot product architecture — cloud/fleet server, the AMR general node (navigation sensors, Raspberry Pi 5 + Nav2, options), the Teensy MC node (BLDC diff-drive with ZBLD.C20-120L2 drivers and AS5040 encoders, plus optional tilt/conveyor/lift), and the power node (BMS + battery, charging, e-stop)](assets/images/HW_schema_article.jpg)
+![Full OpenAMRobot product architecture — cloud/fleet server, the AMR general node (navigation sensors, Raspberry Pi 5 + Nav2, options; legacy diagram of the existing robot, the 2.0 compute is the Jetson Orin NX 16 GB), the Teensy MC node (BLDC diff-drive with ZBLD.C20-120L2 drivers and AS5040 encoders, plus optional tilt/conveyor/lift), and the power node (BMS + battery, charging, e-stop)](assets/images/HW_schema_article.jpg)
 
 ## What the base build actually is
 
@@ -19,15 +21,15 @@ The **✅ base** (this repo's electrical / firmware / software) is the core of t
 - **Drive:** 2× BLDC wheels, **ZBLD.C20-120L2R** drivers, **AS5040** magnetic encoders, Teensy 4.0
   running micro-ROS motor control (electronics derived from the Linorobot project, motor + controller
   upgraded to the ZD/ZBLD industrial parts).
-- **Compute:** Raspberry Pi 5 + ROS 2 Jazzy + Nav2.
+- **Compute:** Raspberry Pi 5 + ROS 2 Jazzy + Nav2 (legacy, existing robot).
 - **Sensing:** RPLIDAR A1 (2D) — legacy (existing robot), Pi Camera Module 3, MPU6500 IMU. The 2.0
   navigation LiDAR is the **RPLIDAR S3** (S3M1-R2); see [lidar.md](electrical/sensors/lidar.md).
-- **Power:** 24 V bus (any chemistry; reference build 2× 12 V; the product targets a LiFePO4 + BMS pack).
+- **Power:** 24 V bus (any chemistry; reference build 2× 12 V; the 2.0 pack is in the battery line below).
 
 The list above is the **Gate A unit**. The **OpenAMRobot 2.0 sensor set** (P-03 Decision Addendum rev19.0
 item 19, BOM Issue 7.14):
 
-- **Base camera:** Orbbec Gemini 336L, housing centre 142.5 mm above the floor, `base_camera_link`
+- **Base camera:** Orbbec Gemini 336L, camera centre 144 mm above the floor, `base_camera_link`
   (0.376, 0, 0.0445), up-tilt 5, 10 or 15 degrees (baseline 10). See [camera.md](electrical/sensors/camera.md).
 - **IMU:** ICM-42688-P (TDK EV_ICM-42688-P board) on a dedicated SPI, on the centreline at
   x 0.195 m from `base_link`. See [imu.md](electrical/sensors/imu.md).
@@ -44,12 +46,17 @@ attachment — **illustrative, not the base build**):
 
 Shown in the architecture diagram but **not part of the base**:
 
-- **Extra safety pack** — ultrasonic (JSN-SR04) + IR (E18-D80NK) proximity rings.
+- **Proximity sensors (on the base, not optional):** the release 001 build uses JSN-SR04T ultrasonic and E18-D80NK
+  IR; 2.0 uses MB7060 ultrasonic and TF-Luna ToF.
 - **Attachments** — tilt sorting, conveyor, end-effectors.
 - **Charging**: TZBOT WCM-500-24 wireless charging is the 2.0 and release 001 charging path (register CHARGING); the WCM-300 is only the existing unit on the release 001 robot.
-- **Battery/BMS** — 24 V smart battery pack + BMS (serial), vs. the base's plain 24 V pack.
-- **Higher-power drives** — ZLTech ZLAC8015D/8030L drivers, hub-motor wheels.
-- **Tracking / AI** — QR + line tracking, on-board NVIDIA (Jetson) for heavier perception.
+- **Battery/BMS (2.0, selected, not an option):** one 8S1P EVE LF105 LiFePO4 pack, 25.6 V, 105 Ah, as close to
+  the rear edge as practical, with a Daly BMS reporting over CAN2 (LiTech second option). The 24 V smart pack
+  with serial BMS is not the 2.0 battery.
+- **Drivetrain (2.0, selected, not an option):** two ZLTECH ZLLG80ASM250-L-B hub motors with one ZLAC8015D V4.2
+  driver on CAN1.
+- **Tracking / AI** — QR + line tracking. The NVIDIA Jetson Orin NX 16 GB on a reComputer Robotics J401 is the
+  2.0 reference compute, not an option.
 - **Fleet** — cloud server, fleet management, dashboards (RMF).
 
 Datasheets for the optional parts are under [`datasheets/`](datasheets/) and clearly marked as options.

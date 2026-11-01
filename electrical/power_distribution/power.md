@@ -45,6 +45,7 @@ Mains 24V  ───┘
 | **IMU + encoders** | **3.3 V from the Teensy** (3.3 V rail). The encoders were originally on the 5 V (VUSB) pin → ~4 V on the Teensy inputs → moved to 3.3 V on 2026-06-19; see ⚠️ encoder overvoltage in [encoders.md](../sensors/encoders.md). The IMU has always been on 3.3 V. |
 | LiDAR — legacy (existing robot), RPLIDAR A1 | powered over its USB (CP2102 adapter) from the Pi |
 | LiDAR — 2.0, RPLIDAR S3 | **regulated 5 V rail**: 4.9–5.2 V, ripple ≤ 150 mV, **1.2 A at start**, 0.45 A typical running. No 12 V rail and no 24 V LiDAR branch. See [lidar.md](../sensors/lidar.md) |
+| 2.0 rails (register POWER-RAILS) | main battery bus **25.6 V nominal** (not a regulated 24 V rail); regulated 24 V branch; regulated 5 V (includes the navigation LiDAR); SAFE 24 V converter MEAN WELL DDR-240B-24 behind F-LIFT 15 A, 2.5 mm²; no 12 V rail |
 
 ## 🔴 Safety gaps found (2026-06-19) — to fix
 1. **No fuse on the battery.** A 24 V battery can deliver **hundreds of amps** into a short → fire /
@@ -111,7 +112,7 @@ voltage under load** (multimeter on the terminals while commanding) and the 24 V
 suspecting the firmware/PID. Bench-test on mains for repeatable results.
 
 ## ⚠️ Pi 5 brown-out at bring-up — the 5 V rail must hold ≥ 5 A (2026-06-25)
-The Raspberry Pi 5 needs **5 V / 5 A**. At bring-up, motors + LiDAR + camera start **at the same time** →
+The Raspberry Pi 5 (legacy, existing robot) needs **5 V / 5 A**. At bring-up, motors + LiDAR + camera start **at the same time** →
 a **current spike on the 5 V rail** → if the DC-DC (or a sagging 24 V pack) can't hold it, the rail
 collapses and the **Pi freezes (Ctrl-C dead) then loses the network** (no ping). At boot the Pi warns:
 *"This power supply is not capable of supplying 5A; power to peripherals will be restricted."*

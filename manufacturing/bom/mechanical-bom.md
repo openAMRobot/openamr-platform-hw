@@ -36,8 +36,8 @@ Each assembly comes with a list of required technological operations. Ensure tha
 
 The following components are used in the assemblies:
 
-- **Heavy duty drive wheel:** Blickle GEVN 200/30H7
-- **Light duty swivel castor:** Blickle LPA-VSTH 35K
+- **Heavy duty drive wheel:** Blickle GEVN 200/30H7 (existing robot, legacy; the 2.0 drive is the ZLTECH ZLLG80ASM250-L-B hub motor)
+- **Light duty swivel castor:** Blickle LPA-VSTH 35K (existing robot)
 - **Oval flange bearing units:**
   - REXNORD UCFL 205 C 655472 (d25)
   - REXNORD UCFL 206 C 666412 (d30)
@@ -50,12 +50,12 @@ The following components are used in the assemblies:
   - 4x4x25 DIN 6885-UNI 6604 (formerly ISO 773)
   - 8x7x28 DIN 6885-UNI 6604 (formerly ISO 773)
 - **Screwed spacer sleeve:** TFF-M3/25 FIX&FASTEN
-- **BLDC Motor:** Z4BLD60-24GN-30S/4GN 25K 
+- **BLDC Motor:** Z4BLD60-24GN-30S/4GN 25K (existing robot, legacy)
 - **Laser range scanner:** RPLIDAR S3 (S3M1-R2), 2.0 navigation LiDAR, 4 × M2.5 (screw engagement ≤ 4 mm). Legacy (existing robot): RPLIDAR A1-A1M8
 - **LiDAR mount spacer:** MMP.07.00.00.002, **17.5 mm** thick, 3D printed (see below), directly on the MMP.07 bracket without standoffs; S3 beam 174.0 + 17.5 + 30.55 = 222.05 mm above the floor. Was a 7.1 mm spacer plate on the 10 mm standoffs of the A1 bracket (BOM Issue 7.7 MEC-008)
-- **Camera module:** NVision Assem
-- **Proximity sensor:** E18-D80NK
-- **US sensor:** JSN-SR04T
+- **Camera module:** NVision Assem (existing robot, legacy); 2.0 base camera: Orbbec Gemini 336L
+- **Proximity sensor:** E18-D80NK (release 001 build, existing); 2.0: Benewake TF-Luna ToF
+- **US sensor:** JSN-SR04T (release 001 build, existing); 2.0: MaxBotix MB7060
 - **LED module:** 3 LED RGB Module 0.72W SWP
 
 ## 3D-printed parts
@@ -76,18 +76,19 @@ Sheet metal and plate parts for the electronics (STEP only, no DXF yet):
 | Part number | Name | Qty | Notes |
 |---|---|---|---|
 | MMP.04.00.00.002 | Electronics bracket | 1 | 2 mm sheet, under and in front of the center bracket; Jetson and IMU |
-| MMP.04.00.00.003 | STM32 Click mount plate | 1 | 6 mm plate, 100 x 90 mm; STM32 and Click boards, on anti-vibration standoffs |
+| MMP.04.00.00.003 | STM32 Click mount plate | 1 | 6 mm plate, 100 x 90 mm; NUCLEO-H723ZG and the CAN isolator, no click shield, on anti-vibration standoffs |
 
 __________________________________________________________
 
-# OpenAMRobot – Preliminary Electronics Bill of Materials (BOM)
+# OpenAMRobot – Preliminary Electronics Bill of Materials (BOM), existing robot (v0.0.1, legacy)
 
 ## Overview
 
 This Bill of Materials preliminary defines the electronics used in the OpenAMRobot development platform.  
+Legacy: it describes the existing robot (v0.0.1); the OpenAMRobot 2.0 electronics are in BOM Issue 7.14.  
 The system follows a two-layer architecture:
 
-- **High-level control**: Raspberry Pi 5 (ROS2, navigation, perception, UI)  
+- **High-level control**: Raspberry Pi 5 (existing robot, legacy) (ROS2, navigation, perception, UI)  
 - **Real-time control**: Teensy 4.0 (motor control, encoders, IMU)  
 
 The setup is designed for differential drive mobile robot development and software validation.
@@ -98,7 +99,7 @@ The setup is designed for differential drive mobile robot development and softwa
 
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
-| Main Computer | Raspberry Pi 5 (8GB) | 1 | High-level controller running ROS2, SLAM, navigation, and UI |
+| Main Computer | Raspberry Pi 5 (8GB), legacy (existing robot) | 1 | High-level controller running ROS2, SLAM, navigation, and UI |
 | Microcontroller | Teensy 4.0 | 1 | Real-time controller for motors, sensors, and low-level logic |
 | Communication | USB cable (USB-A ↔ Micro USB / USB-C) | 1 | Serial communication between Raspberry Pi and Teensy |
 
@@ -119,7 +120,7 @@ The setup is designed for differential drive mobile robot development and softwa
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
 | Magnetic Encoder | AS5040 | 2 | Wheel position sensing for odometry (Quadrature (A/B) or SPI interface) |
-| IMU | MPU6500 | 1 | 6-axis inertial measurement unit (accelerometer + gyroscope, I2C). Gate A unit (legacy), superseded by BOM Issue 7.7: 2.0 IMU is the ICM-42688-P |
+| IMU | MPU6500 | 1 | 6-axis inertial measurement unit (accelerometer + gyroscope, I2C). Gate A unit (legacy), superseded (BOM Issue 7.14 is canonical): 2.0 IMU is the ICM-42688-P |
 
 ---
 
@@ -128,7 +129,7 @@ The setup is designed for differential drive mobile robot development and softwa
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
 | LiDAR | RPLIDAR S3 (S3M1-R2) | 1 | 2.0 navigation 2D laser scanner for SLAM and obstacle detection (USB via USB to UART adapter; regulated 5 V rail). Replaces the RPLIDAR A1 — legacy (existing robot) |
-| Camera | Raspberry Pi Camera Module / Arducam IMX219 | 1 | Vision sensor for docking and computer vision tasks (CSI interface). Gate A unit, superseded by BOM Issue 7.7 |
+| Camera | Raspberry Pi Camera Module / Arducam IMX219 | 1 | Vision sensor for docking and computer vision tasks (CSI interface). Gate A unit, superseded (BOM Issue 7.14 is canonical) |
 
 ---
 
@@ -136,9 +137,9 @@ The setup is designed for differential drive mobile robot development and softwa
 
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
-| Battery | 24V Li-ion / LiFePO4 pack | 1 | Main power source for motors and electronics |
+| Battery | 8S1P EVE LF105 LiFePO4, 25.6 V, 105 Ah (2.0); existing robot: 24 V lead-acid pair | 1 | Main power source for motors and electronics |
 | DC-DC Converter | LM2596 Buck Converter (24V → 5V, ≥5A) | 1 | Power supply for Raspberry Pi |
-| DC-DC Converter | DROK 24V → 5V/12V Step-Down Module, legacy (Gate A unit), superseded by BOM Issue 7.7 | 1 | Power supply for sensors and auxiliary electronics on the existing robot. OpenAMRobot 2.0 has no 12 V rail |
+| DC-DC Converter | DROK 24V → 5V/12V Step-Down Module, legacy (Gate A unit), superseded (BOM Issue 7.14 is canonical) | 1 | Power supply for sensors and auxiliary electronics on the existing robot. OpenAMRobot 2.0 has no 12 V rail |
 | Protection | Inline fuse (rated above motor current) | 1 | Overcurrent protection on main power line |
 | Safety | Emergency stop switch | 1 | Manual power cutoff for safety |
 
@@ -154,17 +155,18 @@ The setup is designed for differential drive mobile robot development and softwa
 
 ---
 
-## Alternative Drive Option (ZL Tech)
+## 2.0 drivetrain (ZLTECH)
 
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
-| Hub Motor | ZLLG80ASM250-L-B | 2 | Integrated BLDC motor with built-in encoder (BOM Issue 7.14 selection; exact order code under confirmation in PR #17) |
-| Driver | ZLAC8015D | 1–2 | Motor controller with RS485/CAN interface. Gate A unit, superseded by BOM Issue 7.7 |
+| Hub Motor | ZLLG80ASM250-L-B | 2 | Integrated BLDC hub motor with brake and built-in encoder (BOM Issue 7.14 selection; brake data recorded by ZLTECH 18 Oct 2026, behaviour not yet verified) |
+| Driver | ZLAC8015D V4.2 | 1 | 2.0 motor driver, CANopen on CAN1 (RS485 not used in 2.0) |
 
 ---
 
-## System Interfaces Summary
+## System Interfaces Summary (existing robot, legacy)
 
+- 2.0: Jetson ↔ STM32H723ZG over Ethernet, micro-ROS over UDP (USB for the bench only)  
 - Raspberry Pi ↔ Teensy: USB Serial  
 - Teensy ↔ Motor Drivers: PWM (speed) + Digital IO (direction)  
 - Teensy ↔ Encoders: Quadrature (A/B) or SPI interface  

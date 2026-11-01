@@ -3,6 +3,9 @@
 *Last updated: 2026-06-19.* Identification done by reading the real labels on the robot + manufacturer
 datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact label/marking.
 
+> **Legacy:** apart from the rows marked 2.0, this BOM describes the existing robot (v0.0.1) as built.
+> The OpenAMRobot 2.0 hardware BOM is BOM Issue 7.14.
+
 > **Two BOMs, by scope.** This file is the **electrical / electronic** BOM (compute, drivers, motors,
 > sensors, power). The **mechanical** BOM — sheet-metal parts, fasteners, technological operations, and
 > the Blickle wheel/castor — is [`mechanical-bom.md`](mechanical-bom.md) + the source workbook
@@ -14,11 +17,11 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
 | 2 | Motor drivers ×2 | **ZBLD.C20-120L2R** (Ningbo Zhongda Leader / ZD) | ✅ | [manual V1.02 (PDF)](https://image.yhdfa.com/Uploads/Picture/PDF/FZ02_11/ZBLD.C20.pdf) · [product](https://www.zd-motor.com/product/ZBLD.C20-120L2R-64.html) |
 | 3 | Motors ×2 | **Z4BLD60-24GN-30S** (ZD geared BLDC, 60 W / 24 V / 3.8 A / 3000 rpm / **P=5**) | ✅ nameplate | [analog F5B60-24GN-30S spec](https://www.omc-stepperonline.com/24v-60w-100rpm-geared-brushless-dc-motor-4-18nm-591-94oz-in-30-1-spur-gearbox-f5b60-24gn-30s-5gn30k) · [ZD](https://en.zd-motor.com/) |
 | 4 | Encoders ×2 | **AMS AS5040** (magnetic, quadrature A/B, marking "AS5040 AB 2.2") | ✅ | [AS5040 datasheet (ams, PDF)](https://www.mouser.com/datasheet/2/588/AS5040_DS000374_4_00-2066720.pdf) |
-| 5 | IMU | **TDK InvenSense MPU-6500** (board silk says "MPU-6050"/GY-521, but the chip is a 6500). Gate A unit, superseded by BOM Issue 7.7 | ✅ | MPU-6500 datasheet (TDK/InvenSense) |
+| 5 | IMU | **TDK InvenSense MPU-6500** (board silk says "MPU-6050"/GY-521, but the chip is a 6500). Gate A unit, superseded (BOM Issue 7.14 is canonical) | ✅ | MPU-6500 datasheet (TDK/InvenSense) |
 | 6 | LiDAR (2.0 navigation) | **Slamtec RPLIDAR S3** (S3M1-R2); USB to UART adapter to the Jetson; regulated 5 V rail (4.9–5.2 V, ripple ≤150 mV, 1.2 A start, 0.45 A typical). Backup: RPLIDAR S2E, only if the S3 is unavailable | 2.0 selection | Slamtec S3 datasheet (to be added) · [lidar.md](../../electrical/sensors/lidar.md) |
 | 6a | LiDAR — legacy (existing robot) | **Slamtec RPLIDAR A1** (A1M8, by shape) | ⏳ confirm sticker | [slamtec.com RPLIDAR A1](https://www.slamtec.com/en/Lidar/A1) |
-| 7 | Camera | **Sony IMX708** = Raspberry Pi **Camera Module 3 NoIR**. Gate A unit, superseded by BOM Issue 7.7 | ✅ | [raspberrypi.com camera-3](https://www.raspberrypi.com/products/camera-module-3/) |
-| 8 | SBC | **Raspberry Pi 5** (Model B Rev 1.1, **8 GB** RAM — confirmed 2026-07-06 on the current board) | ✅ | [raspberrypi.com Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) |
+| 7 | Camera | **Sony IMX708** = Raspberry Pi **Camera Module 3 NoIR**. Gate A unit, superseded (BOM Issue 7.14 is canonical) | ✅ | [raspberrypi.com camera-3](https://www.raspberrypi.com/products/camera-module-3/) |
+| 8 | SBC | **Raspberry Pi 5** (Model B Rev 1.1, **8 GB** RAM — confirmed 2026-07-06 on the current board), legacy (existing robot); 2.0 compute: Jetson Orin NX 16 GB on reComputer J401 | ✅ | [raspberrypi.com Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/) |
 | 9 | DC-DC 24 V→5 V | generic **~300 W 20 A CC/CV buck** (toroid + 2 trimpots) | ⏳ no clear model | (generic) |
 | 10 | Battery | **any 24 V pack** (chemistry up to you). Reference build: 4× **DM12-7S** 12 V **7 Ah** lead-acid (AGM), 2 in series → 24 V | ✅ | DM12-7S SLA datasheet (reference; any 24 V source works) |
 | 11 | AC/DC 230→24 V | unknown | ⏳ read label | — |
@@ -47,9 +50,10 @@ datasheets. Status: ✅ = confirmed (label + datasheet), ⏳ = to read the exact
 ### Drivetrain dimensions (for kinematics / odometry)
 **Ground truth = the firmware config** (`lino_base_config.h`), physically measured:
 - **Wheel diameter = 0.2 m** (radius 0.10 m).
-- **Track (wheel separation) = 0.46 m** (`LR_WHEELS_DISTANCE`), **confirmed by tape-measure**
-  (centre-to-centre of the two wheels). The CAD/URDF value of 0.4075 m is **wrong** (CAD artifact) —
-  use 0.46 m; the sim `robot.sdf` still needs correcting (see the sim note below).
+- **Track (wheel separation) = 0.46 m** on the Gate A unit (`LR_WHEELS_DISTANCE`), **confirmed by tape-measure**
+  on 19 June 2026 (centre-to-centre of the two wheels). The CAD/URDF value of 0.4075 m is **wrong** for this
+  unit (CAD artifact) — use 0.46 m; the sim `robot.sdf` still needs correcting (see the sim note below).
+  The 2.0 drive track is open (model placeholder 0.400 m).
 - With the firmware cap (`MOTOR_MAX_RPM 80` × `MAX_RPM_RATIO 0.85` = 68 rpm) → **max linear ≈ 0.71 m/s**
   (mechanical no-load ≈ **1.26 m/s** at the full **120 rpm** output — see the
   [sizing calculations](../../datasheets/motor-sizing-calculations.md)); rated torque **~3.48 N·m/wheel** (25:1).
