@@ -84,7 +84,7 @@ The RPLIDAR (on its bracket, right in this top view) sits ahead of the central e
 
 ### Field of view note
 The robot's own frame/structure produces close returns in several directions (≈ ±20–50° and ±80–90° in
-the LiDAR frame), not a clean rear block. → a **`scan_body_filter`** (provided in `openamrobot_nav2`)
+the LiDAR frame), not a clean rear block. → a **`scan_body_filter`** (provided in `openamrobot_perception`, `scan_body_filter_real.yaml`)
 must mask those self-returns to produce `/scan_filtered` for Nav2.
 
 ### Good to know / gotchas

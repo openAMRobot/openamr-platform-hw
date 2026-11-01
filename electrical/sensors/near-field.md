@@ -28,7 +28,7 @@ cliff detection; they do not implement or validate any safety function.
 | Quantity | **2**: front and rear |
 | Holes | the existing **22.0 mm front centre hole** and a **new 22.0 mm rear centre hole** |
 | Interface | **one UART per sensor**, **pin 5 tied to 3.3 V** |
-| Pitch | pitched down; **20 degrees is a screening value until the bench test** |
+| Pitch | pitched **10 degrees down** (replaces the earlier 20 degree screening value); confirmed only by the bench test; lens face 9 mm ahead of the panel on mount MMP.00.00.00.005 |
 
 ## Frames
 All frames are from `base_link` (drive-axle midpoint, 98.0 mm above the floor), in metres.
@@ -39,15 +39,15 @@ All frames are from `base_link` (drive-axle midpoint, 98.0 mm above the floor), 
 | `us_front_right` | 0.390 | -0.130 | -0.0066 | 0 |
 | `us_rear_left` | -0.390 | 0.130 | -0.0066 | π |
 | `us_rear_right` | -0.390 | -0.130 | -0.0066 | π |
-| `tof_front` | 0.390 | 0 | -0.0066 | 0 |
-| `tof_rear` | -0.390 | 0 | -0.0066 | π |
+| `tof_front` | 0.399 | 0 | -0.0066 | 0 |
+| `tof_rear` | -0.399 | 0 | -0.0066 | π |
 
 z -0.0066 m from `base_link` is 91.4 mm above the floor. The ToF frames carry the downward pitch above
-(20 degree screening value until the bench test).
+(10 degrees, replacing the earlier 20 degree screening value; confirmed only by the bench test).
 
 ## Panels
 Rev B front and back panels: Cuma.
 
 ## Not verified
 - The 27.5 mm holes, the new rear centre hole and the Rev B panels are not yet made.
-- The ultrasonic tilt (0) and the ToF pitch (20 degrees) are screening values until the bench test.
+- The ultrasonic tilt (0) and the ToF pitch (10 degrees, earlier 20) are not confirmed until the bench test.

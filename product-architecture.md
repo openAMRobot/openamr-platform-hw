@@ -46,7 +46,8 @@ attachment — **illustrative, not the base build**):
 
 Shown in the architecture diagram but **not part of the base**:
 
-- **Extra safety pack** — ultrasonic (JSN-SR04) + IR (E18-D80NK) proximity rings.
+- **Proximity sensors (on the base, not optional):** the release 001 build uses JSN-SR04T ultrasonic and E18-D80NK
+  IR; 2.0 uses MB7060 ultrasonic and TF-Luna ToF.
 - **Attachments** — tilt sorting, conveyor, end-effectors.
 - **Charging**: TZBOT WCM-500-24 wireless charging is the 2.0 and release 001 charging path (register CHARGING); the WCM-300 is only the existing unit on the release 001 robot.
 - **Battery/BMS (2.0, selected, not an option):** one 8S1P EVE LF105 LiFePO4 pack, 25.6 V, 105 Ah, as close to

@@ -53,9 +53,9 @@ The following components are used in the assemblies:
 - **BLDC Motor:** Z4BLD60-24GN-30S/4GN 25K (existing robot, legacy)
 - **Laser range scanner:** RPLIDAR S3 (S3M1-R2), 2.0 navigation LiDAR, 4 × M2.5 (screw engagement ≤ 4 mm). Legacy (existing robot): RPLIDAR A1-A1M8
 - **LiDAR mount spacer:** MMP.07.00.00.002, **17.5 mm** thick, 3D printed (see below), directly on the MMP.07 bracket without standoffs; S3 beam 174.0 + 17.5 + 30.55 = 222.05 mm above the floor. Was a 7.1 mm spacer plate on the 10 mm standoffs of the A1 bracket (BOM Issue 7.7 MEC-008)
-- **Camera module:** NVision Assem
-- **Proximity sensor:** E18-D80NK
-- **US sensor:** JSN-SR04T
+- **Camera module:** NVision Assem (existing robot, legacy); 2.0 base camera: Orbbec Gemini 336L
+- **Proximity sensor:** E18-D80NK (release 001 build, existing); 2.0: Benewake TF-Luna ToF
+- **US sensor:** JSN-SR04T (release 001 build, existing); 2.0: MaxBotix MB7060
 - **LED module:** 3 LED RGB Module 0.72W SWP
 
 ## 3D-printed parts
