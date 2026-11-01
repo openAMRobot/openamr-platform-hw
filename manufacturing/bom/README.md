@@ -12,7 +12,6 @@ The OpenAMRobot 2.0 hardware BOM cited in this repository is BOM Issue 7.14.
 
 ## Component availability rule
 
-Source: P-03 rev20.2 item 26.
-
-- Every BOM part is **in stock at two or more suppliers**.
-- A **single-source part** appears only as a **named option**, never as the baseline part.
+Every part is bought from stock and is stocked by at least two independent suppliers; a part
+stocked by only one supplier is listed only as a named option next to a second-sourced
+alternative; a part with no stock is not selected (P-03 rev20.2 item 26).

@@ -3,9 +3,10 @@
 *Last updated: 2026-11-01.*
 
 ## 2.0 IMU: TDK InvenSense ICM-42688-P (TDK EV_ICM-42688-P)
-The OpenAMRobot 2.0 IMU is the **ICM-42688-P** on the **TDK EV_ICM-42688-P** board (BOM Issue 7.14; it
-replaces the MikroElektronika MIKROE-4237 6DOF IMU 14 Click). Source: P-03 Decision Addendum rev19.0
-item 19 (12 Oct 2026) and BOM Issue 7.14; geometry from STEP MMP.00.00.00.000.
+The OpenAMRobot 2.0 IMU is the **ICM-42688-P** on the **TDK EV_ICM-42688-P** board (it replaces the
+MikroElektronika MIKROE-4237 6DOF IMU 14 Click). Source: P-03 Decision Addendum rev19.0 item 19
+(12 Oct 2026) for the IMU; P-03 Decision Addendum rev20.2 item 26 and BOM Issue 7.14 for the
+EV_ICM-42688-P board; geometry from STEP MMP.00.00.00.000.
 
 | | |
 |---|---|
