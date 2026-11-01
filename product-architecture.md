@@ -48,7 +48,8 @@ Shown in the architecture diagram but **not part of the base**:
 - **Attachments** — tilt sorting, conveyor, end-effectors.
 - **Charging**: TZBOT WCM-500-24 wireless charging is the 2.0 and release 001 charging path (register CHARGING); the WCM-300 is only the existing unit on the release 001 robot.
 - **Battery/BMS** — 24 V smart battery pack + BMS (serial), vs. the base's plain 24 V pack.
-- **Higher-power drives** — ZLTech ZLAC8015D/8030L drivers, hub-motor wheels.
+- **Drivetrain (2.0, selected, not an option):** two ZLTECH ZLLG80ASM250-L-B hub motors with one ZLAC8015D V4.2
+  driver on CAN1.
 - **Tracking / AI** — QR + line tracking. The NVIDIA Jetson Orin NX 16 GB on a reComputer Robotics J401 is the
   2.0 reference compute, not an option.
 - **Fleet** — cloud server, fleet management, dashboards (RMF).

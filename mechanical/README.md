@@ -52,9 +52,10 @@ Files follow `MMP.<assembly>.<sub>.<sub>.<part>` (and `PT1.*` for shared parts):
 Orthographic views ([`AMR_views.jpg`](renderings/AMR_views.jpg)), side / bottom, and the SolidWorks
 assembly renders `MMP_01`–`MMP_05` are also in [`renderings/`](renderings/).
 
-## Drivetrain (as-built)
+## Drivetrain (existing robot, as built)
 
-Wheel **⌀ 0.2 m**, track **0.46 m** (firmware-measured — see
+The 2.0 drive is two ZLTECH ZLLG80ASM250-L-B hub motors; the 2.0 drive track is open (model placeholder
+0.400 m). The existing robot: wheel **⌀ 0.2 m**, track **0.46 m** (firmware-measured — see
 [../manufacturing/bom/components-bom.md](../manufacturing/bom/components-bom.md)). Heavy-duty drive
 wheel and swivel castor are the Blickle parts listed in
 [../manufacturing/bom/mechanical-bom.md](../manufacturing/bom/mechanical-bom.md).

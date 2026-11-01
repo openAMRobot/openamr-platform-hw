@@ -1,4 +1,4 @@
-# Motor driver fault codes — ZBLD.C20-120L2R
+# Motor driver fault codes — ZBLD.C20-120L2R (existing robot, Gate A unit)
 
 *How to read the driver's LED blink code and the full fault-code table. Driver: **ZBLD.C20-120L2R**
 (Ningbo Zhongda Leader / ZD), 24 V ±20 %, 7.5 A, 120 W. One per wheel (LEFT = M1, RIGHT = M2).*

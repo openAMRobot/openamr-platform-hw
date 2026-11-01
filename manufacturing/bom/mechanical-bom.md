@@ -36,8 +36,8 @@ Each assembly comes with a list of required technological operations. Ensure tha
 
 The following components are used in the assemblies:
 
-- **Heavy duty drive wheel:** Blickle GEVN 200/30H7
-- **Light duty swivel castor:** Blickle LPA-VSTH 35K
+- **Heavy duty drive wheel:** Blickle GEVN 200/30H7 (existing robot, legacy; the 2.0 drive is the ZLTECH ZLLG80ASM250-L-B hub motor)
+- **Light duty swivel castor:** Blickle LPA-VSTH 35K (existing robot)
 - **Oval flange bearing units:**
   - REXNORD UCFL 205 C 655472 (d25)
   - REXNORD UCFL 206 C 666412 (d30)
@@ -50,7 +50,7 @@ The following components are used in the assemblies:
   - 4x4x25 DIN 6885-UNI 6604 (formerly ISO 773)
   - 8x7x28 DIN 6885-UNI 6604 (formerly ISO 773)
 - **Screwed spacer sleeve:** TFF-M3/25 FIX&FASTEN
-- **BLDC Motor:** Z4BLD60-24GN-30S/4GN 25K 
+- **BLDC Motor:** Z4BLD60-24GN-30S/4GN 25K (existing robot, legacy)
 - **Laser range scanner:** RPLIDAR S3 (S3M1-R2), 2.0 navigation LiDAR, 4 × M2.5 (screw engagement ≤ 4 mm). Legacy (existing robot): RPLIDAR A1-A1M8
 - **LiDAR mount spacer:** MMP.07.00.00.002, **17.5 mm** thick, 3D printed (see below), directly on the MMP.07 bracket without standoffs; S3 beam 174.0 + 17.5 + 30.55 = 222.05 mm above the floor. Was a 7.1 mm spacer plate on the 10 mm standoffs of the A1 bracket (BOM Issue 7.7 MEC-008)
 - **Camera module:** NVision Assem
@@ -155,12 +155,12 @@ The setup is designed for differential drive mobile robot development and softwa
 
 ---
 
-## Alternative Drive Option (ZL Tech)
+## 2.0 drivetrain (ZLTECH)
 
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
-| Hub Motor | ZLLG80ASM250-L-B | 2 | Integrated BLDC motor with built-in encoder (BOM Issue 7.14 selection; exact order code under confirmation in PR #17) |
-| Driver | ZLAC8015D | 1–2 | Motor controller with RS485/CAN interface. Gate A unit, superseded by BOM Issue 7.7 |
+| Hub Motor | ZLLG80ASM250-L-B | 2 | Integrated BLDC hub motor with brake and built-in encoder (BOM Issue 7.14 selection; brake data recorded by ZLTECH 18 Oct 2026, behaviour not yet verified) |
+| Driver | ZLAC8015D V4.2 | 1 | 2.0 motor driver, CANopen on CAN1 (RS485 not used in 2.0) |
 
 ---
 
