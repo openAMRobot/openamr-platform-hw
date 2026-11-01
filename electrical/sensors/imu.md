@@ -1,14 +1,16 @@
 # IMU: ICM-42688-P (2.0) and MPU6500 (Gate A unit)
 
-*Last updated: 2026-10-12.*
+*Last updated: 2026-11-01.*
 
-## 2.0 IMU: TDK InvenSense ICM-42688-P (MIKROE-4237)
-The OpenAMRobot 2.0 IMU is the **ICM-42688-P** on the **MIKROE-4237 6DOF IMU 14 Click** board. Source:
-P-03 Decision Addendum rev19.0 item 19 (12 Oct 2026); geometry from STEP MMP.00.00.00.000.
+## 2.0 IMU: TDK InvenSense ICM-42688-P (TDK EV_ICM-42688-P)
+The OpenAMRobot 2.0 IMU is the **ICM-42688-P** on the **TDK EV_ICM-42688-P** board (it replaces the
+MikroElektronika MIKROE-4237 6DOF IMU 14 Click). Source: P-03 Decision Addendum rev19.0 item 19
+(12 Oct 2026) for the IMU; P-03 Decision Addendum rev20.2 item 26 and BOM Issue 7.14 for the
+EV_ICM-42688-P board; geometry from STEP MMP.00.00.00.000.
 
 | | |
 |---|---|
-| Chip / board | **ICM-42688-P** (3-axis accel + 3-axis gyro), MikroElektronika **MIKROE-4237** 6DOF IMU 14 Click |
+| Chip / board | **ICM-42688-P** (3-axis accel + 3-axis gyro), TDK **EV_ICM-42688-P** board |
 | Bus | **dedicated SPI**, **Mode 0**, clock **at most 8 MHz** |
 | Data path | **data-ready interrupt with DMA** |
 | `WHO_AM_I` | **0x47** (checked at boot) |

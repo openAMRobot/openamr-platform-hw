@@ -5,6 +5,9 @@ All notable changes to this repository are documented here. Dates are ISO-8601.
 ## [Unreleased]
 
 ### Changed
+- BOM Issue 7.14 replaces Issue 7.7 as the cited BOM in the near-field, IMU, product-architecture
+  and mechanical BOM pages. The 2.0 IMU board is the TDK EV_ICM-42688-P (was MIKROE-4237).
+  `manufacturing/bom/README.md` states the component availability rule (P-03 rev20.2 item 26).
 - CAD Rev B for the OpenAMRobot 2.0 sensor set (P-03 rev19.0 item 19); the previous CAD is kept
   in release v0.0.1.
   - Front and back panels (`MMP.00.00.00.001`, `MMP.00.00.00.002`): MB7060 holes at the panel

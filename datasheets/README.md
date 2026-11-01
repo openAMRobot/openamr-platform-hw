@@ -32,7 +32,7 @@ together.
 | [`MaxBotix/MB7060/`](MaxBotix/MB7060/) | XL-MaxSonar-WR/WRC datasheet, document code 11838ab. |
 | [`Benewake/TF-Luna/`](Benewake/TF-Luna/) | TF-Luna datasheet and user manual, retained in separate subfolders under their vendor filename en.pdf. |
 | [`TDK/ICM-42688-P/`](TDK/ICM-42688-P/) | ICM-42688-P datasheet DS-000347. |
-| [`MikroE/6DOF_IMU_14_Click/`](MikroE/6DOF_IMU_14_Click/) | 6DOF IMU 14 Click schematic. |
+| [`MikroE/6DOF_IMU_14_Click/`](MikroE/6DOF_IMU_14_Click/) | 6DOF IMU 14 Click schematic; reference only, the 2.0 IMU board is the TDK EV_ICM-42688-P (BOM Issue 7.14). |
 | [`TI/ISO1212/`](TI/ISO1212/), [`TI/TPL7407L/`](TI/TPL7407L/) | Link-only metadata; TI terms prohibit other reproduction and display of these PDFs. |
 
 The RM0468 reference manual (about 66 MB) is not stored in this repository because of its size.
