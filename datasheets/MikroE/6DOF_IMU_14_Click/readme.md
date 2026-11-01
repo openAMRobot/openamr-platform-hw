@@ -2,6 +2,8 @@
 
 Retrieved 18 October 2026.
 
+Reference only: from BOM Issue 7.14 the 2.0 IMU board is the TDK EV_ICM-42688-P, not this Click board.
+
 - File: 6dof-imu-14-click-schematic-v100.pdf
 - Source: https://download.mikroe.com/documents/add-on-boards/click/6dof_imu_14_click/6dof-imu-14-click-schematic-v100.pdf
 - Document: 6DOF IMU 14 Click schematic

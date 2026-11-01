@@ -25,11 +25,11 @@ The **✅ base** (this repo's electrical / firmware / software) is the core of t
 - **Power:** 24 V bus (any chemistry; reference build 2× 12 V; the product targets a LiFePO4 + BMS pack).
 
 The list above is the **Gate A unit**. The **OpenAMRobot 2.0 sensor set** (P-03 Decision Addendum rev19.0
-item 19, BOM Issue 7.7):
+item 19, BOM Issue 7.14):
 
 - **Base camera:** Orbbec Gemini 336L, housing centre 142.5 mm above the floor, `base_camera_link`
   (0.376, 0, 0.0445), up-tilt 5, 10 or 15 degrees (baseline 10). See [camera.md](electrical/sensors/camera.md).
-- **IMU:** ICM-42688-P (MIKROE-4237 6DOF IMU 14 Click) on a dedicated SPI, on the centreline at
+- **IMU:** ICM-42688-P (TDK EV_ICM-42688-P board) on a dedicated SPI, on the centreline at
   x 0.195 m from `base_link`. See [imu.md](electrical/sensors/imu.md).
 - **Near-field:** 4 × MaxBotix MB7060 ultrasonic in the front and back panel edge holes and 2 × Benewake
   TF-Luna cliff sensors in the front and rear centre holes. See [near-field.md](electrical/sensors/near-field.md).
