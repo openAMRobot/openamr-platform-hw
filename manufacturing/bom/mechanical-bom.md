@@ -137,7 +137,7 @@ The setup is designed for differential drive mobile robot development and softwa
 
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
-| Battery | 24V Li-ion / LiFePO4 pack | 1 | Main power source for motors and electronics |
+| Battery | 8S1P EVE LF105 LiFePO4, 25.6 V, 105 Ah (2.0); existing robot: 24 V lead-acid pair | 1 | Main power source for motors and electronics |
 | DC-DC Converter | LM2596 Buck Converter (24V → 5V, ≥5A) | 1 | Power supply for Raspberry Pi |
 | DC-DC Converter | DROK 24V → 5V/12V Step-Down Module, legacy (Gate A unit), superseded by BOM Issue 7.7 | 1 | Power supply for sensors and auxiliary electronics on the existing robot. OpenAMRobot 2.0 has no 12 V rail |
 | Protection | Inline fuse (rated above motor current) | 1 | Overcurrent protection on main power line |

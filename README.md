@@ -26,7 +26,8 @@ materials, and safety notes.
 > - **The AS5040 encoders must be powered from the 3.3 V rail**, not 5 V. At 5 V their A/B
 >   outputs swing to ~4 V and over-drive the Teensy inputs. This was found and fixed on
 >   2026-06-19 — see [encoders.md](electrical/sensors/encoders.md). Do not revert it.
-> - **No fuse and no battery-side disconnect are fitted yet** — see
+> - **No fuse and no battery-side disconnect are fitted yet** on the existing robot (v0.0.1); the 2.0
+>   design has main fuse F0 110 A Class T, then a lockable disconnect, and no circuit breaker. See
 >   [Known hardware limitations](#known-hardware-limitations).
 
 ---
@@ -60,7 +61,7 @@ note there about a stale 0.046533 m value that was a CAD artifact).
 
 **Internal layout (cover removed):**
 
-![Top view of the base with the cover removed — the two drive wheels (top and bottom), the central electronics bracket, the RPLIDAR on the right, the E-stop, and the reserved zones for the electronics modules and the optional wireless charger](assets/images/AMR_open_top_view.jpg)
+![Top view of the base with the cover removed — the two drive wheels (top and bottom), the central electronics bracket, the RPLIDAR on the right, the E-stop, and the reserved zones for the electronics modules and the wireless charger receiver (TZBOT WCM-500-24, the 2.0 charging path)](assets/images/AMR_open_top_view.jpg)
 
 More views, renders and the full CAD are in [`mechanical/`](mechanical/).
 
