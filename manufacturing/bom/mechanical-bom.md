@@ -120,7 +120,7 @@ The setup is designed for differential drive mobile robot development and softwa
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
 | Magnetic Encoder | AS5040 | 2 | Wheel position sensing for odometry (Quadrature (A/B) or SPI interface) |
-| IMU | MPU6500 | 1 | 6-axis inertial measurement unit (accelerometer + gyroscope, I2C). Gate A unit (legacy), superseded by BOM Issue 7.7: 2.0 IMU is the ICM-42688-P |
+| IMU | MPU6500 | 1 | 6-axis inertial measurement unit (accelerometer + gyroscope, I2C). Gate A unit (legacy), superseded (BOM Issue 7.14 is canonical): 2.0 IMU is the ICM-42688-P |
 
 ---
 
@@ -129,7 +129,7 @@ The setup is designed for differential drive mobile robot development and softwa
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
 | LiDAR | RPLIDAR S3 (S3M1-R2) | 1 | 2.0 navigation 2D laser scanner for SLAM and obstacle detection (USB via USB to UART adapter; regulated 5 V rail). Replaces the RPLIDAR A1 — legacy (existing robot) |
-| Camera | Raspberry Pi Camera Module / Arducam IMX219 | 1 | Vision sensor for docking and computer vision tasks (CSI interface). Gate A unit, superseded by BOM Issue 7.7 |
+| Camera | Raspberry Pi Camera Module / Arducam IMX219 | 1 | Vision sensor for docking and computer vision tasks (CSI interface). Gate A unit, superseded (BOM Issue 7.14 is canonical) |
 
 ---
 
@@ -139,7 +139,7 @@ The setup is designed for differential drive mobile robot development and softwa
 |------|------|-----|------------|
 | Battery | 8S1P EVE LF105 LiFePO4, 25.6 V, 105 Ah (2.0); existing robot: 24 V lead-acid pair | 1 | Main power source for motors and electronics |
 | DC-DC Converter | LM2596 Buck Converter (24V → 5V, ≥5A) | 1 | Power supply for Raspberry Pi |
-| DC-DC Converter | DROK 24V → 5V/12V Step-Down Module, legacy (Gate A unit), superseded by BOM Issue 7.7 | 1 | Power supply for sensors and auxiliary electronics on the existing robot. OpenAMRobot 2.0 has no 12 V rail |
+| DC-DC Converter | DROK 24V → 5V/12V Step-Down Module, legacy (Gate A unit), superseded (BOM Issue 7.14 is canonical) | 1 | Power supply for sensors and auxiliary electronics on the existing robot. OpenAMRobot 2.0 has no 12 V rail |
 | Protection | Inline fuse (rated above motor current) | 1 | Overcurrent protection on main power line |
 | Safety | Emergency stop switch | 1 | Manual power cutoff for safety |
 
