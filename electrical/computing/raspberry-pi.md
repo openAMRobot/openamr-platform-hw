@@ -1,7 +1,7 @@
 # Raspberry Pi 5 — main computer of the existing robot (v0.0.1, legacy)
 
 > Legacy: this page describes the existing robot (v0.0.1). The OpenAMRobot 2.0 compute is the NVIDIA
-> Jetson Orin NX 16 GB on a reComputer Robotics J401.
+> Jetson Orin NX 8 GB on a reComputer Robotics 104 (D-01; exact carrier SKU, fit and power to confirm).
 
 *Last updated: 2026-07-06.*
 

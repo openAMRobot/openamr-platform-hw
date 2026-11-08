@@ -19,7 +19,7 @@ The existing robot (v0.0.1) documented in this repo uses the **ZD** motor + driv
 | [`ZLTech/drivers/`](ZLTech/drivers/) | ZLAC8015D V4.2 driver (CANopen on CAN1; RS485 not used in 2.0); ZLAC8030L reference only | yes, the 2.0 drivetrain |
 | [`ZLTech/wheel_ZLLG80ASM250/`](ZLTech/wheel_ZLLG80ASM250/) | ZLLG80ASM250-L-B hub motor | yes, the 2.0 drivetrain |
 | [`TZBot/battery_BMS/`](TZBot/battery_BMS/) | 24 V 20 Ah battery + BMS (serial protocol) | ⚙️ option (product battery/BMS) |
-| [`TZBot/charger/`](TZBot/charger/) | TZBOT WCM-500-24 wireless charger (2.0 and release 001 charging path) | Yes, the 2.0 design (register CHARGING) |
+| [`TZBot/charger/`](TZBot/charger/) | TZBOT WCM-500-24 wireless charger (designed in, bought later; Build 1 charges through SB50, D-05) | Yes, the 2.0 design (register CHARGING) |
 
 See [product-architecture.md](../product-architecture.md) for how the base and the options fit
 together.

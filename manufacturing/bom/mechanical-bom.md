@@ -159,7 +159,7 @@ The setup is designed for differential drive mobile robot development and softwa
 
 | Item | Model | Qty | Description |
 |------|------|-----|------------|
-| Hub Motor | ZLLG80ASM250-L-B | 2 | Integrated BLDC hub motor with brake and built-in encoder (BOM Issue 7.14 selection; brake data recorded by ZLTECH 18 Oct 2026, behaviour not yet verified) |
+| Hub Motor | ZLLG80ASM250-L-B | 2 | Integrated BLDC hub motor with brake and built-in encoder (BOM Issue 7.14 selection; brake data recorded by ZLTECH 18 Oct 2026, behaviour not yet verified; 5 vs 6 Nm and 100 vs 120 kg still open, D-25, issue #14) |
 | Driver | ZLAC8015D V4.2 | 1 | 2.0 motor driver, CANopen on CAN1 (RS485 not used in 2.0) |
 
 ---

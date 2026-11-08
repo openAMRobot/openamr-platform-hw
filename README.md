@@ -39,13 +39,13 @@ The overall system is shown in the block diagram above.
 ## Existing robot (release v0.0.1, Gate A unit) hardware configuration
 
 Legacy: the configuration the docs describe and that has run the real robot (v0.0.1). The OpenAMRobot 2.0
-hardware is the Jetson Orin NX 16 GB on a reComputer Robotics J401, the STM32H723ZG (NUCLEO-H723ZG) base
+hardware is the Jetson Orin NX 8 GB on a reComputer Robotics 104 (D-01; exact carrier SKU, fit and power to confirm), the STM32H723ZG (NUCLEO-H723ZG) base
 controller, two ZLTECH ZLLG80ASM250-L-B hub motors with one ZLAC8015D V4.2 driver on CAN1, and one 8S1P
 EVE LF105 LiFePO4 pack (25.6 V, 105 Ah).
 
 | Subsystem | Part | Notes |
 |---|---|---|
-| Compute | **Raspberry Pi 5, 8 GB**, legacy (existing robot); the 2.0 compute is the Jetson Orin NX 16 GB on reComputer J401 | Ubuntu Server 24.04 + ROS 2 Jazzy. **No active cooler fitted** → thermal throttling under the stack. [raspberry-pi.md](electrical/computing/raspberry-pi.md) |
+| Compute | **Raspberry Pi 5, 8 GB**, legacy (existing robot); the 2.0 compute is the Jetson Orin NX 8 GB on reComputer Robotics 104 (D-01) | Ubuntu Server 24.04 + ROS 2 Jazzy. **No active cooler fitted** → thermal throttling under the stack. [raspberry-pi.md](electrical/computing/raspberry-pi.md) |
 | Microcontroller | **Teensy 4.0** | micro-ROS motor control. 3.3 V I/O, **not 5 V tolerant**. [teensy.md](electrical/computing/teensy.md) |
 | Motors | **ZD Z4BLD60-24GN-30S ×2** | 3-phase BLDC, 24 V, 60 W, 5 pole pairs, 3000 rpm + **1:25** gearbox (4GN 25K) → **120 rpm** wheel. [motors-drivers.md](electrical/motor_control/motors-drivers.md) |
 | Motor drivers | **ZBLD.C20-120L2R ×2** | 24 V, 7.5 A, 120 W. Set **DIP SW4/SW5 = 5 pole pairs**. LED [fault codes](electrical/motor_control/motor-driver-fault-codes.md) |

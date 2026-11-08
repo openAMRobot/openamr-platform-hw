@@ -7,12 +7,12 @@ and sensor packs.
 
 This page separates the two so nothing here implies the base build ships with a lift, a conveyor, or
 a wireless charger — it does not. This applies to the existing robot (v0.0.1). For OpenAMRobot 2.0 the lift
-is approved in principle (DOLD Hexalift V4 350 mm primary) and the TZBOT WCM-500-24 wireless charger is the
-charging path.
+is approved in principle (DOLD Hexalift V4 350 mm primary). The TZBOT WCM-500-24 wireless charger is designed
+in and bought later; Build 1 charges manually through the SB50 connector (D-05).
 
 ## The full product architecture (superset)
 
-![Full OpenAMRobot product architecture — cloud/fleet server, the AMR general node (navigation sensors, Raspberry Pi 5 + Nav2, options; legacy diagram of the existing robot, the 2.0 compute is the Jetson Orin NX 16 GB), the Teensy MC node (BLDC diff-drive with ZBLD.C20-120L2 drivers and AS5040 encoders, plus optional tilt/conveyor/lift), and the power node (BMS + battery, charging, e-stop)](assets/images/HW_schema_article.jpg)
+![Full OpenAMRobot product architecture — cloud/fleet server, the AMR general node (navigation sensors, Raspberry Pi 5 + Nav2, options; legacy diagram of the existing robot, the 2.0 compute is the Jetson Orin NX 8 GB on the Robotics 104), the Teensy MC node (BLDC diff-drive with ZBLD.C20-120L2 drivers and AS5040 encoders, plus optional tilt/conveyor/lift), and the power node (BMS + battery, charging, e-stop)](assets/images/HW_schema_article.jpg)
 
 ## What the base build actually is
 
@@ -49,14 +49,14 @@ Shown in the architecture diagram but **not part of the base**:
 - **Proximity sensors (on the base, not optional):** the release 001 build uses JSN-SR04T ultrasonic and E18-D80NK
   IR; 2.0 uses MB7060 ultrasonic and TF-Luna ToF.
 - **Attachments** — tilt sorting, conveyor, end-effectors.
-- **Charging**: TZBOT WCM-500-24 wireless charging is the 2.0 and release 001 charging path (register CHARGING); the WCM-300 is only the existing unit on the release 001 robot.
+- **Charging**: The TZBOT WCM-500-24 wireless charger is designed in (receiver position, cut-out and charge wiring); it is bought later. Build 1 charges manually through the SB50 connector (D-05) (register CHARGING). The WCM-300 is only the existing unit on the release 001 robot.
 - **Battery/BMS (2.0, selected, not an option):** one 8S1P EVE LF105 LiFePO4 pack, 25.6 V, 105 Ah, as close to
   the rear edge as practical, with a Daly BMS reporting over CAN2 (LiTech second option). The 24 V smart pack
   with serial BMS is not the 2.0 battery.
 - **Drivetrain (2.0, selected, not an option):** two ZLTECH ZLLG80ASM250-L-B hub motors with one ZLAC8015D V4.2
   driver on CAN1.
-- **Tracking / AI** — QR + line tracking. The NVIDIA Jetson Orin NX 16 GB on a reComputer Robotics J401 is the
-  2.0 reference compute, not an option.
+- **Tracking / AI** — QR + line tracking. The NVIDIA Jetson Orin NX 8 GB on a reComputer Robotics 104 is the
+  2.0 reference compute, not an option (D-01; exact carrier SKU to confirm).
 - **Fleet** — cloud server, fleet management, dashboards (RMF).
 
 Datasheets for the optional parts are under [`datasheets/`](datasheets/) and clearly marked as options.
