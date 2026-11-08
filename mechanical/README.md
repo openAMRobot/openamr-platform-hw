@@ -3,8 +3,8 @@
 Chassis and mechanical design of the OpenAMRobot base — the **MMP (Multipurpose Mobile Platform)**.
 The CAD, production drawings, and renders come from the OpenAMRobot design repository.
 
-> Binary CAD files (`.STEP .SLDPRT .SLDASM .SLDDRW .DXF .PDF .zip`) are stored with **Git LFS**
-> (see the repo `.gitattributes`). Clone with Git LFS installed to pull the actual files.
+> Binary CAD files (`.STEP .SLDPRT .SLDASM .SLDDRW .DXF .PDF .zip`) are marked **binary** in the repo
+> `.gitattributes`; Git LFS is not used, so a normal clone pulls the actual files.
 
 ## Contents
 
@@ -52,9 +52,10 @@ Files follow `MMP.<assembly>.<sub>.<sub>.<part>` (and `PT1.*` for shared parts):
 Orthographic views ([`AMR_views.jpg`](renderings/AMR_views.jpg)), side / bottom, and the SolidWorks
 assembly renders `MMP_01`–`MMP_05` are also in [`renderings/`](renderings/).
 
-## Drivetrain (as-built)
+## Drivetrain (existing robot, as built)
 
-Wheel **⌀ 0.2 m**, track **0.46 m** (firmware-measured — see
+The 2.0 drive is two ZLTECH ZLLG80ASM250-L-B hub motors; the 2.0 drive track is open (model placeholder
+0.400 m). The existing robot: wheel **⌀ 0.2 m**, track **0.46 m** (firmware-measured — see
 [../manufacturing/bom/components-bom.md](../manufacturing/bom/components-bom.md)). Heavy-duty drive
 wheel and swivel castor are the Blickle parts listed in
 [../manufacturing/bom/mechanical-bom.md](../manufacturing/bom/mechanical-bom.md).

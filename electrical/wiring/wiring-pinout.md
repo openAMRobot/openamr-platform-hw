@@ -1,4 +1,4 @@
-# Wiring & Teensy 4.0 pinout
+# Wiring & Teensy 4.0 pinout (existing robot, Gate A unit)
 
 *Last updated: 2026-06-19.*
 
