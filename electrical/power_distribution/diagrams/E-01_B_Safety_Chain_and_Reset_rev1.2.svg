@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1450" viewBox="0 0 2200 1450" font-family="Arial, Helvetica, sans-serif">
+<defs>
+<marker id="p" markerUnits="userSpaceOnUse" markerWidth="18" markerHeight="18" refX="15" refY="9" orient="auto"><path d="M0,0 L18,9 L0,18 z" fill="#6a1b9a"/></marker>
+</defs>
+<style>
+.t{font-size:19px;fill:#222}.s{font-size:15px;fill:#444}.h{font-size:24px;font-weight:bold;fill:#111}
+.bx{fill:#fff;stroke:#333;stroke-width:2}.es{fill:#ffebee;stroke:#c62828;stroke-width:2.5}.rs{fill:#e3f2fd;stroke:#1565c0;stroke-width:2.5}
+.k{fill:#e3f2fd;stroke:#1565c0;stroke-width:2.5}.pz{fill:#fffde7;stroke:#f9a825;stroke-width:3}.inh{fill:#fff3e0;stroke:#ef6c00;stroke-width:2.5}
+.w{stroke:#1565c0;stroke-width:3;fill:none}.w2{stroke:#00838f;stroke-width:3;fill:none}.rw{stroke:#2e7d32;stroke-width:3;fill:none}.sg{stroke:#6a1b9a;stroke-width:2.5;fill:none}
+.dash{stroke-dasharray:9 6}
+</style>
+<rect width="2200" height="1450" fill="#fff"/>
+<text x="40" y="46" style="font-size:30px;font-weight:bold" fill="#111">E-01 B · Safety chain and RESET, OpenAMRobot 2.0 (rev1.2, 15 Oct 2026)</text>
+<text x="40" y="78" class="s">All safety wiring on the regulated 24 V rail through F-SAFE 2 A. Hardware only: no software, no bus in the safety path. The controller only observes and adds a secondary inhibit.</text>
+
+<!-- rails -->
+<line x1="80" y1="120" x2="80" y2="1000" stroke="#c62828" stroke-width="6"/>
+<text x="90" y="118" class="t" font-weight="bold" fill="#c62828">+24 V (F-SAFE 2 A)</text>
+<line x1="2120" y1="120" x2="2120" y2="1000" stroke="#333" stroke-width="6"/>
+<text x="2110" y="118" class="t" font-weight="bold" text-anchor="end">0 V</text>
+
+<!-- PNOZ -->
+<rect x="900" y="150" width="380" height="560" rx="12" class="pz"/>
+<text x="1090" y="190" class="t" text-anchor="middle" font-weight="bold">KSR · Pilz PNOZ s3 24 V DC</text>
+<text x="1090" y="214" class="s" text-anchor="middle">750103 (SAF-002) · dual channel,</text>
+<text x="1090" y="234" class="s" text-anchor="middle">cross-fault detection, monitored reset</text>
+<text x="915" y="292" class="s">S11</text><text x="915" y="342" class="s">S12</text>
+<text x="915" y="412" class="s">S21</text><text x="915" y="462" class="s">S22</text>
+<text x="915" y="562" class="s">S34</text>
+<text x="1265" y="292" class="s" text-anchor="end">A1 / A2</text>
+<text x="1265" y="412" class="s" text-anchor="end">13 → 14</text>
+<text x="1265" y="482" class="s" text-anchor="end">23 → 24</text>
+<text x="1265" y="632" class="s" text-anchor="end">Y32</text>
+<!-- supply -->
+<text x="1290" y="278" class="s">A1 ← KCHG NC, A2 → 0 V</text>
+
+<!-- Channel 1 -->
+<text x="110" y="250" class="t" font-weight="bold">Channel 1</text>
+<line x1="900" y1="288" x2="760" y2="288" class="w"/>
+<line x1="760" y1="288" x2="760" y2="270" class="w"/>
+<rect x="160" y="265" width="250" height="46" rx="6" class="es"/><text x="285" y="294" class="t" text-anchor="middle">S1 base front · NC1</text>
+<rect x="470" y="265" width="250" height="46" rx="6" class="es"/><text x="595" y="294" class="t" text-anchor="middle">S2 chest · NC1</text>
+<line x1="410" y1="288" x2="470" y2="288" class="w"/><line x1="720" y1="288" x2="760" y2="288" class="w"/>
+<path d="M160,288 L130,288 L130,338 L900,338" class="w"/>
+<text x="140" y="360" class="s">S11 → S1 NC1 → S2 NC1 → S12</text>
+
+<!-- Channel 2 -->
+<text x="110" y="385" class="t" font-weight="bold">Channel 2</text>
+<line x1="900" y1="408" x2="720" y2="408" class="w2"/>
+<rect x="160" y="385" width="250" height="46" rx="6" class="es"/><text x="285" y="414" class="t" text-anchor="middle">S1 base front · NC2</text>
+<rect x="470" y="385" width="250" height="46" rx="6" class="es"/><text x="595" y="414" class="t" text-anchor="middle">S2 chest · NC2</text>
+<line x1="410" y1="408" x2="470" y2="408" class="w2"/>
+<path d="M160,408 L130,408 L130,458 L900,458" class="w2"/>
+<text x="140" y="480" class="s">S21 → S1 NC2 → S2 NC2 → S22</text>
+
+<!-- Reset circuit -->
+<text x="110" y="525" class="t" font-weight="bold">Reset circuit with feedback (EDM)</text>
+<path d="M900,338 L860,338 L860,505 L830,505" class="rw"/>
+<rect x="580" y="535" width="250" height="56" rx="6" class="rs"/><text x="705" y="560" class="t" text-anchor="middle">S3 RESET · NO</text><text x="705" y="580" class="s" text-anchor="middle">XB4BW36B5, momentary</text>
+<path d="M830,505 L830,563" class="rw"/>
+<rect x="320" y="540" width="200" height="46" rx="6" class="k"/><text x="420" y="569" class="t" text-anchor="middle">K1 aux · NC</text>
+<rect x="60" y="540" width="200" height="46" rx="6" class="k"/><text x="160" y="569" class="t" text-anchor="middle">K2 aux · NC</text>
+<line x1="580" y1="563" x2="520" y2="563" class="rw"/><line x1="320" y1="563" x2="260" y2="563" class="rw"/>
+<path d="M60,563 L45,563 L45,620 L870,620 L870,558 L900,558" class="rw"/>
+<text x="140" y="645" class="s">S12 → RESET NO → K1 aux NC → K2 aux NC → S34: reset only when both contactors are really open</text>
+
+<!-- Outputs to coils -->
+<text x="1560" y="395" class="s" font-weight="bold">Contactor coils (PNOZ safety outputs)</text>
+
+<rect x="1300" y="375" width="160" height="0" fill="none"/>
+<rect x="1310" y="372" width="140" height="0"/>
+<!-- inhibit chain vertical -->
+<rect x="1500" y="270" width="330" height="46" rx="6" class="inh"/><text x="1665" y="299" class="t" text-anchor="middle">Charge relay KCHG · NC</text>
+<path d="M1380,170 L1500,163" class="w" style="display:none"/>
+<path d="M1420,230 L1480,230 L1480,293 L1500,293" class="w"/><text x="1412" y="235" class="s" text-anchor="end" fill="#c62828" font-weight="bold">+24 V</text>
+<path d="M1830,293 L1880,293 L1880,345 L1300,345 L1300,288 L1280,288" class="w"/>
+<text x="1500" y="335" class="s">charging → PNOZ off → K1, K2 open</text>
+<text x="1290" y="375" class="s" fill="#c62828" font-weight="bold">13, 23 ← +24 V</text>
+<!-- 14 to K1 -->
+<path d="M1280,428 L1560,428" class="w"/><text x="1290" y="445" class="s">14</text>
+<rect x="1560" y="405" width="230" height="46" rx="23" class="k"/><text x="1675" y="434" class="t" text-anchor="middle">K1 coil (LEV100H)</text>
+<line x1="1790" y1="428" x2="2120" y2="428" class="w"/>
+<path d="M1280,498 L1560,498" class="w"/><text x="1290" y="515" class="s">24</text>
+<rect x="1560" y="475" width="230" height="46" rx="23" class="k"/><text x="1675" y="504" class="t" text-anchor="middle">K2 coil (LEV100H)</text>
+<line x1="1790" y1="498" x2="2120" y2="498" class="w"/>
+<text x="1810" y="460" class="s">suppression per TE datasheet</text>
+
+<!-- controller signals -->
+<rect x="1360" y="560" width="760" height="420" rx="12" fill="#f3e5f5" stroke="#6a1b9a" stroke-width="2.5"/>
+<text x="1380" y="595" class="t" font-weight="bold">STM32 (Teensy on Conestoga) · isolated inputs, diagnostics only</text>
+<line x1="1280" y1="628" x2="1352" y2="628" class="sg" marker-end="url(#p)"/>
+<text x="1380" y="632" class="s">Y32 → SAFETY_OK → publish /estop</text>
+<text x="1380" y="662" class="s">K1 aux NO, K2 aux NO → K1_CLOSED, K2_CLOSED (contactor monitoring)</text>
+<text x="1380" y="692" class="s">S3 RESET · NC → RESET_PRESSED (opens when pressed)</text>
+<text x="1380" y="722" class="s">Daly BMS · CAN2 → faults, SOC (warning → stop motion, LOCKED)</text>
+<text x="1380" y="752" class="s">TZBOT WCM-500-24 yellow fault line (open collector) → WCM_FAULT</text>
+<text x="1380" y="792" class="t" font-weight="bold">Outputs</text>
+<text x="1380" y="822" class="s">RESET lamp (24 V LED in S3): ON = reset needed</text>
+<text x="1380" y="852" class="s">CHARGE_REQUEST → KCHG coil: NO gives the TZBOT start signal, NC opens the PNOZ supply</text>
+<text x="1380" y="892" class="t" font-weight="bold">Firmware</text>
+<text x="1380" y="922" class="s">Boots LOCKED; SAFETY_OK low → LOCKED; motion only by command after reset.</text>
+<text x="1380" y="950" class="s">RESET held 5 s → reboot request to Jetson, then controller self-reset.</text>
+
+<!-- E-stop / reset parts -->
+<rect x="40" y="700" width="1280" height="280" rx="12" fill="#fafafa" stroke="#999"/>
+<text x="60" y="735" class="h">Buttons and contacts</text>
+<text x="60" y="770" class="t">S1 base front E-stop: Schneider XB4BS8445 (40 mm, turn to release, 1NO+1NC) + ZBE-102 → 2NC + 1NO (SAF-001)</text>
+<text x="60" y="800" class="t">S2 chest E-stop: OpenArm kit button (ARM-008), two NC contacts needed (gate ESTOP-KIT)</text>
+<text x="60" y="830" class="t">S3 RESET: Schneider XB4BW36B5, blue, illuminated 24 V, momentary, 1NO (PNOZ reset) + 1NC (controller)</text>
+<text x="60" y="860" class="t">K1, K2: TE KILOVAC LEV100H, 24 V coil, 100 A NO, auxiliary contacts for EDM (gate EDM-STOP)</text>
+<text x="60" y="890" class="t">Exactly two E-stops on 2.0 (UC1-04). Conestoga build: S1 front + S1 back (same model), same wiring.</text>
+<text x="60" y="920" class="t">E-stop cables 4 × 0.5 mm² (CBL-009, CBL-010) · safety supply 0.75 mm² (CBL-008)</text>
+<text x="60" y="950" class="t">PNOZ reset mode: monitored, falling edge (Evans confirms in the Pilz manual)</text>
+
+<!-- sequence -->
+<rect x="40" y="1010" width="2080" height="410" rx="12" fill="#fafafa" stroke="#999"/>
+<text x="60" y="1048" class="h">What happens</text>
+<text x="60" y="1086" class="t">1. Power on (QS1 ON): electronics boot. K1 and K2 open, RESET lamp ON. No actuator power, no motion.</text>
+<text x="60" y="1120" class="t">2. Short press RESET: PNOZ checks both E-stop channels closed, both contactors open, no inhibit → closes K1 and K2. Actuators powered. Motion only on command.</text>
+<text x="60" y="1154" class="t">3. Any E-stop pressed: both channels open → PNOZ drops K1 and K2 at once → traction, arms and lift unpowered, brakes engage. Electronics stay on.</text>
+<text x="60" y="1188" class="t">4. E-stop twisted out: nothing changes. K1 and K2 stay open until a deliberate RESET (UC1-73).</text>
+<text x="60" y="1222" class="t">5. RESET while an E-stop is pressed, a contactor is welded or charging is on: nothing happens. A BMS warning (CAN) keeps the firmware LOCKED.</text>
+<text x="60" y="1256" class="t">6. RESET held 5 s: the controller reboots the Jetson and itself. Releasing the button may also reset the PNOZ, but motion still needs a command.</text>
+<text x="60" y="1290" class="t">7. Charging (STM32 energises KCHG: start signal to TZBOT): PNOZ supply open, K1 and K2 cannot close; RESET needed after. Charging only with actuators off (D28).</text>
+<text x="60" y="1324" class="t">8. Computer frozen: QS1 OFF, wait 5 s, ON. Back to step 1.</text>
+<text x="60" y="1370" class="s">Requirements met: UC1-03 physical stop cuts actuator power · UC1-04 two buttons · UC1-70 electronics stay on · UC1-73 deliberate manual reset · UC1 recovery step 1 (safety relay re-closes on reset).</text>
+<text x="60" y="1395" class="s">Sources: P-03 rev19.2 item 20, BOM Issue 7.7 (SAF-001..006, D28), TZBOT WCM manual V2.6, B-02 rev18.3, Use Case 1 Requirements Baseline rev18.5.</text>
+</svg>
