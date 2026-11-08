@@ -1,0 +1,21 @@
+# Fixture: the BASE-CONTROLLER-IO entry of openAMRobot/.github decisions.yaml at
+# 1c3f51679e1d07739a3521c87d073671d076e979 (fields id, title, kind, status, values, date, source).
+# Used by tests only; CI reads the real register at its pinned SHA.
+schema_version: 1
+decisions:
+- id: BASE-CONTROLLER-IO
+  title: Base-controller MCU, sensor and IMU buses, CAN mapping and micro-ROS transport
+  kind: configuration
+  status: recorded
+  values:
+  - Base controller STM32H723ZG on NUCLEO-H723ZG
+  - four MaxBotix MB7060 XL-MaxSonar-WR (-2XX 3/4 inch NPS housing, RS232 output) in the front and back panel left and right edge holes, each on one dedicated STM32 UART at 9600 8N1 with receive inversion
+    and one trigger GPIO
+  - two Benewake TF-Luna ToF cliff sensors in the front and back panel centre holes, one UART each, pin 5 tied to 3.3 V
+  - IMU on a dedicated SPI, Mode 0
+  - CAN1 traction only, CAN2 BMS, CAN3 reserved for upper-body auxiliary actuators (CANopen, no safety function)
+  - MCU to Jetson over Ethernet, micro-ROS over UDP; USB for the bench only
+  date: 2026-10-12
+  source:
+    document: P-03-rev19.0
+    item: item 19 (base-controller sensor I/O)

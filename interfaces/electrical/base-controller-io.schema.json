@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/openAMRobot/openamr-platform-hw/interfaces/electrical/base-controller-io.schema.json",
+  "title": "OpenAMRobot base-controller I/O contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "controller", "board", "board_id", "board_revision",
+               "source_document", "source_revision", "owner", "hardware_owner", "register",
+               "sources", "signals"],
+  "properties": {
+    "contract_version": {"type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"},
+    "controller": {"type": "string", "minLength": 1},
+    "package": {"type": "string"},
+    "board": {"type": "string", "minLength": 1},
+    "board_id": {"type": "string", "minLength": 1},
+    "board_revision": {"type": "string", "minLength": 1},
+    "source_document": {"type": "string", "minLength": 1},
+    "source_revision": {"type": "string", "minLength": 1},
+    "owner": {"type": "string", "minLength": 1},
+    "hardware_owner": {"type": "string", "minLength": 1},
+    "register": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "file", "decisions"],
+      "properties": {
+        "repository": {"type": "string"},
+        "file": {"type": "string"},
+        "decisions": {"type": "array", "minItems": 1, "items": {"type": "string", "pattern": "^[A-Z0-9-]+$"}}
+      }
+    },
+    "sources": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "string", "minLength": 1}
+    },
+    "signals": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/signal"}}
+  },
+  "$defs": {
+    "signal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["signal", "device", "direction", "peripheral", "function", "gpio", "af",
+                   "zio", "settings", "status", "source"],
+      "properties": {
+        "signal": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+        "device": {"type": "string", "minLength": 1},
+        "direction": {"enum": ["input", "output", "bidirectional"]},
+        "peripheral": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+        "function": {"type": "string", "pattern": "^[A-Za-z0-9_]+$"},
+        "gpio": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^P[A-K](1[0-5]|[0-9])$"}]},
+        "af": {"oneOf": [{"type": "null"}, {"type": "integer", "minimum": 0, "maximum": 15}]},
+        "zio": {"type": ["string", "null"]},
+        "settings": {
+          "type": "object",
+          "properties": {
+            "baud": {"type": "integer", "minimum": 1},
+            "frame": {"type": "string", "pattern": "^[5-9][NEO][12]$"},
+            "rx_invert": {"type": "boolean"},
+            "mode": {"enum": ["rx_only", "tx_only", "tx_rx"]},
+            "supply_v": {"type": "number"},
+            "spi_mode": {"enum": [0, 1, 2, 3]},
+            "max_clock_hz": {"type": "integer", "minimum": 1},
+            "bus": {"enum": ["CAN1", "CAN2", "CAN3"]},
+            "role": {"type": "string"},
+            "bitrate": {"type": "integer", "minimum": 1},
+            "interface": {"type": "string"},
+            "transport": {"type": "string"},
+            "peer": {"type": "string"},
+            "firmware_role": {"enum": ["read_and_report"]},
+            "driver": {"type": "string"},
+            "hse_hz": {"type": "integer"},
+            "idle_level": {"enum": ["high", "low"]},
+            "note": {"type": "string"}
+          },
+          "additionalProperties": false
+        },
+        "status": {"enum": ["verified", "proposed", "unchecked", "tbd", "not_required", "reserved"]},
+        "source": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+      },
+      "allOf": [
+        {"if": {"properties": {"status": {"const": "tbd"}}},
+         "then": {"properties": {"gpio": {"type": "null"}, "af": {"type": "null"}}}},
+        {"if": {"properties": {"status": {"enum": ["verified", "proposed", "unchecked", "not_required", "reserved"]}}},
+         "then": {"properties": {"gpio": {"type": "string"}}}}
+      ]
+    }
+  }
+}

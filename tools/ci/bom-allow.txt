@@ -1,0 +1,4 @@
+# Known findings of tools/ci/check_bom.py, one per line: <check> <path>::<found text> <tracking issue URL>
+# Remove a line in the PR that fixes the finding. Every line needs an open issue.
+quantity manufacturing/bom/mechanical-bom.md::1 set https://github.com/openAMRobot/openamr-platform-hw/issues/36
+quantity manufacturing/bom/mechanical-bom.md::1–2 https://github.com/openAMRobot/openamr-platform-hw/issues/36
