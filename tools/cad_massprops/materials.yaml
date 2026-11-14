@@ -1,0 +1,154 @@
+# Materials and part list for tools/cad_massprops/massprops.py.
+#
+# Rules (see README.md):
+# - A material is assigned only when a document names it. The source of every assignment is given.
+# - Where no document names the material, material is "unknown" and no mass is computed.
+# - Purchased parts take the datasheet or BOM mass, never the CAD volume.
+# - estimate: true marks values that are not from a document for this exact part.
+#
+# The STEP files exported from Autodesk (front panel, back panel, printed mounts, electronics bracket, driver mount,
+# STM32 Click mount plate, LiDAR spacer) carry a material property "Celik" (steel) at 7850 kg/m3. It is the CAD default:
+# it is also on parts that BOM Issue 7.15 names PETG. It is not used as a material source.
+
+schema_version: 1
+
+materials:
+  steel_EN_1.0114:
+    description: "Steel EN 1.0114 (S235JR, EN 10025-2), sheet"
+    density_kg_m3: 7850
+    density_source: "EN 1993-1-1 clause 3.2.6: unit mass of structural steel 7850 kg/m3"
+    estimate: false
+  steel_37Cr4:
+    description: "Steel 37Cr4 (EN 1.7034), bar"
+    density_kg_m3: 7850
+    density_source: "nominal steel value of EN 1993-1-1 clause 3.2.6; no alloy-specific value in the repository"
+    estimate: true
+  PETG:
+    description: "PETG, 3D printed"
+    density_kg_m3: 1270
+    density_source: "PETG copolyester resin density 1.27 g/cm3 (ISO 1183 value on PETG resin datasheets); same value as the roadmap model (openamrobot-docs design_intent/_common.py)"
+    estimate: true
+    note: "mass from the solid CAD volume, that is 100 % infill; infill and wall settings are not documented, so the printed part is lighter or equal"
+
+# Drawing sources are the PDF drawings next to each STEP in mechanical/cad/production_files (title block material field).
+# BOM = BOM Issue 7.15, Hardware BOM sheet. M-01 = M-01 Mechanical CAD Design Work Package rev19.10.
+# status: on_2_0 (on the 2.0 base per the roadmap model and M-01), legacy (1.x drivetrain parts that M-02 replaces),
+#         not_in_2_0 (not placed in the full assembly and not in the 2.0 model)
+# ledger: roadmap model component(s) the part is compared with (openamrobot-docs base_glb.js node ids and mass_export.yaml items)
+# leaf: regular expression on the leaf name in the full assembly STEP (placement for the assembly roll-up)
+# drawing_mm: overall size read from the drawing, used to check the STEP length unit (sorted comparison)
+parts:
+  - {part: MMP.00.00.00.001, name: Front panel, file: "MMP.00.00.00.001 Front panel.STEP", status: on_2_0, qty: 1, bom: MEC-001,
+     material: steel_EN_1.0114, material_source: "drawing MMP.00.00.00.001: Sheet 2.0 Steel EN 1.0114", drawing_mm: [385, 165, 20],
+     ledger: [front_panel], leaf: "^MMP\\.00\\.00\\.00\\.001 "}
+  - {part: MMP.00.00.00.002, name: Back panel, file: "MMP.00.00.00.002 Back panel.STEP", status: on_2_0, qty: 1, bom: MEC-001,
+     material: steel_EN_1.0114, material_source: "drawing MMP.00.00.00.002: Sheet 2.0 Steel EN 1.0114", drawing_mm: [385, 165, 20],
+     ledger: [rear_panel], leaf: "^MMP\\.00\\.00\\.00\\.002 "}
+  - {part: MMP.00.00.00.003, name: Side panel, file: "MMP.00.00.00.003 Side panel.STEP", status: on_2_0, qty: 2, bom: MEC-001,
+     material: steel_EN_1.0114, material_source: "drawing MMP.00.00.00.003: Sheet 0.8 Steel EN 1.0114", drawing_mm: [778.6, 163, 97.5],
+     ledger: [side_panel_left, side_panel_right], leaf: "^MMP\\.00\\.00\\.00\\.003 "}
+  - {part: MMP.00.00.00.004, name: Plastic cover, file: "MMP.00.00.00.004 Plastic cover.STEP", status: not_in_2_0, qty: 0,
+     material: unknown, material_source: "no drawing; the name says plastic but no grade is given"}
+  - {part: MMP.00.00.00.005, name: TF-Luna mount, file: "MMP.00.00.00.005 TF-Luna mount.STEP", status: on_2_0, qty: 2, bom: MEC-010,
+     material: PETG, material_source: "BOM MEC-010: 3D-printed PETG TF-Luna mounting sets", ledger: [tof_mount_front, tof_mount_rear],
+     leaf: "^tf_luna_mount"}
+  - {part: MMP.00.00.00.006, name: Ultrasonic mount, file: "MMP.00.00.00.006 Ultrasonic mount.STEP", status: on_2_0, qty: 4, bom: MEC-011,
+     material: PETG, material_source: "BOM MEC-011: 3D-printed PETG (or COTS) MB7060 retention sets",
+     ledger: [ultrasonic_mount_front_left, ultrasonic_mount_front_right, ultrasonic_mount_rear_left, ultrasonic_mount_rear_right],
+     leaf: "^ultrasonic_mount"}
+  - {part: MMP.01.00.00.001, name: Cover, file: "MMP.01.00.00.001 Cover.STEP", status: on_2_0, qty: 1, bom: MEC-001,
+     material: steel_EN_1.0114, material_source: "drawing MMP.01.00.00.001: Sheet 0.8 Steel EN 1.0114", drawing_mm: [631, 576, 62.7],
+     ledger: [cover], leaf: "^MMP\\.01\\.00\\.00\\.001 "}
+  - {part: MMP.01.00.00.002, name: Cover flange, file: "MMP.01.00.00.002 Cover flange.STEP", status: on_2_0, qty: 2, bom: MEC-001,
+     material: steel_EN_1.0114, material_source: "drawing MMP.01.00.00.002: Sheet 0.8 Steel EN 1.0114", drawing_mm: [572.5, 70.6, 63],
+     ledger: [cover_flange_front, cover_flange_rear], leaf: "^MMP\\.01\\.00\\.00\\.002 "}
+  - {part: MMP.01.00.00.003, name: Camera mount, file: "MMP.01.00.00.003 Camera mount.STEP", status: on_2_0, qty: 1, bom: MEC-009,
+     material: PETG, material_source: "BOM MEC-009: 3D-printed PETG Gemini 336L mount", ledger: [camera_mount],
+     leaf: "^camera_mount"}
+  - {part: MMP.02.00.00.001, name: Base, file: "MMP.02.00.00.001 Base.STEP", status: on_2_0, qty: 1, bom: MEC-001,
+     material: steel_EN_1.0114, material_source: "drawing MMP.02.00.00.001: Sheet 2.0 Steel EN 1.0114", drawing_mm: [776, 580, 32.9],
+     ledger: [base_plate], leaf: "^MMP\\.02\\.00\\.00\\.001 "}
+  - {part: MMP.02.00.00.002, name: Motor driver mount, file: "MMP.02.00.00.002 Motor driver mount.STEP", status: on_2_0, qty: 1,
+     material: unknown, material_source: "no drawing and no BOM line; an STL is published (printed part), polymer not named",
+     ledger: [driver_mount], leaf: "^driver_mount"}
+  - {part: MMP.03.00.00.001, name: Wheel bracket outer, file: "MMP.03.00.00.001 Wheel bracket outer.STEP", status: legacy, qty: 0,
+     material: steel_EN_1.0114, material_source: "drawing MMP.03.00.00.001: Sheet 2.0 Steel EN 1.0114", drawing_mm: [284, 157.2, 63]}
+  - {part: MMP.03.00.00.002, name: Wheel bracket inner, file: "MMP.03.00.00.002 Wheel bracket inner.STEP", status: legacy, qty: 0,
+     material: unknown, material_source: "drawing MMP.03.00.00.002 has no material in the title block (sheet 2 mm by the bend radius only)",
+     drawing_mm: [283, 101, 159.5]}
+  - {part: MMP.03.00.00.003, name: Motor bracket, file: "MMP.03.00.00.003 Motor bracket.STEP", status: legacy, qty: 0,
+     material: steel_EN_1.0114, material_source: "drawing MMP.03.00.00.003: Sheet 2.0 Steel EN 1.0114", drawing_mm: [146, 90, 20]}
+  - {part: MMP.03.00.00.004, name: Drive shaft, file: "MMP.03.00.00.004 Drive shaft.STEP", status: legacy, qty: 0,
+     material: steel_37Cr4, material_source: "drawing MMP.03.00.00.004: Steel 37Cr4", drawing_mm: [150, 30, 30]}
+  - {part: MMP.04.00.00.001, name: Center bracket, file: "MMP.04.00.00.001 Center bracket.STEP", status: on_2_0, qty: 1, bom: MEC-001,
+     material: steel_EN_1.0114, material_source: "drawing MMP.04.00.00.001: Sheet 2.0 Steel EN 1.0114", drawing_mm: [341.2, 270, 240],
+     ledger: [centre_bracket], leaf: "^MMP\\.04\\.00\\.00\\.001 "}
+  - {part: MMP.04.00.00.002, name: Electronics bracket, file: "MMP.04.00.00.002 Electronics bracket.STEP", status: on_2_0, qty: 1,
+     material: unknown, material_source: "no drawing and no BOM line names its material (M-01 names the part only as the IMU carrier)",
+     ledger: [electronics_bracket], leaf: "^electronics_bracket"}
+  - {part: MMP.04.00.00.003, name: STM32 Click mount plate, file: "MMP.04.00.00.003 STM32 Click mount plate.STEP", status: on_2_0, qty: 1,
+     material: unknown, material_source: "no drawing and no BOM line", ledger: [controller_plate], leaf: "^stm32_click_mount_plate"}
+  - {part: MMP.05.00.00.001, name: Support, file: "MMP.05.00.00.001 Support.STEP", status: on_2_0, qty: 2, bom: MEC-001,
+     material: steel_EN_1.0114, material_source: "drawing MMP.05.00.00.001: Sheet 1.2 Steel EN 1.0114", drawing_mm: [240, 104.4, 45],
+     ledger: [support_front_left, support_rear_right], leaf: "^MMP\\.05\\.00\\.00\\.001 Support_\\x8f"}   # \x8f: first byte of the cp866 configuration name "default"
+  - {part: MMP.05.00.00.001-01, name: Support (mirrored), file: "MMP.05.00.00.001-01 Support.STEP", status: on_2_0, qty: 2, bom: MEC-001,
+     material: steel_EN_1.0114, material_source: "drawing MMP.05.00.00.001 (the -01 part is its mirror): Sheet 1.2 Steel EN 1.0114",
+     drawing_mm: [240, 104.4, 45], ledger: [support_front_right, support_rear_left], leaf: "^MMP\\.05\\.00\\.00\\.001 Support_\\x87"}   # \x87: first byte of the cp866 configuration name "mirror"
+  - {part: MMP.07.00.00.001, name: Lidar support, file: "MMP.07.00.00.001 Lidar support.STEP", status: on_2_0, qty: 1, bom: MEC-008,
+     material: steel_EN_1.0114, material_source: "drawing MMP.07.00.00.001: Sheet 1.2 Steel EN 1.0114", drawing_mm: [170, 122.7, 120],
+     ledger: [lidar_support], leaf: "^MMP\\.07\\.00\\.00\\.001 "}
+  - {part: MMP.07.00.00.002, name: Lidar mount spacer, file: "MMP.07.00.00.002 Lidar mount spacer.STEP", status: on_2_0, qty: 1, bom: MEC-008,
+     material: unknown, material_source: "BOM MEC-008 and M-01 call it a 17.5 mm printed spacer without a polymer; the MEC-008 line title says aluminium (conflict)",
+     ledger: [lidar_spacer], leaf: "^lidar_mount_spacer"}
+  - {part: PT1.00.00.032, name: Camera upper body, file: "PT1.00.00.032 Camera upper body.STEP", status: not_in_2_0, qty: 0,
+     material: unknown, material_source: "no drawing"}
+  - {part: PT1.00.00.240, name: Magnetic encoder (assembly), file: "PT1.00.00.240 Magnetic encoder.STEP", status: legacy, qty: 0,
+     material: unknown, material_source: "no drawing; multi-material assembly (board, magnet, fasteners)"}
+  - {part: PT1.00.00.241, name: Adapter, file: "PT1.00.00.241 Adapter.STEP", status: legacy, qty: 0, material: unknown, material_source: "no drawing"}
+  - {part: PT1.00.00.242, name: Bracket, file: "PT1.00.00.242 Bracket.STEP", status: legacy, qty: 0, material: unknown, material_source: "no drawing"}
+  - {part: PT1.00.00.243, name: Cover, file: "PT1.00.00.243 Cover.STEP", status: legacy, qty: 0, material: unknown, material_source: "no drawing"}
+
+# Assembly STEP files: volume and geometry only. Fasteners, rivet nuts and rivets in them are purchased hardware without a
+# datasheet mass in the repository (MEC-014 in the ledger is an estimate); they get no mass here.
+assemblies:
+  - {part: MMP.01.00.00.000, name: Cover assembly, file: "MMP.01.00.00.000 Cover assembly.STEP"}
+  - {part: MMP.02.00.00.000, name: Base assembly, file: "MMP.02.00.00.000 Base assembly.STEP"}
+  - {part: MMP.03.00.00.000, name: Wheel assembly (legacy 1.x drive), file: "MMP.03.00.00.000 Wheel assembly.STEP"}
+  - {part: MMP.04.00.00.000, name: Center bracket assembly, file: "MMP.04.00.00.000 Center bracket assembly.STEP"}
+  - {part: MMP.05.00.00.000, name: Support assembly, file: "MMP.05.00.00.000 Support assembly.STEP"}
+  - {part: MMP.05.00.00.000-01, name: Support assembly (mirrored), file: "MMP.05.00.00.000-01 Support assembly.STEP"}
+  - {part: MMP.07.00.00.000, name: Lidar support assembly, file: "MMP.07.00.00.000 Lidar support assembly.STEP"}
+
+# Purchased parts: datasheet or BOM mass. A STEP, where given, is used for geometry and for an inertia estimate only
+# (uniform density scaled to the datasheet mass).
+purchased:
+  - id: DRV-001
+    name: ZLTECH ZLLG80ASM250-L-B2 V1.01 double-shaft hub motor with brake
+    file: "datasheets/ZLTech/wheel_ZLLG80ASM250/ZLLG80ASM250-L-B2 V1.01 double-shaft.STEP"
+    qty: 2
+    links: [left_wheel_link, right_wheel_link]
+    mass_kg: 3.60
+    mass_source: "ZLLG80ASM250-L V1.0 double-shaft drawing (datasheets/ZLTech/wheel_ZLLG80ASM250/ZLLG80ASM250-L V1.0.zip): weight 3.60 kg +/- 5 %. The selected B2 V1.01 drawing leaves the weight field empty; the V3.0 single-shaft drawing gives 3.55 kg +/- 5 %."
+    estimate: true
+    note: "the B2 V1.01 weight is not documented; weigh one delivered motor"
+    spin_axis_in_step: x
+  - {id: MEC-002, name: Blickle LPA-VSTH 35K castor, qty: 4, mass_kg: 0.300, mass_source: "mass_ledger.yaml: Blickle LPA-VSTH 35K data sheet, unit weight 0.3 kg (data sheet not in this repository)", estimate: false}
+  - {id: NAV-001, name: Slamtec RPLIDAR S3, qty: 1, mass_kg: 0.115, mass_source: "mass_ledger.yaml: Slamtec RPLIDAR S3 datasheet, 115 g (data sheet not in this repository)", estimate: false}
+  - {id: CAM-001, name: Orbbec Gemini 336L, qty: 1, mass_kg: 0.135, mass_source: "mass_ledger.yaml: Orbbec Gemini 336L specification, 135 g (data sheet not in this repository)", estimate: false}
+  - {id: DRV-002, name: ZLTECH ZLAC8015D V4.2 driver, qty: 1, mass_kg: 0.600, mass_source: "mass_ledger.yaml: estimate from the manual outline (no datasheet mass)", estimate: true}
+
+assembly:
+  file: "mechanical/cad/Full_assembly_STEP/MMP.00.00.00.000_full_assembly.STEP.zip"
+  # Frame of the full assembly STEP, found from the geometry (see report.md): X forward (front panel at +X), Y up, Z to the right;
+  # floor at Y = 0 (bottom of the 200 mm wheels at Y = -2 mm, the model's 2 mm tyre compression); legacy wheel axle at X = 0,
+  # Y = 98 mm, wheel centres at Z = +/-199.75 mm.
+  to_base_footprint:
+    rotation: [[1, 0, 0], [0, 0, -1], [0, 1, 0]]   # p_bf = R p_cad + t (x = X, y = -Z, z = Y), a rotation of +90 deg about X
+    translation_m: [0, 0, 0]
+  base_link_z_m: 0.098   # openamrobot-docs facts.yaml base_link_z (B7, datums base_link_height_above_floor)
+  placement_overrides:
+    MMP.02.00.00.001:
+      translation_m: [0.0, 0.052, 0.0]
+      reason: "the full assembly places the base sheet at (+1.49, +43.22, -12.57) mm, 8.8 mm below and 12.6 mm beside its design position; MMP.02.00.00.000 Base assembly.STEP, the 52 mm deck underside datum (BOM Mechanical sheet) and the parts standing on the deck at Y = 54 mm place it at (0, 52, 0) mm"
+  # the roll-up set: parts on base_link with a known material (others are listed with their volume only)
+  rollup_status: [on_2_0]

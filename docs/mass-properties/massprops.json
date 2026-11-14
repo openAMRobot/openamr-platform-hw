@@ -1,0 +1,581 @@
+{
+ "frame": {
+  "R": [
+   [
+    1,
+    0,
+    0
+   ],
+   [
+    0,
+    0,
+    -1
+   ],
+   [
+    0,
+    1,
+    0
+   ]
+  ],
+  "t_bf": [
+   0,
+   0,
+   0
+  ],
+  "t_bl": [
+   0.0,
+   0.0,
+   -0.098
+  ]
+ },
+ "rollup": {
+  "MEC-001 sheet-metal chassis": {
+   "parts": [
+    "MMP.00.00.00.001",
+    "MMP.00.00.00.002",
+    "MMP.00.00.00.003",
+    "MMP.01.00.00.001",
+    "MMP.01.00.00.002",
+    "MMP.02.00.00.001",
+    "MMP.04.00.00.001",
+    "MMP.05.00.00.001",
+    "MMP.05.00.00.001-01"
+   ],
+   "instances": 13,
+   "cad_assembly_frame": {
+    "mass_kg": 18.548,
+    "com_m": [
+     -0.00134,
+     0.14397,
+     -0.0
+    ],
+    "inertia_kgm2": [
+     [
+      0.744072,
+      -0.000935,
+      1.2e-05
+     ],
+     [
+      -0.000935,
+      1.750997,
+      -1e-06
+     ],
+     [
+      1.2e-05,
+      -1e-06,
+      1.342119
+     ]
+    ],
+    "principal_kgm2": [
+     0.744071,
+     1.342119,
+     1.750998
+    ]
+   },
+   "base_footprint": {
+    "mass_kg": 18.548,
+    "com_m": [
+     -0.00134,
+     0.0,
+     0.14397
+    ],
+    "inertia_kgm2": [
+     [
+      0.744072,
+      -1.2e-05,
+      -0.000935
+     ],
+     [
+      -1.2e-05,
+      1.342119,
+      1e-06
+     ],
+     [
+      -0.000935,
+      1e-06,
+      1.750997
+     ]
+    ],
+    "principal_kgm2": [
+     0.744071,
+     1.342119,
+     1.750998
+    ]
+   },
+   "base_link": {
+    "mass_kg": 18.548,
+    "com_m": [
+     -0.00134,
+     0.0,
+     0.04597
+    ],
+    "inertia_kgm2": [
+     [
+      0.744072,
+      -1.2e-05,
+      -0.000935
+     ],
+     [
+      -1.2e-05,
+      1.342119,
+      1e-06
+     ],
+     [
+      -0.000935,
+      1e-06,
+      1.750997
+     ]
+    ],
+    "principal_kgm2": [
+     0.744071,
+     1.342119,
+     1.750998
+    ]
+   }
+  },
+  "all placed parts with a known material": {
+   "parts": [
+    "MMP.00.00.00.001",
+    "MMP.00.00.00.002",
+    "MMP.00.00.00.003",
+    "MMP.00.00.00.005",
+    "MMP.00.00.00.006",
+    "MMP.01.00.00.001",
+    "MMP.01.00.00.002",
+    "MMP.02.00.00.001",
+    "MMP.04.00.00.001",
+    "MMP.05.00.00.001",
+    "MMP.05.00.00.001-01",
+    "MMP.07.00.00.001"
+   ],
+   "instances": 20,
+   "cad_assembly_frame": {
+    "mass_kg": 19.1334,
+    "com_m": [
+     0.00351,
+     0.14296,
+     2e-05
+    ],
+    "inertia_kgm2": [
+     [
+      0.751222,
+      7.9e-05,
+      -0.000121
+     ],
+     [
+      7.9e-05,
+      1.824768,
+      -1.3e-05
+     ],
+     [
+      -0.000121,
+      -1.3e-05,
+      1.4116
+     ]
+    ],
+    "principal_kgm2": [
+     0.751222,
+     1.4116,
+     1.824768
+    ]
+   },
+   "base_footprint": {
+    "mass_kg": 19.1334,
+    "com_m": [
+     0.00351,
+     -2e-05,
+     0.14296
+    ],
+    "inertia_kgm2": [
+     [
+      0.751222,
+      0.000121,
+      7.9e-05
+     ],
+     [
+      0.000121,
+      1.4116,
+      1.3e-05
+     ],
+     [
+      7.9e-05,
+      1.3e-05,
+      1.824768
+     ]
+    ],
+    "principal_kgm2": [
+     0.751222,
+     1.4116,
+     1.824768
+    ]
+   },
+   "base_link": {
+    "mass_kg": 19.1334,
+    "com_m": [
+     0.00351,
+     -2e-05,
+     0.04496
+    ],
+    "inertia_kgm2": [
+     [
+      0.751222,
+      0.000121,
+      7.9e-05
+     ],
+     [
+      0.000121,
+      1.4116,
+      1.3e-05
+     ],
+     [
+      7.9e-05,
+      1.3e-05,
+      1.824768
+     ]
+    ],
+    "principal_kgm2": [
+     0.751222,
+     1.4116,
+     1.824768
+    ]
+   }
+  }
+ },
+ "placed": [
+  {
+   "part": "MMP.01.00.00.001",
+   "leaf": "MMP.01.00.00.001 Cover_00",
+   "volume_cm3": 306.643,
+   "com_cad_mm": [
+    0.0,
+    282.42,
+    -0.0
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.01.00.00.002",
+   "leaf": "MMP.01.00.00.002 Cover flange_00",
+   "volume_cm3": 50.922,
+   "com_cad_mm": [
+    346.83,
+    262.55,
+    -0.0
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.01.00.00.002",
+   "leaf": "MMP.01.00.00.002 Cover flange_00",
+   "volume_cm3": 50.922,
+   "com_cad_mm": [
+    -346.83,
+    262.55,
+    0.0
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.02.00.00.001",
+   "leaf": "MMP.02.00.00.001 Base_\u008f\u00ae \u00e3\u00ac\u00ae\u00ab\u00e7\u00a0\u00ad\u00a8\u00ee",
+   "volume_cm3": 887.216,
+   "com_cad_mm": [
+    -0.03,
+    54.51,
+    -0.0
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": [
+    -386.51,
+    43.22,
+    -302.57
+   ]
+  },
+  {
+   "part": "MMP.04.00.00.001",
+   "leaf": "MMP.04.00.00.001 Center bracket_\u008f\u00ae \u00e3\u00ac\u00ae\u00ab\u00e7\u00a0\u00ad\u00a8\u00ee",
+   "volume_cm3": 395.193,
+   "com_cad_mm": [
+    2.47,
+    221.83,
+    -0.0
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.05.00.00.001",
+   "leaf": "MMP.05.00.00.001 Support_\u008f\u00ae \u00e3\u00ac\u00ae\u00ab\u00e7\u00a0\u00ad\u00a8\u00ee",
+   "volume_cm3": 20.303,
+   "com_cad_mm": [
+    337.33,
+    152.29,
+    -175.16
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.05.00.00.001-01",
+   "leaf": "MMP.05.00.00.001 Support_\u0087\u00a5\u00e0\u00aa\u00a0\u00ab\u00aa\u00a0",
+   "volume_cm3": 20.303,
+   "com_cad_mm": [
+    337.33,
+    152.29,
+    175.16
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.07.00.00.001",
+   "leaf": "MMP.07.00.00.001 Lidar support_\u008f\u00ae \u00e3\u00ac\u00ae\u00ab\u00e7\u00a0\u00ad\u00a8\u00ee",
+   "volume_cm3": 38.18,
+   "com_cad_mm": [
+    307.11,
+    129.71,
+    1.36
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.00.00.00.001",
+   "leaf": "MMP.00.00.00.001 Front panel_\u008f\u00ae \u00e3\u00ac\u00ae\u00ab\u00e7\u00a0\u00ad\u00a8\u00ee",
+   "volume_cm3": 146.16,
+   "com_cad_mm": [
+    386.35,
+    132.38,
+    -0.02
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.00.00.00.002",
+   "leaf": "MMP.00.00.00.002 Back panel_\u008f\u00ae \u00e3\u00ac\u00ae\u00ab\u00e7\u00a0\u00ad\u00a8\u00ee",
+   "volume_cm3": 156.754,
+   "com_cad_mm": [
+    -386.53,
+    133.17,
+    0.0
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.00.00.00.003",
+   "leaf": "MMP.00.00.00.003 Side panel_\u008f\u00ae \u00e3\u00ac\u00ae\u00ab\u00e7\u00a0\u00ad\u00a8\u00ee",
+   "volume_cm3": 143.889,
+   "com_cad_mm": [
+    -0.0,
+    132.75,
+    274.44
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.05.00.00.001-01",
+   "leaf": "MMP.05.00.00.001 Support_\u0087\u00a5\u00e0\u00aa\u00a0\u00ab\u00aa\u00a0",
+   "volume_cm3": 20.303,
+   "com_cad_mm": [
+    -337.33,
+    152.29,
+    -175.16
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.05.00.00.001",
+   "leaf": "MMP.05.00.00.001 Support_\u008f\u00ae \u00e3\u00ac\u00ae\u00ab\u00e7\u00a0\u00ad\u00a8\u00ee",
+   "volume_cm3": 20.303,
+   "com_cad_mm": [
+    -337.33,
+    152.29,
+    175.16
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.00.00.00.003",
+   "leaf": "MMP.00.00.00.003 Side panel_\u008f\u00ae \u00e3\u00ac\u00ae\u00ab\u00e7\u00a0\u00ad\u00a8\u00ee",
+   "volume_cm3": 143.889,
+   "com_cad_mm": [
+    0.0,
+    132.75,
+    -274.44
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.00.00.00.005",
+   "leaf": "tf_luna_mount",
+   "volume_cm3": 7.895,
+   "com_cad_mm": [
+    381.63,
+    92.15,
+    -0.1
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.07.00.00.002",
+   "leaf": "lidar_mount_spacer",
+   "volume_cm3": 97.102,
+   "com_cad_mm": [
+    322.33,
+    182.75,
+    0.12
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.00.00.00.005",
+   "leaf": "tf_luna_mount",
+   "volume_cm3": 7.895,
+   "com_cad_mm": [
+    -381.59,
+    92.26,
+    0.01
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.00.00.00.006",
+   "leaf": "ultrasonic_mount_ v1",
+   "volume_cm3": 52.294,
+   "com_cad_mm": [
+    -372.0,
+    91.4,
+    -130.0
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.00.00.00.006",
+   "leaf": "ultrasonic_mount_ v1",
+   "volume_cm3": 52.294,
+   "com_cad_mm": [
+    372.0,
+    91.4,
+    -130.0
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.00.00.00.006",
+   "leaf": "ultrasonic_mount_ v1",
+   "volume_cm3": 52.294,
+   "com_cad_mm": [
+    372.0,
+    91.4,
+    130.0
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.00.00.00.006",
+   "leaf": "ultrasonic_mount_ v1",
+   "volume_cm3": 52.294,
+   "com_cad_mm": [
+    -372.0,
+    91.4,
+    130.0
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.02.00.00.002",
+   "leaf": "driver_mount v2",
+   "volume_cm3": 57.069,
+   "com_cad_mm": [
+    -47.02,
+    66.48,
+    -0.02
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.04.00.00.002",
+   "leaf": "electronics_bracket v19",
+   "volume_cm3": 189.838,
+   "com_cad_mm": [
+    109.59,
+    134.86,
+    0.02
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  },
+  {
+   "part": "MMP.04.00.00.003",
+   "leaf": "stm32_click_mount_plate",
+   "volume_cm3": 44.529,
+   "com_cad_mm": [
+    27.09,
+    187.02,
+    13.95
+   ],
+   "volume_matches_part_file": true,
+   "placement_corrected_from_box_min_mm": null
+  }
+ ],
+ "excluded_unknown_material": [
+  "MMP.02.00.00.002",
+  "MMP.04.00.00.002",
+  "MMP.04.00.00.003",
+  "MMP.07.00.00.002"
+ ],
+ "void_in_full_assembly": [
+  {
+   "part": "MMP.01.00.00.003",
+   "leaf": "camera_mount v8"
+  }
+ ],
+ "reexport": [],
+ "base_link_substituted": {
+  "mass_kg": 52.692,
+  "com_m": [
+   -0.06475,
+   -0.00446,
+   0.06708
+  ],
+  "inertia_kgm2": [
+   [
+    1.824279,
+    -0.000239,
+    0.002903
+   ],
+   [
+    -0.000239,
+    2.737881,
+    0.000714
+   ],
+   [
+    0.002903,
+    0.000714,
+    3.652115
+   ]
+  ],
+  "principal_kgm2": [
+   1.824275,
+   2.73788,
+   3.65212
+  ]
+ }
+}
