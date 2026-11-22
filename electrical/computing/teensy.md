@@ -1,4 +1,7 @@
-# Teensy 4.0 — real-time microcontroller
+# Teensy 4.0 — real-time microcontroller (Gate A controller, legacy, and release fallback)
+
+> Legacy: this page describes the Gate A controller of the existing robot (v0.0.1). The OpenAMRobot 2.0
+> base controller is the STM32H723ZG on the NUCLEO-H723ZG (Gate B).
 
 *Last updated: 2026-06-17.*
 

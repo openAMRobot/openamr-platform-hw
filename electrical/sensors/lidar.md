@@ -56,7 +56,7 @@ obstacle avoidance. It is connected to the **Pi** (USB), **not** the Teensy.
 ### Communication (Pi ↔ LiDAR)
 The connection is shown in the diagram below.
 
-![RPLIDAR A1 -> USB cable -> Slamtec adapter STC-A0317-R03 (CP2102 bridge, 10c4:ea60) -> Raspberry Pi 5 USB (/dev/ttyUSB0)](diagrams/lidar-connection.svg)
+![RPLIDAR A1 (legacy, existing robot) -> USB cable -> Slamtec adapter STC-A0317-R03 (CP2102 bridge, 10c4:ea60) -> Raspberry Pi 5 USB (/dev/ttyUSB0)](diagrams/lidar-connection.svg)
 
 - **Physical**: USB → `/dev/ttyUSB0`
   (stable: `/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0`).
@@ -84,7 +84,7 @@ The RPLIDAR (on its bracket, right in this top view) sits ahead of the central e
 
 ### Field of view note
 The robot's own frame/structure produces close returns in several directions (≈ ±20–50° and ±80–90° in
-the LiDAR frame), not a clean rear block. → a **`scan_body_filter`** (provided in `openamrobot_nav2`)
+the LiDAR frame), not a clean rear block. → a **`scan_body_filter`** (provided in `openamrobot_perception`, `scan_body_filter_real.yaml`)
 must mask those self-returns to produce `/scan_filtered` for Nav2.
 
 ### Good to know / gotchas

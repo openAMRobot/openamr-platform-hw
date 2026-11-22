@@ -2,6 +2,10 @@
 
 *Last updated: 2026-06-17.*
 
+> Legacy: this page describes the existing robot (Gate A unit, ZD motors with ZBLD drivers on PWM). The
+> OpenAMRobot 2.0 drivetrain is two ZLTECH ZLLG80ASM250-L-B hub motors with one ZLAC8015D V4.2 driver on
+> CAN1 (CANopen).
+
 ## Overview
 Two **BLDC** (brushless) motors, one per wheel, each driven by its own **ZBLD** driver. The Teensy
 sends low-current logic signals to the drivers; the drivers deliver the 24 V power to the motor phases.
@@ -19,7 +23,7 @@ sends low-current logic signals to the drivers; the drivers deliver the 24 V pow
 
 The driver's full terminal layout, DIP-switch table, and LED status codes, from the manufacturer:
 
-![ZBLD.C20-120L2R driver setup: 24 V DC+/DC- (fused), motor phases U/V/W + Hall sensors, control inputs FWD/DI1, REV/DI2, JOG/DI3, CLR/DI4, BRK/DI5, COM, VAR/AI2, +5V, ERR/DO1, SPD/DO2, RS485 A/B, the SW1-SW6 DIP-switch configuration table, and the LED status/fault codes](diagrams/zbld-driver-setup-reference.jpg)
+![ZBLD.C20-120L2R driver setup: 24 V DC+/DC- (fused), motor phases U/V/W + Hall sensors, control inputs FWD/DI1, REV/DI2, JOG/DI3, CLR/DI4, BRK/DI5, COM, VAR/AI2, +5V, ERR/DO1, SPD/DO2, RS485 A/B (legacy driver terminal, not used), the SW1-SW6 DIP-switch configuration table, and the LED status/fault codes](diagrams/zbld-driver-setup-reference.jpg)
 
 *Source: ZD **ZBLD.C20-120L2R** product manual (manufacturer reference figure). This robot wires only a
 subset of these terminals and uses a specific DIP configuration — both are detailed below.*
