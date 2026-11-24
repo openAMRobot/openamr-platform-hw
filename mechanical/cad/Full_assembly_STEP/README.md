@@ -1,6 +1,6 @@
 # Full assembly (STEP)
 
-`MMP.00.00.00.000_full_assembly.STEP.zip` holds the complete mobile-base assembly as one STEP file, exported from Fusion. The current file is the 22 November 2026 export.
+`MMP.00.00.00.000_full_assembly.STEP.zip` holds the complete mobile-base assembly as one STEP file, exported from Fusion. The current file is the 24 November 2026 export.
 
 ## Status
 
