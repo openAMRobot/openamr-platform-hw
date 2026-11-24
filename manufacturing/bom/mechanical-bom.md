@@ -1,4 +1,6 @@
-# Bill of Materials (BOM) repository
+# Mechanical manufacturing reference
+
+**Mixed-generation reference, not the controlled 2.0 purchasing BOM.** Use the current controlled hardware BOM and [decision register](https://github.com/openAMRobot/.github/blob/main/decisions.yaml) for component selection and quantities. Historical entries below are retained for previous-platform maintenance.
 
 ## Overview
 
@@ -80,7 +82,7 @@ Sheet metal and plate parts for the electronics (STEP only, no DXF yet):
 
 __________________________________________________________
 
-# OpenAMRobot – Preliminary Electronics Bill of Materials (BOM)
+# Previous-platform preliminary electronics BOM (historical)
 
 ## Overview
 
@@ -154,12 +156,9 @@ The setup is designed for differential drive mobile robot development and softwa
 
 ---
 
-## Alternative Drive Option (ZL Tech)
+## OpenAMRobot 2.0 selected drivetrain
 
-| Item | Model | Qty | Description |
-|------|------|-----|------------|
-| Hub Motor | ZLLG80ASM250-L-B | 2 | Integrated BLDC motor with built-in encoder (BOM Issue 7.14 selection; exact order code under confirmation in PR #17) |
-| Driver | ZLAC8015D | 1–2 | Motor controller with RS485/CAN interface. Gate A unit, superseded by BOM Issue 7.7 |
+See the [supplier motor record](../../datasheets/ZLTech/wheel_ZLLG80ASM250/readme.md) and controlled BOM for two ZLLG80ASM250-L-B2 V1.01 motors and one ZLAC8015D dual-axis driver on CAN1. This section is not a purchasing release.
 
 ---
 
