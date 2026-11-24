@@ -1,5 +1,15 @@
 # OpenAMRobot Platform Hardware
 
+## OpenAMRobot 2.0 — current development target
+
+**Status: design and integration; not a released fabrication or wiring package.** The 2.0 mobile base uses Jetson Orin NX 8 GB, STM32H723, ZLTECH hub motors and one ZLAC8015D dual-axis driver on CAN1. The exact supplier configuration, power distribution, safety circuit and mechanical fit must follow the approved engineering baseline.
+
+Start with the [decision register](https://github.com/openAMRobot/.github/blob/main/decisions.yaml), [2.0 hardware architecture](https://github.com/openAMRobot/openamrobot-docs/blob/main/docs/reference/openamrobot-2/hardware-architecture.md) and [current CAD work](https://github.com/openAMRobot/openamr-platform-hw/pull/46). The CAD PR is work in progress, not fabrication authorization. Do not use the previous-platform wiring or BOM below to assemble 2.0.
+
+## Previous platform — historical build and maintenance reference
+
+The following material describes the earlier physical robot unless explicitly identified as 2.0. Its measured values and wiring are retained for maintenance and interim testing.
+
 ![The OpenAMRobot differential-drive base — 3D view with the cover shown transparent, revealing the drive wheels, central electronics bracket, sensors, and the front panel (E-stop, buttons, camera)](mechanical/renderings/AMR_transparent.jpg)
 
 Hardware documentation for the **OpenAMRobot** differential-drive mobile base: electrical
@@ -35,7 +45,7 @@ materials, and safety notes.
 
 The overall system is shown in the block diagram above.
 
-## Current validated hardware configuration
+## Previous platform: validated hardware configuration
 
 The configuration the docs describe and that has run the real robot:
 
@@ -65,7 +75,7 @@ More views, renders and the full CAD are in [`mechanical/`](mechanical/).
 
 ## Documentation index
 
-**Wiring & pinout (start here for a build):** **[wiring-pinout.md](electrical/wiring/wiring-pinout.md)**
+**Previous-platform wiring & pinout (maintenance only):** **[wiring-pinout.md](electrical/wiring/wiring-pinout.md)**
 — full Teensy pinout, driver wiring, DIP switches, motor wiring, grounding, ASCII map.
 
 **Bill of materials:** **[components-bom.md](manufacturing/bom/components-bom.md)** (electrical) +
