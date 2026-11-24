@@ -1,0 +1,9 @@
+# Python packages for tools/ci and tests/, installed with: pip install --no-deps -r tools/ci/requirements.txt
+# Every transitive dependency is listed and pinned; --no-deps keeps pip from adding anything else.
+PyYAML==6.0.3                     # MIT, https://pypi.org/project/PyYAML/
+jsonschema==4.26.0                # MIT, https://pypi.org/project/jsonschema/
+jsonschema-specifications==2025.9.1  # MIT, https://pypi.org/project/jsonschema-specifications/
+referencing==0.37.0               # MIT, https://pypi.org/project/referencing/
+rpds-py==2026.6.3                 # MIT, https://pypi.org/project/rpds-py/
+attrs==26.1.0                     # MIT, https://pypi.org/project/attrs/
+typing_extensions==4.16.0         # PSF-2.0, https://pypi.org/project/typing-extensions/

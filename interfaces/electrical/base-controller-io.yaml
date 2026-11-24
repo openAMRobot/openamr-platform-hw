@@ -1,0 +1,390 @@
+# OpenAMRobot 2.0 base-controller I/O contract (machine-readable).
+#
+# Read by tools/ci/check_electrical_contract.py (this repository) and by
+# check_ioc_contract.py in openamr-platform-fw, which compares a CubeMX .ioc with it.
+# Schema: base-controller-io.schema.json. Change it only through a contract change
+# request (AGENTS.md, Contracts); bump contract_version with every change.
+#
+# Status of an entry:
+#   verified      checked against the board schematic or datasheet by the hardware owner
+#   proposed      from the pin map draft, not yet verified
+#   unchecked     pin proposed; alternate function not yet checked by the owner
+#   tbd           not allocated yet (gpio null)
+#   not_required  a pin the peripheral would use but the design does not need; no AF
+#   reserved      used by the NUCLEO-H723ZG board itself; no other signal may use it
+#
+# A passing check proves this file is self-consistent and agrees with the register
+# text. It does not prove that the electronics behave as designed.
+
+contract_version: 0.1.0
+controller: STM32H723ZG
+package: LQFP144
+board: NUCLEO-H723ZG
+board_id: MB1364
+board_revision: E-01
+source_document: OpenAMRobot NUCLEO-H723ZG Controller Pin Map
+source_revision: draft of 18 October 2026, status PROPOSAL
+owner: Evans Kwashie (electrical-owner, @evans-kwashie)
+hardware_owner: Cuma
+register:
+  repository: openAMRobot/.github
+  file: decisions.yaml
+  decisions: [BASE-CONTROLLER-IO, BASE-CONTROLLER-GATES, SAFETY-CHAIN-IO]
+
+sources:
+  pin-map: OpenAMRobot NUCLEO-H723ZG Controller Pin Map, draft 18 October 2026 (PROPOSAL), not held in any repository
+  schematic: MB1364 NUCLEO-H723ZG schematic E-01, datasheets/STMicroelectronics/STM32H723ZG/mb1364-h723zg-e01_schematic.pdf
+  ds13313: STM32H723xE/G datasheet DS13313 Rev 5, Table 8 (pin alternate functions), datasheets/STMicroelectronics/STM32H723ZG/stm32h723zg.pdf
+  um2407: STM32H7 Nucleo-144 user manual UM2407 Rev 6, Tables 18 to 21 (ZIO connectors), datasheets/STMicroelectronics/STM32H723ZG/um2407-stm32h7-nucleo144-board-stmicroelectronics.pdf
+  register: openAMRobot/.github decisions.yaml BASE-CONTROLLER-IO and SAFETY-CHAIN-IO
+
+signals:
+  # MaxBotix MB7060 x4: UART 9600 8N1, receive only, RX inverted, sensor at 3.3 V.
+  - signal: us_front_left_rx
+    device: MB7060
+    direction: input
+    peripheral: UART4
+    function: UART4_RX
+    gpio: PB8
+    af: 8
+    zio: CN7-2 (D15)
+    settings: {baud: 9600, frame: 8N1, rx_invert: true, mode: rx_only, supply_v: 3.3}
+    status: proposed
+    source: [pin-map, ds13313, um2407]
+  - signal: us_front_left_tx
+    device: MB7060
+    direction: output
+    peripheral: UART4
+    function: UART4_TX
+    gpio: PA0
+    af: null
+    zio: CN10-29 (D32)
+    settings: {}
+    status: not_required
+    source: [pin-map]
+  - signal: us_front_left_trigger
+    device: MB7060
+    direction: output
+    peripheral: GPIO
+    function: GPIO_Output
+    gpio: PE2
+    af: null
+    zio: CN9-14 (D56) and CN10-25 (D31)
+    settings: {role: sequential ranging trigger}
+    status: proposed
+    source: [pin-map, um2407]
+  - signal: us_front_right_rx
+    device: MB7060
+    direction: input
+    peripheral: UART5
+    function: UART5_RX
+    gpio: PD2
+    af: 8
+    zio: CN8-12 (D48)
+    settings: {baud: 9600, frame: 8N1, rx_invert: true, mode: rx_only, supply_v: 3.3}
+    status: proposed
+    source: [pin-map, ds13313, um2407]
+  - signal: us_front_right_tx
+    device: MB7060
+    direction: output
+    peripheral: UART5
+    function: UART5_TX
+    gpio: PC12
+    af: null
+    zio: CN8-10 (D47)
+    settings: {}
+    status: not_required
+    source: [pin-map]
+  - signal: us_front_right_trigger
+    device: MB7060
+    direction: output
+    peripheral: GPIO
+    function: GPIO_Output
+    gpio: PE3
+    af: null
+    zio: CN9-22 (D60)
+    settings: {role: sequential ranging trigger}
+    status: proposed
+    source: [pin-map, um2407]
+  - signal: us_rear_left_rx
+    device: MB7060
+    direction: input
+    peripheral: UART7
+    function: UART7_RX
+    gpio: PF6
+    af: 7
+    zio: CN10-11 (A8)
+    settings: {baud: 9600, frame: 8N1, rx_invert: true, mode: rx_only, supply_v: 3.3}
+    status: proposed
+    source: [pin-map, ds13313, um2407]
+  - signal: us_rear_left_tx
+    device: MB7060
+    direction: output
+    peripheral: UART7
+    function: UART7_TX
+    gpio: PF7
+    af: null
+    zio: CN9-26 (D62)
+    settings: {}
+    status: not_required
+    source: [pin-map]
+  - signal: us_rear_left_trigger
+    device: MB7060
+    direction: output
+    peripheral: GPIO
+    function: GPIO_Output
+    gpio: PG2
+    af: null
+    zio: CN8-14 (D49)
+    settings: {role: sequential ranging trigger}
+    status: proposed
+    source: [pin-map, um2407]
+  - signal: us_rear_right_rx
+    device: MB7060
+    direction: input
+    peripheral: UART8
+    function: UART8_RX
+    gpio: PE0
+    af: 8
+    zio: CN10-33 (D34)
+    settings: {baud: 9600, frame: 8N1, rx_invert: true, mode: rx_only, supply_v: 3.3}
+    status: proposed
+    source: [pin-map, ds13313, um2407]
+  - signal: us_rear_right_tx
+    device: MB7060
+    direction: output
+    peripheral: UART8
+    function: UART8_TX
+    gpio: PE1
+    af: null
+    zio: null
+    settings: {note: PE1 is reserved for LD2}
+    status: not_required
+    source: [pin-map, schematic]
+  - signal: us_rear_right_trigger
+    device: MB7060
+    direction: output
+    peripheral: GPIO
+    function: GPIO_Output
+    gpio: PG3
+    af: null
+    zio: CN8-16 (D50)
+    settings: {role: sequential ranging trigger}
+    status: proposed
+    source: [pin-map, um2407]
+
+  # Benewake TF-Luna x2: UART 115200 8N1, TX and RX, no inversion.
+  - signal: tof_front_rx
+    device: TF-Luna
+    direction: input
+    peripheral: USART2
+    function: USART2_RX
+    gpio: PD6
+    af: 7
+    zio: CN9-4 (D52)
+    settings: {baud: 115200, frame: 8N1, rx_invert: false, mode: tx_rx}
+    status: proposed
+    source: [pin-map, ds13313, um2407]
+  - signal: tof_front_tx
+    device: TF-Luna
+    direction: output
+    peripheral: USART2
+    function: USART2_TX
+    gpio: PD5
+    af: 7
+    zio: CN9-6 (D53)
+    settings: {baud: 115200, frame: 8N1, rx_invert: false, mode: tx_rx}
+    status: proposed
+    source: [pin-map, ds13313, um2407]
+  - signal: tof_rear_rx
+    device: TF-Luna
+    direction: input
+    peripheral: USART6
+    function: USART6_RX
+    gpio: PC7
+    af: 7
+    zio: CN7-11 (D21)
+    settings: {baud: 115200, frame: 8N1, rx_invert: false, mode: tx_rx}
+    status: proposed
+    source: [pin-map, ds13313, um2407]
+  - signal: tof_rear_tx
+    device: TF-Luna
+    direction: output
+    peripheral: USART6
+    function: USART6_TX
+    gpio: PC6
+    af: 7
+    zio: CN7-1 (D16)
+    settings: {baud: 115200, frame: 8N1, rx_invert: false, mode: tx_rx}
+    status: proposed
+    source: [pin-map, ds13313, um2407]
+
+  # IMU ICM-42688-P (MIKROE-4237) on SPI4, Mode 0, clock at most 8 MHz.
+  - signal: imu_sck
+    device: ICM-42688-P
+    direction: output
+    peripheral: SPI4
+    function: SPI4_SCK
+    gpio: PE12
+    af: 5
+    zio: CN10-26 (D39)
+    settings: {spi_mode: 0, max_clock_hz: 8000000}
+    status: proposed
+    source: [pin-map, ds13313, um2407]
+  - signal: imu_miso
+    device: ICM-42688-P
+    direction: input
+    peripheral: SPI4
+    function: SPI4_MISO
+    gpio: PE13
+    af: 5
+    zio: CN10-10 (D3)
+    settings: {spi_mode: 0, max_clock_hz: 8000000}
+    status: proposed
+    source: [pin-map, ds13313, um2407]
+  - signal: imu_mosi
+    device: ICM-42688-P
+    direction: output
+    peripheral: SPI4
+    function: SPI4_MOSI
+    gpio: PE14
+    af: 5
+    zio: CN10-8 (D4)
+    settings: {spi_mode: 0, max_clock_hz: 8000000}
+    status: proposed
+    source: [pin-map, ds13313, um2407]
+  - signal: imu_cs
+    device: ICM-42688-P
+    direction: output
+    peripheral: GPIO
+    function: GPIO_Output
+    gpio: PE11
+    af: null
+    zio: CN10-6 (D5)
+    settings: {role: software chip select, idle_level: high}
+    status: proposed
+    source: [pin-map, um2407]
+  - signal: imu_drdy
+    device: ICM-42688-P
+    direction: input
+    peripheral: GPIO
+    function: GPIO_EXTI
+    gpio: null
+    af: null
+    zio: null
+    settings: {role: data-ready interrupt}
+    status: tbd
+    source: [pin-map]
+
+  # CAN: FDCAN1 traction, FDCAN2 BMS (Daly), FDCAN3 upper-body auxiliary.
+  # AF numbers below are read from DS13313 Rev 5 Table 8; the owner has not checked them
+  # yet, so the entries stay "unchecked" until the owner moves them to proposed.
+  - signal: can1_rx
+    device: ZLAC8015D traction bus
+    direction: input
+    peripheral: FDCAN1
+    function: FDCAN1_RX
+    gpio: PD0
+    af: 9
+    zio: CN9-25 (D67)
+    settings: {bus: CAN1, role: traction, bitrate: 500000}
+    status: unchecked
+    source: [pin-map, ds13313, um2407]
+  - signal: can1_tx
+    device: ZLAC8015D traction bus
+    direction: output
+    peripheral: FDCAN1
+    function: FDCAN1_TX
+    gpio: PD1
+    af: 9
+    zio: CN9-27 (D66)
+    settings: {bus: CAN1, role: traction, bitrate: 500000}
+    status: unchecked
+    source: [pin-map, ds13313, um2407]
+  - signal: can2_rx
+    device: Daly BMS
+    direction: input
+    peripheral: FDCAN2
+    function: FDCAN2_RX
+    gpio: PB12
+    af: 9
+    zio: CN7-7 (D19)
+    settings: {bus: CAN2, role: bms, bitrate: 250000}
+    status: unchecked
+    source: [pin-map, ds13313, um2407]
+  - signal: can2_tx
+    device: Daly BMS
+    direction: output
+    peripheral: FDCAN2
+    function: FDCAN2_TX
+    gpio: PB6
+    af: 9
+    zio: CN10-14 (D1)
+    settings: {bus: CAN2, role: bms, bitrate: 250000}
+    status: unchecked
+    source: [pin-map, ds13313, um2407]
+  - signal: can3_rx
+    device: upper-body auxiliary actuators
+    direction: input
+    peripheral: FDCAN3
+    function: FDCAN3_RX
+    gpio: PD12
+    af: 5
+    zio: CN10-21 (D29)
+    settings: {bus: CAN3, role: upper_body_auxiliary, bitrate: 500000}
+    status: unchecked
+    source: [pin-map, ds13313, um2407]
+  - signal: can3_tx
+    device: upper-body auxiliary actuators
+    direction: output
+    peripheral: FDCAN3
+    function: FDCAN3_TX
+    gpio: PD13
+    af: 5
+    zio: CN10-19 (D28)
+    settings: {bus: CAN3, role: upper_body_auxiliary, bitrate: 500000}
+    status: unchecked
+    source: [pin-map, ds13313, um2407]
+
+  # Ethernet RMII to the on-board LAN8742A; micro-ROS over UDP to the Jetson.
+  # Pins verified on the board schematic; AF11 from DS13313 Rev 5 Table 8.
+  - {signal: eth_ref_clk, device: LAN8742A, direction: input, peripheral: ETH, function: ETH_REF_CLK, gpio: PA1, af: 11, zio: null, settings: {interface: RMII, transport: micro-ROS over UDP, peer: Jetson}, status: verified, source: [schematic, ds13313]}
+  - {signal: eth_mdio, device: LAN8742A, direction: bidirectional, peripheral: ETH, function: ETH_MDIO, gpio: PA2, af: 11, zio: null, settings: {interface: RMII, transport: micro-ROS over UDP, peer: Jetson}, status: verified, source: [schematic, ds13313]}
+  - {signal: eth_crs_dv, device: LAN8742A, direction: input, peripheral: ETH, function: ETH_CRS_DV, gpio: PA7, af: 11, zio: "CN7-14 (D11, via SB31)", settings: {interface: RMII, transport: micro-ROS over UDP, peer: Jetson}, status: verified, source: [schematic, ds13313, um2407]}
+  - {signal: eth_mdc, device: LAN8742A, direction: output, peripheral: ETH, function: ETH_MDC, gpio: PC1, af: 11, zio: null, settings: {interface: RMII, transport: micro-ROS over UDP, peer: Jetson}, status: verified, source: [schematic, ds13313]}
+  - {signal: eth_rxd0, device: LAN8742A, direction: input, peripheral: ETH, function: ETH_RXD0, gpio: PC4, af: 11, zio: null, settings: {interface: RMII, transport: micro-ROS over UDP, peer: Jetson}, status: verified, source: [schematic, ds13313]}
+  - {signal: eth_rxd1, device: LAN8742A, direction: input, peripheral: ETH, function: ETH_RXD1, gpio: PC5, af: 11, zio: null, settings: {interface: RMII, transport: micro-ROS over UDP, peer: Jetson}, status: verified, source: [schematic, ds13313]}
+  - {signal: eth_txd1, device: LAN8742A, direction: output, peripheral: ETH, function: ETH_TXD1, gpio: PB13, af: 11, zio: "CN7-5 (D18, via JP6)", settings: {interface: RMII, transport: micro-ROS over UDP, peer: Jetson}, status: verified, source: [schematic, ds13313, um2407]}
+  - {signal: eth_tx_en, device: LAN8742A, direction: output, peripheral: ETH, function: ETH_TX_EN, gpio: PG11, af: 11, zio: null, settings: {interface: RMII, transport: micro-ROS over UDP, peer: Jetson}, status: verified, source: [schematic, ds13313]}
+  - {signal: eth_txd0, device: LAN8742A, direction: output, peripheral: ETH, function: ETH_TXD0, gpio: PG13, af: 11, zio: null, settings: {interface: RMII, transport: micro-ROS over UDP, peer: Jetson}, status: verified, source: [schematic, ds13313]}
+
+  # Item 22 safety and charging I/O (SAFETY-CHAIN-IO). Pins not allocated yet.
+  # Firmware reads and reports status only; E-stop, brakes and contactor power removal
+  # are hardwired. No firmware logic switches the safety chain.
+  - {signal: pnoz_y32_status, device: PNOZ Y32 via ISO1212, direction: input, peripheral: GPIO, function: GPIO_Input, gpio: null, af: null, zio: null, settings: {interface: ISO1212, firmware_role: read_and_report}, status: tbd, source: [pin-map, register]}
+  - {signal: estop_spare_no, device: base E-stop spare NO contact, direction: input, peripheral: GPIO, function: GPIO_Input, gpio: null, af: null, zio: null, settings: {firmware_role: read_and_report}, status: tbd, source: [pin-map, register]}
+  - {signal: reset_nc, device: RESET button NC contact, direction: input, peripheral: GPIO, function: GPIO_Input, gpio: null, af: null, zio: null, settings: {firmware_role: read_and_report}, status: tbd, source: [pin-map, register]}
+  - {signal: charger_fault, device: charger fault open collector, direction: input, peripheral: GPIO, function: GPIO_Input, gpio: null, af: null, zio: null, settings: {firmware_role: read_and_report}, status: tbd, source: [pin-map, register]}
+  - {signal: reset_lamp, device: RESET lamp via TPL7407L, direction: output, peripheral: GPIO, function: GPIO_Output, gpio: null, af: null, zio: null, settings: {driver: TPL7407L}, status: tbd, source: [pin-map, register]}
+  - {signal: kchg_coil, device: KCHG coil via TPL7407L, direction: output, peripheral: GPIO, function: GPIO_Output, gpio: null, af: null, zio: null, settings: {driver: TPL7407L}, status: tbd, source: [pin-map, register]}
+
+  # Reserved by the NUCLEO-H723ZG board (verified on the schematic).
+  - {signal: led_ld2, device: LD2 yellow user LED, direction: output, peripheral: BOARD, function: LD2, gpio: PE1, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: led_ld1, device: LD1 green user LED, direction: output, peripheral: BOARD, function: LD1, gpio: PB0, af: null, zio: CN10-31 (D33), settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: led_ld3, device: LD3 red user LED, direction: output, peripheral: BOARD, function: LD3, gpio: PB14, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: user_button, device: B1 user button, direction: input, peripheral: BOARD, function: B1, gpio: PC13, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: debug_swdio, device: ST-LINK, direction: bidirectional, peripheral: DEBUG, function: SWDIO, gpio: PA13, af: null, zio: null, settings: {}, status: reserved, source: [schematic]}
+  - {signal: debug_swclk, device: ST-LINK, direction: input, peripheral: DEBUG, function: SWCLK, gpio: PA14, af: null, zio: null, settings: {}, status: reserved, source: [schematic]}
+  - {signal: debug_jtdi, device: ST-LINK, direction: input, peripheral: DEBUG, function: JTDI, gpio: PA15, af: null, zio: null, settings: {}, status: reserved, source: [schematic]}
+  - {signal: debug_swo, device: ST-LINK, direction: output, peripheral: DEBUG, function: SWO, gpio: PB3, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: vcp_tx, device: ST-LINK virtual COM port, direction: output, peripheral: USART3, function: USART3_TX, gpio: PD8, af: null, zio: null, settings: {role: debug console and boot banner}, status: reserved, source: [schematic, um2407]}
+  - {signal: vcp_rx, device: ST-LINK virtual COM port, direction: input, peripheral: USART3, function: USART3_RX, gpio: PD9, af: null, zio: null, settings: {role: debug console}, status: reserved, source: [schematic, um2407]}
+  - {signal: usb_vbus, device: USB OTG FS, direction: input, peripheral: BOARD, function: USB_OTG_FS_VBUS, gpio: PA9, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: usb_id, device: USB OTG FS, direction: input, peripheral: BOARD, function: USB_OTG_FS_ID, gpio: PA10, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: usb_dm, device: USB OTG FS, direction: bidirectional, peripheral: BOARD, function: USB_OTG_FS_DM, gpio: PA11, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: usb_dp, device: USB OTG FS, direction: bidirectional, peripheral: BOARD, function: USB_OTG_FS_DP, gpio: PA12, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: usb_fs_ovcr, device: USB OTG FS, direction: input, peripheral: BOARD, function: USB_FS_OVCR, gpio: PG7, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: usb_pwr_en, device: USB OTG FS, direction: output, peripheral: BOARD, function: USB_PWR_EN, gpio: PD10, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: clk_hse_in, device: ST-LINK MCO 8 MHz, direction: input, peripheral: RCC, function: RCC_OSC_IN, gpio: PH0, af: null, zio: null, settings: {hse_hz: 8000000}, status: reserved, source: [schematic, um2407]}
+  - {signal: clk_lse_in, device: X2 32.768 kHz crystal, direction: input, peripheral: RCC, function: RCC_OSC32_IN, gpio: PC14, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}
+  - {signal: clk_lse_out, device: X2 32.768 kHz crystal, direction: output, peripheral: RCC, function: RCC_OSC32_OUT, gpio: PC15, af: null, zio: null, settings: {}, status: reserved, source: [schematic, um2407]}

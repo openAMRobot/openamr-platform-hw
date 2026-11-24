@@ -1,0 +1,9 @@
+# Valid BOM fixture
+
+Two drivers ×2 and 4× cells in series; see [the other BOM](other.md) and [datasheets](../).
+Contact the role address sales@example.com. Size 144 x 42 x 32 mm is not a multiplier.
+
+| # | Item | Qty | Size (mm) |
+|---|---|---|---|
+| 1 | Motor driver ×2 | 2 | 170 x 30 x 28 |
+| 2 | `a|b` escaped pipe \| in a cell | 1 | — |

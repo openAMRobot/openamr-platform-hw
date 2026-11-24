@@ -8,6 +8,11 @@ on:
 permissions:
   contents: read
 
+env:
+  # openAMRobot/.github decisions register read by the electrical contract check. Pinned: move it
+  # in a reviewed PR when the register changes (the nightly checks against .github main).
+  REGISTER_SHA: 1c3f51679e1d07739a3521c87d073671d076e979
+
 jobs:
   hardware-checks:
     name: hardware-checks
@@ -15,9 +20,86 @@ jobs:
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
-      - name: Checker self-tests
-        run: python3 -m unittest discover -s tests -v
+      - name: Check out the decisions register at the pinned SHA
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: openAMRobot/.github
+          ref: ${{ env.REGISTER_SHA }}
+          path: .register
+          persist-credentials: false
+
+      - name: Install pinned Python packages
+        run: |
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --no-deps -r tools/ci/requirements.txt
+          "$RUNNER_TEMP/venv/bin/pip" check
+          echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"
+
+      - name: Checker self-tests (an empty suite fails)
+        run: |
+          set -o pipefail
+          python -m unittest discover -s tests -v 2>&1 | tee "$RUNNER_TEMP/unittest.log"
+          grep -qE '^Ran [1-9][0-9]* tests?' "$RUNNER_TEMP/unittest.log"
 
       - name: Links, file formats, sizes, attributes, datasheet index
-        run: python3 tools/ci/check_hw_repo.py --root .
+        run: python tools/ci/check_hw_repo.py --root .
+
+      - name: Electrical contract (interfaces/electrical/base-controller-io.yaml)
+        run: |
+          python tools/ci/check_electrical_contract.py --register .register/decisions.yaml \
+            --register-sha "$REGISTER_SHA" --require-register | tee "$RUNNER_TEMP/contract.log"
+          { echo "### Electrical contract (register $REGISTER_SHA)"; echo '```'; cat "$RUNNER_TEMP/contract.log"; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: BOM (manufacturing/bom)
+        run: python tools/ci/check_bom.py --root .
+
+  pcb-discover:
+    name: pcb-discover
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      count: ${{ steps.find.outputs.count }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: Find KiCad projects
+        id: find
+        run: |
+          count=$(bash tools/ci/kicad_checks.sh --list | grep -c . || true)
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          if [ "$count" = 0 ]; then
+            # NOT RUN, never PASS: the summary and an annotation say why the PCB job is skipped
+            bash tools/ci/kicad_checks.sh
+          fi
+
+  pcb:
+    name: pcb (ERC, DRC, BOM export)
+    needs: pcb-discover
+    if: needs.pcb-discover.outputs.count != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    container:
+      # kicad/kicad 10.0.6, multi-arch index digest (Docker Hub, published 2026-09-22)
+      image: kicad/kicad:10.0.6@sha256:18693567392b80da435f9fa952ce3a3e534c66eb5a6033f5b9c80aa3b19dd3ec
+      options: --user root
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+
+      - name: ERC, DRC and BOM export for every *.kicad_pro
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          bash tools/ci/kicad_checks.sh build/kicad
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        if: always()
+        with:
+          name: kicad-reports
+          path: build/kicad
+          if-no-files-found: warn

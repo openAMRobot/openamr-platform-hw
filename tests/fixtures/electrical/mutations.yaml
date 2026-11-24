@@ -1,0 +1,134 @@
+# Failing fixtures for tools/ci/check_electrical_contract.py.
+# Each case applies one change to interfaces/electrical/base-controller-io.yaml (contract) or to
+# tests/fixtures/electrical/register.yaml (register) and names the rule that must FAIL and a
+# substring of its message. tests/test_check_electrical_contract.py runs every case.
+#
+# Operations:
+#   set:    {signals: [names], field: dotted.path, value: v}   change fields of named signals
+#   top:    {field: name, value: v}                            change a header field
+#   unset:  {signals: [names], field: name}                    remove a field
+#   delete: {signals: [names]}                                 remove signals
+#   copy:   {signal: name}                                     append a duplicate of a signal
+#   register: {old: text, new: text}                           replace text in the register values
+#   register_id: {new: id}                                     rename the BASE-CONTROLLER-IO entry
+
+- name: gpio name outside the package
+  set: {signals: [us_front_left_rx], field: gpio, value: PZ9}
+  rule: schema
+  expect: "'PZ9'"
+- name: required field missing
+  unset: {signals: [imu_cs], field: status}
+  rule: schema
+  expect: "'status' is a required property"
+- name: unknown status
+  set: {signals: [imu_cs], field: status, value: maybe}
+  rule: schema
+  expect: "'maybe'"
+- name: tbd entry with a pin
+  set: {signals: [imu_drdy], field: gpio, value: PE15}
+  rule: schema
+  expect: "signals/"
+- name: duplicate signal name
+  copy: {signal: imu_cs}
+  rule: unique-signal
+  expect: "signal imu_cs appears 2 times"
+- name: GPIO used twice
+  set: {signals: [imu_cs], field: gpio, value: PE2}
+  rule: unique-gpio
+  expect: "PE2 used twice"
+- name: signal on a not_required pin
+  set: {signals: [imu_cs], field: gpio, value: PA0}
+  rule: unique-gpio
+  expect: "PA0 is marked not_required"
+- name: signal on a reserved pin
+  set: {signals: [us_front_left_trigger], field: gpio, value: PB0}
+  rule: reserved-pin
+  expect: "us_front_left_trigger on PB0, which is reserved for led_ld1"
+- name: debug VCP pin taken by a sensor
+  set: {signals: [tof_front_tx], field: gpio, value: PD8}
+  rule: reserved-pin
+  expect: "reserved for vcp_tx"
+- name: not_required pin keeps its AF
+  set: {signals: [us_front_left_tx], field: af, value: 8}
+  rule: not-required-af
+  expect: "us_front_left_tx on PA0 is not_required but has AF8"
+- name: proposed AF pin without AF
+  set: {signals: [tof_front_rx], field: af, value: null}
+  rule: af-present
+  expect: "tof_front_rx on PD6 (USART2_RX, proposed) has no AF number"
+- name: verified AF pin without AF
+  set: {signals: [eth_mdio], field: af, value: null}
+  rule: af-present
+  expect: "eth_mdio on PA2"
+- name: peripheral settings disagree
+  set: {signals: [tof_front_tx], field: settings.baud, value: 9600}
+  rule: peripheral
+  expect: "USART2 entries disagree on baud"
+- name: three MB7060
+  delete: {signals: [us_rear_right_rx]}
+  rule: counts
+  expect: "MB7060: 3 UARTs"
+- name: one TF-Luna
+  delete: {signals: [tof_rear_rx, tof_rear_tx]}
+  rule: counts
+  expect: "TF-Luna: 1 UARTs"
+- name: two sensors on one UART
+  set: {signals: [us_front_right_rx], field: peripheral, value: UART4}
+  rule: counts
+  expect: "MB7060: 3 UARTs"
+- name: TF-Luna on an MB7060 UART
+  set: {signals: [tof_front_rx, tof_front_tx], field: peripheral, value: UART4}
+  rule: counts
+  expect: "UART4 is shared by"
+- name: MB7060 without a trigger
+  delete: {signals: [us_front_left_trigger]}
+  rule: counts
+  expect: "3 trigger GPIOs for 4 sensors"
+- name: MB7060 baud differs from the register
+  set: {signals: [us_front_left_rx], field: settings.baud, value: 19200}
+  rule: register
+  expect: "us_front_left_rx: baud 19200, register says 9600"
+- name: register baud changed
+  register: {old: "9600 8N1", new: "19200 8N1"}
+  rule: register
+  expect: "register says 19200"
+- name: MB7060 receive inversion off
+  set: {signals: [us_front_left_rx], field: settings.rx_invert, value: false}
+  rule: register
+  expect: "rx_invert False, register says receive inversion"
+- name: MB7060 frame differs
+  set: {signals: [us_rear_left_rx], field: settings.frame, value: 8E1}
+  rule: register
+  expect: "frame 8E1, register says 8N1"
+- name: CAN2 used for traction
+  set: {signals: [can2_rx, can2_tx], field: settings.role, value: traction}
+  rule: register
+  expect: "CAN2 role traction, register says BMS"
+- name: CAN3 bus missing
+  set: {signals: [can3_rx, can3_tx], field: settings.bus, value: CAN1}
+  rule: register
+  expect: "no contract signal on CAN3"
+- name: micro-ROS over serial
+  set: {signals: [eth_ref_clk, eth_mdio, eth_crs_dv, eth_mdc, eth_rxd0, eth_rxd1, eth_txd1, eth_tx_en, eth_txd0], field: settings.transport, value: micro-ROS over serial}
+  rule: register
+  expect: "transport micro-ROS over serial, register says micro-ROS over UDP"
+- name: IMU SPI mode 3
+  set: {signals: [imu_sck, imu_miso, imu_mosi], field: settings.spi_mode, value: 3}
+  rule: register
+  expect: "spi_mode 3, register says Mode 0"
+- name: IMU SPI shared with another device
+  set: {signals: [imu_mosi], field: device, value: W25Q flash}
+  rule: register
+  expect: "SPI4 is not dedicated to the IMU"
+- name: controller differs
+  top: {field: controller, value: STM32H743ZI}
+  rule: register
+  expect: "controller STM32H743ZI, register says STM32H723ZG"
+- name: register no longer states the SPI mode
+  register: {old: "IMU on a dedicated SPI, Mode 0", new: "IMU on SPI"}
+  rule: register
+  expect: "no longer states the IMU SPI mode"
+- name: register entry missing
+  register_id: {new: BASE-CONTROLLER-IO-OLD}
+  rule: register
+  expect: "register has no entry BASE-CONTROLLER-IO"
