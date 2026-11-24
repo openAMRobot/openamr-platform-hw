@@ -2,6 +2,12 @@
 
 *Last updated: 2026-06-20.*
 
+> **E-01 baseline (15 October 2026).** This page records the existing v0.0.1 robot as built. For the
+> defined fused and E-stop-protected layout to build to (Class T main fuse, lockable disconnect, one
+> fuse per branch, PNOZ s3 safety relay with two LEV100H contactors), see
+> [E-01 safety chain and power distribution](e01-safety-and-power.md). It covers OpenAMRobot 2.0 and
+> the Conestoga v0.0.1 build.
+
 ## 🔋 Battery state of charge — THRESHOLDS — READ BEFORE ANY NAV TEST
 The design takes **any 24 V battery** (chemistry is up to you). The at-rest thresholds below are for the
 **reference build's pack** (2× 12 V lead-acid in series) — **adjust the numbers for your chemistry**
