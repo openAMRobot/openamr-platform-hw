@@ -1,5 +1,15 @@
 # OpenAMRobot Platform Hardware
 
+## OpenAMRobot 2.0 — current development target
+
+**Status: design and integration; not a released fabrication or wiring package.** The 2.0 mobile base uses Jetson Orin NX 8 GB, STM32H723, ZLTECH hub motors and one ZLAC8015D dual-axis driver on CAN1. The exact supplier configuration, power distribution, safety circuit and mechanical fit must follow the approved engineering baseline.
+
+Start with the [decision register](https://github.com/openAMRobot/.github/blob/main/decisions.yaml), [2.0 hardware architecture](https://github.com/openAMRobot/openamrobot-docs/blob/main/docs/reference/openamrobot-2/hardware-architecture.md) and [current CAD work](https://github.com/openAMRobot/openamr-platform-hw/pull/46). The CAD PR is work in progress, not fabrication authorization. Do not use the previous-platform wiring or BOM below to assemble 2.0.
+
+## Previous platform — historical build and maintenance reference
+
+The following material describes the earlier physical robot unless explicitly identified as 2.0. Its measured values and wiring are retained for maintenance and interim testing.
+
 ![The OpenAMRobot differential-drive base — 3D view with the cover shown transparent, revealing the drive wheels, central electronics bracket, sensors, and the front panel (E-stop, buttons, camera)](mechanical/renderings/AMR_transparent.jpg)
 
 Hardware documentation for the **OpenAMRobot** differential-drive mobile base: electrical
@@ -35,7 +45,7 @@ materials, and safety notes.
 
 The overall system is shown in the block diagram above.
 
-## Current validated hardware configuration
+## Previous platform: validated hardware configuration
 
 The configuration the docs describe and that has run the real robot:
 
@@ -65,7 +75,7 @@ More views, renders and the full CAD are in [`mechanical/`](mechanical/).
 
 ## Documentation index
 
-**Wiring & pinout (start here for a build):** **[wiring-pinout.md](electrical/wiring/wiring-pinout.md)**
+**Previous-platform wiring & pinout (maintenance only):** **[wiring-pinout.md](electrical/wiring/wiring-pinout.md)**
 — full Teensy pinout, driver wiring, DIP switches, motor wiring, grounding, ASCII map.
 
 **Bill of materials:** **[components-bom.md](manufacturing/bom/components-bom.md)** (electrical) +
@@ -149,10 +159,10 @@ regulatory compliance before building or operating hardware based on this docume
 
 ## Ownership, licensing, and contributions
 
-OpenAMRobot is a project initiated, operated, and controlled by **Botshare LTD** (Cyprus Company ID HE479056). Botshare LTD owns the transferable economic rights in original OpenAMRobot material created by or validly assigned to it. Third-party material remains subject to its respective ownership, licences, and notices.
+OpenAMRobot is a project initiated, operated, and controlled by **Botshare LTD** (Cyprus Company ID HE479056). Botshare LTD owns the original OpenAMRobot material it created or that was assigned to it, and holds a permanent, sublicensable licence to contributions whose authors keep ownership. Third-party material remains subject to its respective ownership, licences, and notices.
 
 Original OpenAMRobot software and firmware are licensed under MIT, documentation under CC BY 4.0, and hardware design source under CERN-OHL-P-2.0, as mapped in [`LICENSING.md`](LICENSING.md). Public distribution grants the permissions stated in the applicable licence; it does not transfer ownership of underlying copyright, trademarks, patents, or other intellectual property.
 
-Accepted external contributions require DCO sign-off and an applicable Individual or Corporate Contributor Agreement governing assignment of transferable economic rights to Botshare LTD. Contributor attribution and legally non-waivable authorship or moral rights remain recognized.
+Accepted external contributions require DCO sign-off and a recorded Individual or Corporate contributor agreement ([process](https://github.com/openAMRobot/.github/blob/main/CLA.md)). Under version 2.0 contributors keep ownership and license Botshare LTD; contributions accepted under version 1.1 were assigned. Contributor attribution and legally non-waivable authorship or moral rights remain recognized.
 
 See the organization [IP Policy](https://github.com/openAMRobot/.github/blob/main/IP_POLICY.md), [Contribution Guide](https://github.com/openAMRobot/.github/blob/main/CONTRIBUTING.md), and [Contributor Agreement Process](https://github.com/openAMRobot/.github/blob/main/CLA.md).

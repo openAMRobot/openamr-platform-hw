@@ -7,6 +7,8 @@
 | `ZLLG80ASM250-L V1.0.zip` | Earlier double-shaft package (2024), superseded by B2 V1.01. |
 
 Key dimensions from the B2 V1.01 drawing: wheel diameter 200 ±2 mm, tyre width 49.4 ±1 mm, hub width 59.2 mm, overall length shaft end to shaft end 167.8 ±0.5 mm, 83.8 ±1 mm from the tyre face to the brake-side shaft end, 40 ±0.5 mm brake-side shaft, shafts M14 x 1.5 with 10 mm flats, cable 600 ±50 mm.
-Motor data on the drawing: 24 V, 5.5 Nm rated, 16 Nm peak, 6.5 A rated, 19 A peak, 200 rpm rated, 260 rpm peak, 15 pole pairs, tyre rubber Shore A 65 ±5.
-**Maximum load: 120 kg per pair** (ZLTECH written answer of 18 Oct 2026). The B2 V1.01 drawing states 100 kg per 2 sets.
-Brake per ZLTECH written answer of 18 Oct 2026: power-off brake (engaged with power off), 24 V DC, 12.5 W per motor, 6 Nm holding torque, release time at most 100 ms, engagement time at most 30 ms without a diode or at most 100 ms with a diode. These brake values are not on the drawing.
+Motor data on the drawing: 24 V, 5.5 Nm rated, 16 Nm peak, 6.5 A rated, 19 A peak, 200 rpm rated, 260 rpm maximum, 15 pole pairs, tyre rubber Shore A 65 ±5.
+**Maximum load: 120 kg per pair** (ZLTECH written answer of 18 Oct 2026). OPEN: supplier drawing says 100 kg per 2 sets, asked 23 Nov.
+Brake per ZLTECH written answer of 18 Oct 2026: power-off brake (engaged with power off), 24 V DC, 12.5 W per motor, 6 Nm holding torque, release time at most 100 ms, engagement time at most 30 ms without a diode or at most 100 ms with a diode. OPEN: not on the supplier drawing, asked 23 Nov. Brake voltage, motor weight and rotor inertia also remain OPEN. The drawing is unsigned.
+
+Data received 23 November 2026. Estimate from supplier STEP, assumed densities, not supplier data: rotating mass about 2.74 kg; wheel-axis inertia about 0.0097 kg m² (range 0.0092 to 0.0103).

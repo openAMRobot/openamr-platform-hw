@@ -9,16 +9,16 @@ for the wheel–motor–driver mechatronic chain.
 > covered by this repository's licence; all rights remain with the manufacturers. If you redistribute,
 > keep the attribution, or download the current versions from the manufacturers directly.
 
-## What applies to the base build vs. what is optional
+## Current 2.0 and previous-platform references
 
-The base OpenAMRobot documented in this repo uses the **ZD** motor + driver. The **ZLTech** parts and the TZBOT battery and BMS are **alternative / optional** components for larger product configurations; they are **not** on the base build. The TZBOT WCM-500-24 wireless charger is the 2.0 and release 001 charging path.
+The ZD drivetrain belongs to the previous platform. OpenAMRobot 2.0 selects the ZLTECH B2 V1.01 hub motors and ZLAC8015D on CAN1. Consult the controlled BOM for purchasing and the decision register for unresolved selections.
 
-| Folder | Component | On the base build? |
+| Folder | Component | Applicability |
 |---|---|---|
-| [`ZDmotor/`](ZDmotor/) | ZD BLDC motor (Z4BLD60-24GN-30S) + **ZBLD.C20-120L2R** driver | ✅ **yes — this is the base** |
-| [`ZLTech/drivers/`](ZLTech/drivers/) | ZLAC8015D / ZLAC8030L industrial drivers (CANopen/RS485) | ⚙️ option (higher-power variant) |
-| [`ZLTech/wheel_ZLLG80ASM250/`](ZLTech/wheel_ZLLG80ASM250/) | ZLLG80 hub-motor wheel | ⚙️ option (alternative drivetrain) |
-| [`TZBot/battery_BMS/`](TZBot/battery_BMS/) | 24 V 20 Ah battery + BMS (serial protocol) | ⚙️ option (product battery/BMS) |
+| [`ZDmotor/`](ZDmotor/) | ZD BLDC motor (Z4BLD60-24GN-30S) + **ZBLD.C20-120L2R** driver | Previous platform (legacy) |
+| [`ZLTech/drivers/`](ZLTech/drivers/) | ZLAC8015D / ZLAC8030L industrial drivers | ZLAC8015D selected for 2.0 on CAN1; ZLAC8030L reference only |
+| [`ZLTech/wheel_ZLLG80ASM250/`](ZLTech/wheel_ZLLG80ASM250/) | ZLLG80ASM250-L-B2 V1.01 hub motor | Selected 2.0 drivetrain |
+| [`TZBot/battery_BMS/`](TZBot/battery_BMS/) | 24 V 20 Ah battery + BMS (serial protocol) | Reference only; consult current controlled BOM |
 | [`TZBot/charger/`](TZBot/charger/) | TZBOT WCM-500-24 wireless charger (2.0 and release 001 charging path) | Yes, the 2.0 design (register CHARGING) |
 
 See [product-architecture.md](../product-architecture.md) for how the base and the options fit
