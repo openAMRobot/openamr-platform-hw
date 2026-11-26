@@ -1,5 +1,7 @@
 # Power & electrical safety
 
+For the OpenAMRobot 2.0 design, see the [versioned B-02 Battery Guide](B-02-Battery-Guide-rev18.11-public.pdf) and its [RC.1 provenance](../../manufacturing/bom/rc1-snapshots.md). The previous-platform details below retain their original scope.
+
 *Last updated: 2026-06-20.*
 
 ## 🔋 Battery state of charge — THRESHOLDS — READ BEFORE ANY NAV TEST
