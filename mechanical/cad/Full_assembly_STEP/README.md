@@ -1,6 +1,6 @@
 # Full assembly (STEP)
 
-`MMP.00.00.00.000_full_assembly.STEP.zip` holds the complete robot assembly as one STEP file, exported from Fusion. The current file is the 27 November 2026 export (Fusion full assembly rev2 v91).
+`MMP.00.00.00.000_full_assembly.STEP.zip` holds the complete robot assembly as one STEP file, exported from Fusion. The current file is the 27 November 2026 export (Fusion full assembly rev2 v94).
 
 ## Status
 
@@ -12,7 +12,7 @@ This is a draft layout. Compared with the 24 November export it adds the upper b
   - The base floor is 2.0 mm, top face 54.0 mm above the floor (issue #43).
   - The arch-wall screws are M5.
   - Hole E in MEC-004 is removed.
-  - The electronics plate has corner reliefs for the new-build wheel bracket B1.
+  - The electronics plate has corner reliefs for the new-build wheel bracket B1, clearance notches for the front castor screws and 4 x M4 fixings to the base (new M4 rivet nuts in the base).
 - **Placeholders:** parts with no selected model or no vendor CAD yet are simple boxes. Their names end in `(envelope)`.
 - **Electrical:** fuse ratings and cable sizes are not approved for wiring release.
 
