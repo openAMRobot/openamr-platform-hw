@@ -6,6 +6,8 @@
 
 Start with the [decision register](https://github.com/openAMRobot/.github/blob/main/decisions.yaml), [2.0 hardware architecture](https://github.com/openAMRobot/openamrobot-docs/blob/main/docs/reference/openamrobot-2/hardware-architecture.md) and [current CAD work](https://github.com/openAMRobot/openamr-platform-hw/pull/46). The CAD PR is work in progress, not fabrication authorization. Do not use the previous-platform wiring or BOM below to assemble 2.0.
 
+The versioned [RC.1 hardware documentation snapshots](manufacturing/bom/rc1-snapshots.md) cover the 2.0 component BOM and battery design reference.
+
 ## Previous platform — historical build and maintenance reference
 
 The following material describes the earlier physical robot unless explicitly identified as 2.0. Its measured values and wiring are retained for maintenance and interim testing.
