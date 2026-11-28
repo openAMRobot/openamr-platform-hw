@@ -1,6 +1,6 @@
 # Bills of materials
 
-*Last updated: 2026-11-01.*
+*Last updated: 2026-11-28.*
 
 | File | Scope |
 |---|---|
@@ -8,7 +8,7 @@
 | [`mechanical-bom.md`](mechanical-bom.md) | Mechanical BOM: sheet-metal parts, fasteners, technological operations, wheels and castors. |
 | [`BOM_specs_MMP.xlsx`](BOM_specs_MMP.xlsx) | Source workbook for the mechanical BOM. |
 
-For OpenAMRobot 2.0, see the [RC.1 snapshots and provenance](rc1-snapshots.md), including the technical extract of BOM Issue 7.15. The historical tables above retain their original scope.
+For OpenAMRobot 2.0, see the [RC.1 snapshots and provenance](rc1-snapshots.md), including the technical extract of BOM Issue 7.16 (28 November 2026, replaces 7.15). The historical tables above retain their original scope.
 
 ## Component availability rule
 

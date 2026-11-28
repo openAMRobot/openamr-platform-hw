@@ -5,6 +5,10 @@ All notable changes to this repository are documented here. Dates are ISO-8601.
 ## [Unreleased]
 
 ### Changed
+- BOM Issue 7.16 (28 Nov 2026) replaces Issue 7.15 as the public technical extract
+  (`manufacturing/bom/OpenAMRobot-2.0-Hardware-BOM-issue-7.16-public.xlsx`). See
+  `manufacturing/bom/issue-7.16-changes.md`. Wiring and safety pages that still describe the
+  removed safety relay unit are not changed in this PR; the electrical owner updates them.
 - BOM Issue 7.14 replaces Issue 7.7 as the cited BOM in the near-field, IMU, product-architecture
   and mechanical BOM pages. The 2.0 IMU board is the TDK EV_ICM-42688-P (was MIKROE-4237).
   `manufacturing/bom/README.md` states the component availability rule (P-03 rev20.2 item 26).
