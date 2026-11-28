@@ -26,6 +26,10 @@ electrical docs remain the property of their respective owners and are cited for
 identification only. Do not add third-party design files, datasheets, or assets unless their
 license permits redistribution and it is clearly documented here.
 
+The full-assembly STEP in `mechanical/cad/Full_assembly_STEP/` contains vendor CAD models for fit and
+clearance checks, included with the project lead's approval. They remain the property of their owners,
+are not covered by CERN-OHL-P-2.0 and are listed in that folder's `README.md`.
+
 ## Related repositories
 
 - `openamr-platform-fw` — Teensy motor-control firmware.
